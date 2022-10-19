@@ -267,7 +267,7 @@ Vue.component('ud-select', {
                 return temp;
             if (this.group[this.index - 1]) {
                 var _loop_1 = function (i) {
-                    temp = temp.find(function (option) { return option.value === _this.group[i]; }).children;
+                    temp = temp.find(function (option) { return option[_this.valueBy] === _this.group[i]; }).children;
                 };
                 for (var i = 0; i < this.index; i++) {
                     _loop_1(i);

@@ -372,8 +372,8 @@ Vue.component('ud-select', {
     placeholder: { default: "請選擇一項" }, // 取代文字
     combine: Boolean, // 使用value做為label
     center: Boolean, // 是否置中
-    group: { default: "" }, // 是否群組
-    index: { default: 0 }, // 群組索引
+    group: { default: "" }, // 是否群組(雙向綁定的值所組成的陣列)
+    index: { default: 0 }, // 群組索引(由0開始的數字)
     labelBy: { default: "label" }, // label替代值
     valueBy: { default: "value" }, // value替代值
   },
@@ -393,7 +393,7 @@ Vue.component('ud-select', {
       if(this.index === 0) return temp;
       if(this.group[this.index - 1]) {
         for(let i = 0; i < this.index; i++) {
-          temp = temp.find(option => option.value === this.group[i]).children;
+          temp = temp.find(option => option[this.valueBy] === this.group[i]).children;
         }
         return temp;
       }
