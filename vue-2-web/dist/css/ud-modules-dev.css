@@ -1,0 +1,211 @@
+.ud-image-upload {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+  overflow: hidden; }
+  .ud-image-upload .preview-area {
+    background-color: #eee;
+    padding: 5px;
+    min-height: 200px; }
+    .ud-image-upload .preview-area > img {
+      max-height: 300px;
+      width: auto; }
+    .ud-image-upload .preview-area > div {
+      margin-bottom: 10px; }
+      .ud-image-upload .preview-area > div .image-info {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between; }
+        .ud-image-upload .preview-area > div .image-info p {
+          margin-bottom: 5px;
+          font-size: 14px; }
+  .ud-image-upload .info-area {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 8px; }
+    .ud-image-upload .info-area .info-left p {
+      font-size: 12px; }
+    .ud-image-upload .info-area .info-right input {
+      display: none; }
+
+.ud-image-multi-upload input {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 5px; }
+  .ud-image-multi-upload input .image-preview {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px; }
+    .ud-image-multi-upload input .image-preview > div {
+      margin-bottom: 10px; }
+      .ud-image-multi-upload input .image-preview > div .image-info {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between; }
+        .ud-image-multi-upload input .image-preview > div .image-info p {
+          margin-bottom: 5px;
+          font-size: 14px; }
+
+.ud-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+  .ud-carousel .item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    background: #000;
+    color: #FFF;
+    opacity: 1; }
+    .ud-carousel .item:first-of-type {
+      position: relative; }
+    .ud-carousel .item img {
+      display: block;
+      max-width: 100%; }
+    .ud-carousel .item a {
+      display: block; }
+  .ud-carousel .button-prev, .ud-carousel .button-next, .ud-carousel .dot-group {
+    position: absolute;
+    z-index: 1; }
+  .ud-carousel .button-prev, .ud-carousel .button-next {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s; }
+    .ud-carousel .button-prev:hover, .ud-carousel .button-next:hover {
+      opacity: .7; }
+    .ud-carousel .button-prev img, .ud-carousel .button-next img {
+      display: block;
+      max-width: 50px; }
+  .ud-carousel .button-next {
+    right: 0; }
+  .ud-carousel .dot-group {
+    right: 0;
+    bottom: 8px;
+    left: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+    .ud-carousel .dot-group a {
+      display: block;
+      margin-right: 5px;
+      margin-left: 5px;
+      width: 10px;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      -webkit-transition: .3s;
+      -o-transition: .3s;
+      transition: .3s; }
+      .ud-carousel .dot-group a:hover, .ud-carousel .dot-group a.active {
+        background: #fff; }
+  .ud-carousel .carousel-prev-enter-active, .ud-carousel .carousel-prev-leave-active,
+  .ud-carousel .carousel-next-enter-active, .ud-carousel .carousel-next-leave-active {
+    -webkit-transition: -webkit-transform 0.5s ease;
+    transition: -webkit-transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+    will-change: transform; }
+  .ud-carousel .carousel-next-enter, .ud-carousel .carousel-prev-leave-to {
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%); }
+  .ud-carousel .carousel-next-leave-to, .ud-carousel .carousel-prev-enter {
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%); }
+
+.ud-youtube .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden; }
+  .ud-youtube .video-wrapper iframe, .ud-youtube .video-wrapper object, .ud-youtube .video-wrapper embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+.ud-youtube-api .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden; }
+  .ud-youtube-api .video-wrapper iframe, .ud-youtube-api .video-wrapper object, .ud-youtube-api .video-wrapper embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+.ud-google-map {
+  position: relative;
+  padding-bottom: 65.25%;
+  height: 0;
+  overflow: hidden; }
+  .ud-google-map iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+.ud-select2 {
+  width: 100%; }
+
+.ud-scratch .sc__wrapper {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin: 0 auto; }
+  .ud-scratch .sc__wrapper .sc__container {
+    position: relative;
+    overflow: hidden; }
+  .ud-scratch .sc__wrapper .sc__container > img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto; }
+  .ud-scratch .sc__wrapper .sc__container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto; }

@@ -1,0 +1,16 @@
+# [SI客戶]UAT環境
+deploy_testing:
+  extends: .deploy
+  variables: {
+    ENV_FILE: deployment/env/testing.env,
+    # 需搭配nginx 設定指定位置
+    PROJECT_FOLDER: ""
+  }
+  only:
+    # 指定的branch
+    - testing
+  tags:
+    # 指定的gitlab-runner tag
+    - fet-shared-runner
+  # 開啟後為手動更版
+  when: manual

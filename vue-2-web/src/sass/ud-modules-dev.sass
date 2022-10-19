@@ -1,0 +1,246 @@
+@import '_color.sass'
+
+// ==================== Vue組件庫(Extra)目錄 ====================
+// Form
+//   Upload 上傳 -----> ud-upload
+//   ImageUpload 圖片上傳預覽 -----> ud-image-upload
+//   ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
+
+// Data
+//   Table 表格 -----> ud-table
+//   Pagination 分頁 -----> ud-pagination
+
+// Notice
+//   Notify 通知訊息 -----> ud-notify
+//   Popover 氣泡框 -----> ud-popover
+
+// Tools
+//   CountdownExpire 倒數計時(時限) -----> ud-countdown-expire
+
+// Appication
+//   Carousel 圖片輪播 -----> ud-carousel
+//   Youtube 水管播放 -----> ud-youtube
+//   YoutubeApi 水管播放(控制版) -----> ud-youtube-api
+//   GoogleMap 估狗地圖 -----> ud-google-map
+//   Select2 搜尋下拉框 -----> ud-select2
+//   Scratch 刮刮樂 -----> ud-scratch
+//   Editor 文字編輯器 -----> ud-editor
+
+//-----------------------Form-----------------------
+// Upload 上傳
+.ud-upload
+
+// ImageUpload 圖片上傳預覽
+.ud-image-upload
+  border: 1px solid #ccc
+  border-radius: 5px
+  margin-bottom: 15px
+  text-align: center
+  overflow: hidden
+  .preview-area
+    background-color: #eee
+    padding: 5px
+    min-height: 200px
+    >img
+      max-height: 300px
+      width: auto
+    >div
+      margin-bottom: 10px
+      .image-info
+        display: flex
+        justify-content: space-between
+        p
+          margin-bottom: 5px
+          font-size: 14px
+  .info-area
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background-color: #fff
+    padding: 8px
+    .info-left
+      p
+        font-size: 12px
+    .info-right
+      input
+        display: none
+
+// ImageMultiUpload 圖片上傳預覽(多張)
+.ud-image-multi-upload
+  input
+    width: 100%
+    max-width: 100%
+    margin-bottom: 5px
+    .image-preview
+      border: 1px solid #ccc
+      padding: 10px
+      border-radius: 5px
+      margin-bottom: 15px
+      >div
+        margin-bottom: 10px
+        .image-info
+          display: flex
+          justify-content: space-between
+          p
+            margin-bottom: 5px
+            font-size: 14px
+
+//-----------------------Data-----------------------
+// Table 表格
+.ud-table
+
+// Pagination 分頁
+.ud-pagination
+
+//-----------------------Notice-----------------------
+// Notify 通知訊息
+.ud-notify
+
+// Popover 氣泡框
+.ud-popover
+
+//-----------------------Tools-----------------------
+// CountdownExpire 倒數計時(時限)
+.ud-countdown-expire
+
+//-----------------------Appication-----------------------
+//Carousel 圖片輪播
+.ud-carousel
+  position: relative
+  width: 100%
+  overflow: hidden
+  .item
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    background: #000
+    color: #FFF
+    opacity: 1
+    &:first-of-type
+      position: relative
+    img
+      display: block
+      max-width: 100%
+    a
+      display: block
+  // buttons: prev, next
+  .button-prev, .button-next, .dot-group
+    position: absolute
+    z-index: 1
+  .button-prev, .button-next
+    top: 50%
+    transform: translateY(-50%)
+    transition: opacity .3s
+    &:hover
+      opacity: .7
+    img
+      display: block
+      max-width: 50px
+  .button-next
+    right: 0
+  // dots
+  .dot-group
+    right: 0
+    bottom: 8px
+    left: 0
+    display: flex
+    justify-content: center
+    a
+      display: block
+      margin-right: 5px
+      margin-left: 5px
+      width: 10px
+      height: 10px
+      background: rgba(#000, .5)
+      border-radius: 50%
+      transition: .3s
+      &:hover, &.active
+        background: #fff
+  // carousel effect
+  .carousel-prev-enter-active, .carousel-prev-leave-active,
+  .carousel-next-enter-active, .carousel-next-leave-active
+    transition: transform 0.5s ease
+    will-change: transform
+  .carousel-next-enter, .carousel-prev-leave-to
+    transform: translateX(100%)
+  .carousel-next-leave-to, .carousel-prev-enter
+    transform: translateX(-100%)
+
+// Youtube 水管播放
+.ud-youtube
+  .video-wrapper
+    position: relative
+    padding-bottom: 56.25%
+    // padding-top: 30px
+    height: 0
+    overflow: hidden
+    iframe, object, embed
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+
+// YoutubeApi 水管播放(控制版)
+.ud-youtube-api
+  .video-wrapper
+    position: relative
+    padding-bottom: 56.25%
+    // padding-top: 30px
+    height: 0
+    overflow: hidden
+    iframe, object, embed
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+
+// GoogleMap 估狗地圖
+.ud-google-map
+  position: relative
+  padding-bottom: 65.25%
+  height: 0
+  overflow: hidden
+  iframe
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+// Select2 搜尋下拉框
+.ud-select2
+  width: 100%
+
+// Scratch 刮刮樂
+.ud-scratch
+  .sc__wrapper
+    cursor: pointer
+    display: block
+    width: 100%
+    margin: 0 auto
+    .sc__container
+      position: relative
+      overflow: hidden
+    .sc__container > img
+      position: relative
+      top: 0
+      left: 0
+      width: 100%
+      height: auto
+    .sc__container canvas
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: auto
+
+// Editor 文字編輯器
+.ud-editor

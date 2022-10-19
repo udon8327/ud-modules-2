@@ -1,0 +1,31 @@
+before_script:
+  - git checkout -f
+
+stages:
+  - deploy
+
+.deploy:
+  stage: deploy
+  script:
+    # 移動設定檔
+    - cp $ENV_FILE .env
+
+    # 安裝
+    - yarn install
+    - yarn build
+
+    # 移動程式
+    - mkdir -p $PROJECT_FOLDER
+    - rsync -a --exclude=deployment --delete ./dist $PROJECT_FOLDER
+    - chown nginx:nginx -R $PROJECT_FOLDER
+
+after_script:
+  - git checkout -f
+  - git clean -df
+
+include:
+  - local: deployment/yml/master.yml # [公版]開發環境，客戶環境可忽略
+  - local: deployment/yml/dev.yml # [公版]開發環境
+  - local: deployment/yml/develop.yml # [SI客戶]開發環境
+  - local: deployment/yml/testing.yml # [SI客戶]UAT環境
+  - local: deployment/yml/production.yml # [SI客戶]正式環境

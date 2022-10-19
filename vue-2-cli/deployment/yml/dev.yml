@@ -1,0 +1,16 @@
+# [公版]開發環境
+deploy_dev:
+  extends: .deploy
+  variables: {
+    ENV_FILE: deployment/env/dev.env,
+    # 需搭配nginx 設定指定位置
+    PROJECT_FOLDER: "/var/vhosts/coolbe-frontend-test/personnel"
+  }
+  only:
+    # 指定的branch
+    - dev
+  tags:
+    # 指定的gitlab-runner tag
+    - fet-shared-runner
+  # 開啟後為手動更版
+  # when: manual

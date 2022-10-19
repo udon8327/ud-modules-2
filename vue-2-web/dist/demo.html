@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no maximum-scale=1 user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta property="og:image" content="http://static.naver.jp/line_lp/img/ogp.png">
+    <meta property="og:title" content="ud-vue2">
+    <meta property="og:description" content="ud-vue2">
+    <link href="img/favicon.ico" rel="shortcut icon">
+    <title>ud-vue2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/ud-modules.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>Your browser does not support JavaScript!</noscript>
+    <div id="app" v-cloak>
+      <ud-modal v-model="isModalShow">
+        <h1>好</h1>
+      </ud-modal>
+      <div class="container">
+        <div class="wrapper">
+          <div class="component">
+            <h2>ud-button 按鈕</h2>
+            <ud-button @click="alert('aaa')">按鈕</ud-button>
+          </div>
+          <div class="component">
+            <h2>ud-input 輸入框</h2>
+            <ud-input v-model="aaa" placeholder=""></ud-input>
+          </div>
+          <div class="component">
+            <h2>ud-textarea 多行輸入框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-radio 單選框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-checkbox 多選框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-select 下拉框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-select-multiple 下拉複選框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-select-link 連動下拉框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-select-date 日期連動下拉框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-select-twzip 台灣行政區連動下拉框</h2>
+          </div>
+          <div class="component">
+            <h2>ud-switch 開關</h2>
+          </div>
+          <div class="component">
+            <h2>ud-date-picker 日期選擇器</h2>
+          </div>
+          <div class="component">
+            <h2>ud-captcha 圖形驗證碼</h2>
+          </div>
+          <div class="component">
+            <h2>ud-form-item 表單驗證容器</h2>
+          </div>
+          <div class="component">
+            <h2>ud-form 表單驗證</h2>
+          </div>
+          <div class="component">
+            <h2>ud-flex 通用排版容器</h2>
+          </div>
+          <div class="component">
+            <h2>ud-arrow CSS箭頭</h2>
+          </div>
+          <div class="component">
+            <h2>ud-collapse 摺疊容器</h2>
+          </div>
+          <div class="component">
+            <h2>ud-ratio 等比例自適應容器</h2>
+          </div>
+          <div class="component">
+            <h2>ud-alert 警告彈窗</h2>
+          </div>
+          <div class="component">
+            <h2>ud-modal 通用彈窗</h2>
+          </div>
+          <div class="component">
+            <h2>ud-loading 載入中</h2>
+          </div>
+          <div class="component">
+            <h2>ud-html 用戶自定義訊息</h2>
+          </div>
+          <div class="component">
+            <h2>ud-backtop 回到頂部</h2>
+          </div>
+          <div class="component">
+            <h2>ud-ellipsis 文字省略</h2>
+          </div>
+          <div class="component">
+            <h2>ud-phone 撥打電話</h2>
+          </div>
+          <div class="component">
+            <h2>ud-countdown 倒數計時</h2>
+          </div>
+          <div class="component">
+            <h2>ud-qrcode 取得QRcode圖片</h2>
+          </div><a href="⁨https://meet.google.com/rrb-rvfz-otx⁩" target="_blank">TEST</a>
+          <ud-select v-model="aaa" :options="aaaOptions" center></ud-select><br>
+          <div class="d-flex">
+            <ud-select v-model="store[0]" :options="storeOptions" :group="store" :index="0" placeholder="請選擇縣市"></ud-select>
+            <ud-select v-model="store[1]" :options="storeOptions" :group="store" :index="1" placeholder="請選擇店點"></ud-select>
+            <ud-select v-model="store[2]" :options="storeOptions" :group="store" :index="2" placeholder="請選擇日期"></ud-select>
+            <ud-select v-model="store[3]" :options="storeOptions" :group="store" :index="3" placeholder="請選擇時段"></ud-select>
+          </div><br>
+          <div class="d-flex">
+            <ud-select v-model="test1" :options="storeOptions" :group="testArr" :index="0"></ud-select>
+            <ud-select v-model="test2" :options="storeOptions" :group="testArr" :index="1"></ud-select>
+            <ud-select v-model="test3" :options="storeOptions" :group="testArr" :index="2"></ud-select>
+            <ud-select v-model="test4" :options="storeOptions" :group="testArr" :index="3"></ud-select>
+          </div><br>
+          <ud-form :rules="rules" :model="user" ref="form">
+            <ud-form-item label="姓名" prop="name" flex>
+              <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
+            </ud-form-item>
+            <ud-form-item label="年齡" prop="age" flex>
+              <ud-input placeholder="請輸入您的年齡" v-model="user.age" type="tel" disabled></ud-input>
+            </ud-form-item>
+            <ud-form-item label="生日" prop="birthday">
+              <ud-input placeholder="請輸入您的生日" v-model="user.birthday"></ud-input>
+            </ud-form-item>
+            <ud-form-item label="驗證碼" prop="verify">
+              <ud-input placeholder="驗證碼" v-model="user.verify"></ud-input>
+            </ud-form-item>
+            <ud-form-item label="單選" prop="radio">
+              <ud-radio v-model="user.radio" :options="charaOptions" flex></ud-radio>
+            </ud-form-item>
+            <ud-form-item label="條款" prop="agree">
+              <ud-checkbox v-model="user.agree" option="我同意使用者條款" flex></ud-checkbox>
+            </ud-form-item>
+            <ud-form-item label="多選" prop="checkbox">
+              <ud-checkbox v-model="user.checkbox" :options="charaOptions" flex></ud-checkbox>
+            </ud-form-item>
+            <ud-form-item label="下拉" prop="select">
+              <ud-select v-model="user.select" :options="charaOptions" flex center></ud-select>
+            </ud-form-item>
+            <ud-form-item label="櫃點" prop="store">
+              <ud-select-link v-model="user.store" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third></ud-select-link>
+            </ud-form-item>
+            <ud-form-item label="地址" prop="twzip">
+              <ud-select-twzip v-model="user.twzip" flex></ud-select-twzip>
+            </ud-form-item>
+            <ud-form-item label="預約日期" prop="date">
+              <ud-select-date v-model="user.date" flex third roc required>
+                <p>年</p>
+                <p slot="second">月</p>
+                <p slot="third">日</p>
+              </ud-select-date>
+            </ud-form-item><br>
+            <ud-button @click="formSubmit">送出表單</ud-button>
+          </ud-form>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js"></script>
+    <script>
+      if(!window.Vue){
+        document.write(`
+          <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"><\/script>
+          <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"><\/script>
+        `);
+      }
+    </script>
+    <script src="js/ud-modules.js"></script>
+    <script src="js/ud-axios.js"></script>
+    <script src="js/demo.js"></script>
+  </body>
+</html>
