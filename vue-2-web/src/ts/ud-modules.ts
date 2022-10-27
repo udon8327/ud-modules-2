@@ -351,6 +351,7 @@ Vue.component('ud-select', {
         v-bind="$attrs"
         @change="onChange"
         ref="select"
+        :class="{ center: center }"
       >
         <option value="" disabled selected>{{ placeholder }}</option>
         <option v-for="option in optionsArr" :value="option[valueBy]" :key="option[valueBy]" :disabled="option.disabled">
@@ -371,7 +372,7 @@ Vue.component('ud-select', {
     },
     placeholder: { default: "請選擇一項" }, // 取代文字
     combine: Boolean, // 使用value做為label
-    center: Boolean, // 是否置中
+    center: Boolean, // 文字是否置中
     group: { default: "" }, // 是否群組(雙向綁定的值所組成的陣列)
     index: { default: 0 }, // 群組索引(由0開始的數字)
     labelBy: { default: "label" }, // label替代值
@@ -410,36 +411,12 @@ Vue.component('ud-select', {
     }
   },
   mounted() {
-    if(this.center) this.centerSelect();
-    if(this.center) window.addEventListener("resize", this.centerSelect);
-  },
-  destroyed() {
-    if(this.center) window.removeEventListener("resize", this.centerSelect);
   },
   methods: {
     onChange() {
-      if(this.center) this.centerSelect();
       this.$parent.$emit('validate'); // 通知FormItem校驗
       this.$emit('change', this.$refs.select.value);
     },
-    getTextWidth(text, target) {
-      let el = document.createElement('span');
-      let fontSize = window.getComputedStyle(target).fontSize || '14px';
-      el.textContent = text;
-      el.style.display = 'inline-block';
-      el.style.fontSize = fontSize;
-      document.body.appendChild(el);
-      let elmWidth = el.offsetWidth;
-      el.remove();
-      return elmWidth;
-    },
-    centerSelect() {
-      let el = this.$refs.select;
-      let text = "";
-      el.value ? text = this.options.find(item => item.value == el.value).label : text = this.placeholder;
-      let emptySpace = el.offsetWidth - this.getTextWidth(text, el);
-      el.style.textIndent = `${ ( emptySpace / 2 ) - 10 }px`;
-    }
   }
 })
 

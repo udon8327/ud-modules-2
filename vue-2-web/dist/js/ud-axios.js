@@ -14,7 +14,7 @@
  */
 // udAxios 自定義預設值
 var udAxios = axios.create({
-    baseURL: "https://private-c1c50-mock108.apiary-mock.com",
+    baseURL: "https://mock.udons.site",
     timeout: 30000,
 });
 var ajaxCount = 0; // 計算ajax數量

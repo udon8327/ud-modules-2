@@ -230,7 +230,7 @@ Vue.component('ud-checkbox', {
 // Select 下拉框
 Vue.component('ud-select', {
     name: "UdSelect",
-    template: "\n    <div class=\"ud-select\">\n      <select \n        v-model=\"modelValue\" \n        :data-placeholder-selected=\"modelValue.length === 0\"\n        v-bind=\"$attrs\"\n        @change=\"onChange\"\n        ref=\"select\"\n      >\n        <option value=\"\" disabled selected>{{ placeholder }}</option>\n        <option v-for=\"option in optionsArr\" :value=\"option[valueBy]\" :key=\"option[valueBy]\" :disabled=\"option.disabled\">\n          {{ combine ? option[valueBy] : option[labelBy] }}\n        </option>\n      </select>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-select\">\n      <select \n        v-model=\"modelValue\" \n        :data-placeholder-selected=\"modelValue.length === 0\"\n        v-bind=\"$attrs\"\n        @change=\"onChange\"\n        ref=\"select\"\n        :class=\"{ center: center }\"\n      >\n        <option value=\"\" disabled selected>{{ placeholder }}</option>\n        <option v-for=\"option in optionsArr\" :value=\"option[valueBy]\" :key=\"option[valueBy]\" :disabled=\"option.disabled\">\n          {{ combine ? option[valueBy] : option[labelBy] }}\n        </option>\n      </select>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: { default: "" },
@@ -289,40 +289,12 @@ Vue.component('ud-select', {
         }
     },
     mounted: function () {
-        if (this.center)
-            this.centerSelect();
-        if (this.center)
-            window.addEventListener("resize", this.centerSelect);
-    },
-    destroyed: function () {
-        if (this.center)
-            window.removeEventListener("resize", this.centerSelect);
     },
     methods: {
         onChange: function () {
-            if (this.center)
-                this.centerSelect();
             this.$parent.$emit('validate'); // 通知FormItem校驗
             this.$emit('change', this.$refs.select.value);
         },
-        getTextWidth: function (text, target) {
-            var el = document.createElement('span');
-            var fontSize = window.getComputedStyle(target).fontSize || '14px';
-            el.textContent = text;
-            el.style.display = 'inline-block';
-            el.style.fontSize = fontSize;
-            document.body.appendChild(el);
-            var elmWidth = el.offsetWidth;
-            el.remove();
-            return elmWidth;
-        },
-        centerSelect: function () {
-            var el = this.$refs.select;
-            var text = "";
-            el.value ? text = this.options.find(function (item) { return item.value == el.value; }).label : text = this.placeholder;
-            var emptySpace = el.offsetWidth - this.getTextWidth(text, el);
-            el.style.textIndent = (emptySpace / 2) - 10 + "px";
-        }
     }
 });
 // SelectMultiple 下拉複選框 (依賴：element-ui)

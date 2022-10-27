@@ -326,6 +326,8 @@ html, #app {
       color: #a8a8a8; }
     .ud-select select[multiple] option:nth-of-type(1) {
       color: #a8a8a8; }
+    .ud-select select.center {
+      text-align-last: center; }
 
 .ud-select-multiple {
   position: relative;
