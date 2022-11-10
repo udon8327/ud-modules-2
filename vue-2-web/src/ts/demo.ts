@@ -132,6 +132,14 @@ let vm = new Vue({
           console.log("res: ", res);
         })
     },
+    checkAlert() {
+      this.udAlert({
+        msg: "測試",
+        confirm: true
+      })
+        .then(() => {})
+        .catch(() => {})
+    },
     handlePreview(item) {
       console.log(item);
     },

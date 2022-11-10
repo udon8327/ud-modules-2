@@ -71,6 +71,7 @@ Object
   deleteObj：刪除物件鍵值
   deepCloneSimple：深拷貝(簡易版)
   deepClone：深拷貝(完全版)
+  renameKeys：物件key重命名
 
 Time
   isLeapYear：判斷是否為閏年
@@ -1045,7 +1046,8 @@ Vue.component('ud-form-item', {
   template: `
     <div class="ud-form-item" :class="{'is-error': errorMessage, 'is-flex': flex}">
       <div class="ud-form-item-left" :style="{ 'flex-basis': labelWidth, 'text-align': labelAlign }">  
-        <label v-if="label">{{ label }}</label>
+        <img :src="icon" v-if="icon">
+        <label v-if="label"><span v-if="required">*</span>{{ label }}</label>
       </div>
       <div class="ud-form-item-right">  
         <slot></slot>
@@ -1061,6 +1063,12 @@ Vue.component('ud-form-item', {
   },
   inject: ["form"],
   props: {
+    required: { // 必填提示
+      type: Boolean,
+    },
+    icon: { // icon路徑
+      type: String
+    },
     label: { // 標籤內容
       type: String,
     },
@@ -1969,6 +1977,18 @@ const deepClone = (obj, hash = new WeakMap()) => {
     if (obj.hasOwnProperty(key)) cloneObj[key] = deepClone(obj[key], hash);
   }
   return cloneObj;
+}
+
+/**
+ * 物件key重命名
+ * @param {object} obj 傳入值
+ * @example renameKeys(obj, { line_uid: "lineUid", is_past: "isPast" });
+ */
+const renameKeys = (obj, keysMap) => {
+  return Object.keys(obj).reduce((acc, key) => ({
+    ...acc,
+    ...{ [keysMap[key] || key]: obj[key] }
+  }), {});
 }
 
 //-----------------------Time-----------------------

@@ -131,6 +131,14 @@ var vm = new Vue({
                 console.log("res: ", res);
             });
         },
+        checkAlert: function () {
+            this.udAlert({
+                msg: "測試",
+                confirm: true
+            })
+                .then(function () { })
+                .catch(function () { });
+        },
         handlePreview: function (item) {
             console.log(item);
         },

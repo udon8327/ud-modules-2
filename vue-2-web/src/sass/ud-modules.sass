@@ -418,8 +418,19 @@ html,#app
       text-align: left
       display: flex
       align-items: center
+      img
+        width: 26px
+        margin-right: 2px
       label
-        line-height: 20px
+        font-size: 17px
+        position: relative
+        span
+          color: $red
+          font-size: 20px
+          position: absolute
+          left: -10px
+          top: 64%
+          transform: translate(0% ,-50%)
     .ud-form-item-right
       flex: 1 1 0
   &.is-error
