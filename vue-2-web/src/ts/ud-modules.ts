@@ -652,13 +652,13 @@ Vue.component('ud-select-twzip', {
     return {
       options: [
         { 
-          label: "基隆市", value: "01",
-          children: [{ label: "仁愛區", value: "200" },{ label: "信義區", value: "201" },{ label: "中正區", value: "202" },{ label: "中山區", value: "203" },{ label: "安樂區", value: "204" },{ label: "暖暖區", value: "205" },{ label: "七堵區", value: "206" }]
-        },
-        { 
-          label: "台北市", value: "02", 
+          label: "臺北市", value: "01",
           children: [{ label: "中正區", value: "100" },{ label: "大同區", value: "103" },{ label: "中山區", value: "104" },{ label: "松山區", value: "105" },{ label: "大安區", value: "106" },{ label: "萬華區", value: "108" },{ label: "信義區", value: "110" },
           { label: "士林區", value: "111" },{ label: "北投區", value: "112" },{ label: "內湖區", value: "114" },{ label: "南港區", value: "115" },{ label: "文山區", value: "116" }]
+        },
+        { 
+          label: "基隆市", value: "02",
+          children: [{ label: "仁愛區", value: "200" },{ label: "信義區", value: "201" },{ label: "中正區", value: "202" },{ label: "中山區", value: "203" },{ label: "安樂區", value: "204" },{ label: "暖暖區", value: "205" },{ label: "七堵區", value: "206" }]
         },
         { 
           label: "新北市", value: "03", 
@@ -668,28 +668,33 @@ Vue.component('ud-select-twzip', {
           { label: "泰山區", value: "243" },{ label: "林口區", value: "244" },{ label: "蘆洲區", value: "247" },{ label: "五股區", value: "248" },{ label: "八里區", value: "249" },{ label: "淡水區", value: "251" },{ label: "三芝區", value: "252" },
           { label: "石門區", value: "253" }]
         },
-        { 
-          label: "桃園縣", value: "04",
-          children: [{ label: "中壢市", value: "320" },{ label: "平鎮市", value: "324" },{ label: "龍潭鄉", value: "325" },{ label: "楊梅市", value: "326" },{ label: "新屋鄉", value: "327" },{ label: "觀音鄉", value: "328" },{ label: "桃園市", value: "330" },
-          { label: "龜山鄉", value: "333" },{ label: "八德市", value: "334" },{ label: "大溪鎮", value: "335" },{ label: "復興鄉", value: "336" },{ label: "大園鄉", value: "337" },{ label: "蘆竹鄉", value: "338" }]
+        {
+          label: "宜蘭縣", value: "04",
+          children: [{ label: "宜蘭", value: "260" },{ label: "頭城", value: "261" },{ label: "礁溪", value: "262" },{ label: "壯圍", value: "263" },{ label: "員山", value: "264" },{ label: "羅東", value: "265" },{ label: "三星", value: "266" },
+          { label: "大同", value: "267" },{ label: "五結", value: "268" },{ label: "冬山", value: "269" },{ label: "蘇澳", value: "270" },{ label: "南澳", value: "272" }]
         },
         {
           label: "新竹市", value: "05",
-          children: [{ label: "東區", value: "300" },{ label: "北區", value: "300" },{ label: "香山區", value: "300" }]
+          children: [{ label: "新竹市", value: "300" }]
         },
         {
           label: "新竹縣", value: "06",
-          children: [{ label: "竹北市", value: "302" },{ label: "湖口鄉", value: "303" },{ label: "新豐鄉", value: "304" },{ label: "新埔鎮", value: "305" },{ label: "關西鎮", value: "306" },{ label: "芎林鄉", value: "307" },{ label: "寶山鄉", value: "308" },
-          { label: "竹東鎮", value: "310" },{ label: "五峰鄉", value: "311" },{ label: "橫山鄉", value: "312" },{ label: "尖石鄉", value: "313" },{ label: "北埔鄉", value: "314" },{ label: "峨眉鄉", value: "315" }]
+          children: [{ label: "竹北", value: "302" },{ label: "湖口", value: "303" },{ label: "新豐", value: "304" },{ label: "新埔", value: "305" },{ label: "關西", value: "306" },{ label: "芎林", value: "307" },{ label: "寶山", value: "308" },
+          { label: "竹東", value: "310" },{ label: "五峰", value: "311" },{ label: "橫山", value: "312" },{ label: "尖石", value: "313" },{ label: "北埔", value: "314" },{ label: "峨眉", value: "315" }]
+        },
+        { 
+          label: "桃園市", value: "07",
+          children: [{ label: "中壢區", value: "320" },{ label: "平鎮區", value: "324" },{ label: "龍潭區", value: "325" },{ label: "楊梅區", value: "326" },{ label: "新屋區", value: "327" },{ label: "觀音區", value: "328" },{ label: "桃園區", value: "330" },
+          { label: "龜山區", value: "333" },{ label: "八德區", value: "334" },{ label: "大溪區", value: "335" },{ label: "復興區", value: "336" },{ label: "大園區", value: "337" },{ label: "蘆竹區", value: "338" }]
         },
         {
-          label: "苗栗縣", value: "07",
-          children: [{ label: "竹南鎮", value: "350" },{ label: "頭份鎮", value: "351" },{ label: "三灣鄉", value: "352" },{ label: "南庄鄉", value: "353" },{ label: "獅潭鄉", value: "354" },{ label: "後龍鎮", value: "356" },{ label: "通霄鎮", value: "357" },
-          { label: "苑裡鎮", value: "358" },{ label: "苗栗市", value: "360" },{ label: "造橋鄉", value: "361" },{ label: "頭屋鄉", value: "362" },{ label: "公館鄉", value: "363" },{ label: "大湖鄉", value: "364" },{ label: "泰安鄉", value: "365" },
-          { label: "銅鑼鄉", value: "366" },{ label: "三義鄉", value: "367" },{ label: "西湖鄉", value: "368" },{ label: "卓蘭鎮", value: "369" }]
+          label: "苗栗縣", value: "08",
+          children: [{ label: "竹南", value: "350" },{ label: "頭份", value: "351" },{ label: "三灣", value: "352" },{ label: "南庄", value: "353" },{ label: "獅潭", value: "354" },{ label: "後龍", value: "356" },{ label: "通霄", value: "357" },
+          { label: "苑裡", value: "358" },{ label: "苗栗", value: "360" },{ label: "造橋", value: "361" },{ label: "頭屋", value: "362" },{ label: "公館", value: "363" },{ label: "大湖", value: "364" },{ label: "泰安", value: "365" },
+          { label: "銅鑼", value: "366" },{ label: "三義", value: "367" },{ label: "西湖", value: "368" },{ label: "卓蘭", value: "369" }]
         },
         {
-          label: "台中市", value: "08",
+          label: "臺中市", value: "09",
           children: [{ label: "中區", value: "400" },{ label: "東區", value: "401" },{ label: "南區", value: "402" },{ label: "西區", value: "403" },{ label: "北區", value: "404" },{ label: "北屯區", value: "406" },{ label: "西屯區", value: "407" },
           { label: "南屯區", value: "408" },{ label: "太平區", value: "411" },{ label: "大里區", value: "412" },{ label: "霧峰區", value: "413" },{ label: "烏日區", value: "414" },{ label: "豐原區", value: "420" },{ label: "后里區", value: "421" },
           { label: "石岡區", value: "422" },{ label: "東勢區", value: "423" },{ label: "和平區", value: "424" },{ label: "新社區", value: "426" },{ label: "潭子區", value: "427" },{ label: "大雅區", value: "428" },{ label: "神岡區", value: "429" },
@@ -697,35 +702,35 @@ Vue.component('ud-select-twzip', {
           { label: "大安區", value: "439" }]
         },
         {
-          label: "彰化縣", value: "09",
-          children: [{ label: "彰化市", value: "500" },{ label: "芬園鄉", value: "502" },{ label: "花壇鄉", value: "503" },{ label: "秀水鄉", value: "504" },{ label: "鹿港鎮", value: "505" },{ label: "福興鄉", value: "506" },{ label: "線西鄉", value: "507" },
-          { label: "和美鎮", value: "508" },{ label: "伸港鄉", value: "509" },{ label: "員林鎮", value: "510" },{ label: "社頭鄉", value: "511" },{ label: "永靖鄉", value: "512" },{ label: "埔心鄉", value: "513" },{ label: "溪湖鎮", value: "514" },
-          { label: "大村鄉", value: "515" },{ label: "埔鹽鄉", value: "516" },{ label: "田中鎮", value: "520" },{ label: "北斗鎮", value: "521" },{ label: "田尾鄉", value: "522" },{ label: "埤頭鄉", value: "523" },{ label: "溪州鄉", value: "524" },
-          { label: "竹塘鄉", value: "525" },{ label: "二林鎮", value: "526" },{ label: "大城鄉", value: "527" },{ label: "芳苑鄉", value: "528" },{ label: "二水鄉", value: "530" }]
+          label: "彰化縣", value: "10",
+          children: [{ label: "彰化", value: "500" },{ label: "芬園", value: "502" },{ label: "花壇", value: "503" },{ label: "秀水", value: "504" },{ label: "鹿港", value: "505" },{ label: "福興", value: "506" },{ label: "線西", value: "507" },
+          { label: "和美", value: "508" },{ label: "伸港", value: "509" },{ label: "員林", value: "510" },{ label: "社頭", value: "511" },{ label: "永靖", value: "512" },{ label: "埔心", value: "513" },{ label: "溪湖", value: "514" },
+          { label: "大村", value: "515" },{ label: "埔鹽", value: "516" },{ label: "田中", value: "520" },{ label: "北斗", value: "521" },{ label: "田尾", value: "522" },{ label: "埤頭", value: "523" },{ label: "溪州", value: "524" },
+          { label: "竹塘", value: "525" },{ label: "二林", value: "526" },{ label: "大城", value: "527" },{ label: "芳苑", value: "528" },{ label: "二水", value: "530" }]
         },
         {
-          label: "南投縣", value: "10",
-          children: [{ label: "南投市", value: "540" },{ label: "中寮鄉", value: "541" },{ label: "草屯鎮", value: "542" },{ label: "國姓鄉", value: "544" },{ label: "埔里鎮", value: "545" },{ label: "仁愛鄉", value: "546" },{ label: "名間鄉", value: "551" },
-          { label: "集集鎮", value: "552" },{ label: "水里鄉", value: "553" },{ label: "魚池鄉", value: "555" },{ label: "信義鄉", value: "556" },{ label: "竹山鎮", value: "557" },{ label: "鹿谷鄉", value: "558" }]
-        },
-        {
-          label: "雲林縣", value: "11",
-          children: [{ label: "斗南鎮", value: "630" },{ label: "大埤鄉", value: "631" },{ label: "虎尾鎮", value: "632" },{ label: "土庫鎮", value: "633" },{ label: "褒忠鄉", value: "634" },{ label: "東勢鄉", value: "635" },{ label: "台西鄉", value: "636" },
-          { label: "崙背鄉", value: "637" },{ label: "麥寮鄉", value: "638" },{ label: "斗六市", value: "640" },{ label: "林內鄉", value: "643" },{ label: "古坑鄉", value: "646" },{ label: "莿桐鄉", value: "647" },{ label: "西螺鎮", value: "648" },
-          { label: "二崙鄉", value: "649" },{ label: "北港鎮", value: "651" },{ label: "水林鄉", value: "652" },{ label: "口湖鄉", value: "653" },{ label: "四湖鄉", value: "654" },{ label: "元長鄉", value: "655" }]
+          label: "南投縣", value: "11",
+          children: [{ label: "南投", value: "540" },{ label: "中寮", value: "541" },{ label: "草屯", value: "542" },{ label: "國姓", value: "544" },{ label: "埔里", value: "545" },{ label: "仁愛", value: "546" },{ label: "名間", value: "551" },
+          { label: "集集", value: "552" },{ label: "水里", value: "553" },{ label: "魚池", value: "555" },{ label: "信義", value: "556" },{ label: "竹山", value: "557" },{ label: "鹿谷", value: "558" }]
         },
         {
           label: "嘉義市", value: "12",
-          children: [{ label: "東區", value: "600" },{ label: "西區", value: "600" }]
+          children: [{ label: "嘉義市", value: "600" }]
         },
         {
           label: "嘉義縣", value: "13",
-          children: [{ label: "番路鄉", value: "602" },{ label: "梅山鄉", value: "603" },{ label: "竹崎鄉", value: "604" },{ label: "阿里山鄉", value: "605" },{ label: "中埔鄉", value: "606" },{ label: "大埔鄉", value: "607" },{ label: "水上鄉", value: "608" },
-          { label: "鹿草鄉", value: "611" },{ label: "太保市", value: "612" },{ label: "朴子市", value: "613" },{ label: "東石鄉", value: "614" },{ label: "六腳鄉", value: "615" },{ label: "新港鄉", value: "616" },{ label: "民雄鄉", value: "621" },
-          { label: "大林鎮", value: "622" },{ label: "溪口鄉", value: "623" },{ label: "義竹鄉", value: "624" },{ label: "布袋鎮", value: "625" }]
+          children: [{ label: "番路", value: "602" },{ label: "梅山", value: "603" },{ label: "竹崎", value: "604" },{ label: "阿里山", value: "605" },{ label: "中埔", value: "606" },{ label: "大埔", value: "607" },{ label: "水上", value: "608" },
+          { label: "鹿草", value: "611" },{ label: "太保", value: "612" },{ label: "朴子", value: "613" },{ label: "東石", value: "614" },{ label: "六腳", value: "615" },{ label: "新港", value: "616" },{ label: "民雄", value: "621" },
+          { label: "大林", value: "622" },{ label: "溪口", value: "623" },{ label: "義竹", value: "624" },{ label: "布袋", value: "625" }]
         },
         {
-          label: "台南市", value: "14",
+          label: "雲林縣", value: "14",
+          children: [{ label: "斗南", value: "630" },{ label: "大埤", value: "631" },{ label: "虎尾", value: "632" },{ label: "土庫", value: "633" },{ label: "褒忠", value: "634" },{ label: "東勢", value: "635" },{ label: "臺西", value: "636" },
+          { label: "崙背", value: "637" },{ label: "麥寮", value: "638" },{ label: "斗六", value: "640" },{ label: "林內", value: "643" },{ label: "古坑", value: "646" },{ label: "莿桐", value: "647" },{ label: "西螺", value: "648" },
+          { label: "二崙", value: "649" },{ label: "北港", value: "651" },{ label: "水林", value: "652" },{ label: "口湖", value: "653" },{ label: "四湖", value: "654" },{ label: "元長", value: "655" }]
+        },
+        {
+          label: "臺南市", value: "15",
           children: [{ label: "中西區", value: "700" },{ label: "東區", value: "701" },{ label: "南區", value: "702" },{ label: "北區", value: "704" },{ label: "安平區", value: "708" },{ label: "安南區", value: "709" },{ label: "永康區", value: "710" },
           { label: "歸仁區", value: "711" },{ label: "新化區", value: "712" },{ label: "左鎮區", value: "713" },{ label: "玉井區", value: "714" },{ label: "楠西區", value: "715" },{ label: "南化區", value: "716" },{ label: "仁德區", value: "717" },
           { label: "關廟區", value: "718" },{ label: "龍崎區", value: "719" },{ label: "官田區", value: "720" },{ label: "麻豆區", value: "721" },{ label: "佳里區", value: "722" },{ label: "西港區", value: "723" },{ label: "七股區", value: "724" },
@@ -734,7 +739,7 @@ Vue.component('ud-select-twzip', {
           { label: "新市區", value: "744" },{ label: "安定區", value: "745" }]
         },
         {
-          label: "高雄市", value: "15",
+          label: "高雄市", value: "16",
           children: [{ label: "新興區", value: "800" },{ label: "前金區", value: "801" },{ label: "苓雅區", value: "802" },{ label: "鹽埕區", value: "803" },{ label: "鼓山區", value: "804" },{ label: "旗津區", value: "805" },{ label: "前鎮區", value: "806" },
           { label: "三民區", value: "807" },{ label: "楠梓區", value: "811" },{ label: "小港區", value: "812" },{ label: "左營區", value: "813" },{ label: "仁武區", value: "814" },{ label: "大社區", value: "815" },{ label: "岡山區", value: "820" },
           { label: "路竹區", value: "821" },{ label: "阿蓮區", value: "822" },{ label: "田寮區", value: "823" },{ label: "燕巢區", value: "824" },{ label: "橋頭區", value: "825" },{ label: "梓官區", value: "826" },{ label: "彌陀區", value: "827" },
@@ -743,41 +748,44 @@ Vue.component('ud-select-twzip', {
           { label: "那瑪夏區", value: "849" },{ label: "茂林區", value: "851" },{ label: "茄萣區", value: "852" }]
         },
         {
-          label: "屏東縣", value: "16",
-          children: [{ label: "屏東市", value: "900" },{ label: "三地門鄉", value: "901" },{ label: "霧台鄉", value: "902" },{ label: "瑪家鄉", value: "903" },{ label: "九如鄉", value: "904" },{ label: "里港鄉", value: "905" },{ label: "高樹鄉", value: "906" },
-          { label: "鹽埔鄉", value: "907" },{ label: "長治鄉", value: "908" },{ label: "麟洛鄉", value: "909" },{ label: "竹田鄉", value: "911" },{ label: "內埔鄉", value: "912" },{ label: "萬丹鄉", value: "913" },{ label: "潮州鎮", value: "920" },
-          { label: "泰武鄉", value: "921" },{ label: "來義鄉", value: "922" },{ label: "萬巒鄉", value: "923" },{ label: "崁頂鄉", value: "924" },{ label: "新埤鄉", value: "925" },{ label: "南州鄉", value: "926" },{ label: "林邊鄉", value: "927" },
-          { label: "東港鎮", value: "928" },{ label: "琉球鄉", value: "929" },{ label: "佳冬鄉", value: "931" },{ label: "新園鄉", value: "932" },{ label: "枋寮鄉", value: "940" },{ label: "枋山鄉", value: "941" },{ label: "春日鄉", value: "942" },
-          { label: "獅子鄉", value: "943" },{ label: "車城鄉", value: "944" },{ label: "牡丹鄉", value: "945" },{ label: "恆春鎮", value: "946" },{ label: "滿州鄉", value: "947" }]
+          label: "屏東縣", value: "17",
+          children: [{ label: "屏東", value: "900" },{ label: "三地門", value: "901" },{ label: "霧臺", value: "902" },{ label: "瑪家", value: "903" },{ label: "九如", value: "904" },{ label: "里港", value: "905" },{ label: "高樹", value: "906" },
+          { label: "鹽埔", value: "907" },{ label: "長治", value: "908" },{ label: "麟洛", value: "909" },{ label: "竹田", value: "911" },{ label: "內埔", value: "912" },{ label: "萬丹", value: "913" },{ label: "潮州", value: "920" },
+          { label: "泰武", value: "921" },{ label: "來義", value: "922" },{ label: "萬巒", value: "923" },{ label: "崁頂", value: "924" },{ label: "新埤", value: "925" },{ label: "南州", value: "926" },{ label: "林邊", value: "927" },
+          { label: "東港", value: "928" },{ label: "琉球", value: "929" },{ label: "佳冬", value: "931" },{ label: "新園", value: "932" },{ label: "枋寮", value: "940" },{ label: "枋山", value: "941" },{ label: "春日", value: "942" },
+          { label: "獅子", value: "943" },{ label: "車城", value: "944" },{ label: "牡丹", value: "945" },{ label: "恆春", value: "946" },{ label: "滿州", value: "947" }]
         },
         {
-          label: "台東縣", value: "17",
-          children: [{ label: "台東市", value: "950" },{ label: "綠島鄉", value: "951" },{ label: "蘭嶼鄉", value: "952" },{ label: "延平鄉", value: "953" },{ label: "卑南鄉", value: "954" },{ label: "鹿野鄉", value: "955" },{ label: "關山鎮", value: "956" },
-          { label: "海端鄉", value: "957" },{ label: "池上鄉", value: "958" },{ label: "東河鄉", value: "959" },{ label: "成功鎮", value: "961" },{ label: "長濱鄉", value: "962" },{ label: "太麻里鄉", value: "963" },{ label: "金峰鄉", value: "964" },
-          { label: "大武鄉", value: "965" },{ label: "達仁鄉", value: "966" }]
+          label: "臺東縣", value: "18",
+          children: [{ label: "臺東", value: "950" },{ label: "綠島", value: "951" },{ label: "蘭嶼", value: "952" },{ label: "延平", value: "953" },{ label: "卑南", value: "954" },{ label: "鹿野", value: "955" },{ label: "關山", value: "956" },
+          { label: "海端", value: "957" },{ label: "池上", value: "958" },{ label: "東河", value: "959" },{ label: "成功", value: "961" },{ label: "長濱", value: "962" },{ label: "太麻里", value: "963" },{ label: "金峰", value: "964" },
+          { label: "大武", value: "965" },{ label: "達仁", value: "966" }]
         },
         {
-          label: "花蓮縣", value: "18",
-          children: [{ label: "花蓮市", value: "970" },{ label: "新城鄉", value: "971" },{ label: "秀林鄉", value: "972" },{ label: "吉安鄉", value: "973" },{ label: "壽豐鄉", value: "974" },{ label: "鳳林鎮", value: "975" },{ label: "光復鄉", value: "976" },
-          { label: "豐濱鄉", value: "977" },{ label: "瑞穗鄉", value: "978" },{ label: "萬榮鄉", value: "979" },{ label: "玉里鎮", value: "981" },{ label: "卓溪鄉", value: "982" }]
-        },
-        {
-          label: "宜蘭縣", value: "19",
-          children: [{ label: "宜蘭市", value: "260" },{ label: "頭城鎮", value: "261" },{ label: "礁溪鄉", value: "262" },{ label: "壯圍鄉", value: "263" },{ label: "員山鄉", value: "264" },{ label: "羅東鎮", value: "265" },{ label: "三星鄉", value: "266" },
-          { label: "大同鄉", value: "267" },{ label: "五結鄉", value: "268" },{ label: "冬山鄉", value: "269" },{ label: "蘇澳鎮", value: "270" },{ label: "南澳鄉", value: "272" }]
+          label: "花蓮縣", value: "19",
+          children: [{ label: "花蓮", value: "970" },{ label: "新城", value: "971" },{ label: "秀林", value: "972" },{ label: "吉安", value: "973" },{ label: "壽豐", value: "974" },{ label: "鳳林", value: "975" },{ label: "光復", value: "976" },
+          { label: "豐濱", value: "977" },{ label: "瑞穗", value: "978" },{ label: "萬榮", value: "979" },{ label: "玉里", value: "981" },{ label: "卓溪", value: "982" },{ label: "富里", value: "983" }]
         },
         {
           label: "澎湖縣", value: "20",
-          children: [{ label: "馬公市", value: "880" },{ label: "西嶼鄉", value: "881" },{ label: "望安鄉", value: "882" },{ label: "七美鄉", value: "883" },{ label: "白沙鄉", value: "884" },{ label: "湖西鄉", value: "885" }]
+          children: [{ label: "馬公", value: "880" },{ label: "西嶼", value: "881" },{ label: "望安", value: "882" },{ label: "七美", value: "883" },{ label: "白沙", value: "884" },{ label: "湖西", value: "885" }]
         },
         {
           label: "金門縣", value: "21",
-          children: [{ label: "金沙鎮", value: "890" },{ label: "金湖鎮", value: "891" },{ label: "金寧鄉", value: "892" },{ label: "金城鎮", value: "893" },{ label: "烈嶼鄉", value: "894" },{ label: "烏坵鄉", value: "896" }]
+          children: [{ label: "金沙", value: "890" },{ label: "金湖", value: "891" },{ label: "金寧", value: "892" },{ label: "金城", value: "893" },{ label: "烈嶼", value: "894" },{ label: "烏坵", value: "896" }]
         },
         {
           label: "連江縣", value: "22",
-          children: [{ label: "南竿鄉", value: "209" },{ label: "北竿鄉", value: "210" },{ label: "莒光鄉", value: "211" },{ label: "東引鄉", value: "212" }]
-        }
+          children: [{ label: "南竿", value: "209" },{ label: "北竿", value: "210" },{ label: "莒光", value: "211" },{ label: "東引", value: "212" }]
+        },
+        {
+          label: "南海諸島", value: "23",
+          children: [{ label: "東沙", value: "817" },{ label: "南沙", value: "819" }]
+        },
+        {
+          label: "釣魚臺列嶼", value: "24",
+          children: [{ label: "釣魚臺列嶼", value: "290" }]
+        },
       ]
     }
   },
