@@ -1122,7 +1122,8 @@ Vue.component('ud-form-item', {
             if(value && !new RegExp('^[a-zA-Z0-9_\u4e00-\u9fa5]+$').test(value)) this.errorMessage = rule.message || "姓名格式有誤，不接受特殊符號";
             break;
           case "phone": // 電話驗證
-            if(value && !new RegExp('^09[0-9]{8}$').test(value)) this.errorMessage = rule.message || "電話格式有誤，例: 0929123456";
+            let valueAfter = typeOf(value) === 'array' ? value.join("") : value;
+            if(valueAfter && !new RegExp('^09[0-9]{8}$').test(valueAfter)) this.errorMessage = rule.message || "電話格式有誤，例: 0929123456";
             break;
           case "email": // 電子郵件驗證
             if(value && !new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$').test(value)) this.errorMessage = rule.message || "Email格式有誤，需包含'@'符號";

@@ -929,7 +929,8 @@ Vue.component('ud-form-item', {
                             this.errorMessage = rule.message || "姓名格式有誤，不接受特殊符號";
                         break;
                     case "phone":// 電話驗證
-                        if (value && !new RegExp('^09[0-9]{8}$').test(value))
+                        var valueAfter = typeOf(value) === 'array' ? value.join("") : value;
+                        if (valueAfter && !new RegExp('^09[0-9]{8}$').test(valueAfter))
                             this.errorMessage = rule.message || "電話格式有誤，例: 0929123456";
                         break;
                     case "email":// 電子郵件驗證
