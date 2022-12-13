@@ -139,6 +139,24 @@ html, #app {
     background-color: #eee;
     cursor: not-allowed; }
 
+.ud-input-phone {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .ud-input-phone .ud-input:nth-of-type(1) {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 34%;
+    flex: 0 0 34%; }
+  .ud-input-phone .separator {
+    font-size: 18px;
+    margin: 0 5px; }
+
 .ud-textarea textarea {
   -webkit-appearance: none;
   -moz-appearance: none;

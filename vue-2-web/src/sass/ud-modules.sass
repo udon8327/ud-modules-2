@@ -4,6 +4,7 @@
 // Form
 //   Button 按鈕 -----> ud-button
 //   Input 輸入框 -----> ud-input
+//   InputPhone 電話號碼連動輸入框 -----> ud-input-phone
 //   Textarea 多行輸入框 -----> ud-textarea
 //   Radio 單選框 -----> ud-radio
 //   Checkbox 多選框 -----> ud-checkbox
@@ -139,6 +140,17 @@ html,#app
     &:disabled
       background-color: #eee
       cursor: not-allowed
+
+// InputPhone 電話號碼連動輸入框
+.ud-input-phone
+  display: flex
+  justify-content: center
+  align-items: center
+  .ud-input:nth-of-type(1)
+    flex: 0 0 34%
+  .separator
+    font-size: 18px
+    margin: 0 5px
 
 // Textarea 多行輸入框
 .ud-textarea
