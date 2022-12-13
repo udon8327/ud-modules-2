@@ -1334,7 +1334,7 @@ const UdAlert = {
             <p v-html="nl2br(title)"></p>
           </div>
           <div class="ud-modal-body">
-            <p v-html="nl2br(msg)"></p>
+            <p v-html="nl2br(message)"></p>
           </div>
           <div class="ud-modal-footer">
             <ud-flex>
@@ -1353,14 +1353,14 @@ const UdAlert = {
       maskClose: false, // 點擊遮罩關閉
       btnClose: false, // 右上關閉按鈕
       scrollLock: true, // 是否鎖定背景頁面捲動
-      title: '', // 標題文字
-      msg: "網路通信錯誤，請稍候再試", // 訊息文字
+      title: "", // 標題文字
+      message: "", // 訊息文字
       cancelText: "取消", // 取消鈕文字
       onCancel: () => {}, // 取消鈕callback
       confirmText: "確定", // 確認鈕文字
       onConfirm: () => {}, // 確認鈕callback
-      resolve: '', // 保存resolve
-      reject: '', // 保存reject
+      resolve: "", // 保存resolve
+      reject: "", // 保存reject
     }
   },
   mounted() {
@@ -1405,7 +1405,7 @@ const UdAlert = {
 const udAlertExtend = Vue.extend(UdAlert);
 const udAlert = options => {
   let instance = new udAlertExtend();
-  typeof options === 'string' ? instance.msg = options : Object.assign(instance, options);
+  typeof options === 'string' || typeof options === 'number' ? instance.message = options : Object.assign(instance, options);
   document.body.appendChild(instance.$mount().$el);
   return instance.show();
 };
@@ -1474,7 +1474,7 @@ const UdLoading = {
               <img v-else class="icon-img" :src="iconImg">
             </div>
             <div class="ud-modal-body">
-              <p v-html="nl2br(msg)"></p>
+              <p v-html="nl2br(message)"></p>
             </div>
           </div>
         </div>
@@ -1489,7 +1489,7 @@ const UdLoading = {
       iconType: "css", // icon類型 [css:CSS, font:字型, img:圖片]
       iconFont: "fas fa-spinner fa-pulse", // 字型icon的class
       iconImg: "https://image.flaticon.com/icons/svg/553/553265.svg", // 圖片icon的路徑
-      msg: "", // 載入訊息
+      message: "", // 載入訊息
     }
   },
   mounted() {

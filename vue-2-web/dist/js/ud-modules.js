@@ -1099,7 +1099,7 @@ Vue.component('ud-ratio', {
 // Alert 警告彈窗
 var UdAlert = {
     name: "UdAlert",
-    template: "\n    <transition name=\"fade\">\n      <div class=\"ud-alert\" v-if=\"isShow\" @click.self=\"maskHandler\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-close\" v-if=\"btnClose\" @click=\"destroy\">\n            <i class=\"icon-close\"></i>\n          </div>\n          <div class=\"ud-modal-header\" v-if=\"title\">\n            <p v-html=\"nl2br(title)\"></p>\n          </div>\n          <div class=\"ud-modal-body\">\n            <p v-html=\"nl2br(msg)\"></p>\n          </div>\n          <div class=\"ud-modal-footer\">\n            <ud-flex>\n              <ud-button @click=\"cancelHandler\" plain v-if=\"confirm\">{{ cancelText }}</ud-button>\n              <ud-button @click=\"confirmHandler\">{{ confirmText }}</ud-button>\n            </ud-flex>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
+    template: "\n    <transition name=\"fade\">\n      <div class=\"ud-alert\" v-if=\"isShow\" @click.self=\"maskHandler\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-close\" v-if=\"btnClose\" @click=\"destroy\">\n            <i class=\"icon-close\"></i>\n          </div>\n          <div class=\"ud-modal-header\" v-if=\"title\">\n            <p v-html=\"nl2br(title)\"></p>\n          </div>\n          <div class=\"ud-modal-body\">\n            <p v-html=\"nl2br(message)\"></p>\n          </div>\n          <div class=\"ud-modal-footer\">\n            <ud-flex>\n              <ud-button @click=\"cancelHandler\" plain v-if=\"confirm\">{{ cancelText }}</ud-button>\n              <ud-button @click=\"confirmHandler\">{{ confirmText }}</ud-button>\n            </ud-flex>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
     data: function () {
         return {
             isShow: false,
@@ -1107,14 +1107,14 @@ var UdAlert = {
             maskClose: false,
             btnClose: false,
             scrollLock: true,
-            title: '',
-            msg: "網路通信錯誤，請稍候再試",
+            title: "",
+            message: "",
             cancelText: "取消",
             onCancel: function () { },
             confirmText: "確定",
             onConfirm: function () { },
-            resolve: '',
-            reject: '',
+            resolve: "",
+            reject: "",
         };
     },
     mounted: function () {
@@ -1164,7 +1164,7 @@ var UdAlert = {
 var udAlertExtend = Vue.extend(UdAlert);
 var udAlert = function (options) {
     var instance = new udAlertExtend();
-    typeof options === 'string' ? instance.msg = options : Object.assign(instance, options);
+    typeof options === 'string' || typeof options === 'number' ? instance.message = options : Object.assign(instance, options);
     document.body.appendChild(instance.$mount().$el);
     return instance.show();
 };
@@ -1199,7 +1199,7 @@ Vue.component("ud-modal", {
 // Loading 載入中
 var UdLoading = {
     name: "UdLoading",
-    template: "\n    <transition name=\"loading\">\n      <div class=\"ud-loading\" v-show=\"isShow\" :class=\"{'theme-white': theme === 'white'}\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-content\">\n            <div class=\"ud-modal-header\">\n              <div v-if=\"iconType === 'css'\" class=\"icon-css\"></div>\n              <i v-else-if=\"iconType === 'font'\" class=\"icon-font\" :class=\"iconFont\"></i>\n              <img v-else class=\"icon-img\" :src=\"iconImg\">\n            </div>\n            <div class=\"ud-modal-body\">\n              <p v-html=\"nl2br(msg)\"></p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
+    template: "\n    <transition name=\"loading\">\n      <div class=\"ud-loading\" v-show=\"isShow\" :class=\"{'theme-white': theme === 'white'}\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-content\">\n            <div class=\"ud-modal-header\">\n              <div v-if=\"iconType === 'css'\" class=\"icon-css\"></div>\n              <i v-else-if=\"iconType === 'font'\" class=\"icon-font\" :class=\"iconFont\"></i>\n              <img v-else class=\"icon-img\" :src=\"iconImg\">\n            </div>\n            <div class=\"ud-modal-body\">\n              <p v-html=\"nl2br(message)\"></p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
     data: function () {
         return {
             isShow: false,
@@ -1208,7 +1208,7 @@ var UdLoading = {
             iconType: "css",
             iconFont: "fas fa-spinner fa-pulse",
             iconImg: "https://image.flaticon.com/icons/svg/553/553265.svg",
-            msg: "",
+            message: "",
         };
     },
     mounted: function () {
