@@ -1326,17 +1326,17 @@ const UdAlert = {
   template: `
     <transition name="fade">
       <div class="ud-alert" v-if="isShow" @click.self="maskHandler">
-        <div class="modal-wrapper">
-          <div class="modal-close" v-if="btnClose" @click="destroy">
+        <div class="ud-modal-wrapper">
+          <div class="ud-modal-close" v-if="btnClose" @click="destroy">
             <i class="icon-close"></i>
           </div>
-          <div class="modal-header" v-if="title">
+          <div class="ud-modal-header" v-if="title">
             <p v-html="nl2br(title)"></p>
           </div>
-          <div class="modal-body">
+          <div class="ud-modal-body">
             <p v-html="nl2br(msg)"></p>
           </div>
-          <div class="modal-footer">
+          <div class="ud-modal-footer">
             <ud-flex>
               <ud-button @click="cancelHandler" plain v-if="confirm">{{ cancelText }}</ud-button>
               <ud-button @click="confirmHandler">{{ confirmText }}</ud-button>
@@ -1417,18 +1417,18 @@ Vue.component("ud-modal", {
   template: `
     <transition name="fade">
       <div class="ud-modal" v-if="isShow" @click.self="maskHandler" :class="{ 'full-screen': fullScreen }" :style="{ zIndex: zIndex }">
-        <div class="modal-wrapper" :class="{ 'no-bg': noBg }">
-          <div class="modal-close" v-if="btnClose" @click="isShow = 0">
+        <div class="ud-modal-wrapper" :class="{ 'no-bg': noBg }">
+          <div class="ud-modal-close" v-if="btnClose" @click="isShow = 0">
             <i class="icon-close"></i>
           </div>
-          <div class="modal-header" v-if="!$slots.default">
+          <div class="ud-modal-header" v-if="!$slots.default">
             <p>{{ title }}</p>
           </div>
-          <div class="modal-body">
+          <div class="ud-modal-body">
             <p v-if="!$slots.default">{{ message }}</p>
             <slot></slot>
           </div>
-          <div class="modal-footer" v-if="!$slots.default">
+          <div class="ud-modal-footer" v-if="!$slots.default">
             <div class="button-area">
               <ud-button @click="isShow = 0">確認</ud-button>
             </div>
@@ -1466,14 +1466,14 @@ const UdLoading = {
   template: `
     <transition name="loading">
       <div class="ud-loading" v-show="isShow" :class="{'theme-white': theme === 'white'}">
-        <div class="modal-wrapper">
-          <div class="modal-content">
-            <div class="modal-header">
+        <div class="ud-modal-wrapper">
+          <div class="ud-modal-content">
+            <div class="ud-modal-header">
               <div v-if="iconType === 'css'" class="icon-css"></div>
               <i v-else-if="iconType === 'font'" class="icon-font" :class="iconFont"></i>
               <img v-else class="icon-img" :src="iconImg">
             </div>
-            <div class="modal-body">
+            <div class="ud-modal-body">
               <p v-html="nl2br(msg)"></p>
             </div>
           </div>

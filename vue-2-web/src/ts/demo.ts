@@ -19,7 +19,7 @@ let vm = new Vue({
     store: ["", "", "", ""],
     fileList: [],
     file: "",
-    isModalShow: 0,
+    isModalShow: true,
     user: {
       name: "",
       age: "",
@@ -63,6 +63,9 @@ let vm = new Vue({
     }
   },
   methods: {
+    toG() {
+      location.href = 'https://www.google.com.tw/'
+    },
     getStoreOptions() {
       udAxios.post('https://polls.apiblueprint.org/questions', {
         question: "Favourite programming language?",

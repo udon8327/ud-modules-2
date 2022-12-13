@@ -79,13 +79,13 @@ udAxios.interceptors.response.use(
     let code = error.response && error.response.data && error.response.data.code;
     if(code) { // 有收到code的錯誤
       switch (code) {
-        // case '984': // LINE 尚未登入，前台使用
-        //   udAxios.get(`/api/line/login/verify?url=${ encodeURIComponent(window.location) }`, {
-        //     default: true
-        //   })
-        //     .then(res => console.log('已登入'))
-        //     .catch(err => location.href = err.response.data.data.url);
-        //   break;
+        case '984': // LINE 尚未登入，前台使用
+          udAxios.get(`/api/line/login/verify?url=${ encodeURIComponent(window.location) }`, {
+            default: true
+          })
+            .then(res => console.log('已登入'))
+            .catch(err => location.href = err.response.data.data.url);
+          break;
         default:
           if(!(error.config.noAlertCode && error.config.noAlertCode.some(error => error == code))) {
             if(!error.config.noAlert) vm.udAlert(alertConfig);

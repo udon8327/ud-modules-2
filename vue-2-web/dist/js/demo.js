@@ -17,7 +17,7 @@ var vm = new Vue({
         store: ["", "", "", ""],
         fileList: [],
         file: "",
-        isModalShow: 0,
+        isModalShow: true,
         user: {
             name: "",
             age: "",
@@ -60,6 +60,9 @@ var vm = new Vue({
         }
     },
     methods: {
+        toG: function () {
+            location.href = 'https://www.google.com.tw/';
+        },
         getStoreOptions: function () {
             var _this = this;
             udAxios.post('https://polls.apiblueprint.org/questions', {

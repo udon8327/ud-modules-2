@@ -19,8 +19,8 @@
   <body>
     <noscript>Your browser does not support JavaScript!</noscript>
     <div id="app" v-cloak>
-      <ud-modal v-model="isModalShow">
-        <h1>好</h1>
+      <ud-modal v-model="isModalShow" no-bg full-screen mask-close>
+        <h1>好</h1><img src="https://imgur.com/DIC7dRT.jpg" alt="" @click="isModalShow = false">
       </ud-modal>
       <div class="container">
         <div class="wrapper">
@@ -109,7 +109,8 @@
           </div>
           <div class="component">
             <h2>ud-qrcode 取得QRcode圖片</h2>
-          </div><a href="⁨https://meet.google.com/rrb-rvfz-otx⁩" target="_blank">TEST</a>
+          </div>
+          <ud-button @click="toG">估狗</ud-button><a href="⁨https://meet.google.com/rrb-rvfz-otx⁩" target="_blank">TEST</a>
           <ud-select v-model="aaa" :options="aaaOptions" center></ud-select><br>
           <div class="d-flex">
             <ud-select v-model="store[0]" :options="storeOptions" :group="store" :index="0" placeholder="請選擇縣市"></ud-select>

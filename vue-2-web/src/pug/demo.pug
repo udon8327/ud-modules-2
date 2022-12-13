@@ -5,8 +5,9 @@ block css
   link(href='css/demo.css' rel='stylesheet')
 
 block modal
-  ud-modal(v-model="isModalShow")
+  ud-modal(v-model="isModalShow" no-bg full-screen mask-close)
     h1 好
+    img(src="https://imgur.com/DIC7dRT.jpg", alt="" @click="isModalShow = false")
 
 block content
   //- Form
@@ -75,6 +76,7 @@ block content
   .component
     h2 ud-qrcode 取得QRcode圖片
   
+  ud-button(@click="toG") 估狗
   a(href='⁨https://meet.google.com/rrb-rvfz-otx⁩' target="_blank") TEST
   ud-select(v-model='aaa' :options="aaaOptions" center)
   br

@@ -493,8 +493,21 @@ html, #app {
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center; }
+      .ud-form-item.is-flex .ud-form-item-left img {
+        width: 26px;
+        margin-right: 2px; }
       .ud-form-item.is-flex .ud-form-item-left label {
-        line-height: 20px; }
+        font-size: 17px;
+        position: relative; }
+        .ud-form-item.is-flex .ud-form-item-left label span {
+          color: #dc3545;
+          font-size: 20px;
+          position: absolute;
+          left: -10px;
+          top: 64%;
+          -webkit-transform: translate(0%, -50%);
+          -ms-transform: translate(0%, -50%);
+          transform: translate(0%, -50%); }
     .ud-form-item.is-flex .ud-form-item-right {
       -webkit-box-flex: 1;
       -ms-flex: 1 1 0px;
@@ -596,7 +609,7 @@ html, #app {
   -ms-flex-align: center;
   align-items: center;
   overflow-x: hidden; }
-  .ud-alert .modal-wrapper {
+  .ud-alert .ud-modal-wrapper {
     position: relative;
     padding: 15px;
     width: 90%;
@@ -613,55 +626,55 @@ html, #app {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column; }
-    .ud-alert .modal-wrapper p {
+    .ud-alert .ud-modal-wrapper p {
       font-size: 16px;
       margin-bottom: 0;
       color: #333; }
-    .ud-alert .modal-wrapper .modal-close {
+    .ud-alert .ud-modal-wrapper .ud-modal-close {
       position: absolute;
       width: 26px;
       height: 26px;
       right: 4px;
       top: -32px;
       cursor: pointer; }
-      .ud-alert .modal-wrapper .modal-close:hover .icon-close {
+      .ud-alert .ud-modal-wrapper .ud-modal-close:hover .icon-close {
         opacity: 1; }
-      .ud-alert .modal-wrapper .modal-close .icon-close {
+      .ud-alert .ud-modal-wrapper .ud-modal-close .icon-close {
         opacity: 0.75;
         -webkit-transition: all 0.2s ease;
         -o-transition: all 0.2s ease;
         transition: all 0.2s ease; }
-        .ud-alert .modal-wrapper .modal-close .icon-close:before, .ud-alert .modal-wrapper .modal-close .icon-close:after {
+        .ud-alert .ud-modal-wrapper .ud-modal-close .icon-close:before, .ud-alert .ud-modal-wrapper .ud-modal-close .icon-close:after {
           position: absolute;
           left: 13px;
           content: '';
           height: 26px;
           width: 2px;
           background-color: #fff; }
-        .ud-alert .modal-wrapper .modal-close .icon-close:before {
+        .ud-alert .ud-modal-wrapper .ud-modal-close .icon-close:before {
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
           transform: rotate(45deg); }
-        .ud-alert .modal-wrapper .modal-close .icon-close:after {
+        .ud-alert .ud-modal-wrapper .ud-modal-close .icon-close:after {
           -webkit-transform: rotate(-45deg);
           -ms-transform: rotate(-45deg);
           transform: rotate(-45deg); }
-    .ud-alert .modal-wrapper .modal-header {
+    .ud-alert .ud-modal-wrapper .ud-modal-header {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
       flex: 0 0 auto;
       padding: 0 0 15px 0; }
-      .ud-alert .modal-wrapper .modal-header p {
+      .ud-alert .ud-modal-wrapper .ud-modal-header p {
         font-size: 18px;
         font-weight: bold; }
-    .ud-alert .modal-wrapper .modal-body {
+    .ud-alert .ud-modal-wrapper .ud-modal-body {
       -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
       padding: 5px 15px;
       margin: 0 -15px;
       overflow-y: auto; }
-    .ud-alert .modal-wrapper .modal-footer {
+    .ud-alert .ud-modal-wrapper .ud-modal-footer {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
       flex: 0 0 auto;
@@ -687,7 +700,7 @@ html, #app {
   -ms-flex-align: center;
   align-items: center;
   overflow-x: hidden; }
-  .ud-modal .modal-wrapper {
+  .ud-modal .ud-modal-wrapper {
     position: relative;
     width: 85%;
     max-width: 380px;
@@ -704,59 +717,59 @@ html, #app {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column; }
-    .ud-modal .modal-wrapper.no-bg {
+    .ud-modal .ud-modal-wrapper.no-bg {
       background-color: rgba(255, 255, 255, 0);
       -webkit-box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0);
       box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0); }
-    .ud-modal .modal-wrapper .modal-close {
+    .ud-modal .ud-modal-wrapper .ud-modal-close {
       position: absolute;
       width: 26px;
       height: 26px;
       right: 4px;
       top: -32px;
       cursor: pointer; }
-      .ud-modal .modal-wrapper .modal-close:hover .icon-close {
+      .ud-modal .ud-modal-wrapper .ud-modal-close:hover .icon-close {
         opacity: 1; }
-      .ud-modal .modal-wrapper .modal-close .icon-close {
+      .ud-modal .ud-modal-wrapper .ud-modal-close .icon-close {
         opacity: 0.75;
         -webkit-transition: all 0.2s ease;
         -o-transition: all 0.2s ease;
         transition: all 0.2s ease; }
-        .ud-modal .modal-wrapper .modal-close .icon-close:before, .ud-modal .modal-wrapper .modal-close .icon-close:after {
+        .ud-modal .ud-modal-wrapper .ud-modal-close .icon-close:before, .ud-modal .ud-modal-wrapper .ud-modal-close .icon-close:after {
           position: absolute;
           left: 13px;
           content: '';
           height: 26px;
           width: 2px;
           background-color: #fff; }
-        .ud-modal .modal-wrapper .modal-close .icon-close:before {
+        .ud-modal .ud-modal-wrapper .ud-modal-close .icon-close:before {
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
           transform: rotate(45deg); }
-        .ud-modal .modal-wrapper .modal-close .icon-close:after {
+        .ud-modal .ud-modal-wrapper .ud-modal-close .icon-close:after {
           -webkit-transform: rotate(-45deg);
           -ms-transform: rotate(-45deg);
           transform: rotate(-45deg); }
-    .ud-modal .modal-wrapper .modal-header {
+    .ud-modal .ud-modal-wrapper .ud-modal-header {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
       flex: 0 0 auto;
       padding: 15px; }
-      .ud-modal .modal-wrapper .modal-header p {
+      .ud-modal .ud-modal-wrapper .ud-modal-header p {
         font-size: 18px;
         font-weight: bold; }
-    .ud-modal .modal-wrapper .modal-body {
+    .ud-modal .ud-modal-wrapper .ud-modal-body {
       -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
       padding: 15px;
       overflow-y: auto; }
-    .ud-modal .modal-wrapper .modal-footer {
+    .ud-modal .ud-modal-wrapper .ud-modal-footer {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
       flex: 0 0 auto;
       padding: 15px; }
-  .ud-modal.full-screen .modal-wrapper {
+  .ud-modal.full-screen .ud-modal-wrapper {
     width: 100%;
     max-width: 460px;
     max-height: 100%;
@@ -766,7 +779,7 @@ html, #app {
     box-shadow: none;
     border-radius: 0;
     will-change: auto; }
-    .ud-modal.full-screen .modal-wrapper .modal-body {
+    .ud-modal.full-screen .ud-modal-wrapper .ud-modal-body {
       padding: 0; }
 
 .ud-loading {
@@ -780,14 +793,14 @@ html, #app {
   background-color: rgba(0, 0, 0, 0.5); }
   .ud-loading.theme-white {
     background-color: rgba(255, 255, 255, 0.5); }
-    .ud-loading.theme-white .modal-wrapper .modal-content .modal-header .icon-css {
+    .ud-loading.theme-white .ud-modal-wrapper .ud-modal-content .ud-modal-header .icon-css {
       border: 3px solid rgba(0, 0, 0, 0.2);
       border-top: 3px solid #000; }
-    .ud-loading.theme-white .modal-wrapper .modal-content .modal-header i {
+    .ud-loading.theme-white .ud-modal-wrapper .ud-modal-content .ud-modal-header i {
       color: #666; }
-    .ud-loading.theme-white .modal-wrapper .modal-content .modal-body p {
+    .ud-loading.theme-white .ud-modal-wrapper .ud-modal-content .ud-modal-body p {
       color: #666; }
-  .ud-loading .modal-wrapper {
+  .ud-loading .ud-modal-wrapper {
     width: 100%;
     height: 100%;
     display: -webkit-box;
@@ -799,7 +812,7 @@ html, #app {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
-    .ud-loading .modal-wrapper .modal-content .modal-header {
+    .ud-loading .ud-modal-wrapper .ud-modal-content .ud-modal-header {
       text-align: center;
       margin-bottom: 5px;
       display: -webkit-box;
@@ -808,7 +821,7 @@ html, #app {
       -webkit-box-pack: center;
       -ms-flex-pack: center;
       justify-content: center; }
-      .ud-loading .modal-wrapper .modal-content .modal-header .icon-css {
+      .ud-loading .ud-modal-wrapper .ud-modal-content .ud-modal-header .icon-css {
         border: 3px solid rgba(255, 255, 255, 0.2);
         border-top: 3px solid #fff;
         border-radius: 50%;
@@ -824,10 +837,10 @@ html, #app {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-      .ud-loading .modal-wrapper .modal-content .modal-header .icon-font {
+      .ud-loading .ud-modal-wrapper .ud-modal-content .ud-modal-header .icon-font {
         font-size: 24px;
         color: #999; }
-      .ud-loading .modal-wrapper .modal-content .modal-header .icon-img {
+      .ud-loading .ud-modal-wrapper .ud-modal-content .ud-modal-header .icon-img {
         max-width: 32px;
         margin-bottom: 5px;
         -webkit-animation: spin 2s linear infinite;
@@ -840,7 +853,7 @@ html, #app {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-    .ud-loading .modal-wrapper .modal-content .modal-body p {
+    .ud-loading .ud-modal-wrapper .ud-modal-content .ud-modal-body p {
       font-size: 16px;
       color: #999; }
 

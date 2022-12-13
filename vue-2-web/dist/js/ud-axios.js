@@ -70,13 +70,13 @@ function (error) {
     var code = error.response && error.response.data && error.response.data.code;
     if (code) {
         switch (code) {
-            // case '984': // LINE 尚未登入，前台使用
-            //   udAxios.get(`/api/line/login/verify?url=${ encodeURIComponent(window.location) }`, {
-            //     default: true
-            //   })
-            //     .then(res => console.log('已登入'))
-            //     .catch(err => location.href = err.response.data.data.url);
-            //   break;
+            case '984':// LINE 尚未登入，前台使用
+                udAxios.get("/api/line/login/verify?url=" + encodeURIComponent(window.location), {
+                    default: true
+                })
+                    .then(function (res) { return console.log('已登入'); })
+                    .catch(function (err) { return location.href = err.response.data.data.url; });
+                break;
             default:
                 if (!(error.config.noAlertCode && error.config.noAlertCode.some(function (error) { return error == code; }))) {
                     if (!error.config.noAlert)
