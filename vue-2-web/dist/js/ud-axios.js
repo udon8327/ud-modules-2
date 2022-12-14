@@ -64,7 +64,7 @@ function (error) {
         errorMsg = "請求被取消或發送請求時異常";
     }
     // 定義警告彈窗
-    var alertConfig = { msg: errorMsg };
+    var alertConfig = { message: errorMsg };
     Object.assign(alertConfig, error.config.alert);
     // 定義錯誤處理
     var code = error.response && error.response.data && error.response.data.code;

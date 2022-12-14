@@ -72,7 +72,7 @@ udAxios.interceptors.response.use(
     }
 
     // 定義警告彈窗
-    let alertConfig = { msg: errorMsg };
+    let alertConfig = { message: errorMsg };
     Object.assign(alertConfig, error.config.alert);
     
     // 定義錯誤處理
