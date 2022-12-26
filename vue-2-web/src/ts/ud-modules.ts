@@ -1449,6 +1449,7 @@ const UdAlert = {
   mounted() {
     if(this.scrollLock) document.getElementsByTagName('body')[0].style.overflow = 'hidden';
     if(this.scrollLock) document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
+    if(this.message === "") this.message = this.msg;
   },
   methods: {
     show() {

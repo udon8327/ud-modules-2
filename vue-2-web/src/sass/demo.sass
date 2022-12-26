@@ -4,3 +4,49 @@
   margin-bottom: 15px
   h2
     color: #999
+
+
+.sub-tab 
+  display: flex
+  width: 100%
+  max-width: 100%
+
+.sub-tab img 
+  margin: 0 3% 0 0
+  width: 26px
+
+.sub-tab p 
+  margin: 0
+  font-size: 18px
+
+@media (max-width: 340px) 
+  .sub-tab p 
+    font-size: 16px
+  
+
+@media (min-width: 540px)
+  .sub-tab p 
+    font-size: 24px
+  
+
+.sub-tab > div 
+  margin-top: 10px
+  flex: 0 0 50%
+  padding: 14px 0
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: #6e0006
+  color: #fff
+  border-radius: 12px 12px 0 0
+  cursor: pointer
+
+.sub-tab > .actived 
+  background-color: #ba050f
+  color: #fff
+
+.layout, .layout-vip
+  padding: 15px
+
+.layout-vip
+  display: none

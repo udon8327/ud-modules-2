@@ -19,7 +19,7 @@ let vm = new Vue({
     store: ["", "", "", ""],
     fileList: [],
     file: "",
-    isModalShow: true,
+    isModalShow: false,
     user: {
       name: "",
       age: "",
@@ -53,9 +53,43 @@ let vm = new Vue({
       {label: "步夢", value: "pomu"},
     ],
     storeOptions: [
+      {label: "台北市", value: "01", children: [
+        {label: "中正區", value: "011", children: [
+          {label: "中正01", value: "0111", disabled: "true"},
+          {label: "中正02", value: "0112"},
+        ]},
+        {label: "大安區", value: "012", disabled: true, children: [
+          {label: "大安01", value: "0121"},
+          {label: "大安02", value: "0122"},
+        ]},
+        {label: "信義區", value: "013", children: [
+          {label: "信義01", value: "0131"},
+          {label: "信義02", value: "0132"},
+        ]},
+      ]},
+      {label: "台中市", value: "02", children: [
+        {label: "西屯區", value: "021", children: [
+          {label: "中正01", value: "0211"},
+          {label: "中正02", value: "0212"},
+        ]},
+        {label: "北屯區", value: "022", children: [
+          {label: "大安01", value: "0221"},
+          {label: "大安02", value: "0222"},
+        ]},
+        {label: "中區", value: "023", children: [
+          {label: "信義01", value: "0231"},
+          {label: "信義02", value: "0232"},
+        ]},
+      ]},
     ],
   },
   mounted() {
+    udAlert({
+      msg: 1234,
+      onConfirm: () => {
+        udAlert('確定');
+      },
+    })
   },
   computed: {
     testArr() {
@@ -65,18 +99,6 @@ let vm = new Vue({
   methods: {
     toG() {
       location.href = 'https://www.google.com.tw/'
-    },
-    getStoreOptions() {
-      udAxios.post('https://polls.apiblueprint.org/questions', {
-        question: "Favourite programming language?",
-        choices: [
-            "Swift",
-            "Python",
-            "Objective-C",
-            "Ruby"
-        ]
-    })
-        .then(res => this.storeOptions = res.options)
     },
     download() {
       imageDownload('#image');
