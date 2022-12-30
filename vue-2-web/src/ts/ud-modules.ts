@@ -1255,11 +1255,7 @@ Vue.component('ud-form', {
   name: "UdForm",
   template: `
     <div class="ud-form" :class="{'is-no-error-msg': noErrorMsg}">
-      <form 
-        v-bind="$attrs"
-      >
-        <slot></slot>
-      </form>
+      <slot></slot>
     </div>
   `,
   inheritAttrs: false,

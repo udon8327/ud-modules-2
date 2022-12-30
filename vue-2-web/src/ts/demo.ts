@@ -82,14 +82,29 @@ let vm = new Vue({
         ]},
       ]},
     ],
+    param: "",
+    paramOptions: [
+      {label: "妮可", value: "1"},
+      {label: "花丸", value: "2"},
+      {label: "步夢", value: "3"},
+    ],
   },
   mounted() {
-    udAlert({
-      msg: 1234,
-      onConfirm: () => {
-        udAlert('確定');
-      },
-    })
+    // udAlert(queryString('id'))
+    // console.log(this.funcUrlDel('id'))
+    // window.history.replaceState(null, null,'demo.html');
+    // this.param = queryString('id')
+    // var url = window.location.href; 
+    // this.changeURLArg(url, 'id', 5);
+    // udAxios.get('test/500')
+    //   .then(res => {
+    //     udAlert({
+    //       msg: 1234,
+    //       onConfirm: () => {
+    //         udAlert('確定');
+    //       },
+    //     })
+    //   })
   },
   computed: {
     testArr() {
@@ -97,6 +112,9 @@ let vm = new Vue({
     }
   },
   methods: {
+    onParamChange() {
+      window.history.replaceState("", "",`demo.html?id=${this.param}`);
+    },
     toG() {
       location.href = 'https://www.google.com.tw/'
     },

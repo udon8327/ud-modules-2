@@ -1,20 +1,11 @@
 extends _layout.pug
 
 block css
-  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet')
   link(href='css/index.css' rel='stylesheet')
 
 block modal
-  ud-modal(v-model="isModalShow" no-bg)
-    img(src="https://imgur.com/DIC7dRT.jpg", alt="")
-    h1 TEST
-    ud-button(@click="isModalShow = false") CLOSE
 
 block content
-  ud-button(@click="toDemo") DEMO
-  form#form(name="from")
-    ud-input(name="name" required)
-    ud-button(@click="submitForm" type="submit") 送出
 
 block js
   script(src="js/index.js")

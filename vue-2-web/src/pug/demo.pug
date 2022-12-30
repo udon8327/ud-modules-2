@@ -1,6 +1,8 @@
 extends _layout.pug
 
 block css
+  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css' rel='stylesheet')
+  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css' rel='stylesheet')
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet')
   link(href='css/demo.css' rel='stylesheet')
 
@@ -10,6 +12,7 @@ block modal
     img(src="https://imgur.com/DIC7dRT.jpg", alt="" @click="isModalShow = false")
 
 block content
+  ud-select(v-model="param" :options="paramOptions" @change="onParamChange")
   //- Form
   .component
     h2 ud-button 按鈕
@@ -144,4 +147,5 @@ block content
     ud-button(@click="formSubmit") 送出表單
 
 block js
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js')
   script(src="js/demo.js")

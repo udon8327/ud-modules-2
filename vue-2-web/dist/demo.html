@@ -10,10 +10,8 @@
     <meta property="og:description" content="ud-vue2">
     <link href="img/favicon.ico" rel="shortcut icon">
     <title>ud-vue2</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/ud-modules.css" rel="stylesheet">
+    <link href="https://ud-modules.udons.site/css/ud-modules.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
   <body>
@@ -24,6 +22,7 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
+          <ud-select v-model="param" :options="paramOptions" @change="onParamChange"></ud-select>
           <div class="component">
             <h2>ud-button 按鈕</h2>
             <ud-button @click="alert('aaa')">按鈕</ud-button>
@@ -169,7 +168,6 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js"></script>
     <script>
       if(!window.Vue){
         document.write(`
@@ -178,7 +176,7 @@
         `);
       }
     </script>
-    <script src="js/ud-modules.js"></script>
+    <script src="https://ud-modules.udons.site/js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
     <script src="js/demo.js"></script>
   </body>

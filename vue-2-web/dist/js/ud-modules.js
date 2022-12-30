@@ -1039,7 +1039,7 @@ Vue.component('ud-form-item', {
 // Form 表單驗證
 Vue.component('ud-form', {
     name: "UdForm",
-    template: "\n    <div class=\"ud-form\" :class=\"{'is-no-error-msg': noErrorMsg}\">\n      <form \n        v-bind=\"$attrs\"\n      >\n        <slot></slot>\n      </form>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-form\" :class=\"{'is-no-error-msg': noErrorMsg}\">\n      <slot></slot>\n    </div>\n  ",
     inheritAttrs: false,
     provide: function () {
         return {

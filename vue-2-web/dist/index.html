@@ -10,32 +10,20 @@
     <meta property="og:description" content="ud-vue2">
     <link href="img/favicon.ico" rel="shortcut icon">
     <title>ud-vue2</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/ud-modules.css" rel="stylesheet">
+    <link href="https://ud-modules.udons.site/css/ud-modules.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
   </head>
   <body>
     <noscript>Your browser does not support JavaScript!</noscript>
     <div id="app" v-cloak>
-      <ud-modal v-model="isModalShow" no-bg><img src="https://imgur.com/DIC7dRT.jpg" alt="">
-        <h1>TEST</h1>
-        <ud-button @click="isModalShow = false">CLOSE</ud-button>
-      </ud-modal>
       <div class="container">
         <div class="wrapper">
-          <ud-button @click="toDemo">DEMO</ud-button>
-          <form id="form" name="from">
-            <ud-input name="name" required></ud-input>
-            <ud-button @click="submitForm" type="submit">送出</ud-button>
-          </form>
         </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js"></script>
     <script>
       if(!window.Vue){
         document.write(`
@@ -44,7 +32,7 @@
         `);
       }
     </script>
-    <script src="js/ud-modules.js"></script>
+    <script src="https://ud-modules.udons.site/js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
     <script src="js/index.js"></script>
   </body>
