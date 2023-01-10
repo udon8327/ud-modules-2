@@ -158,35 +158,49 @@ html, #app {
     font-size: 18px;
     margin: 0 5px; }
 
-.ud-textarea textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 5px;
-  border: 1px solid #cecece;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  background-color: #fff;
-  font-size: 14px;
-  padding: .75em;
-  width: 100%;
-  -webkit-transition: border 0.2s ease;
-  -o-transition: border 0.2s ease;
-  transition: border 0.2s ease; }
-  .ud-textarea textarea::-webkit-input-placeholder {
-    color: #aaa; }
-  .ud-textarea textarea:-ms-input-placeholder {
-    color: #aaa; }
-  .ud-textarea textarea::-ms-input-placeholder {
-    color: #aaa; }
-  .ud-textarea textarea::placeholder {
-    color: #aaa; }
-  .ud-textarea textarea:focus {
-    outline: 0;
-    border: 1px solid #5e5248; }
-  .ud-textarea textarea:disabled {
-    background-color: #eee;
-    cursor: not-allowed; }
+.ud-textarea {
+  position: relative; }
+  .ud-textarea textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    padding: 5px 10px;
+    min-height: 40px;
+    font-size: 14px;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    background-color: #fff;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease; }
+    .ud-textarea textarea.is-no-resize {
+      resize: none; }
+    .ud-textarea textarea::-webkit-input-placeholder {
+      color: #aaa; }
+    .ud-textarea textarea:-ms-input-placeholder {
+      color: #aaa; }
+    .ud-textarea textarea::-ms-input-placeholder {
+      color: #aaa; }
+    .ud-textarea textarea::placeholder {
+      color: #aaa; }
+    .ud-textarea textarea:focus {
+      outline: 0;
+      border: 1px solid #000; }
+    .ud-textarea textarea:disabled {
+      background-color: #efefef;
+      cursor: not-allowed; }
+  .ud-textarea .textarea-limit {
+    position: absolute;
+    right: 0px;
+    bottom: -20px; }
+    .ud-textarea .textarea-limit span {
+      color: #ccc;
+      letter-spacing: 1px;
+      font-size: 14px; }
+    .ud-textarea .textarea-limit.limit-input span {
+      color: #000; }
 
 .ud-radio.is-flex {
   display: -webkit-box;

@@ -221,20 +221,36 @@ Vue.component('ud-input-phone', {
 // Textarea 多行輸入框
 Vue.component('ud-textarea', {
     name: "UdTextarea",
-    template: "\n    <div class=\"ud-textarea\">\n      <textarea\n        type=\"text\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        @input=\"onInput\"\n      >\n      </textarea>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-textarea\">\n      <textarea\n        ref=\"textarea\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        v-on=\"inputListeners\"\n        :rows=\"rows\"\n        :class=\"{ 'is-no-resize': noResize }\"\n        @input=\"onInput\"\n      >\n      </textarea>\n      <div class=\"textarea-limit\" v-if=\"showLimit\" :class=\"{ 'limit-input': value.length > 0 }\">\n        <span>{{ valueLength }}/{{ limit }}</span>\n      </div>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: null,
+        rows: { default: 4 },
+        showLimit: Boolean,
+        limit: { default: 0 },
+        noResize: Boolean // 禁止改變大小
     },
     computed: {
         modelValue: {
-            get: function () { return this.value; },
+            get: function () { return this.value == null ? "" : this.value; },
             set: function (val) { this.$emit('input', val); }
+        },
+        valueLength: function () {
+            return this.value.length;
+        },
+        inputListeners: function () {
+            return Object.assign({}, this.$listeners, { input: function (event) { } });
         }
     },
     methods: {
         onInput: function () {
             this.$parent.$emit('validate'); // 通知FormItem校驗
+        },
+        focus: function () {
+            this.$refs.textarea.focus();
+        },
+        blur: function () {
+            this.$refs.textarea.blur();
         }
     }
 });

@@ -291,27 +291,52 @@ Vue.component('ud-textarea', {
   template: `
     <div class="ud-textarea">
       <textarea
-        type="text"
+        ref="textarea"
         v-model="modelValue"
         v-bind="$attrs"
+        v-on="inputListeners"
+        :rows="rows"
+        :class="{ 'is-no-resize': noResize }"
         @input="onInput"
       >
       </textarea>
+      <div class="textarea-limit" v-if="showLimit" :class="{ 'limit-input': value.length > 0 }">
+        <span>{{ valueLength }}/{{ limit }}</span>
+      </div>
     </div>
   `,
   inheritAttrs: false,
   props: {
     value: null,
+    rows: { default: 4 }, // 行數
+    showLimit: Boolean, // 是否顯示字數限制
+    limit: { default: 0 }, // 字數限制
+    noResize: Boolean // 禁止改變大小
   },
   computed: {
     modelValue: {
-      get(){ return this.value },
+      get(){ return this.value == null ? "" : this.value },
       set(val){ this.$emit('input', val) }
+    },
+    valueLength() {
+      return this.value.length;
+    },
+    inputListeners() {
+      return Object.assign({},
+        this.$listeners,
+        { input: event => {} }
+      )
     }
   },
   methods: {
     onInput() {
       this.$parent.$emit('validate'); // 通知FormItem校驗
+    },
+    focus() {
+      this.$refs.textarea.focus();
+    },
+    blur() {
+      this.$refs.textarea.blur();
     }
   }
 })
