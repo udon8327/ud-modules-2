@@ -35,7 +35,6 @@ Notice
 Tools
   Html 用戶自定義訊息 -----> ud-html
   Ellipsis 文字省略 -----> ud-ellipsis
-  Phone 撥打電話 -----> ud-phone
   Countdown 倒數計時 -----> ud-countdown
   QrCode 取得QRcode圖片 -----> ud-qrcode
 
@@ -1672,26 +1671,6 @@ Vue.component('ud-ellipsis', {
   `,
   props: {
     maxLine: { default: 1, } // 指定省略行數
-  }
-})
-
-// Phone 撥打電話
-Vue.component('ud-phone', {
-  name: "UdPhone",
-  template: `
-    <div class="ud-phone">
-      <a :href="phoneHref">
-        <slot>{{ number }}</slot>
-      </a>
-    </div>
-  `,
-  props: {
-    number: { default: "0912345678" } // 電話號碼
-  },
-  computed: {
-    phoneHref(){
-      return `tel:${this.number}`
-    }
   }
 })
 
