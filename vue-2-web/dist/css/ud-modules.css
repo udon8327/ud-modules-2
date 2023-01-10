@@ -112,18 +112,19 @@ html, #app {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border-radius: 5px;
-  border: 1px solid #cecece;
-  font-size: 14px;
-  padding: 5px 10px;
   width: 100%;
+  padding: 5px 10px;
   min-height: 40px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  font-size: 14px;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 0px;
   background-color: #fff;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease; }
+  .ud-input input.is-center {
+    text-align: center; }
   .ud-input input::-webkit-input-placeholder {
     color: #aaa; }
   .ud-input input:-ms-input-placeholder {
@@ -134,9 +135,9 @@ html, #app {
     color: #aaa; }
   .ud-input input:focus {
     outline: 0;
-    border: 1px solid #5e5248; }
+    border: 1px solid #000; }
   .ud-input input:disabled {
-    background-color: #eee;
+    background-color: #efefef;
     cursor: not-allowed; }
 
 .ud-input-phone {

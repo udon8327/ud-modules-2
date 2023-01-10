@@ -140,7 +140,7 @@ Vue.component('ud-button', {
 // Input 輸入框
 Vue.component('ud-input', {
     name: 'UdInput',
-    template: "\n    <div class=\"ud-input\">\n      <input\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        @input=\"onInput\"\n        ref=\"input\"\n      >\n    </div>\n  ",
+    template: "\n    <div class=\"ud-input\">\n      <input\n        ref=\"input\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        v-on=\"inputListeners\"\n        :class=\"{ 'is-center': center }\"\n        @input=\"onInput\"\n      >\n      <slot></slot>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: null,
@@ -148,13 +148,15 @@ Vue.component('ud-input', {
     },
     computed: {
         modelValue: {
-            get: function () { return this.value; },
+            get: function () { return this.value == null ? "" : this.value; },
             set: function (val) { this.$emit('input', val); }
         },
+        inputListeners: function () {
+            console.log('inputListeners: ');
+            return Object.assign({}, this.$listeners, { input: function (event) { } });
+        }
     },
     mounted: function () {
-        if (this.center)
-            this.$refs.input.style.textAlign = 'center';
     },
     methods: {
         onInput: function () {
@@ -162,6 +164,9 @@ Vue.component('ud-input', {
         },
         focus: function () {
             this.$refs.input.focus();
+        },
+        blur: function () {
+            this.$refs.input.blur();
         }
     }
 });

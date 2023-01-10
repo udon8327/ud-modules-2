@@ -161,11 +161,14 @@ Vue.component('ud-input', {
   template: `
     <div class="ud-input">
       <input
+        ref="input"
         v-model="modelValue"
         v-bind="$attrs"
+        v-on="inputListeners"
+        :class="{ 'is-center': center }"
         @input="onInput"
-        ref="input"
       >
+      <slot></slot>
     </div>
   `,
   inheritAttrs: false,
@@ -175,12 +178,18 @@ Vue.component('ud-input', {
   },
   computed: {
     modelValue: {
-      get(){ return this.value },
+      get(){ return this.value == null ? "" : this.value },
       set(val){ this.$emit('input', val) }
     },
+    inputListeners() {
+      console.log('inputListeners: ');
+      return Object.assign({},
+        this.$listeners,
+        { input: event => {} }
+      )
+    }
   },
   mounted() {
-    if(this.center) this.$refs.input.style.textAlign = 'center';
   },
   methods: {
     onInput() {
@@ -188,6 +197,9 @@ Vue.component('ud-input', {
     },
     focus() {
       this.$refs.input.focus();
+    },
+    blur() {
+      this.$refs.input.blur();
     }
   }
 })

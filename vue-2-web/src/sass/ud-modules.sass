@@ -123,22 +123,24 @@ html,#app
 .ud-input
   input
     appearance: none
-    border-radius: 5px
-    border: 1px solid #cecece
-    font-size: 14px
-    padding: 5px 10px
     width: 100%
+    padding: 5px 10px
     min-height: 40px
-    box-sizing: border-box
+    font-size: 14px
+    color: #000
+    border: 1px solid #ccc
+    border-radius: 0px
     background-color: #fff
     transition: all 0.2s ease
+    &.is-center
+      text-align: center
     &::placeholder
       color: #aaa
     &:focus
       outline: 0
-      border: 1px solid $main
+      border: 1px solid #000
     &:disabled
-      background-color: #eee
+      background-color: #efefef
       cursor: not-allowed
 
 // InputPhone 電話號碼連動輸入框

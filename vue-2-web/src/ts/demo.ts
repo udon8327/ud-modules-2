@@ -90,6 +90,7 @@ let vm = new Vue({
     ],
   },
   mounted() {
+    udAlert(123)
     // udAlert(queryString('id'))
     // console.log(this.funcUrlDel('id'))
     // window.history.replaceState(null, null,'demo.html');
@@ -117,6 +118,9 @@ let vm = new Vue({
     },
     toG() {
       location.href = 'https://www.google.com.tw/'
+    },
+    test() {
+      udAlert(this.aaa)
     },
     download() {
       imageDownload('#image');

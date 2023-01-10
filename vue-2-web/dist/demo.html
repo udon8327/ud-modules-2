@@ -22,6 +22,7 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
+          <ud-input v-model="aaa" @keyup.enter="test()"></ud-input>
           <ud-select v-model="param" :options="paramOptions" @change="onParamChange"></ud-select>
           <div class="component">
             <h2>ud-button 按鈕</h2>
@@ -176,7 +177,7 @@
         `);
       }
     </script>
-    <script src="https://ud-modules.udons.site/js/ud-modules.js"></script>
+    <script src="js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
     <script src="js/demo.js"></script>
   </body>
