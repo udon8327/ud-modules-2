@@ -1678,15 +1678,28 @@ Vue.component('ud-ellipsis', {
 Vue.component('ud-countdown', {
   name: "UdCountdown",
   template: `
-    <span class="ud-countdown" ref="count">{{countTime}}</span>
+    <span class="ud-countdown" ref="count">{{formatCountTime}}</span>
   `,
   props: {
     time: { default: 60 }, // 倒數秒數
-    delay: Boolean // 不馬上開始倒數
+    delay: Boolean, // 延遲開始倒數
+    type: { default: "second" } // 時間格式
   },
   data() {
     return {
+      countInterval: {},
       countTime: this.time
+    }
+  },
+  computed: {
+    formatCountTime() {
+      if(this.type === "second") {
+        return this.countTime
+      }else if(this.type === "minute"){
+        let min = Math.floor(this.countTime / 60);
+        let sec = this.countTime - (min * 60);
+        return `${min}:${padStart(sec)}`;
+      }
     }
   },
   mounted() {
@@ -1694,15 +1707,16 @@ Vue.component('ud-countdown', {
   },
   methods: {
     countdown(){
-      let countdown = setInterval(() => {
+      this.countInterval = setInterval(() => {
         this.countTime -= 1;
         if(this.countTime <= 0){
           this.$emit("timeup");
-          clearInterval(countdown);
+          clearInterval(this.countInterval);
         }
       }, 1000);
     },
     reset(){
+      clearInterval(this.countInterval);
       this.countTime = this.time;
       this.countdown();
     }
