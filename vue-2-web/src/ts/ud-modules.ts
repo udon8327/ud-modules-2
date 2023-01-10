@@ -34,7 +34,6 @@ Notice
 
 Tools
   Html 用戶自定義訊息 -----> ud-html
-  Backtop 回到頂部 -----> ud-backtop
   Ellipsis 文字省略 -----> ud-ellipsis
   Phone 撥打電話 -----> ud-phone
   Countdown 倒數計時 -----> ud-countdown
@@ -385,7 +384,7 @@ Vue.component('ud-radio', {
     option: null, // 單選項[string, number]
     options: null, // 多選項[object]
     flex: Boolean, // 是否並排
-    radius: { default: "1em" }, // 圓角
+    radius: { default: "50px" }, // 圓角
     combine: Boolean // 使用value做為label
   },
   computed: {
@@ -1659,19 +1658,6 @@ Vue.component('ud-html', {
       }
       let breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
       return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-    }
-  }
-})
-
-// Backtop 回到頂部
-Vue.component('ud-backtop', {
-  name: "UdBacktop",
-  template: `
-    <ud-button @click="scrollToTop">回最頂</ud-button>
-  `,
-  methods: {
-    scrollToTop(){
-      scrollTo();
     }
   }
 })
