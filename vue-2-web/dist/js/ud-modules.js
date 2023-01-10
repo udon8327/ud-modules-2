@@ -150,7 +150,6 @@ Vue.component('ud-input', {
             set: function (val) { this.$emit('input', val); }
         },
         inputListeners: function () {
-            console.log('inputListeners: ');
             return Object.assign({}, this.$listeners, { input: function (event) { } });
         }
     },
@@ -325,6 +324,7 @@ Vue.component('ud-select', {
         index: { default: 0 },
         labelBy: { default: "label" },
         valueBy: { default: "value" },
+        childrenBy: { default: "children" },
     },
     data: function () {
         return {
@@ -344,8 +344,9 @@ Vue.component('ud-select', {
                 return temp;
             if (this.group[this.index - 1]) {
                 var _loop_1 = function (i) {
-                    temp = temp.find(function (option) { return option[_this.valueBy] === _this.group[i]; }).children;
+                    temp = temp.find(function (option) { return option[_this.valueBy] === _this.group[i]; })[this_1.childrenBy];
                 };
+                var this_1 = this;
                 for (var i = 0; i < this.index; i++) {
                     _loop_1(i);
                 }

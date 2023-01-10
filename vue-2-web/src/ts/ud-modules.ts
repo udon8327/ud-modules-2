@@ -180,7 +180,6 @@ Vue.component('ud-input', {
       set(val){ this.$emit('input', val) }
     },
     inputListeners() {
-      console.log('inputListeners: ');
       return Object.assign({},
         this.$listeners,
         { input: event => {} }
@@ -495,6 +494,7 @@ Vue.component('ud-select', {
     index: { default: 0 }, // 群組索引(由0開始的數字)
     labelBy: { default: "label" }, // label替代值
     valueBy: { default: "value" }, // value替代值
+    childrenBy: { default: "children" }, // children替代值
   },
   data() {
     return {
@@ -512,7 +512,7 @@ Vue.component('ud-select', {
       if(this.index === 0) return temp;
       if(this.group[this.index - 1]) {
         for(let i = 0; i < this.index; i++) {
-          temp = temp.find(option => option[this.valueBy] === this.group[i]).children;
+          temp = temp.find(option => option[this.valueBy] === this.group[i])[this.childrenBy];
         }
         return temp;
       }
