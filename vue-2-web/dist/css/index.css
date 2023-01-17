@@ -1,7 +1,4 @@
-* {
-  background-color: pink !important; }
-
-body {
+html, body, .container, .wrapper {
   background-color: pink !important; }
 
 .test {
