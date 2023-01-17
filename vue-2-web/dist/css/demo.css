@@ -1,3 +1,6 @@
+* {
+  background-color: pink; }
+
 .test {
   position: fixed;
   bottom: 0;
