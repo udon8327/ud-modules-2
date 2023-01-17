@@ -1,3 +1,12 @@
+.test {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: aqua;
+  z-index: 10;
+  padding: 15px; }
+
 .component {
   margin-bottom: 15px; }
   .component h2 {

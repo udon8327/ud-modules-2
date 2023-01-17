@@ -88,7 +88,7 @@ var vm = new Vue({
         ],
     },
     mounted: function () {
-        udAlert(123);
+        // udAlert(123)
         // udAlert(queryString('id'))
         // console.log(this.funcUrlDel('id'))
         // window.history.replaceState(null, null,'demo.html');

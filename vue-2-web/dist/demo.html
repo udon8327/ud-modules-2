@@ -12,6 +12,7 @@
     <title>ud-vue2</title>
     <link href="css/main.css" rel="stylesheet">
     <link href="https://ud-modules.udons.site/css/ud-modules.css" rel="stylesheet">
+    <link href="css/ud-modules-dev.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
   <body>
@@ -22,6 +23,19 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
+          <div class="test">123
+            <ud-input></ud-input>
+            <ud-button></ud-button>
+            <ud-input></ud-input>
+            <ud-button></ud-button>
+            <ud-input></ud-input>
+            <ud-button></ud-button>
+            <ud-input></ud-input>
+            <ud-button></ud-button>
+            <ud-input></ud-input>
+            <ud-button></ud-button>
+          </div>
+          <ud-image-upload></ud-image-upload>
           <ud-input v-model="aaa" @keyup.enter="test()"></ud-input>
           <ud-select v-model="param" :options="paramOptions" @change="onParamChange"></ud-select>
           <div class="component">
@@ -178,6 +192,7 @@
       }
     </script>
     <script src="js/ud-modules.js"></script>
+    <script src="js/ud-modules-dev.js"></script>
     <script src="js/ud-axios.js"></script>
     <script src="js/demo.js"></script>
   </body>

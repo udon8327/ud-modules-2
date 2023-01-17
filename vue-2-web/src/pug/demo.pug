@@ -12,6 +12,18 @@ block modal
     img(src="https://imgur.com/DIC7dRT.jpg", alt="" @click="isModalShow = false")
 
 block content
+  .test 123
+    ud-input
+    ud-button
+    ud-input
+    ud-button
+    ud-input
+    ud-button
+    ud-input
+    ud-button
+    ud-input
+    ud-button
+  ud-image-upload
   ud-input(v-model="aaa" @keyup.enter="test()")
   ud-select(v-model="param" :options="paramOptions" @change="onParamChange")
   //- Form
