@@ -1,5 +1,5 @@
 * {
-  background-color: pink; }
+  background-color: pink !important; }
 
 .test {
   position: fixed;
