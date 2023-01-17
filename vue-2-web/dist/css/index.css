@@ -1,6 +1,5 @@
 html, body, .container, .wrapper {
-  background-color: pink !important;
-  padding: 0; }
+  background-color: pink !important; }
 
 .test {
   position: fixed;
