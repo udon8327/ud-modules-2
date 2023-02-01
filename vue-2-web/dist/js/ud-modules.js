@@ -555,7 +555,7 @@ Vue.component('ud-select-date', {
 // SelectTwzip 台灣行政區連動下拉框
 Vue.component('ud-select-twzip', {
     name: "UdSelectTwzip",
-    template: "\n    <div class=\"ud-select-twzip\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"firstValue\" @change=\"onChange()\" :options=\"firstArr\" :placeholder=\"placeholder[0]\" :combine=\"combine\"></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"secondValue\" :options=\"secondArr\" :placeholder=\"placeholder[1]\" :combine=\"combine\"></ud-select>\n      <slot name=\"second\"></slot>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-select-twzip\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"county\" id=\"county\" @change=\"onCountyChange()\" :options=\"countyArr\" :placeholder=\"placeholder[0]\" :combine=\"combine\"></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"district\" id=\"district\" :options=\"districtArr\" :placeholder=\"placeholder[1]\" :combine=\"combine\"></ud-select>\n      <slot name=\"second\"></slot>\n    </div>\n  ",
     props: {
         value: {
             type: Array,
@@ -570,8 +570,8 @@ Vue.component('ud-select-twzip', {
     },
     data: function () {
         return {
-            firstValue: "",
-            secondValue: "",
+            county: "",
+            district: "",
             options: [
                 {
                     label: "基隆市", value: "01",
@@ -704,14 +704,14 @@ Vue.component('ud-select-twzip', {
         };
     },
     computed: {
-        firstArr: function () {
+        countyArr: function () {
             return this.options;
         },
-        secondArr: function () {
+        districtArr: function () {
             var _this = this;
             var temp = [];
-            if (this.firstValue) {
-                temp = this.options.find(function (option) { return option.value === _this.firstValue; }).children;
+            if (this.county) {
+                temp = this.options.find(function (option) { return option.value === _this.county; }).children;
             }
             return temp;
         },
@@ -720,29 +720,24 @@ Vue.component('ud-select-twzip', {
         value: {
             immediate: true,
             handler: function () {
-                this.firstValue = this.value[0];
-                if (this.firstValue === "05") {
-                    this.secondValue = "300";
+                this.county = this.value[0];
+                if (this.county === "05") {
+                    this.district = "300";
                 }
-                else if (this.firstValue === "12") {
-                    this.secondValue = "600";
+                else if (this.county === "12") {
+                    this.district = "600";
                 }
                 else {
-                    this.secondValue = this.value[1];
+                    this.district = this.value[1];
                 }
             }
         },
-        firstValue: function () {
-            this.$emit("input", [this.firstValue, this.secondValue]);
+        county: function () {
+            this.$emit("input", [this.county, this.district]);
         },
-        secondValue: function () {
-            this.$emit("input", [this.firstValue, this.secondValue]);
+        district: function () {
+            this.$emit("input", [this.county, this.district]);
         },
-    },
-    methods: {
-        onChange: function () {
-            this.secondValue = "";
-        }
     },
     mounted: function () {
         var _this = this;
@@ -751,7 +746,12 @@ Vue.component('ud-select-twzip', {
                 _this.$parent.$emit('validate'); // 通知FormItem校驗
             });
         });
-    }
+    },
+    methods: {
+        onCountyChange: function () {
+            this.district = "";
+        }
+    },
 });
 // Switch 開關
 Vue.component('ud-switch', {

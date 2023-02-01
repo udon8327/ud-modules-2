@@ -12,12 +12,7 @@ block modal
     img(src="https://imgur.com/DIC7dRT.jpg", alt="" @click="isModalShow = false")
 
 block content
-  ud-input(v-model="aaa" @keyup.enter="test()")
-  ud-select(v-model="param" :options="paramOptions" @change="onParamChange")
   //- //- Form
-  //- .component
-  //-   h2 ud-button 按鈕
-  //-   ud-button(@click="alert('aaa')") 按鈕
   //- .component
   //-   h2 ud-input 輸入框
   //-   ud-input(v-model="aaa" placeholder="")
@@ -80,72 +75,60 @@ block content
   //- .component
   //-   h2 ud-qrcode 取得QRcode圖片
   
-  ud-button(@click="toG") 估狗
-  a(href='⁨https://meet.google.com/rrb-rvfz-otx⁩' target="_blank") TEST
-  ud-select(v-model='aaa' :options="aaaOptions" center)
-  br
-  .d-flex
-    ud-select(v-model="store[0]" :options="storeOptions" :group="store" :index="0" placeholder="請選擇縣市")
-    ud-select(v-model="store[1]" :options="storeOptions" :group="store" :index="1" placeholder="請選擇店點")
-    ud-select(v-model="store[2]" :options="storeOptions" :group="store" :index="2" placeholder="請選擇日期")
-    ud-select(v-model="store[3]" :options="storeOptions" :group="store" :index="3" placeholder="請選擇時段")
-  br
-  .d-flex
-    ud-select(v-model="test1" :options="storeOptions" :group="testArr" :index="0")
-    ud-select(v-model="test2" :options="storeOptions" :group="testArr" :index="1")
-    ud-select(v-model="test3" :options="storeOptions" :group="testArr" :index="2")
-    ud-select(v-model="test4" :options="storeOptions" :group="testArr" :index="3")
-  br
+  .test-area
+    h1 TEST
+    ud-input(v-model="aaa" @keyup.enter="test()")
+    ud-select(v-model="param" :options="paramOptions" @change="onParamChange")
 
-  //- el-upload.upload-demo(
-  //-   ref="file"
-  //-   :http-request="upload"
-  //-   action='' 
-  //-   :on-preview='handlePreview' 
-  //-   :on-remove='handleRemove' 
-  //-   :file-list='fileList' 
-  //-   :before-upload="beforeUpload"
-  //-   list-type='picture'
-  //-   drag
-  //-   multiple
-  //- )
-  //-   i.el-icon-upload
-  //-   .el-upload__text
-  //-     | 將文件拖到此處，或
-  //-     em 點擊上傳
-  //-   .el-upload__tip(slot='tip') 只能上傳jpg/png文件，且不超過500kb
-  //-   | 
-    //- el-button(size='small' type='primary') 点击上传
-  //- ud-image-upload
-  //- input(type="file" ref="file" @change="upload")
-  ud-form(:rules="rules" :model="user" ref="form")
-    ud-form-item(label="姓名" prop="name" flex)
-      ud-input(placeholder="請輸入您的姓名" v-model="user.name")
-    ud-form-item(label="年齡" prop="age" flex)
-      ud-input(placeholder="請輸入您的年齡" v-model="user.age" type="tel" disabled)
-    ud-form-item(label="生日" prop="birthday")
-      ud-input(placeholder="請輸入您的生日" v-model="user.birthday")
-    ud-form-item(label="驗證碼" prop="verify")
-      ud-input(placeholder="驗證碼" v-model="user.verify")
-    ud-form-item(label="單選" prop="radio")
-      ud-radio(v-model="user.radio" :options="charaOptions" flex)
-    ud-form-item(label="條款" prop="agree")
-      ud-checkbox(v-model="user.agree" option="我同意使用者條款" flex)
-    ud-form-item(label="多選" prop="checkbox")
-      ud-checkbox(v-model="user.checkbox" :options="charaOptions" flex)
-    ud-form-item(label="下拉" prop="select")
-      ud-select(v-model="user.select" :options="charaOptions" flex center)
-    ud-form-item(label="櫃點" prop="store")
-      ud-select-link(v-model="user.store" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third)
-    ud-form-item(label="地址" prop="twzip")
-      ud-select-twzip(v-model="user.twzip" flex)
-    ud-form-item(label="預約日期" prop="date")
-      ud-select-date(v-model="user.date" flex third roc required)
-        p 年
-        p(slot="second") 月
-        p(slot="third") 日
+  .demo-area
+    h1 DEMO
+    //- Form
+    //- ud-button 按鈕
+    ud-button(@click="onClick()") 按鈕
+    ud-form(:rules="rules" :model="user" ref="form")
+      ud-form-item(label="姓名" prop="name" flex)
+        ud-input(placeholder="請輸入您的姓名" v-model="user.name")
+      ud-form-item(label="年齡" prop="age" flex)
+        ud-input(placeholder="請輸入您的年齡" v-model="user.age" type="tel" disabled)
+      ud-form-item(label="生日" prop="birthday")
+        ud-input(placeholder="請輸入您的生日" v-model="user.birthday")
+      ud-form-item(label="驗證碼" prop="verify")
+        ud-input(placeholder="驗證碼" v-model="user.verify")
+      ud-form-item(label="單選" prop="radio")
+        ud-radio(v-model="user.radio" :options="charaOptions" flex)
+      ud-form-item(label="條款" prop="agree")
+        ud-checkbox(v-model="user.agree" option="我同意使用者條款" flex)
+      ud-form-item(label="多選" prop="checkbox")
+        ud-checkbox(v-model="user.checkbox" :options="charaOptions" flex)
+      ud-form-item(label="下拉" prop="select")
+        ud-select(v-model="user.select" :options="charaOptions" flex center)
+      ud-form-item(label="櫃點" prop="store")
+        ud-select-link(v-model="user.store" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third)
+      ud-form-item(label="地址" prop="twzip")
+        ud-select-twzip(ref="zip" v-model="user.twzip" flex)
+        ud-button(@click="changeZip") 換區
+      ud-form-item(label="預約日期" prop="date")
+        ud-select-date(v-model="user.date" flex third roc required)
+          p 年
+          p(slot="second") 月
+          p(slot="third") 日
+      br
+      ud-button(@click="formSubmit") 送出表單
+
+    ud-select(v-model='aaa' :options="aaaOptions" center)
     br
-    ud-button(@click="formSubmit") 送出表單
+    .d-flex
+      ud-select(v-model="store[0]" :options="storeOptions" :group="store" :index="0" placeholder="請選擇縣市")
+      ud-select(v-model="store[1]" :options="storeOptions" :group="store" :index="1" placeholder="請選擇店點")
+      ud-select(v-model="store[2]" :options="storeOptions" :group="store" :index="2" placeholder="請選擇日期")
+      ud-select(v-model="store[3]" :options="storeOptions" :group="store" :index="3" placeholder="請選擇時段")
+    br
+    .d-flex
+      ud-select(v-model="test1" :options="storeOptions" :group="testArr" :index="0")
+      ud-select(v-model="test2" :options="storeOptions" :group="testArr" :index="1")
+      ud-select(v-model="test3" :options="storeOptions" :group="testArr" :index="2")
+      ud-select(v-model="test4" :options="storeOptions" :group="testArr" :index="3")
+    br
 
 block js
   //- script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js')

@@ -1,14 +1,11 @@
 var vm = new Vue({
     el: "#app",
     data: {
+        // TEST
         aaa: "",
         aaaOptions: [
-            {
-                label: "aaa", value: "aaa"
-            },
-            {
-                label: "bbb", value: "bbb"
-            },
+            { label: "aaa", value: "aaa" },
+            { label: "bbb", value: "bbb" },
         ],
         test1: "",
         test2: "",
@@ -89,25 +86,8 @@ var vm = new Vue({
         ],
     },
     mounted: function () {
-        // setTimeout(() => {
-        //   this.user.twzip = ["02", "100"];
-        // }, 1000);
-        // udAlert(123)
-        // udAlert(queryString('id'))
-        // console.log(this.funcUrlDel('id'))
-        // window.history.replaceState(null, null,'demo.html');
-        // this.param = queryString('id')
-        // var url = window.location.href; 
-        // this.changeURLArg(url, 'id', 5);
-        // udAxios.get('test/500')
-        //   .then(res => {
-        //     udAlert({
-        //       msg: 1234,
-        //       onConfirm: () => {
-        //         udAlert('確定');
-        //       },
-        //     })
-        //   })
+        // this.getData();
+        this.postData();
     },
     computed: {
         testArr: function () {
@@ -115,11 +95,33 @@ var vm = new Vue({
         }
     },
     methods: {
+        // TEST
+        // DEMO
+        onClick: function () {
+            console.log("按了按鈕");
+        },
+        alert: function () {
+            udAlert(123);
+        },
+        getData: function () {
+            udAxios.get('test')
+                .then(function (res) {
+                console.log('res: ', res);
+            });
+        },
+        postData: function () {
+            udAxios.post('test', {
+                name: "UDON"
+            })
+                .then(function (res) {
+                console.log('res: ', res);
+            });
+        },
+        changeZip: function () {
+            console.log(document.getElementById("district").options[document.getElementById("district").selectedIndex].text);
+        },
         onParamChange: function () {
             window.history.replaceState("", "", "demo.html?id=" + this.param);
-        },
-        toG: function () {
-            location.href = 'https://www.google.com.tw/';
         },
         test: function () {
             udAlert(this.aaa);
@@ -161,26 +163,6 @@ var vm = new Vue({
             })
                 .then(function (res) { return console.log('res', res); })
                 .catch(function (err) { return console.log('err', err); });
-        },
-        getData: function () {
-            var _this = this;
-            udAxios.get(BASE_URL + "ajax/success.php").then(function (res) {
-                _this.userData = res.userData;
-            });
-        },
-        postData: function () {
-            udAxios.post(BASE_URL + "ajax/success.php", {
-                mail: "udon8327@gmail.com",
-                name: "UDON",
-            }, {
-                params: {
-                    from: 123,
-                    to: 456
-                }
-            })
-                .then(function (res) {
-                console.log("res: ", res);
-            });
         },
         checkAlert: function () {
             this.udAlert({

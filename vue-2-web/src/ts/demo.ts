@@ -3,14 +3,11 @@ declare var $: (selector: string) => any;
 let vm = new Vue({
   el: "#app",
   data: {
+    // TEST
     aaa: "",
     aaaOptions: [
-      {
-        label: "aaa", value: "aaa"
-      },
-      {
-        label: "bbb", value: "bbb"
-      },
+      { label: "aaa", value: "aaa" },
+      { label: "bbb", value: "bbb" },
     ],
     test1: "",
     test2: "",
@@ -89,27 +86,11 @@ let vm = new Vue({
       {label: "乙", value: "b"},
       {label: "丙", value: "c"},
     ],
+    // DEMO
   },
   mounted() {
-    // setTimeout(() => {
-    //   this.user.twzip = ["02", "100"];
-    // }, 1000);
-    // udAlert(123)
-    // udAlert(queryString('id'))
-    // console.log(this.funcUrlDel('id'))
-    // window.history.replaceState(null, null,'demo.html');
-    // this.param = queryString('id')
-    // var url = window.location.href; 
-    // this.changeURLArg(url, 'id', 5);
-    // udAxios.get('test/500')
-    //   .then(res => {
-    //     udAlert({
-    //       msg: 1234,
-    //       onConfirm: () => {
-    //         udAlert('確定');
-    //       },
-    //     })
-    //   })
+    // this.getData();
+    this.postData();
   },
   computed: {
     testArr() {
@@ -117,11 +98,35 @@ let vm = new Vue({
     }
   },
   methods: {
+    // TEST
+    
+    
+    // DEMO
+    onClick() {
+      console.log("按了按鈕");
+    },
+    alert() {
+      udAlert(123);
+    },
+    getData() {
+      udAxios.get('test')
+        .then(res => {
+          console.log('res: ', res);
+        })
+    },
+    postData() {
+      udAxios.post('test', {
+        name: "UDON"
+      })
+        .then(res => {
+          console.log('res: ', res);
+        })
+    },
+    changeZip() {
+      console.log(document.getElementById("district").options[document.getElementById("district").selectedIndex].text)
+    },
     onParamChange() {
       window.history.replaceState("", "",`demo.html?id=${this.param}`);
-    },
-    toG() {
-      location.href = 'https://www.google.com.tw/'
     },
     test() {
       udAlert(this.aaa)
@@ -163,25 +168,6 @@ let vm = new Vue({
       )
         .then(res => console.log('res', res))
         .catch(err => console.log('err', err))
-    },
-    getData() {
-      udAxios.get(BASE_URL + `ajax/success.php`).then(res => {
-        this.userData = res.userData;
-      });
-    },
-    postData() {
-      udAxios.post(BASE_URL + `ajax/success.php`, {
-          mail: "udon8327@gmail.com",
-          name: "UDON",
-        }, {
-        params: {
-          from: 123,
-          to: 456
-        }
-      })
-        .then(res => {
-          console.log("res: ", res);
-        })
     },
     checkAlert() {
       this.udAlert({

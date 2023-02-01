@@ -1,66 +1,11 @@
-.test {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: aqua;
-  z-index: 10;
-  padding: 15px; }
-
-.component {
+.test-area, .demo-area {
+  border: 1px solid #ccc;
+  padding: 15px 5%;
+  border-radius: 10px;
   margin-bottom: 15px; }
-  .component h2 {
-    color: #999; }
-
-.sub-tab {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  max-width: 100%; }
-
-.sub-tab img {
-  margin: 0 3% 0 0;
-  width: 26px; }
-
-.sub-tab p {
-  margin: 0;
-  font-size: 18px; }
-
-@media (max-width: 340px) {
-  .sub-tab p {
-    font-size: 16px; } }
-
-@media (min-width: 540px) {
-  .sub-tab p {
-    font-size: 24px; } }
-
-.sub-tab > div {
-  margin-top: 10px;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 50%;
-  flex: 0 0 50%;
-  padding: 14px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #6e0006;
-  color: #fff;
-  border-radius: 12px 12px 0 0;
-  cursor: pointer; }
-
-.sub-tab > .actived {
-  background-color: #ba050f;
-  color: #fff; }
-
-.layout, .layout-vip {
-  padding: 15px; }
-
-.layout-vip {
-  display: none; }
+  .test-area h1, .demo-area h1 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px; }

@@ -749,9 +749,9 @@ Vue.component('ud-select-twzip', {
   name: "UdSelectTwzip",
   template: `
     <div class="ud-select-twzip" :class="{'is-flex': flex}">
-      <ud-select v-model="firstValue" @change="onChange()" :options="firstArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
+      <ud-select v-model="county" id="county" @change="onCountyChange()" :options="countyArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
       <slot></slot>
-      <ud-select v-model="secondValue" :options="secondArr" :placeholder="placeholder[1]" :combine="combine"></ud-select>
+      <ud-select v-model="district" id="district" :options="districtArr" :placeholder="placeholder[1]" :combine="combine"></ud-select>
       <slot name="second"></slot>
     </div>
   `,
@@ -769,8 +769,8 @@ Vue.component('ud-select-twzip', {
   },
   data() {
     return {
-      firstValue: "",
-      secondValue: "",
+      county: "",
+      district: "",
       options: [
         { 
           label: "基隆市", value: "01",
@@ -903,13 +903,13 @@ Vue.component('ud-select-twzip', {
     }
   },
   computed: {
-    firstArr() {
+    countyArr() {
       return this.options;
     },
-    secondArr() {
+    districtArr() {
       let temp = [];
-      if(this.firstValue){
-        temp = this.options.find(option => option.value === this.firstValue).children;
+      if(this.county){
+        temp = this.options.find(option => option.value === this.county).children;
       }
       return temp;
     },
@@ -918,27 +918,22 @@ Vue.component('ud-select-twzip', {
     value: {
       immediate: true,
       handler(){
-        this.firstValue = this.value[0];
-        if(this.firstValue === "05") {
-          this.secondValue = "300";
-        }else if(this.firstValue === "12") {
-          this.secondValue = "600";
+        this.county = this.value[0];
+        if(this.county === "05") {
+          this.district = "300";
+        }else if(this.county === "12") {
+          this.district = "600";
         }else {
-          this.secondValue = this.value[1];
+          this.district = this.value[1];
         }
       }
     },
-    firstValue() {
-      this.$emit("input", [this.firstValue, this.secondValue]);
+    county() {
+      this.$emit("input", [this.county, this.district]);
     },
-    secondValue() {
-      this.$emit("input", [this.firstValue, this.secondValue]);
+    district() {
+      this.$emit("input", [this.county, this.district]);
     },
-  },
-  methods: {
-    onChange() {
-      this.secondValue = "";
-    }
   },
   mounted() {
     this.$on('validate', () => {
@@ -946,7 +941,12 @@ Vue.component('ud-select-twzip', {
         this.$parent.$emit('validate'); // 通知FormItem校驗
       })
     })
-  }
+  },
+  methods: {
+    onCountyChange() {
+      this.district = "";
+    }
+  },
 })
 
 // Switch 開關
