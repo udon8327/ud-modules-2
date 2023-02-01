@@ -46,9 +46,9 @@ var vm = new Vue({
             date: [{ type: "required" }],
         },
         charaOptions: [
-            { label: "妮可", value: "nico" },
-            { label: "花丸", value: "maru" },
-            { label: "步夢", value: "pomu" },
+            { label: "甲", value: "a" },
+            { label: "乙", value: "b" },
+            { label: "丙", value: "c" },
         ],
         storeOptions: [
             { label: "台北市", value: "01", children: [
@@ -82,9 +82,9 @@ var vm = new Vue({
         ],
         param: "",
         paramOptions: [
-            { label: "妮可", value: "1" },
-            { label: "花丸", value: "2" },
-            { label: "步夢", value: "3" },
+            { label: "甲", value: "a" },
+            { label: "乙", value: "b" },
+            { label: "丙", value: "c" },
         ],
     },
     mounted: function () {

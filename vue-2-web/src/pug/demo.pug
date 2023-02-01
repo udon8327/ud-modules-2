@@ -12,85 +12,73 @@ block modal
     img(src="https://imgur.com/DIC7dRT.jpg", alt="" @click="isModalShow = false")
 
 block content
-  .test 123
-    ud-input
-    ud-button
-    ud-input
-    ud-button
-    ud-input
-    ud-button
-    ud-input
-    ud-button
-    ud-input
-    ud-button
-  ud-image-upload
   ud-input(v-model="aaa" @keyup.enter="test()")
   ud-select(v-model="param" :options="paramOptions" @change="onParamChange")
-  //- Form
-  .component
-    h2 ud-button 按鈕
-    ud-button(@click="alert('aaa')") 按鈕
-  .component
-    h2 ud-input 輸入框
-    ud-input(v-model="aaa" placeholder="")
-  .component
-    h2 ud-textarea 多行輸入框
-  .component
-    h2 ud-radio 單選框
-  .component
-    h2 ud-checkbox 多選框
-  .component
-    h2 ud-select 下拉框
-  .component
-    h2 ud-select-multiple 下拉複選框
-  .component
-    h2 ud-select-link 連動下拉框
-  .component
-    h2 ud-select-date 日期連動下拉框
-  .component
-    h2 ud-select-twzip 台灣行政區連動下拉框
-  .component
-    h2 ud-switch 開關
-  .component
-    h2 ud-date-picker 日期選擇器
-  .component
-    h2 ud-captcha 圖形驗證碼
-  .component
-    h2 ud-form-item 表單驗證容器
-  .component
-    h2 ud-form 表單驗證
+  //- //- Form
+  //- .component
+  //-   h2 ud-button 按鈕
+  //-   ud-button(@click="alert('aaa')") 按鈕
+  //- .component
+  //-   h2 ud-input 輸入框
+  //-   ud-input(v-model="aaa" placeholder="")
+  //- .component
+  //-   h2 ud-textarea 多行輸入框
+  //- .component
+  //-   h2 ud-radio 單選框
+  //- .component
+  //-   h2 ud-checkbox 多選框
+  //- .component
+  //-   h2 ud-select 下拉框
+  //- .component
+  //-   h2 ud-select-multiple 下拉複選框
+  //- .component
+  //-   h2 ud-select-link 連動下拉框
+  //- .component
+  //-   h2 ud-select-date 日期連動下拉框
+  //- .component
+  //-   h2 ud-select-twzip 台灣行政區連動下拉框
+  //- .component
+  //-   h2 ud-switch 開關
+  //- .component
+  //-   h2 ud-date-picker 日期選擇器
+  //- .component
+  //-   h2 ud-captcha 圖形驗證碼
+  //- .component
+  //-   h2 ud-form-item 表單驗證容器
+  //- .component
+  //-   h2 ud-form 表單驗證
 
-  //- Layout
-  .component
-    h2 ud-flex 通用排版容器
-  .component
-    h2 ud-arrow CSS箭頭
-  .component
-    h2 ud-collapse 摺疊容器
-  .component
-    h2 ud-ratio 等比例自適應容器
+  //- //- Layout
+  //- .component
+  //-   h2 ud-flex 通用排版容器
+  //- .component
+  //-   h2 ud-arrow CSS箭頭
+  //- .component
+  //-   h2 ud-collapse 摺疊容器
+  //- .component
+  //-   h2 ud-ratio 等比例自適應容器
 
-  //- Notice
-  .component
-    h2 ud-alert 警告彈窗
-  .component
-    h2 ud-modal 通用彈窗
-  .component
-    h2 ud-loading 載入中
+  //- //- Notice
+  //- .component
+  //-   h2 ud-alert 警告彈窗
+  //- .component
+  //-   h2 ud-modal 通用彈窗
+  //- .component
+  //-   h2 ud-loading 載入中
 
-  //- Tools
-  .component
-    h2 ud-html 用戶自定義訊息
-  .component
-    h2 ud-backtop 回到頂部
-  .component
-    h2 ud-ellipsis 文字省略
-  .component
-    h2 ud-phone 撥打電話
-  .component
-    h2 ud-countdown 倒數計時
-  .component
-    h2 ud-qrcode 取得QRcode圖片
+  //- //- Tools
+  //- .component
+  //-   h2 ud-html 用戶自定義訊息
+  //- .component
+  //-   h2 ud-backtop 回到頂部
+  //- .component
+  //-   h2 ud-ellipsis 文字省略
+  //- .component
+  //-   h2 ud-phone 撥打電話
+  //- .component
+  //-   h2 ud-countdown 倒數計時
+  //- .component
+  //-   h2 ud-qrcode 取得QRcode圖片
   
   ud-button(@click="toG") 估狗
   a(href='⁨https://meet.google.com/rrb-rvfz-otx⁩' target="_blank") TEST

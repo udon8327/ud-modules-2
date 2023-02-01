@@ -11,8 +11,7 @@
     <link href="img/favicon.ico" rel="shortcut icon">
     <title>ud-vue2</title>
     <link href="css/main.css" rel="stylesheet">
-    <link href="https://ud-modules.udons.site/css/ud-modules.css" rel="stylesheet">
-    <link href="css/ud-modules-dev.css" rel="stylesheet">
+    <link href="css/ud-modules.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
   <body>
@@ -23,107 +22,8 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
-          <div class="test">123
-            <ud-input></ud-input>
-            <ud-button></ud-button>
-            <ud-input></ud-input>
-            <ud-button></ud-button>
-            <ud-input></ud-input>
-            <ud-button></ud-button>
-            <ud-input></ud-input>
-            <ud-button></ud-button>
-            <ud-input></ud-input>
-            <ud-button></ud-button>
-          </div>
-          <ud-image-upload></ud-image-upload>
           <ud-input v-model="aaa" @keyup.enter="test()"></ud-input>
           <ud-select v-model="param" :options="paramOptions" @change="onParamChange"></ud-select>
-          <div class="component">
-            <h2>ud-button 按鈕</h2>
-            <ud-button @click="alert('aaa')">按鈕</ud-button>
-          </div>
-          <div class="component">
-            <h2>ud-input 輸入框</h2>
-            <ud-input v-model="aaa" placeholder=""></ud-input>
-          </div>
-          <div class="component">
-            <h2>ud-textarea 多行輸入框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-radio 單選框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-checkbox 多選框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-select 下拉框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-select-multiple 下拉複選框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-select-link 連動下拉框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-select-date 日期連動下拉框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-select-twzip 台灣行政區連動下拉框</h2>
-          </div>
-          <div class="component">
-            <h2>ud-switch 開關</h2>
-          </div>
-          <div class="component">
-            <h2>ud-date-picker 日期選擇器</h2>
-          </div>
-          <div class="component">
-            <h2>ud-captcha 圖形驗證碼</h2>
-          </div>
-          <div class="component">
-            <h2>ud-form-item 表單驗證容器</h2>
-          </div>
-          <div class="component">
-            <h2>ud-form 表單驗證</h2>
-          </div>
-          <div class="component">
-            <h2>ud-flex 通用排版容器</h2>
-          </div>
-          <div class="component">
-            <h2>ud-arrow CSS箭頭</h2>
-          </div>
-          <div class="component">
-            <h2>ud-collapse 摺疊容器</h2>
-          </div>
-          <div class="component">
-            <h2>ud-ratio 等比例自適應容器</h2>
-          </div>
-          <div class="component">
-            <h2>ud-alert 警告彈窗</h2>
-          </div>
-          <div class="component">
-            <h2>ud-modal 通用彈窗</h2>
-          </div>
-          <div class="component">
-            <h2>ud-loading 載入中</h2>
-          </div>
-          <div class="component">
-            <h2>ud-html 用戶自定義訊息</h2>
-          </div>
-          <div class="component">
-            <h2>ud-backtop 回到頂部</h2>
-          </div>
-          <div class="component">
-            <h2>ud-ellipsis 文字省略</h2>
-          </div>
-          <div class="component">
-            <h2>ud-phone 撥打電話</h2>
-          </div>
-          <div class="component">
-            <h2>ud-countdown 倒數計時</h2>
-          </div>
-          <div class="component">
-            <h2>ud-qrcode 取得QRcode圖片</h2>
-          </div>
           <ud-button @click="toG">估狗</ud-button><a href="⁨https://meet.google.com/rrb-rvfz-otx⁩" target="_blank">TEST</a>
           <ud-select v-model="aaa" :options="aaaOptions" center></ud-select><br>
           <div class="d-flex">
@@ -192,7 +92,6 @@
       }
     </script>
     <script src="js/ud-modules.js"></script>
-    <script src="js/ud-modules-dev.js"></script>
     <script src="js/ud-axios.js"></script>
     <script src="js/demo.js"></script>
   </body>
