@@ -749,7 +749,7 @@ Vue.component('ud-select-twzip', {
   name: "UdSelectTwzip",
   template: `
     <div class="ud-select-twzip" :class="{'is-flex': flex}">
-      <ud-select v-model="firstValue" :options="firstArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
+      <ud-select v-model="firstValue" @change="onChange()" :options="firstArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
       <slot></slot>
       <ud-select v-model="secondValue" :options="secondArr" :placeholder="placeholder[1]" :combine="combine"></ud-select>
       <slot name="second"></slot>
@@ -769,6 +769,7 @@ Vue.component('ud-select-twzip', {
   },
   data() {
     return {
+      firstValue: "",
       secondValue: "",
       options: [
         { 
@@ -902,10 +903,6 @@ Vue.component('ud-select-twzip', {
     }
   },
   computed: {
-    firstValue: {
-      get(){ return this.value[0] },
-      set(val){ this.$emit("input", [val, this.secondValue]) }
-    },
     firstArr() {
       return this.options;
     },
@@ -921,6 +918,7 @@ Vue.component('ud-select-twzip', {
     value: {
       immediate: true,
       handler(){
+        this.firstValue = this.value[0];
         if(this.firstValue === "05") {
           this.secondValue = "300";
         }else if(this.firstValue === "12") {
@@ -930,14 +928,17 @@ Vue.component('ud-select-twzip', {
         }
       }
     },
+    firstValue() {
+      this.$emit("input", [this.firstValue, this.secondValue]);
+    },
     secondValue() {
       this.$emit("input", [this.firstValue, this.secondValue]);
     },
-    firstValue() {
-      this.secondValue = "";
-    },
   },
   methods: {
+    onChange() {
+      this.secondValue = "";
+    }
   },
   mounted() {
     this.$on('validate', () => {

@@ -555,7 +555,7 @@ Vue.component('ud-select-date', {
 // SelectTwzip 台灣行政區連動下拉框
 Vue.component('ud-select-twzip', {
     name: "UdSelectTwzip",
-    template: "\n    <div class=\"ud-select-twzip\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"firstValue\" :options=\"firstArr\" :placeholder=\"placeholder[0]\" :combine=\"combine\"></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"secondValue\" :options=\"secondArr\" :placeholder=\"placeholder[1]\" :combine=\"combine\"></ud-select>\n      <slot name=\"second\"></slot>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-select-twzip\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"firstValue\" @change=\"onChange()\" :options=\"firstArr\" :placeholder=\"placeholder[0]\" :combine=\"combine\"></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"secondValue\" :options=\"secondArr\" :placeholder=\"placeholder[1]\" :combine=\"combine\"></ud-select>\n      <slot name=\"second\"></slot>\n    </div>\n  ",
     props: {
         value: {
             type: Array,
@@ -570,6 +570,7 @@ Vue.component('ud-select-twzip', {
     },
     data: function () {
         return {
+            firstValue: "",
             secondValue: "",
             options: [
                 {
@@ -703,10 +704,6 @@ Vue.component('ud-select-twzip', {
         };
     },
     computed: {
-        firstValue: {
-            get: function () { return this.value[0]; },
-            set: function (val) { this.$emit("input", [val, this.secondValue]); }
-        },
         firstArr: function () {
             return this.options;
         },
@@ -723,6 +720,7 @@ Vue.component('ud-select-twzip', {
         value: {
             immediate: true,
             handler: function () {
+                this.firstValue = this.value[0];
                 if (this.firstValue === "05") {
                     this.secondValue = "300";
                 }
@@ -734,14 +732,18 @@ Vue.component('ud-select-twzip', {
                 }
             }
         },
+        firstValue: function () {
+            this.$emit("input", [this.firstValue, this.secondValue]);
+        },
         secondValue: function () {
             this.$emit("input", [this.firstValue, this.secondValue]);
         },
-        firstValue: function () {
-            this.secondValue = "";
-        },
     },
-    methods: {},
+    methods: {
+        onChange: function () {
+            this.secondValue = "";
+        }
+    },
     mounted: function () {
         var _this = this;
         this.$on('validate', function () {

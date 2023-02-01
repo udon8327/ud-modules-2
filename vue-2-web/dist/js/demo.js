@@ -30,6 +30,7 @@ var vm = new Vue({
             select: "",
             store: ["", "", ""],
             twzip: ["", ""],
+            // twzip: ["05", "300"],
             date: ["", "", ""]
         },
         rules: {
@@ -88,6 +89,9 @@ var vm = new Vue({
         ],
     },
     mounted: function () {
+        // setTimeout(() => {
+        //   this.user.twzip = ["02", "100"];
+        // }, 1000);
         // udAlert(123)
         // udAlert(queryString('id'))
         // console.log(this.funcUrlDel('id'))
