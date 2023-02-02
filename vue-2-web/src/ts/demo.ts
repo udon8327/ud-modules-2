@@ -3,49 +3,37 @@ declare var $: (selector: string) => any;
 let vm = new Vue({
   el: "#app",
   data: {
-    // TEST
-    aaa: "",
-    aaaOptions: [
-      { label: "aaa", value: "aaa" },
-      { label: "bbb", value: "bbb" },
-    ],
-    test1: "",
-    test2: "",
-    test3: "",
-    test4: "",
-    store: ["", "", "", ""],
-    fileList: [],
-    file: "",
     isModalShow: false,
     user: {
       name: "",
       age: "",
       birthday: "",
-      code: "test", // verify需相等
       verify: "",
+      verifyEqual: "test",
       radio: "",
-      agree: false,
       checkbox: [],
       select: "",
-      store: ["", "", ""],
+      selectLink: ["", "", ""],
+      selectLinkSp: ["", "", "", ""],
       twzip: ["", ""],
-      // twzip: ["05", "300"],
-      date: ["", "", ""]
+      date: ["", "", ""],
+      isAgree: false,
     },
     rules: {
-      name: [{ type: "required" }, { type: "name" }],
-      birthday: [{ type: "required" }, { type: "date" }],
-      age: [{ type: "required" }, { type: "number" },],
-      verify: [{ type: "required" }, { type: "equal", equalTo: "code", caseIgnore: "true"}],
-      radio: [{ type: "required" },],
-      agree: [{ type: "required", message: "請先同意相關使用條款"},],
-      checkbox: [{ type: "required" },],
-      select: [{ type: "required" },],
-      store: [{ type: "required", message: "櫃點為必填項目" }],
-      twzip: [{ type: "required" }],
-      date: [{ type: "required" }],
+      name: [{type: "required"}, {type: "name" }],
+      age: [{type: "required"}, {type: "number" }],
+      birthday: [{type: "required"}, {type: "date" }],
+      verify: [{type: "required"}, {type: "equal", equalTo: "verifyEqual", caseIgnore: "true"}],
+      radio: [{type: "required"}],
+      checkbox: [{type: "required"}],
+      select: [{type: "required"}],
+      selectLink: [{type: "required"}],
+      selectLinkSp: [{type: "required"}],
+      twzip: [{type: "required"}],
+      date: [{type: "required"}],
+      isAgree: [{type: "required", message: "請先同意相關使用條款"},],
     },
-    charaOptions: [
+    formOptions: [
       {label: "甲", value: "a"},
       {label: "乙", value: "b"},
       {label: "丙", value: "c"},
@@ -54,7 +42,10 @@ let vm = new Vue({
       {label: "台北市", value: "01", children: [
         {label: "中正區", value: "011", children: [
           {label: "中正01", value: "0111", disabled: "true"},
-          {label: "中正02", value: "0112"},
+          {label: "中正02", value: "0112", children: [
+            {label: "中正02甲", value: "01121"},
+            {label: "中正02乙", value: "01122"},
+          ]}
         ]},
         {label: "大安區", value: "012", disabled: true, children: [
           {label: "大安01", value: "0121"},
@@ -80,33 +71,17 @@ let vm = new Vue({
         ]},
       ]},
     ],
-    param: "",
-    paramOptions: [
-      {label: "甲", value: "a"},
-      {label: "乙", value: "b"},
-      {label: "丙", value: "c"},
-    ],
-    // DEMO
   },
   mounted() {
-    // this.getData();
     this.postData();
   },
   computed: {
-    testArr() {
-      return [this.test1, this.test2, this.test3]
-    }
   },
   methods: {
-    // TEST
-    
-    
-    // DEMO
-    onClick() {
-      console.log("按了按鈕");
-    },
-    alert() {
-      udAlert(123);
+    formSubmit: function(){
+      this.$refs.form.validate(() => {
+        this.udAlert({msg: "驗證成功!!"})
+      });
     },
     getData() {
       udAxios.get('test')
@@ -120,19 +95,8 @@ let vm = new Vue({
       })
         .then(res => {
           console.log('res: ', res);
+
         })
-    },
-    changeZip() {
-      console.log(document.getElementById("district").options[document.getElementById("district").selectedIndex].text)
-    },
-    onParamChange() {
-      window.history.replaceState("", "",`demo.html?id=${this.param}`);
-    },
-    test() {
-      udAlert(this.aaa)
-    },
-    download() {
-      imageDownload('#image');
     },
     upload(param) {
       console.log('param: ', param);
@@ -146,45 +110,9 @@ let vm = new Vue({
       }).then(res => console.log(res))
       .catch(err => console.log(err));
     },
-    formSubmit: function(){
-      this.$refs.form.validate(() => {
-        this.udAlert({msg: "驗證成功!!"})
-      });
-    },
+    // tools
     toUrl(url) {
       location.href = url;
     },
-    //API
-    init() {
-      udAxios.post(`echo.php`, {'123': 456}, {
-          params: {
-            from: "02-22",
-            to: "02-29"
-          },
-          headers: {
-            channel_id: "12345678"
-          },
-        }
-      )
-        .then(res => console.log('res', res))
-        .catch(err => console.log('err', err))
-    },
-    checkAlert() {
-      this.udAlert({
-        msg: "測試",
-        confirm: true
-      })
-        .then(() => {})
-        .catch(() => {})
-    },
-    handlePreview(item) {
-      console.log(item);
-    },
-    handleRemove(item) {
-      console.log(item);
-    },
-    beforeUpload(item) {
-      console.log(item);
-    }
   }
 });

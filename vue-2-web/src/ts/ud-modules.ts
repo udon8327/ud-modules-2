@@ -415,7 +415,7 @@ Vue.component('ud-checkbox', {
             ref="checkbox"
           >
           <div class="checkbox-decorator"></div>
-          <p v-if="!noLabel"><slot>{{ options }}</slot></p>
+          <p v-if="!noLabel"><slot>{{ option }}</slot></p>
         </label>
       </template>
       <template v-else>

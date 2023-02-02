@@ -12,6 +12,7 @@
     <title>ud-vue2</title>
     <link href="css/main.css" rel="stylesheet">
     <link href="css/ud-modules.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
   <body>
@@ -24,66 +25,62 @@
         <div class="wrapper">
           <div class="test-area">
             <h1>TEST</h1>
-            <ud-input v-model="aaa" @keyup.enter="test()"></ud-input>
-            <ud-select v-model="param" :options="paramOptions" @change="onParamChange"></ud-select>
           </div>
           <div class="demo-area">
             <h1>DEMO</h1>
-            <ud-button @click="onClick()">按鈕</ud-button>
-            <ud-form :rules="rules" :model="user" ref="form">
-              <ud-form-item label="姓名" prop="name" flex>
-                <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
-              </ud-form-item>
-              <ud-form-item label="年齡" prop="age" flex>
-                <ud-input placeholder="請輸入您的年齡" v-model="user.age" type="tel" disabled></ud-input>
-              </ud-form-item>
-              <ud-form-item label="生日" prop="birthday">
-                <ud-input placeholder="請輸入您的生日" v-model="user.birthday"></ud-input>
-              </ud-form-item>
-              <ud-form-item label="驗證碼" prop="verify">
-                <ud-input placeholder="驗證碼" v-model="user.verify"></ud-input>
-              </ud-form-item>
-              <ud-form-item label="單選" prop="radio">
-                <ud-radio v-model="user.radio" :options="charaOptions" flex></ud-radio>
-              </ud-form-item>
-              <ud-form-item label="條款" prop="agree">
-                <ud-checkbox v-model="user.agree" option="我同意使用者條款" flex></ud-checkbox>
-              </ud-form-item>
-              <ud-form-item label="多選" prop="checkbox">
-                <ud-checkbox v-model="user.checkbox" :options="charaOptions" flex></ud-checkbox>
-              </ud-form-item>
-              <ud-form-item label="下拉" prop="select">
-                <ud-select v-model="user.select" :options="charaOptions" flex center></ud-select>
-              </ud-form-item>
-              <ud-form-item label="櫃點" prop="store">
-                <ud-select-link v-model="user.store" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third></ud-select-link>
-              </ud-form-item>
-              <ud-form-item label="地址" prop="twzip">
-                <ud-select-twzip ref="zip" v-model="user.twzip" flex></ud-select-twzip>
-                <ud-button @click="changeZip">換區</ud-button>
-              </ud-form-item>
-              <ud-form-item label="預約日期" prop="date">
-                <ud-select-date v-model="user.date" flex third roc required>
-                  <p>年</p>
-                  <p slot="second">月</p>
-                  <p slot="third">日</p>
-                </ud-select-date>
-              </ud-form-item><br>
-              <ud-button @click="formSubmit">送出表單</ud-button>
-            </ud-form>
-            <ud-select v-model="aaa" :options="aaaOptions" center></ud-select><br>
-            <div class="d-flex">
-              <ud-select v-model="store[0]" :options="storeOptions" :group="store" :index="0" placeholder="請選擇縣市"></ud-select>
-              <ud-select v-model="store[1]" :options="storeOptions" :group="store" :index="1" placeholder="請選擇店點"></ud-select>
-              <ud-select v-model="store[2]" :options="storeOptions" :group="store" :index="2" placeholder="請選擇日期"></ud-select>
-              <ud-select v-model="store[3]" :options="storeOptions" :group="store" :index="3" placeholder="請選擇時段"></ud-select>
-            </div><br>
-            <div class="d-flex">
-              <ud-select v-model="test1" :options="storeOptions" :group="testArr" :index="0"></ud-select>
-              <ud-select v-model="test2" :options="storeOptions" :group="testArr" :index="1"></ud-select>
-              <ud-select v-model="test3" :options="storeOptions" :group="testArr" :index="2"></ud-select>
-              <ud-select v-model="test4" :options="storeOptions" :group="testArr" :index="3"></ud-select>
-            </div><br>
+            <div class="demo-wrapper">
+              <ud-form :rules="rules" :model="user" ref="form">
+                <ud-form-item label="姓名" prop="name" flex>
+                  <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
+                </ud-form-item>
+                <ud-form-item label="年齡" prop="age" flex>
+                  <ud-input placeholder="請輸入您的年齡" v-model="user.age" type="tel"></ud-input>
+                </ud-form-item>
+                <ud-form-item label="生日" prop="birthday" flex>
+                  <ud-input placeholder="請輸入您的生日" v-model="user.birthday"></ud-input>
+                </ud-form-item>
+                <ud-form-item label="驗證碼" prop="verify" flex>
+                  <ud-input placeholder="驗證碼" v-model="user.verify"></ud-input>
+                </ud-form-item>
+                <ud-form-item label="單選" prop="radio" flex>
+                  <ud-radio v-model="user.radio" :options="formOptions" flex></ud-radio>
+                </ud-form-item>
+                <ud-form-item label="多選" prop="checkbox" flex>
+                  <ud-checkbox v-model="user.checkbox" :options="formOptions" flex></ud-checkbox>
+                </ud-form-item>
+                <ud-form-item label="下拉" prop="select" flex>
+                  <ud-select v-model="user.select" :options="formOptions" flex center></ud-select>
+                </ud-form-item>
+                <ud-form-item label="下拉連動" prop="selectLink" flex>
+                  <ud-select-link v-model="user.selectLink" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third></ud-select-link>
+                </ud-form-item>
+                <ud-form-item label="下拉連動分開" prop="selectLinkSp">
+                  <div class="d-flex">
+                    <ud-select v-model="user.selectLinkSp[0]" :options="storeOptions" :group="user.selectLinkSp" :index="0" placeholder="請選擇縣市"></ud-select>
+                    <ud-select v-model="user.selectLinkSp[1]" :options="storeOptions" :group="user.selectLinkSp" :index="1" placeholder="請選擇店點"></ud-select>
+                    <ud-select v-model="user.selectLinkSp[2]" :options="storeOptions" :group="user.selectLinkSp" :index="2" placeholder="請選擇日期"></ud-select>
+                    <ud-select v-model="user.selectLinkSp[3]" :options="storeOptions" :group="user.selectLinkSp" :index="3" placeholder="請選擇時段"></ud-select>
+                  </div>
+                </ud-form-item>
+                <ud-form-item label="地址" prop="twzip" flex>
+                  <ud-select-twzip ref="zip" v-model="user.twzip" flex></ud-select-twzip>
+                </ud-form-item>
+                <ud-form-item label="預約日期" prop="date" flex>
+                  <ud-select-date v-model="user.date" flex third roc required>
+                    <p>年</p>
+                    <p slot="second">月</p>
+                    <p slot="third">日</p>
+                  </ud-select-date>
+                </ud-form-item>
+                <ud-form-item label="" prop="isAgree">
+                  <ud-checkbox v-model="user.isAgree" option="我同意使用者條款(作法一)"></ud-checkbox>
+                  <ud-checkbox v-model="user.isAgree" option="條款">
+                    <p>我同意使用者條款(作法二)</p>
+                  </ud-checkbox>
+                </ud-form-item>
+                <ud-button @click="formSubmit">送出表單</ud-button>
+              </ud-form>
+            </div>
           </div>
         </div>
       </div>
@@ -100,6 +97,7 @@
     </script>
     <script src="js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js"></script>
     <script src="js/demo.js"></script>
   </body>
 </html>

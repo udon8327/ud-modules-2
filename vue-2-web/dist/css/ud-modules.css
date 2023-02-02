@@ -280,8 +280,6 @@ html, #app {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; }
-  .ud-checkbox label p {
-    font-size: 14px; }
   .ud-checkbox label input {
     position: absolute;
     left: -999px;

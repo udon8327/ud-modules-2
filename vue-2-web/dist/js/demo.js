@@ -1,49 +1,37 @@
 var vm = new Vue({
     el: "#app",
     data: {
-        // TEST
-        aaa: "",
-        aaaOptions: [
-            { label: "aaa", value: "aaa" },
-            { label: "bbb", value: "bbb" },
-        ],
-        test1: "",
-        test2: "",
-        test3: "",
-        test4: "",
-        store: ["", "", "", ""],
-        fileList: [],
-        file: "",
         isModalShow: false,
         user: {
             name: "",
             age: "",
             birthday: "",
-            code: "test",
             verify: "",
+            verifyEqual: "test",
             radio: "",
-            agree: false,
             checkbox: [],
             select: "",
-            store: ["", "", ""],
+            selectLink: ["", "", ""],
+            selectLinkSp: ["", "", "", ""],
             twzip: ["", ""],
-            // twzip: ["05", "300"],
-            date: ["", "", ""]
+            date: ["", "", ""],
+            isAgree: false,
         },
         rules: {
             name: [{ type: "required" }, { type: "name" }],
+            age: [{ type: "required" }, { type: "number" }],
             birthday: [{ type: "required" }, { type: "date" }],
-            age: [{ type: "required" }, { type: "number" },],
-            verify: [{ type: "required" }, { type: "equal", equalTo: "code", caseIgnore: "true" }],
-            radio: [{ type: "required" },],
-            agree: [{ type: "required", message: "請先同意相關使用條款" },],
-            checkbox: [{ type: "required" },],
-            select: [{ type: "required" },],
-            store: [{ type: "required", message: "櫃點為必填項目" }],
+            verify: [{ type: "required" }, { type: "equal", equalTo: "verifyEqual", caseIgnore: "true" }],
+            radio: [{ type: "required" }],
+            checkbox: [{ type: "required" }],
+            select: [{ type: "required" }],
+            selectLink: [{ type: "required" }],
+            selectLinkSp: [{ type: "required" }],
             twzip: [{ type: "required" }],
             date: [{ type: "required" }],
+            isAgree: [{ type: "required", message: "請先同意相關使用條款" },],
         },
-        charaOptions: [
+        formOptions: [
             { label: "甲", value: "a" },
             { label: "乙", value: "b" },
             { label: "丙", value: "c" },
@@ -52,7 +40,10 @@ var vm = new Vue({
             { label: "台北市", value: "01", children: [
                     { label: "中正區", value: "011", children: [
                             { label: "中正01", value: "0111", disabled: "true" },
-                            { label: "中正02", value: "0112" },
+                            { label: "中正02", value: "0112", children: [
+                                    { label: "中正02甲", value: "01121" },
+                                    { label: "中正02乙", value: "01122" },
+                                ] }
                         ] },
                     { label: "大安區", value: "012", disabled: true, children: [
                             { label: "大安01", value: "0121" },
@@ -78,30 +69,17 @@ var vm = new Vue({
                         ] },
                 ] },
         ],
-        param: "",
-        paramOptions: [
-            { label: "甲", value: "a" },
-            { label: "乙", value: "b" },
-            { label: "丙", value: "c" },
-        ],
     },
     mounted: function () {
-        // this.getData();
         this.postData();
     },
-    computed: {
-        testArr: function () {
-            return [this.test1, this.test2, this.test3];
-        }
-    },
+    computed: {},
     methods: {
-        // TEST
-        // DEMO
-        onClick: function () {
-            console.log("按了按鈕");
-        },
-        alert: function () {
-            udAlert(123);
+        formSubmit: function () {
+            var _this = this;
+            this.$refs.form.validate(function () {
+                _this.udAlert({ msg: "驗證成功!!" });
+            });
         },
         getData: function () {
             udAxios.get('test')
@@ -117,18 +95,6 @@ var vm = new Vue({
                 console.log('res: ', res);
             });
         },
-        changeZip: function () {
-            console.log(document.getElementById("district").options[document.getElementById("district").selectedIndex].text);
-        },
-        onParamChange: function () {
-            window.history.replaceState("", "", "demo.html?id=" + this.param);
-        },
-        test: function () {
-            udAlert(this.aaa);
-        },
-        download: function () {
-            imageDownload('#image');
-        },
         upload: function (param) {
             console.log('param: ', param);
             // let file = this.$refs.file.files[0];
@@ -141,46 +107,10 @@ var vm = new Vue({
             }).then(function (res) { return console.log(res); })
                 .catch(function (err) { return console.log(err); });
         },
-        formSubmit: function () {
-            var _this = this;
-            this.$refs.form.validate(function () {
-                _this.udAlert({ msg: "驗證成功!!" });
-            });
-        },
+        // tools
         toUrl: function (url) {
             location.href = url;
         },
-        //API
-        init: function () {
-            udAxios.post("echo.php", { '123': 456 }, {
-                params: {
-                    from: "02-22",
-                    to: "02-29"
-                },
-                headers: {
-                    channel_id: "12345678"
-                },
-            })
-                .then(function (res) { return console.log('res', res); })
-                .catch(function (err) { return console.log('err', err); });
-        },
-        checkAlert: function () {
-            this.udAlert({
-                msg: "測試",
-                confirm: true
-            })
-                .then(function () { })
-                .catch(function () { });
-        },
-        handlePreview: function (item) {
-            console.log(item);
-        },
-        handleRemove: function (item) {
-            console.log(item);
-        },
-        beforeUpload: function (item) {
-            console.log(item);
-        }
     }
 });
 //# sourceMappingURL=demo.js.map
