@@ -118,7 +118,7 @@ html, #app {
   font-size: 14px;
   color: #000;
   border: 1px solid #ccc;
-  border-radius: 0px;
+  border-radius: 4px;
   background-color: #fff;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -170,7 +170,7 @@ html, #app {
     font-size: 14px;
     color: #000;
     border: 1px solid #ccc;
-    border-radius: 0px;
+    border-radius: 4px;
     background-color: #fff;
     -webkit-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
@@ -298,7 +298,7 @@ html, #app {
     flex: 0 0 1em;
     width: 1em;
     height: 1em;
-    border-radius: 3px;
+    border-radius: 2px;
     border: 1px solid #cecece;
     position: relative;
     cursor: pointer; }
@@ -329,7 +329,7 @@ html, #app {
     border-width: .3em .3em 0;
     top: 50%;
     margin-top: -.1em;
-    right: 1em;
+    right: .5em;
     position: absolute;
     z-index: 1;
     pointer-events: none; }
@@ -337,7 +337,7 @@ html, #app {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 5px;
+    border-radius: 4px;
     border: 1px solid #cecece;
     background-color: #fff;
     color: #333;
@@ -348,7 +348,8 @@ html, #app {
     -webkit-transition: border 0.2s ease;
     -o-transition: border 0.2s ease;
     transition: border 0.2s ease;
-    cursor: pointer; }
+    cursor: pointer;
+    min-height: 40px; }
     .ud-select select option {
       color: #333; }
     .ud-select select:focus {
@@ -411,7 +412,8 @@ html, #app {
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center; }
+  align-items: center;
+  min-height: 40px; }
   .ud-switch label input {
     position: absolute;
     left: -999px;

@@ -129,7 +129,7 @@ html,#app
     font-size: 14px
     color: #000
     border: 1px solid #ccc
-    border-radius: 0px
+    border-radius: 4px
     background-color: #fff
     transition: all 0.2s ease
     &.is-center
@@ -165,7 +165,7 @@ html,#app
     font-size: 14px
     color: #000
     border: 1px solid #ccc
-    border-radius: 0px
+    border-radius: 4px
     background-color: #fff
     transition: all 0.2s ease
     &.is-no-resize
@@ -262,7 +262,7 @@ html,#app
       flex: 0 0 1em
       width: 1em
       height: 1em
-      border-radius: 3px
+      border-radius: 2px
       border: 1px solid #cecece
       position: relative
       cursor: pointer
@@ -291,13 +291,13 @@ html,#app
     border-width: .3em .3em 0
     top: 50%
     margin-top: -.1em
-    right: 1em
+    right: .5em
     position: absolute
     z-index: 1
     pointer-events: none
   select
     appearance: none
-    border-radius: 5px
+    border-radius: 4px
     border: 1px solid #cecece
     background-color: #fff
     color: #333
@@ -307,6 +307,7 @@ html,#app
     margin: 0
     transition: border 0.2s ease
     cursor: pointer
+    min-height: 40px
     option
       color: #333
     &:focus
@@ -365,6 +366,7 @@ html,#app
     cursor: pointer
     display: flex
     align-items: center
+    min-height: 40px
     input
       position: absolute
       left: -999px

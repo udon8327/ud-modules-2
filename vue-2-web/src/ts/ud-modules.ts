@@ -136,7 +136,8 @@ Vue.component('ud-button', {
     plain: Boolean, // 線條化
     round: Boolean, // 圓角
     circle: Boolean, // 圓型
-    throttle: Boolean // 函式節流
+    throttle: Boolean, // 函式節流
+    throttleTime: { default: 1000 } // 函式節流間隔時間
   },
   methods: {
     clickHandler(evt) {
@@ -147,7 +148,8 @@ Vue.component('ud-button', {
   mounted() {
     if(!this.throttle) return;
     this.$el.addEventListener('click', throttle(
-        evt => this.$emit('click', evt)
+        evt => this.$emit('click', evt),
+        this.throttleTime
       )
     );
   }
@@ -252,7 +254,7 @@ Vue.component('ud-input-phone', {
       default: true
     },
     separator: {
-      type: [String, Array],
+      type: String,
       default: ""
     }
   },
@@ -295,6 +297,7 @@ Vue.component('ud-textarea', {
         :rows="rows"
         :class="{ 'is-no-resize': noResize }"
         @input="onInput"
+        :maxlength="limit"
       >
       </textarea>
       <div class="textarea-limit" v-if="showLimit" :class="{ 'limit-input': value.length > 0 }">
@@ -307,7 +310,7 @@ Vue.component('ud-textarea', {
     value: null,
     rows: { default: 4 }, // 行數
     showLimit: Boolean, // 是否顯示字數限制
-    limit: { default: 0 }, // 字數限制
+    limit: { default: null }, // 字數限制
     noResize: Boolean // 禁止改變大小
   },
   computed: {
@@ -963,7 +966,7 @@ Vue.component('ud-switch', {
         <div class="switch-decorator">
           <div class="circle"></div>
         </div>
-        <p><slot>開關</slot></p>
+        <slot></slot>
       </label>
     </div>
   `,

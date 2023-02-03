@@ -119,7 +119,8 @@ Vue.component('ud-button', {
         plain: Boolean,
         round: Boolean,
         circle: Boolean,
-        throttle: Boolean // 函式節流
+        throttle: Boolean,
+        throttleTime: { default: 1000 } // 函式節流間隔時間
     },
     methods: {
         clickHandler: function (evt) {
@@ -132,7 +133,7 @@ Vue.component('ud-button', {
         var _this = this;
         if (!this.throttle)
             return;
-        this.$el.addEventListener('click', throttle(function (evt) { return _this.$emit('click', evt); }));
+        this.$el.addEventListener('click', throttle(function (evt) { return _this.$emit('click', evt); }, this.throttleTime));
     }
 });
 // Input 輸入框
@@ -186,7 +187,7 @@ Vue.component('ud-input-phone', {
             default: true
         },
         separator: {
-            type: [String, Array],
+            type: String,
             default: ""
         }
     },
@@ -218,13 +219,13 @@ Vue.component('ud-input-phone', {
 // Textarea 多行輸入框
 Vue.component('ud-textarea', {
     name: "UdTextarea",
-    template: "\n    <div class=\"ud-textarea\">\n      <textarea\n        ref=\"textarea\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        v-on=\"inputListeners\"\n        :rows=\"rows\"\n        :class=\"{ 'is-no-resize': noResize }\"\n        @input=\"onInput\"\n      >\n      </textarea>\n      <div class=\"textarea-limit\" v-if=\"showLimit\" :class=\"{ 'limit-input': value.length > 0 }\">\n        <span>{{ valueLength }}/{{ limit }}</span>\n      </div>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-textarea\">\n      <textarea\n        ref=\"textarea\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        v-on=\"inputListeners\"\n        :rows=\"rows\"\n        :class=\"{ 'is-no-resize': noResize }\"\n        @input=\"onInput\"\n        :maxlength=\"limit\"\n      >\n      </textarea>\n      <div class=\"textarea-limit\" v-if=\"showLimit\" :class=\"{ 'limit-input': value.length > 0 }\">\n        <span>{{ valueLength }}/{{ limit }}</span>\n      </div>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: null,
         rows: { default: 4 },
         showLimit: Boolean,
-        limit: { default: 0 },
+        limit: { default: null },
         noResize: Boolean // 禁止改變大小
     },
     computed: {
@@ -756,7 +757,7 @@ Vue.component('ud-select-twzip', {
 // Switch 開關
 Vue.component('ud-switch', {
     name: "UdSwitch",
-    template: "\n    <div class=\"ud-switch\">\n      <label>\n        <input \n          type=\"checkbox\"\n          v-model=\"modelValue\"\n          v-bind=\"$attrs\"\n        >\n        <div class=\"switch-decorator\">\n          <div class=\"circle\"></div>\n        </div>\n        <p><slot>\u958B\u95DC</slot></p>\n      </label>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-switch\">\n      <label>\n        <input \n          type=\"checkbox\"\n          v-model=\"modelValue\"\n          v-bind=\"$attrs\"\n        >\n        <div class=\"switch-decorator\">\n          <div class=\"circle\"></div>\n        </div>\n        <slot></slot>\n      </label>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: { default: false },
