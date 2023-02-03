@@ -110,21 +110,5 @@ let vm = new Vue({
         this.udAlert({msg: "驗證成功!!"})
       });
     },
-    upload(param) {
-      console.log('param: ', param);
-      // let file = this.$refs.file.files[0];
-      let formData = new FormData();
-      formData.append('image', param.file);
-      udAxios.post('https://api.imgur.com/3/image', formData, {
-        headers: {
-          Authorization: "Client-ID " + '0259aa13deafaac' //放置你剛剛申請的Client-ID
-        },
-      }).then(res => console.log(res))
-      .catch(err => console.log(err));
-    },
-    // tools
-    toUrl(url) {
-      location.href = url;
-    },
   }
 });
