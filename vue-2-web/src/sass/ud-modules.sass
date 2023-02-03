@@ -32,11 +32,8 @@
 
 // Tools
 //   Html 用戶自定義訊息 -----> ud-html
-//   Backtop 回到頂部 -----> ud-backtop
 //   Ellipsis 文字省略 -----> ud-ellipsis
-//   Phone 播打電話 -----> ud-phone
 //   Countdown 倒數計時 -----> ud-countdown
-//   QrCode 取得QRcode圖片 -----> ud-qrcode
 
 //-----------------------Global-----------------------
 html,#app
@@ -780,21 +777,3 @@ html,#app
 
 // Countdown 倒數計時
 .ud-countdown
-
-// QrCode 取得QRcode圖片
-.ud-qrcode
-  display: flex
-  justify-content: center
-  align-items: center
-  .icon-css
-    border: 3px solid rgba(#000, 0.2)
-    border-top: 3px solid #fff
-    border-radius: 50%
-    width: 32px
-    height: 32px
-    animation: spin .5s linear infinite
-    @keyframes spin
-      0%
-        transform: rotate(0deg)
-      100% 
-        transform: rotate(360deg)

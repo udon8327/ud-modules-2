@@ -18,16 +18,17 @@
   <body>
     <noscript>Your browser does not support JavaScript!</noscript>
     <div id="app" v-cloak>
-      <ud-modal v-model="isModalShow" no-bg full-screen mask-close>
-        <h1>好</h1><img src="https://imgur.com/DIC7dRT.jpg" alt="" @click="isModalShow = false">
+      <ud-modal v-model="isModalShow" mask-close btn-close>
+        <h1>通用彈窗</h1><br>
+        <ud-button @click="isModalShow = false">關閉</ud-button>
       </ud-modal>
       <div class="container">
         <div class="wrapper">
           <div class="test-area">
-            <h1>TEST</h1>
+            <div class="title">TEST</div>
           </div>
           <div class="demo-area">
-            <h1>DEMO</h1>
+            <div class="title">DEMO</div>
             <ud-form :rules="rules" :model="user" ref="form">
               <ud-form-item label="姓名" prop="name" flex>
                 <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
@@ -89,7 +90,20 @@
                   <ud-captcha v-model="user.captchaCode"></ud-captcha>
                 </div>
               </ud-form-item>
+              <div style="margin-bottom: 60px"></div>
               <ud-button @click="formSubmit">送出表單</ud-button>
+              <ud-button @click="isCollapse = !isCollapse">摺疊容器&nbsp
+                <ud-arrow color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'"></ud-arrow>
+              </ud-button>
+              <ud-collapse v-model="isCollapse" :duration="0.4">
+                <ud-ratio src="https://imgur.com/DIC7dRT.jpg" bg-size="contain" :height="66"></ud-ratio>
+              </ud-collapse>
+              <ud-button @click="alert()">Alert</ud-button>
+              <ud-button @click="isModalShow = true">Model</ud-button>
+              <ud-html text="&lt;i&gt;用戶&lt;/i&gt;自定
+&lt;h3&gt;義訊息&lt;/h3&gt;"></ud-html><br>
+              <ud-ellipsis :max-line="2">文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略</ud-ellipsis><br>
+              <ud-countdown :time="120" @timeup="timeup()" type="minute"></ud-countdown>
             </ud-form>
           </div>
         </div>

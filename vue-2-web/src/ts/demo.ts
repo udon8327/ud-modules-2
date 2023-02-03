@@ -4,6 +4,7 @@ let vm = new Vue({
   el: "#app",
   data: {
     isModalShow: false,
+    isCollapse: false,
     user: {
       name: "",
       phone: ["", "", ""],
@@ -35,7 +36,6 @@ let vm = new Vue({
       selectLinkSp: [{type: "required"}],
       twzip: [{type: "required"}],
       date: [{type: "required"}],
-      isActive: [{type: "required"}],
       isAgree: [{type: "required", message: "請先同意相關使用條款"},],
       captcha: [{type: "required"}, {type: "equal", equalTo: "captchaCode", caseIgnore: "true"}],
     },
@@ -84,11 +84,6 @@ let vm = new Vue({
   computed: {
   },
   methods: {
-    formSubmit: function(){
-      this.$refs.form.validate(() => {
-        this.udAlert({msg: "驗證成功!!"})
-      });
-    },
     getData() {
       udAxios.get('test')
         .then(res => {
@@ -103,6 +98,17 @@ let vm = new Vue({
           console.log('res: ', res);
 
         })
+    },
+    alert() {
+      udAlert("警告\n彈窗");
+    },
+    timeup() {
+      console.log('時間到');
+    },
+    formSubmit: function(){
+      this.$refs.form.validate(() => {
+        this.udAlert({msg: "驗證成功!!"})
+      });
     },
     upload(param) {
       console.log('param: ', param);

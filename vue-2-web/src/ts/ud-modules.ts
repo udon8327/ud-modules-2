@@ -36,7 +36,6 @@ Tools
   Html 用戶自定義訊息 -----> ud-html
   Ellipsis 文字省略 -----> ud-ellipsis
   Countdown 倒數計時 -----> ud-countdown
-  QrCode 取得QRcode圖片 -----> ud-qrcode
 
 ==================== 工具函數目錄 ====================
 String
@@ -1213,7 +1212,8 @@ Vue.component('ud-form-item', {
       if(this.form.submitLock) return;
       const rules = this.form.rules[this.prop]; // 獲取校驗規則
       const value = this.form.model[this.prop]; // 獲取數據
-
+      
+      if(!rules) return;
       for(let rule of rules){
         this.errorMessage = "";
         switch (rule.type) {
@@ -1341,16 +1341,16 @@ Vue.component('ud-arrow', {
       class="ud-arrow"
       :class=[direction]
       :style="{
-        'border-color': bdColor,
-        'border-width': '0 ' + bdWidth + 'px ' + bdWidth + 'px 0',
-        padding: padding + 'px'
+        'border-color': color,
+        'border-width': '0 ' + width + 'px ' + width + 'px 0',
+        padding: size + 'px'
       }">
     </i>
   `,
   props: {
-    bdColor: { default: "#333" }, // 顏色
-    bdWidth: { default: "3" }, // 寬度
-    padding: { default: "3" }, // 大小
+    color: { default: "#333" }, // 顏色
+    width: { default: "3" }, // 寬度
+    size: { default: "3" }, // 大小
     direction: { default: "right" } //方向
   }
 })
@@ -1710,37 +1710,6 @@ Vue.component('ud-countdown', {
       clearInterval(this.countInterval);
       this.countTime = this.time;
       this.countdown();
-    }
-  }
-})
-
-// QrCode 取得QRcode圖片
-Vue.component('ud-qrcode', {
-  name: "UdQrcode",
-  template: `
-    <div class="ud-qrcode">
-      <div v-if="!ready" class="icon-css"></div>
-      <img v-show="ready" ref="img" :src="QrCodeSrc" :alt="url">
-    </div>
-  `,
-  mounted() {
-    this.$refs.img.onload = () => {
-      this.ready = 1;
-    }
-  },
-  data() {
-    return {
-      ready: 0,
-    }
-  },
-  props: {
-    url: { default: "https://www.google.com.tw/" }, // 網址
-    width: { default: "300" }, // 寬度
-    height: { default: "300" }, // 高度
-  },
-  computed: {
-    QrCodeSrc() {
-      return `http://chart.apis.google.com/chart?cht=qr&choe=UTF-8&chs=${this.width}x${this.height}&chl=${this.url}`
     }
   }
 })

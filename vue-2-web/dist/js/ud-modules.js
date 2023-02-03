@@ -43,7 +43,6 @@ Tools
   Html 用戶自定義訊息 -----> ud-html
   Ellipsis 文字省略 -----> ud-ellipsis
   Countdown 倒數計時 -----> ud-countdown
-  QrCode 取得QRcode圖片 -----> ud-qrcode
 
 ==================== 工具函數目錄 ====================
 String
@@ -965,6 +964,8 @@ Vue.component('ud-form-item', {
                 return;
             var rules = this.form.rules[this.prop]; // 獲取校驗規則
             var value = this.form.model[this.prop]; // 獲取數據
+            if (!rules)
+                return;
             for (var _i = 0, rules_1 = rules; _i < rules_1.length; _i++) {
                 var rule = rules_1[_i];
                 this.errorMessage = "";
@@ -1095,11 +1096,11 @@ Vue.component('ud-flex', {
 // Arrow CSS箭頭
 Vue.component('ud-arrow', {
     name: "UdArrow",
-    template: "\n    <i \n      class=\"ud-arrow\"\n      :class=[direction]\n      :style=\"{\n        'border-color': bdColor,\n        'border-width': '0 ' + bdWidth + 'px ' + bdWidth + 'px 0',\n        padding: padding + 'px'\n      }\">\n    </i>\n  ",
+    template: "\n    <i \n      class=\"ud-arrow\"\n      :class=[direction]\n      :style=\"{\n        'border-color': color,\n        'border-width': '0 ' + width + 'px ' + width + 'px 0',\n        padding: size + 'px'\n      }\">\n    </i>\n  ",
     props: {
-        bdColor: { default: "#333" },
-        bdWidth: { default: "3" },
-        padding: { default: "3" },
+        color: { default: "#333" },
+        width: { default: "3" },
+        size: { default: "3" },
         direction: { default: "right" } //方向
     }
 });
@@ -1378,32 +1379,6 @@ Vue.component('ud-countdown', {
             clearInterval(this.countInterval);
             this.countTime = this.time;
             this.countdown();
-        }
-    }
-});
-// QrCode 取得QRcode圖片
-Vue.component('ud-qrcode', {
-    name: "UdQrcode",
-    template: "\n    <div class=\"ud-qrcode\">\n      <div v-if=\"!ready\" class=\"icon-css\"></div>\n      <img v-show=\"ready\" ref=\"img\" :src=\"QrCodeSrc\" :alt=\"url\">\n    </div>\n  ",
-    mounted: function () {
-        var _this = this;
-        this.$refs.img.onload = function () {
-            _this.ready = 1;
-        };
-    },
-    data: function () {
-        return {
-            ready: 0,
-        };
-    },
-    props: {
-        url: { default: "https://www.google.com.tw/" },
-        width: { default: "300" },
-        height: { default: "300" },
-    },
-    computed: {
-        QrCodeSrc: function () {
-            return "http://chart.apis.google.com/chart?cht=qr&choe=UTF-8&chs=" + this.width + "x" + this.height + "&chl=" + this.url;
         }
     }
 });

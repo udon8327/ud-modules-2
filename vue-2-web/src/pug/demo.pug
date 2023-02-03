@@ -7,16 +7,17 @@ block css
   link(href='css/demo.css' rel='stylesheet')
 
 block modal
-  ud-modal(v-model="isModalShow" no-bg full-screen mask-close)
-    h1 好
-    img(src="https://imgur.com/DIC7dRT.jpg", alt="" @click="isModalShow = false")
+  ud-modal(v-model="isModalShow" mask-close btn-close)
+    h1 通用彈窗
+    br
+    ud-button(@click="isModalShow = false") 關閉
 
 block content
   .test-area
-    h1 TEST
+    .title TEST
 
   .demo-area
-    h1 DEMO
+    .title DEMO
     ud-form(:rules="rules" :model="user" ref="form")
       ud-form-item(label="姓名" prop="name" flex)
         ud-input(placeholder="請輸入您的姓名" v-model="user.name")
@@ -59,8 +60,21 @@ block content
         .captcha-wrapper
           ud-input(v-model="user.captcha" placeholder="驗證碼" maxlength="4")
           ud-captcha(v-model="user.captchaCode")
-      ud-button(@click="formSubmit") 送出表單
+      div(style="margin-bottom: 60px")
 
+      ud-button(@click="formSubmit") 送出表單
+      ud-button(@click="isCollapse = !isCollapse") 摺疊容器&nbsp
+        ud-arrow(color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'")
+      ud-collapse(v-model="isCollapse" :duration="0.4")
+        ud-ratio(src="https://imgur.com/DIC7dRT.jpg" bg-size="contain" :height="66")
+      ud-button(@click="alert()") Alert
+      ud-button(@click="isModalShow = true") Model
+
+      ud-html(text="<i>用戶</i>自定\n<h3>義訊息</h3>")
+      br
+      ud-ellipsis(:max-line="2") 文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略
+      br
+      ud-countdown(:time="120" @timeup="timeup()" type="minute")
 block js
   script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js')
   script(src="js/demo.js")
