@@ -834,7 +834,7 @@ Vue.component('ud-date-picker', {
 // Captcha 圖形驗證碼
 Vue.component('ud-captcha', {
     name: "UdCaptcha",
-    template: "\n    <div class=\"ud-captcha\">\n      <div class=\"canvas-area\" ref=\"canvasArea\">\n        <canvas id=\"verify-canvas\" width=\"100\" height=\"38\" style=\"display: none;\"></canvas>\n        <img ref=\"codeimg\" @click=\"refresh\">\n        <input type=\"hidden\" v-model=\"inputVal\">\n      </div>\n      <div class=\"refresh\" @click=\"refresh\" v-if=\"!noRefresh\">\n        <img src=\"img/icon_04.png\">\n      </div>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-captcha\">\n      <div class=\"canvas-area\" ref=\"canvasArea\">\n        <canvas id=\"verify-canvas\" width=\"100\" height=\"38\" style=\"display: none;\"></canvas>\n        <img ref=\"codeimg\" @click=\"refresh\">\n        <input type=\"hidden\" v-model=\"inputVal\">\n      </div>\n      <div class=\"refresh\" @click=\"refresh\" v-if=\"!noRefresh\">\n        <img src=\"img/refresh.png\">\n      </div>\n    </div>\n  ",
     computed: {
         inputVal: {
             get: function () { return this.value; },

@@ -1070,7 +1070,7 @@ Vue.component('ud-captcha', {
         <input type="hidden" v-model="inputVal">
       </div>
       <div class="refresh" @click="refresh" v-if="!noRefresh">
-        <img src="img/icon_04.png">
+        <img src="img/refresh.png">
       </div>
     </div>
   `,

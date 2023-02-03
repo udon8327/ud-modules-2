@@ -19,8 +19,9 @@
     <noscript>Your browser does not support JavaScript!</noscript>
     <div id="app" v-cloak>
       <ud-modal v-model="isModalShow" mask-close btn-close>
-        <h1>通用彈窗</h1><br>
-        <ud-button @click="isModalShow = false">關閉</ud-button>
+        <h1>通用彈窗</h1>
+        <ud-ratio src="img/02.jpg" alt=""></ud-ratio><br>
+        <ud-button @click="isModalShow = false" plain>關閉</ud-button>
       </ud-modal>
       <div class="container">
         <div class="wrapper">
@@ -96,7 +97,7 @@
                 <ud-arrow color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'"></ud-arrow>
               </ud-button>
               <ud-collapse v-model="isCollapse" :duration="0.4">
-                <ud-ratio src="https://imgur.com/DIC7dRT.jpg" bg-size="contain" :height="66"></ud-ratio>
+                <ud-ratio src="img/01.jpg" bg-size="contain"></ud-ratio>
               </ud-collapse>
               <ud-button @click="alert()">Alert</ud-button>
               <ud-button @click="isModalShow = true">Model</ud-button>

@@ -9,8 +9,9 @@ block css
 block modal
   ud-modal(v-model="isModalShow" mask-close btn-close)
     h1 通用彈窗
+    ud-ratio(src="img/02.jpg", alt="")
     br
-    ud-button(@click="isModalShow = false") 關閉
+    ud-button(@click="isModalShow = false" plain) 關閉
 
 block content
   .test-area
@@ -66,7 +67,7 @@ block content
       ud-button(@click="isCollapse = !isCollapse") 摺疊容器&nbsp
         ud-arrow(color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'")
       ud-collapse(v-model="isCollapse" :duration="0.4")
-        ud-ratio(src="https://imgur.com/DIC7dRT.jpg" bg-size="contain" :height="66")
+        ud-ratio(src="img/01.jpg" bg-size="contain")
       ud-button(@click="alert()") Alert
       ud-button(@click="isModalShow = true") Model
 

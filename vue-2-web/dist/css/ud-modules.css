@@ -500,14 +500,23 @@ html, #app {
   display: flex; }
   .ud-captcha .canvas-area {
     cursor: pointer;
-    border: 1px solid #ced4da; }
+    border: 1px solid #ced4da;
+    margin-right: 5px; }
     .ud-captcha .canvas-area img {
-      height: 48px; }
+      height: 40px; }
   .ud-captcha .refresh {
-    cursor: pointer;
-    -webkit-transform: translate(10px, 5px);
-    -ms-transform: translate(10px, 5px);
-    transform: translate(10px, 5px); }
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .ud-captcha .refresh img {
+      width: 20px;
+      cursor: pointer; }
 
 .ud-form-item {
   margin-bottom: 18px; }
