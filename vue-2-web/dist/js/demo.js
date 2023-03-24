@@ -90,6 +90,8 @@ var vm = new Vue({
         postData: function () {
             udAxios.post('test', {
                 name: "UDON"
+            }, {
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
             })
                 .then(function (res) {
                 console.log('res: ', res);
