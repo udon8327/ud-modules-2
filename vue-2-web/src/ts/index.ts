@@ -5,11 +5,17 @@ let vm = new Vue({
   data: {
   },
   mounted() {
-    this.getData();
+    // this.getData();
+    let video = document.getElementById("video");
+    video.play();
   },
   computed: {
   },
   methods: {
+    play() {
+      let video = document.getElementById("video");
+      video.play();
+    },
     getData() {
       udAxios.get(`products`)
         .then(res => {

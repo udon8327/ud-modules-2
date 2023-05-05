@@ -6,6 +6,9 @@ block css
 block modal
 
 block content
+  video#video(autoplay poster="img/blank.png")
+    source(src="img/background-video-banner.mp4" type="video/mp4")
+  button(@click="play") PLAY
 
 block js
   script(src="js/index.js")
