@@ -1,15 +1,11 @@
-<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+<template lang="pug">
+.about
+  h6 This is an about page
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
+<style scoped lang="sass">
+h6
+  font-size: 30px
+  margin-top: 50px
+  text-align: center
 </style>
