@@ -81,6 +81,11 @@ var vm = new Vue({
     },
     computed: {},
     methods: {
+        test: function () {
+            throttle(function () {
+                console.log(getRandom());
+            }, 3000);
+        },
         getData: function () {
             udAxios.get('test')
                 .then(function (res) {

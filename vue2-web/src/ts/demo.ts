@@ -84,6 +84,11 @@ let vm = new Vue({
   computed: {
   },
   methods: {
+    test() {
+      throttle(() => {
+        console.log(getRandom())
+      }, 3000);
+    },
     getData() {
       udAxios.get('test')
         .then(res => {

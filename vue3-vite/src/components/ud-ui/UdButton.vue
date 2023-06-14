@@ -1,6 +1,8 @@
 <template>
   <div class="ud-button">
     <button
+      ref="button"
+      id="test"
       @click="clickHandler"
       v-bind="$attrs"
       :disabled="disabled || loading"
@@ -25,6 +27,43 @@
 </template>
 
 <script>
+export default {
+  inheritAttrs: false
+}
+</script>
+<script setup>
+import { ref, onMounted } from "vue";
+import { throttle } from "@/utils/ud-utils";
+
+const props = defineProps({
+  icon: String, // CSS的icon
+  image: String, // 圖片的icon
+  loading: Boolean, // 載入中
+  disabled: Boolean, // 禁止點擊
+  plain: Boolean, // 線條化
+  round: Boolean, // 圓角
+  circle: Boolean, // 圓型
+  throttle: Boolean // 函式節流
+});
+const emit = defineEmits(["click"]);
+
+const button = ref(null);
+console.log('button: ', button);
+
+onMounted(() => {
+});
+
+const clickHandler = (evt) => {
+  if (props.throttle) {
+    throttle(() => emit("click", evt), 10000);
+    emit("click", evt);
+  } else {
+    emit("click", evt);
+  }
+};
+</script>
+
+<!-- <script>
 import { throttle } from '@/utils/ud-utils'
 
 export default {
@@ -54,7 +93,7 @@ export default {
     );
   }
 }
-</script>
+</script> -->
 
 <style lang="sass" scoped>
 .ud-button

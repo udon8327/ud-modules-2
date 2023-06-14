@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from "vue"
+import { ref, reactive, onMounted, nextTick, computed, watch } from "vue"
 import { RouterLink, RouterView } from "vue-router"
 import HelloWorld from "./components/HelloWorld.vue"
 
@@ -11,6 +11,21 @@ const user = reactive({
 onMounted(() => console.log(`${title.value}標題: ${user.name}`));
 
 const toAbout = () => location.href = "https://www.google.com.tw/"
+const changeName = (val) => {
+  nextTick(() => {
+    user.name = val;
+  })
+}
+const test = (e) => {
+  console.log('e: ', e);
+  console.log(Date.now());
+}
+const computedName = computed(()=> {
+  return user.name + "!!!";
+});
+watch(user, (val) => {
+  console.log(val);
+})
 </script>
 
 <template lang="pug">
@@ -22,8 +37,13 @@ header
       RouterLink(to="/") Home
       RouterLink(to="/about") About
     ud-button(@click="toAbout") About
-    p {{ title }}: {{ user.name }}
-    input(v-model="title" placeholder="name")
+    ud-button(@click="changeName('UDON')" ) Name 
+    br
+    ud-button.sd(@click="test") TEST
+    ud-button(@click="test" throttle) TEST(throttle)
+    br
+    p {{ title }}: {{ user.name }}: {{ computedName }}
+    input(v-model="user.name" placeholder="name")
     ud-input(v-model="title" placeholder="name")
 RouterView
 </template>

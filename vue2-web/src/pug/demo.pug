@@ -24,6 +24,7 @@ block content
 
   .demo-area
     .title DEMO
+    ud-button(@click="test") TEST
     ud-form(:rules="rules" :model="user" ref="form")
       ud-form-item(label="姓名" prop="name" flex)
         ud-input(placeholder="請輸入您的姓名" v-model="user.name")

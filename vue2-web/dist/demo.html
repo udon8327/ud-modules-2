@@ -35,6 +35,7 @@
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>
+            <ud-button @click="test">TEST</ud-button>
             <ud-form :rules="rules" :model="user" ref="form">
               <ud-form-item label="姓名" prop="name" flex>
                 <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
