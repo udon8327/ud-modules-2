@@ -36,7 +36,7 @@ header
     nav
       RouterLink(to="/") Home
       RouterLink(to="/about") About
-    ud-button(@click="toAbout") About
+    ud-button.test(@click="toAbout") About
     ud-button(@click="changeName('UDON')" ) Name 
     br
     ud-button.sd(@click="test") TEST
@@ -52,6 +52,7 @@ RouterView
 header
   line-height: 1.5
   max-height: 100vh
+  background-color: $sub2
 
 .logo
   display: block

@@ -2,7 +2,6 @@
   <div class="ud-button">
     <button
       ref="button"
-      id="test"
       @click="clickHandler"
       v-bind="$attrs"
       :disabled="disabled || loading"
@@ -26,15 +25,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  inheritAttrs: false
-}
-</script>
 <script setup>
 import { ref, onMounted } from "vue";
 import { throttle } from "@/utils/ud-utils";
 
+defineOptions({inheritAttrs: false});
 const props = defineProps({
   icon: String, // CSS的icon
   image: String, // 圖片的icon

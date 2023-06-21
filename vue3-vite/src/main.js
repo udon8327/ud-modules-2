@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-// import "@/style/all.sass";
+import "@/style/all.sass";
 
 // import UdUi from "./components/ud-ui";
 // Vue.use(UdUi);
