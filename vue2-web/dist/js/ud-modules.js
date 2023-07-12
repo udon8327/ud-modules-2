@@ -29,7 +29,6 @@ Form
   Form 表單驗證 -----> ud-form
 
 Layout
-  Flex 通用排版容器 -----> ud-flex
   Arrow CSS箭頭 -----> ud-arrow
   Collapse 摺疊容器 -----> ud-collapse
   Ratio 等比例自適應容器 -----> ud-ratio
@@ -40,7 +39,7 @@ Notice
   Loading 載入中 -----> ud-loading
 
 Tools
-  Html 用戶自定義訊息 -----> ud-html
+  Html 自定義訊息 -----> ud-html
   Ellipsis 文字省略 -----> ud-ellipsis
   Countdown 倒數計時 -----> ud-countdown
 
@@ -1087,12 +1086,6 @@ Vue.component('ud-form', {
     }
 });
 //-----------------------Layout-----------------------
-// Flex 通用排版容器
-Vue.component('ud-flex', {
-    name: "UdFlex",
-    template: "\n    <div class=\"ud-flex\">\n      <slot></slot>\n    </div>\n  ",
-    props: {}
-});
 // Arrow CSS箭頭
 Vue.component('ud-arrow', {
     name: "UdArrow",
@@ -1159,7 +1152,7 @@ Vue.component('ud-ratio', {
 // Alert 警告彈窗
 var UdAlert = {
     name: "UdAlert",
-    template: "\n    <transition name=\"fade\">\n      <div class=\"ud-alert\" v-if=\"isShow\" @click.self=\"maskHandler\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-close\" v-if=\"btnClose\" @click=\"destroy\">\n            <i class=\"icon-close\"></i>\n          </div>\n          <div class=\"ud-modal-header\" v-if=\"title\">\n            <p v-html=\"nl2br(title)\"></p>\n          </div>\n          <div class=\"ud-modal-body\">\n            <p v-html=\"nl2br(message)\"></p>\n          </div>\n          <div class=\"ud-modal-footer\">\n            <ud-flex>\n              <ud-button @click=\"cancelHandler\" plain v-if=\"confirm\">{{ cancelText }}</ud-button>\n              <ud-button @click=\"confirmHandler\">{{ confirmText }}</ud-button>\n            </ud-flex>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
+    template: "\n    <transition name=\"fade\">\n      <div class=\"ud-alert\" v-if=\"isShow\" @click.self=\"maskHandler\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-close\" v-if=\"btnClose\" @click=\"destroy\">\n            <i class=\"icon-close\"></i>\n          </div>\n          <div class=\"ud-modal-header\" v-if=\"title\">\n            <p v-html=\"nl2br(title)\"></p>\n          </div>\n          <div class=\"ud-modal-body\">\n            <p v-html=\"nl2br(message)\"></p>\n          </div>\n          <div class=\"ud-modal-footer\">\n            <ud-button @click=\"cancelHandler\" plain v-if=\"confirm\">{{ cancelText }}</ud-button>\n            <ud-button @click=\"confirmHandler\">{{ confirmText }}</ud-button>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
     data: function () {
         return {
             isShow: false,
@@ -1925,7 +1918,14 @@ var isVerify = function (val, type) {
             return !isNaN(val);
         // 網址驗證
         case "url":
-            return /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(val);
+            var pattern = new RegExp("^(https?:\\/\\/)?" + // protocol
+                "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+                "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+                "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+                "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+                "(\\#[-a-z\\d_]*)?$", // fragment locator
+            "i");
+            return pattern.test(val);
         // IP地址驗證
         case "ip":
             return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(val);

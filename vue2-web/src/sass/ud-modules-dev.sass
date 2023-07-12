@@ -1,4 +1,4 @@
-@import '_color.sass'
+@import '_variables.sass'
 
 // ==================== Vue組件庫(Extra)目錄 ====================
 // Form
@@ -16,6 +16,9 @@
 
 // Tools
 //   CountdownExpire 倒數計時(時限) -----> ud-countdown-expire
+
+// Layout
+//   Flex 通用排版容器 -----> ud-flex
 
 // Appication
 //   Carousel 圖片輪播 -----> ud-carousel
@@ -102,6 +105,18 @@
 //-----------------------Tools-----------------------
 // CountdownExpire 倒數計時(時限)
 .ud-countdown-expire
+
+//-----------------------Layout-----------------------
+// Flex 通用排版容器
+.ud-flex
+  display: flex
+  justify-content: center
+  align-items: center
+  >*
+    flex: 1 1 50%
+    max-width: 50%
+  >* + *
+    margin-left: 15px
 
 //-----------------------Appication-----------------------
 //Carousel 圖片輪播

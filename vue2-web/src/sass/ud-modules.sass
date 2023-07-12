@@ -20,7 +20,6 @@
 //   Form 表單驗證 -----> ud-form
 
 //Layout
-//   Flex 通用排版容器 -----> ud-flex
 //   Arrow CSS箭頭 -----> ud-arrow
 //   Collapse -----> ud-collapse
 //   Ratio 等比例自適應容器 -----> ud-ratio
@@ -494,17 +493,6 @@ html,#app
             display: none
 
 //-----------------------Layout-----------------------
-// Flex 通用排版容器
-.ud-flex
-  display: flex
-  justify-content: center
-  align-items: center
-  >*
-    flex: 1 1 50%
-    max-width: 50%
-  >* + *
-    margin-left: 15px
-
 // Arrow CSS箭頭
 .ud-arrow
   border: solid black
@@ -606,6 +594,14 @@ html,#app
     .ud-modal-footer
       flex: 0 0 auto
       padding: 15px 0 0 0
+      display: flex
+      justify-content: center
+      align-items: center
+      .ud-button
+        flex: 1 1 50%
+        max-width: 50%
+      >.ud-button + .ud-button
+        margin-left: 15px
 
 // Modal 通用彈窗
 .ud-modal

@@ -43,7 +43,6 @@ const props = defineProps({
 const emit = defineEmits(["click"]);
 
 const button = ref(null);
-console.log('button: ', button);
 
 onMounted(() => {
 });

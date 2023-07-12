@@ -8,8 +8,8 @@ html, #app {
       font-size: 54%; } }
 
 .ud-button button {
-  background-color: #5e5248;
-  border: 1px solid #5e5248;
+  background-color: #22273b;
+  border: 1px solid #22273b;
   color: #fff;
   padding: 10px;
   border-radius: 5px;
@@ -90,11 +90,11 @@ html, #app {
     opacity: 0.85; }
   .ud-button button.is-plain {
     background-color: #fff;
-    border: 1px solid #5e5248;
-    color: #5e5248; }
+    border: 1px solid #22273b;
+    color: #22273b; }
     .ud-button button.is-plain:hover, .ud-button button.is-plain:focus {
-      background-color: #5e5248;
-      border: 1px solid #5e5248;
+      background-color: #22273b;
+      border: 1px solid #22273b;
       color: #fff; }
   .ud-button button.is-disabled {
     background-color: #ddd;
@@ -229,9 +229,9 @@ html, #app {
     opacity: 0;
     pointer-events: none; }
     .ud-radio label input:checked + .radio-decorator {
-      border-color: #5e5248; }
+      border-color: #22273b; }
       .ud-radio label input:checked + .radio-decorator:before {
-        background-color: #5e5248; }
+        background-color: #22273b; }
   .ud-radio label .radio-decorator {
     margin-right: 6px;
     -webkit-box-flex: 0;
@@ -286,9 +286,9 @@ html, #app {
     opacity: 0;
     pointer-events: none; }
     .ud-checkbox label input:checked + .checkbox-decorator {
-      border-color: #5e5248; }
+      border-color: #22273b; }
       .ud-checkbox label input:checked + .checkbox-decorator:before {
-        background-color: #5e5248;
+        background-color: #22273b;
         -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>');
         mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>'); }
   .ud-checkbox label .checkbox-decorator {
@@ -354,7 +354,7 @@ html, #app {
       color: #333; }
     .ud-select select:focus {
       outline: 0;
-      border: 1px solid #5e5248; }
+      border: 1px solid #22273b; }
     .ud-select select[data-placeholder-selected] {
       color: #a8a8a8; }
     .ud-select select[multiple] option:nth-of-type(1) {
@@ -420,7 +420,7 @@ html, #app {
     opacity: 0;
     pointer-events: none; }
     .ud-switch label input:checked + .switch-decorator {
-      background: #5e5248; }
+      background: #22273b; }
       .ud-switch label input:checked + .switch-decorator .circle {
         margin-left: 20px; }
   .ud-switch label .switch-decorator {
@@ -491,7 +491,7 @@ html, #app {
     color: #868686; }
   .ud-date-picker input:focus {
     outline: 0;
-    border: 1px solid #5e5248; }
+    border: 1px solid #22273b; }
 
 .ud-captcha {
   position: relative;
@@ -575,24 +575,6 @@ html, #app {
 
 .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > p.error-message {
   display: none; }
-
-.ud-flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-  .ud-flex > * {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 50%;
-    flex: 1 1 50%;
-    max-width: 50%; }
-  .ud-flex > * + * {
-    margin-left: 15px; }
 
 .ud-arrow {
   border: solid black;
@@ -721,7 +703,23 @@ html, #app {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
       flex: 0 0 auto;
-      padding: 15px 0 0 0; }
+      padding: 15px 0 0 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center; }
+      .ud-alert .ud-modal-wrapper .ud-modal-footer .ud-button {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 50%;
+        flex: 1 1 50%;
+        max-width: 50%; }
+      .ud-alert .ud-modal-wrapper .ud-modal-footer > .ud-button + .ud-button {
+        margin-left: 15px; }
 
 .ud-modal {
   position: fixed;

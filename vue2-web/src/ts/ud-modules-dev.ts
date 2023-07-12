@@ -18,6 +18,9 @@ Notice
 Tools
   CountdownExpire 倒數計時(時限) -----> ud-countdown-expire
 
+Layout
+  Flex 通用排版容器 -----> ud-flex
+
 Application
   Carousel 圖片輪播 -----> ud-carousel
   Youtube 水管播放 -----> ud-youtube
@@ -274,6 +277,20 @@ Vue.component('ud-countdown-expire', {
       aI[2].textContent = sec + "秒";
     }, 1000);
   },
+})
+
+//-----------------------Layout----------------------------
+// Flex 通用排版容器
+Vue.component('ud-flex', {
+  name: "UdFlex",
+  template: `
+    <div class="ud-flex">
+      <slot></slot>
+    </div>
+  `,
+  props: {
+
+  }
 })
 
 //-----------------------Application-----------------------

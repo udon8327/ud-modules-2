@@ -22,7 +22,6 @@ Form
   Form 表單驗證 -----> ud-form
 
 Layout
-  Flex 通用排版容器 -----> ud-flex
   Arrow CSS箭頭 -----> ud-arrow
   Collapse 摺疊容器 -----> ud-collapse
   Ratio 等比例自適應容器 -----> ud-ratio
@@ -33,7 +32,7 @@ Notice
   Loading 載入中 -----> ud-loading
 
 Tools
-  Html 用戶自定義訊息 -----> ud-html
+  Html 自定義訊息 -----> ud-html
   Ellipsis 文字省略 -----> ud-ellipsis
   Countdown 倒數計時 -----> ud-countdown
 
@@ -1320,19 +1319,6 @@ Vue.component('ud-form', {
 })
 
 //-----------------------Layout-----------------------
-// Flex 通用排版容器
-Vue.component('ud-flex', {
-  name: "UdFlex",
-  template: `
-    <div class="ud-flex">
-      <slot></slot>
-    </div>
-  `,
-  props: {
-
-  }
-})
-
 // Arrow CSS箭頭
 Vue.component('ud-arrow', {
   name: "UdArrow",
@@ -1442,10 +1428,8 @@ const UdAlert = {
             <p v-html="nl2br(message)"></p>
           </div>
           <div class="ud-modal-footer">
-            <ud-flex>
-              <ud-button @click="cancelHandler" plain v-if="confirm">{{ cancelText }}</ud-button>
-              <ud-button @click="confirmHandler">{{ confirmText }}</ud-button>
-            </ud-flex>
+            <ud-button @click="cancelHandler" plain v-if="confirm">{{ cancelText }}</ud-button>
+            <ud-button @click="confirmHandler">{{ confirmText }}</ud-button>
           </div>
         </div>
       </div>
@@ -1459,7 +1443,7 @@ const UdAlert = {
       btnClose: false, // 右上關閉按鈕
       scrollLock: true, // 是否鎖定背景頁面捲動
       title: "", // 標題文字
-      message: "", // 訊息文字
+      message: "", // 訊息文字(也可接受msg)
       cancelText: "取消", // 取消鈕文字
       onCancel: () => {}, // 取消鈕callback
       confirmText: "確定", // 確認鈕文字

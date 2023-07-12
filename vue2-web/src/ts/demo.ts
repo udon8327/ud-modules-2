@@ -79,7 +79,22 @@ let vm = new Vue({
     ],
   },
   mounted() {
-    this.postData();
+    // this.udAlert({
+    //   confirm: true,
+    //   maskClose: true,
+    //   btnClose: true,
+    //   scrollLock: false,
+    //   title: "錯誤",
+    //   message: "發生錯誤\n請稍候再試<i>！</i>",
+    //   confirmText: "確定鈕",
+    //   onConfirm: () => {
+    //     console.log("點擊確定");
+    //   },
+    //   cancelText: "取消鈕",
+    // }).catch(() => {
+    //   console.log("點擊取消");
+    // })
+    // this.postData();
   },
   computed: {
   },

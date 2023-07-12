@@ -1,16 +1,53 @@
+<template lang="pug">
+header
+  .logo-area
+    img(:src="Logo")
+  p {{ route.params.id }}
+  h1 {{ counterStore.name }}
+  h1 {{ counterStore.count }}, {{ counterStore.doubleCount }}
+  ud-button(@click="double") ++
+  .wrapper
+    HelloWorld(:msg="`${counterStore.name} You did it!`")
+    ud-button.test(@click="toAbout") About
+    ud-button(@click="changeName('UDON')" ) Name 
+    br
+    ud-button.sd(@click="test") TEST
+    ud-button(@click="test" throttle) TEST(throttle)
+    br
+    p {{ title }}: {{ user.name }}: {{ computedName }}
+    input(v-model="user.name" placeholder="name")
+    ud-input(v-model="title" placeholder="name")
+RouterView
+</template>
+
 <script setup>
-import { ref, reactive, onMounted, nextTick, computed, watch } from "vue"
-import { RouterLink, RouterView } from "vue-router"
+import Logo from "@/assets/images/logo/logo.png"
+import { ref, reactive, onMounted, nextTick, computed, watch, watchEffect } from "vue"
+import { RouterView } from "vue-router"
 import HelloWorld from "./components/HelloWorld.vue"
+import { useCounterStore } from "@/stores/counter.js";
+import { useRouter, useRoute } from "vue-router";
+
+const counterStore = useCounterStore();
+const router = useRouter();
+const route = useRoute();
+
+onMounted(() => init());
+
+const init = () => {
+  console.log("init");
+  watchEffect(() => {
+    console.log('route: ', route.params.id);
+  })
+}
 
 const title = ref("Title")
 const user = reactive({
   name: "bohan",
   gender: "male",
 })
-onMounted(() => console.log(`${title.value}標題: ${user.name}`));
 
-const toAbout = () => location.href = "https://www.google.com.tw/"
+const toAbout = () => router.push("/about");
 const changeName = (val) => {
   nextTick(() => {
     user.name = val;
@@ -26,76 +63,19 @@ const computedName = computed(()=> {
 watch(user, (val) => {
   console.log(val);
 })
+
+const double = () => {
+  counterStore.count++
+  counterStore.increment();
+}
 </script>
 
-<template lang="pug">
-header
-  img.logo(alt="Vue logo", src="@/assets/logo.svg", width="125", height="125")
-  .wrapper
-    HelloWorld(msg="You did it!")
-    nav
-      RouterLink(to="/") Home
-      RouterLink(to="/about") About
-    ud-button.test(@click="toAbout") About
-    ud-button(@click="changeName('UDON')" ) Name 
-    br
-    ud-button.sd(@click="test") TEST
-    ud-button(@click="test" throttle) TEST(throttle)
-    br
-    p {{ title }}: {{ user.name }}: {{ computedName }}
-    input(v-model="user.name" placeholder="name")
-    ud-input(v-model="title" placeholder="name")
-RouterView
-</template>
-
 <style scoped lang="sass">
-header
-  line-height: 1.5
-  max-height: 100vh
-  background-color: $sub2
-
-.logo
-  display: block
-  margin: 0 auto 2rem
-
-nav
-  width: 100%
-  font-size: 12px
-  text-align: center
-  margin-top: 2rem
-
-  a
-    &.router-link-exact-active
-      color: var(--color-text)
-
-      &:hover
-        background-color: transparent
-
-    display: inline-block
-    padding: 0 1rem
-    border-left: 1px solid var(--color-border)
-
-    &:first-of-type
-      border: 0
-
-@media (min-width: 1024px)
-  header
-    display: flex
-    place-items: center
-    padding-right: calc(var(--section-gap) / 2)
-
-  .logo
-    margin: 0 2rem 0 0
-
-  header .wrapper
-    display: flex
-    place-items: flex-start
-    flex-wrap: wrap
-
-  nav
-    text-align: left
-    margin-left: -1rem
-    font-size: 1rem
-    padding: 1rem 0
-    margin-top: 1rem
+.logo-area
+  background-color: $main
+  height: 72px
+  display: flex
+  justify-content: center
+  img
+    height: 100%
 </style>

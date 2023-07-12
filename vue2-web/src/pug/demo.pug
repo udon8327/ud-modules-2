@@ -14,9 +14,7 @@ block modal
     ud-button(@click="isModalShow = false" plain) 關閉
 
 block content
-  video#video(autoplay poster="img/blank.png")
-    source(src="img/background-video-banner.mp4" type="video/mp4")
-
+  ud-arrow(width="5" size="6" direction="down")
   .test-area
     .title#title TEST
     label(for="title")
