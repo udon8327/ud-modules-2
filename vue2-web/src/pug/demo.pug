@@ -2,7 +2,7 @@ extends _layout.pug
 
 block css
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css' rel='stylesheet')
-  link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css' rel='stylesheet')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css' rel='stylesheet')
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet')
   link(href='css/demo.css' rel='stylesheet')
 
@@ -14,7 +14,9 @@ block modal
     ud-button(@click="isModalShow = false" plain) 關閉
 
 block content
-  ud-arrow(width="5" size="6" direction="down")
+  button.test(type="button") 點我
+  ud-arrow(wuuidth="5" size="6" direction="down")
+  el-button(size="small" round type="primary" icon="el-icon-refresh") 更新進度
   .test-area
     .title#title TEST
     label(for="title")
@@ -22,6 +24,15 @@ block content
 
   .demo-area
     .title DEMO
+    select#gender(v-model="gender")
+      option(value="a") A
+      option(value="b") B
+      option(value="c") C
+    button(@click="focus('#gender')") 性別
+    hr
+    input#birth(type="month" v-model="birth")
+    button(@click="focus('#birth')") 生日 
+    hr
     ud-button(@click="test") TEST
     ud-form(:rules="rules" :model="user" ref="form")
       ud-form-item(label="姓名" prop="name" flex)
@@ -81,5 +92,5 @@ block content
       br
       ud-countdown(:time="120" @timeup="timeup()" type="minute")
 block js
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js')
   script(src="js/demo.js")

@@ -13,7 +13,7 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/ud-modules.css" rel="stylesheet">
     <script src="https://coolbe-dev.coolbe.com.tw/js/diversion/985775d0-edac-4579-a8e5-2d87b7ef36b0.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
   <body>
@@ -26,13 +26,25 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
-          <ud-arrow width="5" size="6" direction="down"></ud-arrow>
+          <button class="test" type="button">點我</button>
+          <ud-arrow wuuidth="5" size="6" direction="down"></ud-arrow>
+          <el-button size="small" round type="primary" icon="el-icon-refresh">更新進度</el-button>
           <div class="test-area">
             <div class="title" id="title">TEST</div>
             <label for="title"><a href="https://www.google.com.tw/">Google</a></label>
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>
+            <select id="gender" v-model="gender">
+              <option value="a">A</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+            </select>
+            <button @click="focus('#gender')">性別</button>
+            <hr>
+            <input id="birth" type="month" v-model="birth">
+            <button @click="focus('#birth')">生日 </button>
+            <hr>
             <ud-button @click="test">TEST</ud-button>
             <ud-form :rules="rules" :model="user" ref="form">
               <ud-form-item label="姓名" prop="name" flex>
@@ -114,6 +126,7 @@
         </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script>
@@ -126,7 +139,7 @@
     </script>
     <script src="js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js"></script>
     <script src="js/demo.js"></script>
   </body>
 </html>

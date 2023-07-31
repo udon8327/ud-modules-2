@@ -3,6 +3,8 @@ var vm = new Vue({
     data: {
         isModalShow: false,
         isCollapse: false,
+        gender: "",
+        birth: "",
         user: {
             name: "",
             phone: ["", "", ""],
@@ -96,6 +98,10 @@ var vm = new Vue({
     },
     computed: {},
     methods: {
+        focus: function (type) {
+            $(type).focus();
+            // $(type).trigger("click");
+        },
         test: function () {
             throttle(function () {
                 console.log(getRandom());
