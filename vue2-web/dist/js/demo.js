@@ -98,6 +98,14 @@ var vm = new Vue({
     },
     computed: {},
     methods: {
+        gtm: function () {
+            dataLayer.push({
+                event: "line-authoried_signup-login",
+                event_category: "bind-register-login-process",
+                event_label: "test",
+            });
+            console.log('dataLayer: ', dataLayer);
+        },
         focus: function (type) {
             $(type).focus();
             // $(type).trigger("click");

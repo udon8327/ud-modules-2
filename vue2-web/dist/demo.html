@@ -13,6 +13,20 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/ud-modules.css" rel="stylesheet">
     <script src="https://coolbe-dev.coolbe.com.tw/js/diversion/985775d0-edac-4579-a8e5-2d87b7ef36b0.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+        event: "UserID",
+        login: "true",
+        lineoa_id: "U440ba7770ec5ff6f90fc29056a875840",
+        mid: "",
+        new_customer: "false",
+      });
+    </script>
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-P74QVTX');
+      
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
@@ -26,6 +40,7 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
+          <button id="test" @click="gtm">GTM</button>
           <button class="test" type="button">點我</button>
           <ud-arrow wuuidth="5" size="6" direction="down"></ud-arrow>
           <el-button size="small" round type="primary" icon="el-icon-refresh">更新進度</el-button>
