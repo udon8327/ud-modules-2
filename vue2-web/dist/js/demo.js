@@ -79,6 +79,10 @@ var vm = new Vue({
         ],
     },
     mounted: function () {
+        udAxios.get("http://localhost:3000/cats?sex=4")
+            .then(function (res) {
+            console.log('res: ', res);
+        });
         // this.udAlert({
         //   confirm: true,
         //   maskClose: true,
