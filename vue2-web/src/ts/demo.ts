@@ -81,10 +81,10 @@ let vm = new Vue({
     ],
   },
   mounted() {
-    udAxios.get("http://localhost:3000/cats?sex=4")
-      .then((res) => {
-        console.log('res: ', res);
-      })
+    // udAxios.get("http://localhost:3000/cats?sex=4")
+    //   .then((res) => {
+    //     console.log('res: ', res);
+    //   })
     // this.udAlert({
     //   confirm: true,
     //   maskClose: true,
@@ -105,22 +105,12 @@ let vm = new Vue({
   computed: {
   },
   methods: {
-    gtm() {
-      dataLayer.push({
-        event: "line-authoried_signup-login",
-        event_category: "bind-register-login-process",
-        event_label: "test",
-      });
-      console.log('dataLayer: ', dataLayer);
+    test() {
+      console.log(Date.now());
     },
     focus(type) {
       $(type).focus();
       // $(type).trigger("click");
-    },
-    test() {
-      throttle(() => {
-        console.log(getRandom())
-      }, 3000);
     },
     getData() {
       udAxios.get('test')

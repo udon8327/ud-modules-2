@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no maximum-scale=1 user-scalable=no">
     <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="描述">
+    <meta name="keywords" content="關鍵字">
+    <meta name="author" content="作者">
     <meta property="og:image" content="http://static.naver.jp/line_lp/img/ogp.png">
     <meta property="og:title" content="ud-vue2">
     <meta property="og:description" content="ud-vue2">
@@ -12,26 +15,12 @@
     <title>ud-vue2</title>
     <link href="css/main.css" rel="stylesheet">
     <link href="css/ud-modules.css" rel="stylesheet">
-    <script src="https://coolbe-dev.coolbe.com.tw/js/diversion/985775d0-edac-4579-a8e5-2d87b7ef36b0.js"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      dataLayer.push({
-        event: "UserID",
-        login: "true",
-        lineoa_id: "U440ba7770ec5ff6f90fc29056a875840",
-        mid: "",
-        new_customer: "false",
-      });
-    </script>
-    <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-P74QVTX');
-      
-    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
   <body>
-    <noscript>iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-P74QVTX" height="0" width="0" style="display:none;visibility:hidden")</noscript>
     <noscript>Your browser does not support JavaScript!</noscript>
     <div id="app" v-cloak>
       <ud-modal v-model="isModalShow" mask-close btn-close>
@@ -41,13 +30,9 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
-          <button id="test" @click="gtm">GTM TEST</button>
-          <button class="test" type="button">點我</button>
-          <ud-arrow wuuidth="5" size="6" direction="down"></ud-arrow>
-          <el-button size="small" round type="primary" icon="el-icon-refresh">更新進度</el-button>
           <div class="test-area">
-            <div class="title" id="title">TEST</div>
-            <label for="title"><a href="https://www.google.com.tw/">Google</a></label>
+            <button @mouseover="test">測試按鈕</button>
+            <ud-button @click="test" throttle :throttle-time="5000">測試按鈕</ud-button>
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>

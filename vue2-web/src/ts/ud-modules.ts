@@ -116,10 +116,11 @@ Vue.component('ud-button', {
       >
         <div class="button-wrapper">
           <span><slot>按鈕</slot></span>
-          <div class="button-icon" v-if="loading || icon || image">
+          <div class="button-icon">
             <div class="icon-loading" v-if="loading"></div>
             <i :class="icon" v-if="icon && !loading"></i>
             <img :src="image" alt="" v-if="image && !loading">
+            <slot name="icon" v-if="!loading"></slot>
           </div>
         </div>
       </button>
@@ -141,7 +142,7 @@ Vue.component('ud-button', {
     clickHandler(evt) {
       if(this.throttle) return;
       this.$emit('click', evt);
-    }
+    },
   },
   mounted() {
     if(!this.throttle) return;

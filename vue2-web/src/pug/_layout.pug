@@ -7,9 +7,9 @@ html(lang='zh-Hant-TW')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
     meta(name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no maximum-scale=1 user-scalable=no")
     meta(name="format-detection" content="telephone=no")
-    //- meta(name='description' content='描述')
-    //- meta(name='keywords' content='關鍵字')
-    //- meta(name='author' content='作者')
+    meta(name='description' content='描述')
+    meta(name='keywords' content='關鍵字')
+    meta(name='author' content='作者')
     meta(property="og:image" content="http://static.naver.jp/line_lp/img/ogp.png")
     meta(property="og:title" content="ud-vue2")
     meta(property="og:description" content="ud-vue2")
@@ -21,25 +21,9 @@ html(lang='zh-Hant-TW')
     link(href='css/ud-modules.css' rel='stylesheet')
     //- link(href='https://ud-modules.udons.site/css/ud-modules.css' rel='stylesheet')
     //- link(href='css/ud-modules-dev.css' rel='stylesheet')
-    script(src=`https://coolbe-dev.coolbe.com.tw/js/diversion/985775d0-edac-4579-a8e5-2d87b7ef36b0.js`)
-    
-    script.
-      window.dataLayer = window.dataLayer || [];
-      dataLayer.push({
-        event: "UserID",
-        login: "true",
-        lineoa_id: "U440ba7770ec5ff6f90fc29056a875840",
-        mid: "",
-        new_customer: "false",
-      });
-    script.
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-P74QVTX');
-
     block css
 
   body
-    noscript.
-      iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-P74QVTX" height="0" width="0" style="display:none;visibility:hidden")
     noscript Your browser does not support JavaScript!
     #app(v-cloak)
       block modal

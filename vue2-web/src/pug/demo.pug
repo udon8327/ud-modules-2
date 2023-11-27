@@ -1,7 +1,8 @@
 extends _layout.pug
 
 block css
-  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css' rel='stylesheet')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css' rel='stylesheet')
   link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css' rel='stylesheet')
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet')
   link(href='css/demo.css' rel='stylesheet')
@@ -14,14 +15,9 @@ block modal
     ud-button(@click="isModalShow = false" plain) 關閉
 
 block content
-  button#test(@click="gtm") GTM TEST
-  button.test(type="button") 點我
-  ud-arrow(wuuidth="5" size="6" direction="down")
-  el-button(size="small" round type="primary" icon="el-icon-refresh") 更新進度
   .test-area
-    .title#title TEST
-    label(for="title")
-      a(href="https://www.google.com.tw/") Google
+    button(@mouseover="test") 測試按鈕
+    ud-button(@click="test" throttle :throttle-time="5000") 測試按鈕
 
   .demo-area
     .title DEMO

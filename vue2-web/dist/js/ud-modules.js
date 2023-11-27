@@ -107,7 +107,7 @@ Web
 // Button 按鈕
 Vue.component('ud-button', {
     name: 'UdButton',
-    template: "\n    <div class=\"ud-button\">\n      <button\n        @click=\"clickHandler\"\n        v-bind=\"$attrs\"\n        :disabled=\"disabled || loading\"\n        :class=\"{\n          'is-disabled': disabled || loading,\n          'is-plain': plain,\n          'is-round': round,\n          'is-circle': circle,\n        }\"\n      >\n        <div class=\"button-wrapper\">\n          <span><slot>\u6309\u9215</slot></span>\n          <div class=\"button-icon\" v-if=\"loading || icon || image\">\n            <div class=\"icon-loading\" v-if=\"loading\"></div>\n            <i :class=\"icon\" v-if=\"icon && !loading\"></i>\n            <img :src=\"image\" alt=\"\" v-if=\"image && !loading\">\n          </div>\n        </div>\n      </button>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-button\">\n      <button\n        @click=\"clickHandler\"\n        v-bind=\"$attrs\"\n        :disabled=\"disabled || loading\"\n        :class=\"{\n          'is-disabled': disabled || loading,\n          'is-plain': plain,\n          'is-round': round,\n          'is-circle': circle,\n        }\"\n      >\n        <div class=\"button-wrapper\">\n          <span><slot>\u6309\u9215</slot></span>\n          <div class=\"button-icon\">\n            <div class=\"icon-loading\" v-if=\"loading\"></div>\n            <i :class=\"icon\" v-if=\"icon && !loading\"></i>\n            <img :src=\"image\" alt=\"\" v-if=\"image && !loading\">\n            <slot name=\"icon\" v-if=\"!loading\"></slot>\n          </div>\n        </div>\n      </button>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         icon: { default: '' },
@@ -125,7 +125,7 @@ Vue.component('ud-button', {
             if (this.throttle)
                 return;
             this.$emit('click', evt);
-        }
+        },
     },
     mounted: function () {
         var _this = this;
