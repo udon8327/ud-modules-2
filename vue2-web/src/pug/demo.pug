@@ -17,7 +17,8 @@ block modal
 block content
   .test-area
     button(@mouseover="test") 測試按鈕
-    ud-button(@click="test" throttle :throttle-time="5000") 測試按鈕
+    ud-button(@click="test" throttle) 測試按鈕
+    ud-input(ref="omg" v-model="user.name" @input="test")
 
   .demo-area
     .title DEMO

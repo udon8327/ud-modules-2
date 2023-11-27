@@ -32,7 +32,8 @@
         <div class="wrapper">
           <div class="test-area">
             <button @mouseover="test">測試按鈕</button>
-            <ud-button @click="test" throttle :throttle-time="5000">測試按鈕</ud-button>
+            <ud-button @click="test" throttle>測試按鈕</ud-button>
+            <ud-input ref="omg" v-model="user.name" @input="test"></ud-input>
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>
