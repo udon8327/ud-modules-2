@@ -88,13 +88,13 @@
   ### props
   * options: 選項 | Array
   * flex: 是否並排 | Boolean(false)
-  * radius: 圓角 | String("50px")
+  * combine: 使用value做為label | Boolean(false)
 
 ## <font color=#ebc600>Checkbox 多選框 ud-checkbox</font>
+  多選時v-model綁定Array
   ``` html
   <ud-checkbox v-model="value" :options="options" flex></ud-checkbox>
   ```
-  單個時綁定Boolean 多個時綁定Array
   ``` js
   options: [
     {label: "選項一", value: "1"},
@@ -102,12 +102,21 @@
     {label: "選項三", value: "3"},
   ],
   ```
+  單選時v-model綁定Boolean
+  ``` html
+  <!-- options可帶入字串 -->
+  <ud-checkbox v-model="value" options="我同意使用者條款"></ud-checkbox>
+  
+  <!-- options也可不帶改用slot塞入任意內容 -->
+  <ud-checkbox v-model="value">
+    <p>我同意<a href="https://www.google.com.tw/">使用者條款</a></p>
+  </ud-checkbox>
+  ```
   ### props
-  * option: 單選項 | Array
-  * options: 多選項 | Array
+  * options: 多選項 | String、Array
   * flex: 是否並排 | Boolean(false)
-  * radius: 圓角 | String("50px")
-  * noLabel: 是否有label | Boolean(false)
+  * combine: 使用value做為label | Boolean(false)
+  * solid: 打勾改為實心 | Boolean(false)
 
 ## <font color=#ebc600>Select 下拉框 ud-select</font>
 

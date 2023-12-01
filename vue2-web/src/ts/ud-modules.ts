@@ -272,9 +272,7 @@ Vue.component('ud-radio', {
           @change="onChange"
           ref="radio"
         >
-        <div class="radio-decorator"
-          :style="{'border-radius': radius}"
-        ></div>
+        <div class="radio-decorator"></div>
         <p>{{ combine ? option.value : option.label }}</p>
       </label>
     </div>
@@ -282,9 +280,10 @@ Vue.component('ud-radio', {
   inheritAttrs: false,
   props: {
     value: null, // value值
-    options: null, // 多選項 | Array
+    options: { // 選項 | Array
+      default: null,
+    },
     flex: Boolean, // 是否並排
-    radius: { default: "50px" }, // 圓角
     combine: Boolean // 使用value做為label
   },
   computed: {
@@ -306,18 +305,18 @@ Vue.component('ud-checkbox', {
   name: "UdCheckbox",
   template: `
     <div class="ud-checkbox" :class="{'is-flex': flex}">
-      <template v-if="option">
+      <template v-if="typeof(options) === 'string' || options === null">
         <label>
           <input
             type="checkbox"
             v-model="modelValue"
-            :value="option"
+            :value="options"
             v-bind="$attrs"
             @change="onChange"
             ref="checkbox"
           >
-          <div class="checkbox-decorator"></div>
-          <p v-if="!noLabel"><slot>{{ option }}</slot></p>
+          <div class="checkbox-decorator" :class="{'is-solid': solid}"></div>
+          <p><slot>{{ options }}</slot></p>
         </label>
       </template>
       <template v-else>
@@ -330,8 +329,8 @@ Vue.component('ud-checkbox', {
             @change="onChange"
             ref="checkbox"
           >
-          <div class="checkbox-decorator"></div>
-          <p v-if="!noLabel">{{ combine ? option.value : option.label }}</p>
+          <div class="checkbox-decorator" :class="{'is-solid': solid}"></div>
+          <p>{{ combine ? option.value : option.label }}</p>
         </label>
       </template>
     </div>
@@ -339,11 +338,12 @@ Vue.component('ud-checkbox', {
   inheritAttrs: false,
   props: {
     value: null, // value值 單個時綁定Boolean 多個時綁定Array
-    option: null, // 單選項
-    options: null, // 多選項
+    options: { // 選項 | Array、String
+      default: null,
+    },
     flex: Boolean, // 是否並排
     combine: Boolean, // 使用value做為label
-    noLabel: Boolean, // 是否有label
+    solid: Boolean, // 打勾改為實心
   },
   computed: {
     modelValue: {
