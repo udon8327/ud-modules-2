@@ -17,26 +17,15 @@ block modal
 block content
   .test-area
     ud-radio(v-model="user.radio" :options="options" flex)
-    ud-button(@click="test" throttle) 測試按鈕
-    ud-textarea(v-model="user.info")
+    ud-checkbox(v-model="user.checkbox" :options="options" flex)
+    ud-checkbox(v-model="user.checkbox" :options="options" flex)
 
   .demo-area
     .title DEMO
-    select#gender(v-model="gender")
-      option(value="a") A
-      option(value="b") B
-      option(value="c") C
-    button(@click="focus('#gender')") 性別
-    hr
-    input#birth(type="month" v-model="birth")
-    button(@click="focus('#birth')") 生日 
-    hr
     ud-button(@click="test") TEST
     ud-form(:rules="rules" :model="user" ref="form")
       ud-form-item(label="姓名" prop="name" flex)
         ud-input(placeholder="請輸入您的姓名" v-model="user.name")
-      ud-form-item(label="手機" prop="phone" flex)
-        ud-input-phone(:placeholder="['0912', '345', '678']" v-model="user.phone")
       ud-form-item(label="備註" prop="note" flex)
         ud-textarea(placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10")
       ud-form-item(label="年齡" prop="age" flex)

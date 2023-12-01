@@ -39,6 +39,9 @@
     ```
 
 ## <font color=#ebc600>Input 輸入框 ud-input</font>
+  ``` html
+  <ud-input v-model="value" placeholder="請輸入文字" center></ud-textarea>
+  ```
   ### props
   * placeholder: 替代文字 | String
   * center: 文字是否置中 | Boolean(false)
@@ -46,61 +49,65 @@
   * focus: 焦點
     ``` html
     <ud-input ref="target"></ud-input>
+    ```
+    ``` js
     this.$refs.target.focus();
     ```
   * blur: 離開焦點
     ``` html
     <ud-input ref="target"></ud-input>
+    ```
+    ``` js
     this.$refs.target.blur();
     ```
 
 ## <font color=#ebc600>Textarea 多行輸入框 ud-textarea</font>
+  ``` html
+  <ud-textarea v-model="value" placeholder="請輸入文字" :rows="8" show-limit :limit="99" no-resize></ud-textarea>
+  ```
   ### props
   * placeholder: 替代文字 | String
   * rows: 預設行數 | Number(4)
-  * show-limit: 是否顯示字數限制(與limit併用) | Boolean(false)
-    ``` html
-    <ud-textarea v-model="test" :limit="99" show-limit></ud-textarea>
-    ```
+  * showLimit: 是否顯示字數限制(與limit併用) | Boolean(false)
   * limit: 字數限制 | Number(null)
-  * no-resize: 禁止改變大小 | Boolean(false)
+  * noResize: 禁止改變大小 | Boolean(false)
   ### methods
   * 同ud-input
+
 ## <font color=#ebc600>Radio 單選框 ud-radio</font>
+  ``` html
+  <ud-radio v-model="value" :options="options" flex></ud-radio>
+  ```
+  ``` js
+  options: [
+    {label: "選項一", value: "1"},
+    {label: "選項二", value: "2"},
+    {label: "選項三", value: "3"},
+  ],
+  ```
   ### props
-  * placeholder: 替代文字
-    ``` html
-    <ud-textarea v-model="test" placeholder="替代文字"></ud-textarea>
-    ```
-  * rows: 預設行數
-    ``` html
-    <ud-textarea v-model="test" :rows="8"></ud-textarea>
-    ```
-  * showLimit: 是否顯示字數限制(與limit併用)
-    ``` html
-    <ud-textarea v-model="test" :limit="99" show-limit></ud-textarea>
-    ```
-  * limit: 字數限制
-    ``` html
-    <ud-textarea v-model="test" :limit="99"></ud-textarea>
-    ```
-  * noResize: 禁止改變大小
-    ``` html
-    <ud-textarea v-model="test" no-resize></ud-textarea>
-    ```
-  ### methods
-  * focus: 焦點
-    ``` html
-    <ud-textarea ref="target"></ud-textarea>
-    this.$refs.target.focus();
-    ```
-  * blur: 離開焦點
-    ``` html
-    <ud-textarea ref="target"></ud-textarea>
-    this.$refs.target.blur();
-    ```
+  * options: 選項 | Array
+  * flex: 是否並排 | Boolean(false)
+  * radius: 圓角 | String("50px")
 
 ## <font color=#ebc600>Checkbox 多選框 ud-checkbox</font>
+  ``` html
+  <ud-checkbox v-model="value" :options="options" flex></ud-checkbox>
+  ```
+  單個時綁定Boolean 多個時綁定Array
+  ``` js
+  options: [
+    {label: "選項一", value: "1"},
+    {label: "選項二", value: "2"},
+    {label: "選項三", value: "3"},
+  ],
+  ```
+  ### props
+  * option: 單選項 | Array
+  * options: 多選項 | Array
+  * flex: 是否並排 | Boolean(false)
+  * radius: 圓角 | String("50px")
+  * noLabel: 是否有label | Boolean(false)
 
 ## <font color=#ebc600>Select 下拉框 ud-select</font>
 

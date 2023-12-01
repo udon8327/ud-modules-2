@@ -263,23 +263,7 @@ Vue.component('ud-radio', {
   name: "UdRadio",
   template: `
     <div class="ud-radio" :class="{'is-flex': flex}">
-
-      <label v-if="option">
-        <input
-          type="radio"
-          v-model="modelValue"
-          :value="option"
-          v-bind="$attrs"
-          @change="onChange"
-          ref="radio"
-        >
-        <div class="radio-decorator"
-          :style="{'border-radius': radius}"
-        ></div>
-        <p v-if="combine">{{ option }}</p>
-      </label>
-
-      <label v-for="option in options" :key="option.value" v-if="options">
+      <label v-for="option in options" :key="option.value">
         <input
           type="radio"
           v-model="modelValue"
@@ -293,14 +277,12 @@ Vue.component('ud-radio', {
         ></div>
         <p>{{ combine ? option.value : option.label }}</p>
       </label>
-
     </div>
   `,
   inheritAttrs: false,
   props: {
     value: null, // value值
-    option: null, // 單選項[string, number]
-    options: null, // 多選項[object]
+    options: null, // 多選項 | Array
     flex: Boolean, // 是否並排
     radius: { default: "50px" }, // 圓角
     combine: Boolean // 使用value做為label

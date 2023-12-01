@@ -81,16 +81,12 @@ let vm = new Vue({
     ],
   },
   mounted() {
-    this.$refs.omg.focus();
-    setTimeout(() => {
-      this.$refs.omg.blur();
-    }, 3000);
-    udAxios.post("/tests", {}, {
-      noAlert: true,
-    })
-      .then((res) => {
-        console.log('res: ', res);
-      })
+    // udAxios.post("/tests", {}, {
+    //   noAlert: true,
+    // })
+    //   .then((res) => {
+    //     console.log('res: ', res);
+    //   })
     // this.udAlert({
     //   confirm: true,
     //   maskClose: true,

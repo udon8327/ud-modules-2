@@ -204,11 +204,10 @@ Vue.component('ud-textarea', {
 // Radio 單選框
 Vue.component('ud-radio', {
     name: "UdRadio",
-    template: "\n    <div class=\"ud-radio\" :class=\"{'is-flex': flex}\">\n\n      <label v-if=\"option\">\n        <input\n          type=\"radio\"\n          v-model=\"modelValue\"\n          :value=\"option\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n          ref=\"radio\"\n        >\n        <div class=\"radio-decorator\"\n          :style=\"{'border-radius': radius}\"\n        ></div>\n        <p v-if=\"combine\">{{ option }}</p>\n      </label>\n\n      <label v-for=\"option in options\" :key=\"option.value\" v-if=\"options\">\n        <input\n          type=\"radio\"\n          v-model=\"modelValue\"\n          :value=\"option.value\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n          ref=\"radio\"\n        >\n        <div class=\"radio-decorator\"\n          :style=\"{'border-radius': radius}\"\n        ></div>\n        <p>{{ combine ? option.value : option.label }}</p>\n      </label>\n\n    </div>\n  ",
+    template: "\n    <div class=\"ud-radio\" :class=\"{'is-flex': flex}\">\n      <label v-for=\"option in options\" :key=\"option.value\">\n        <input\n          type=\"radio\"\n          v-model=\"modelValue\"\n          :value=\"option.value\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n          ref=\"radio\"\n        >\n        <div class=\"radio-decorator\"\n          :style=\"{'border-radius': radius}\"\n        ></div>\n        <p>{{ combine ? option.value : option.label }}</p>\n      </label>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: null,
-        option: null,
         options: null,
         flex: Boolean,
         radius: { default: "50px" },

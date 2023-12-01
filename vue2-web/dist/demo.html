@@ -32,28 +32,15 @@
         <div class="wrapper">
           <div class="test-area">
             <ud-radio v-model="user.radio" :options="options" flex></ud-radio>
-            <ud-button @click="test" throttle>測試按鈕</ud-button>
-            <ud-textarea v-model="user.info"></ud-textarea>
+            <ud-checkbox v-model="user.checkbox" :options="options" flex></ud-checkbox>
+            <ud-checkbox v-model="user.checkbox" :options="options" flex></ud-checkbox>
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>
-            <select id="gender" v-model="gender">
-              <option value="a">A</option>
-              <option value="b">B</option>
-              <option value="c">C</option>
-            </select>
-            <button @click="focus('#gender')">性別</button>
-            <hr>
-            <input id="birth" type="month" v-model="birth">
-            <button @click="focus('#birth')">生日 </button>
-            <hr>
             <ud-button @click="test">TEST</ud-button>
             <ud-form :rules="rules" :model="user" ref="form">
               <ud-form-item label="姓名" prop="name" flex>
                 <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
-              </ud-form-item>
-              <ud-form-item label="手機" prop="phone" flex>
-                <ud-input-phone :placeholder="['0912', '345', '678']" v-model="user.phone"></ud-input-phone>
               </ud-form-item>
               <ud-form-item label="備註" prop="note" flex>
                 <ud-textarea placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10"></ud-textarea>
