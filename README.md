@@ -91,7 +91,7 @@
   * combine: 使用value做為label | Boolean(false)
 
 ## <font color=#ebc600>Checkbox 多選框 ud-checkbox</font>
-  多選時v-model綁定Array
+  多選時v-model需綁定Array
   ``` html
   <ud-checkbox v-model="value" :options="options" flex></ud-checkbox>
   ```
@@ -102,7 +102,7 @@
     {label: "選項三", value: "3"},
   ],
   ```
-  單選時v-model綁定Boolean
+  單選時v-model需綁定Boolean
   ``` html
   <!-- options可帶入字串 -->
   <ud-checkbox v-model="value" options="我同意使用者條款"></ud-checkbox>
@@ -113,7 +113,7 @@
   </ud-checkbox>
   ```
   ### props
-  * options: 多選項 | String、Array
+  * options: 選項 | String、Array
   * flex: 是否並排 | Boolean(false)
   * combine: 使用value做為label | Boolean(false)
   * solid: 打勾改為實心 | Boolean(false)
