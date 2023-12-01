@@ -17,7 +17,7 @@ let vm = new Vue({
       checkbox: [],
       select: "",
       selectLink: ["", "", ""],
-      selectLinkSp: ["", "", "", ""],
+      selectLinkSp: ["", "", ""],
       twzip: ["", ""],
       date: ["", "", ""],
       isActive: false,
@@ -42,40 +42,37 @@ let vm = new Vue({
       captcha: [{type: "required"}, {type: "equal", equalTo: "captchaCode", caseIgnore: "true"}],
     },
     options: [
-      {label: "甲", value: "a"},
+      {label: "甲", value: "a", disabled: true},
       {label: "乙", value: "b"},
       {label: "丙", value: "c"},
     ],
     storeOptions: [
-      {label: "台北市", value: "01", children: [
-        {label: "中正區", value: "011", children: [
-          {label: "中正01", value: "0111", disabled: "true"},
-          {label: "中正02", value: "0112", children: [
-            {label: "中正02甲", value: "01121"},
-            {label: "中正02乙", value: "01122"},
-          ]}
+      {label: "台北市", value: "taipei", children: [
+        {label: "中正區", value: "100", children: [
+          {label: "2023-12-01", value: "1" },
+          {label: "2023-12-02", value: "2", disabled: "true" }
         ]},
-        {label: "大安區", value: "012", disabled: true, children: [
-          {label: "大安01", value: "0121"},
-          {label: "大安02", value: "0122"},
+        {label: "大安區", value: "106", disabled: true, children: [
+          {label: "2023-12-03", value: "3" },
+          {label: "2023-12-04", value: "4" },
         ]},
-        {label: "信義區", value: "013", children: [
-          {label: "信義01", value: "0131"},
-          {label: "信義02", value: "0132"},
+        {label: "信義區", value: "110", children: [
+          {label: "2023-12-05", value: "5" },
+          {label: "2023-12-06", value: "6" },
         ]},
       ]},
-      {label: "台中市", value: "02", children: [
-        {label: "西屯區", value: "021", children: [
-          {label: "中正01", value: "0211"},
-          {label: "中正02", value: "0212"},
+      {label: "新北市", value: "newTaipei", children: [
+        {label: "板橋區", value: "220", children: [
+          {label: "2023-12-07", value: "7" },
+          {label: "2023-12-08", value: "8" },
         ]},
-        {label: "北屯區", value: "022", children: [
-          {label: "大安01", value: "0221"},
-          {label: "大安02", value: "0222"},
+        {label: "永和區", value: "234", children: [
+          {label: "2023-12-09", value: "9" },
+          {label: "2023-12-10", value: "10", disabled: true },
         ]},
-        {label: "中區", value: "023", children: [
-          {label: "信義01", value: "0231"},
-          {label: "信義02", value: "0232"},
+        {label: "新店區", value: "231", children: [
+          {label: "2023-12-11", value: "11", disabled: true },
+          {label: "2023-12-12", value: "12", disabled: true },
         ]},
       ]},
     ],

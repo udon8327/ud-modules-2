@@ -82,7 +82,7 @@
   options: [
     {label: "選項一", value: "1"},
     {label: "選項二", value: "2"},
-    {label: "選項三", value: "3"},
+    {label: "選項三", value: "3", disabled: true},
   ],
   ```
   ### props
@@ -99,7 +99,7 @@
   options: [
     {label: "選項一", value: "1"},
     {label: "選項二", value: "2"},
-    {label: "選項三", value: "3"},
+    {label: "選項三", value: "3", disabled: true},
   ],
   ```
   單選時v-model需綁定Boolean
@@ -119,6 +119,72 @@
   * solid: 打勾改為實心 | Boolean(false)
 
 ## <font color=#ebc600>Select 下拉框 ud-select</font>
+  ``` html
+  <ud-select v-model="value" :options="options" placeholder="請選擇櫃點"></ud-select>
+  ```
+  ``` js
+  options: [
+    {label: "選項一", value: "1"},
+    {label: "選項二", value: "2"},
+    {label: "選項三", value: "3", disabled: true},
+  ],
+  ```
+  將多個獨立的ud-select進行連動
+  ``` html
+  <ud-select v-model="valueGroup[0]" :options="storeOptions" :group="valueGroup" :index="0" placeholder="請選擇縣市"></ud-select>
+  <ud-select v-model="valueGroup[1]" :options="storeOptions" :group="valueGroup" :index="1" placeholder="請選擇櫃點"></ud-select>
+  <ud-select v-model="valueGroup[2]" :options="storeOptions" :group="valueGroup" :index="2" placeholder="請選擇日期"></ud-select>
+  ```
+  ``` js
+  data: {
+    valueGroup: ["", "", ""],
+    storeOptions: [
+      {label: "台北市", value: "taipei", children: [
+        {label: "中正區", value: "100", children: [
+          {label: "2023-12-01", value: "1" },
+          {label: "2023-12-02", value: "2", disabled: "true" }
+        ]},
+        {label: "大安區", value: "106", disabled: true, children: [
+          {label: "2023-12-03", value: "3" },
+          {label: "2023-12-04", value: "4" },
+        ]},
+        {label: "信義區", value: "110", children: [
+          {label: "2023-12-05", value: "5" },
+          {label: "2023-12-06", value: "6" },
+        ]},
+      ]},
+      {label: "新北市", value: "newTaipei", children: [
+        {label: "板橋區", value: "220", children: [
+          {label: "2023-12-07", value: "7" },
+          {label: "2023-12-08", value: "8" },
+        ]},
+        {label: "永和區", value: "234", children: [
+          {label: "2023-12-09", value: "9" },
+          {label: "2023-12-10", value: "10", disabled: true },
+        ]},
+        {label: "新店區", value: "231", children: [
+          {label: "2023-12-11", value: "11", disabled: true },
+          {label: "2023-12-12", value: "12", disabled: true },
+        ]},
+      ]},
+    ],
+  },
+  ```
+  ### props
+  * options: 選項 | Array
+  * placeholder: 替代文字 | String
+  * combine: 使用value做為label | Boolean(false)
+  * center: 文字是否置中 | Boolean(false)
+  * group: 是否群組(雙向綁定的值所組成的陣列) | Array
+  * index: 群組索引(由0開始的數字) | Number
+  * labelBy: label替代值 | String("label")
+  * valueBy: value替代值 | String("value")
+  * childrenBy: children替代值 | String("children")
+  ``` html
+  <ud-select v-model="valueGroup[0]" :options="storeOptions" :group="valueGroup" :index="0" placeholder="請選擇縣市" label-by="name" value-by="id" children-by="list"></ud-select>
+  <ud-select v-model="valueGroup[1]" :options="storeOptions" :group="valueGroup" :index="1" placeholder="請選擇櫃點" label-by="name" value-by="id" children-by="list"></ud-select>
+  <ud-select v-model="valueGroup[2]" :options="storeOptions" :group="valueGroup" :index="2" placeholder="請選擇日期" label-by="name" value-by="id" children-by="list"></ud-select>
+  ```
 
 ## <font color=#ebc600>SelectMultiple 下拉複選框 ud-select-multiple</font>
 

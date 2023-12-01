@@ -21,6 +21,7 @@ block content
     ud-checkbox(v-model="user.isAgree" options="我同意使用者條款" solid)
     ud-checkbox(v-model="user.isAgree")
       p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
+    ud-select(v-model="user.select" :options="options" placeholder="請選擇櫃點")
 
   .demo-area
     .title DEMO
@@ -47,7 +48,6 @@ block content
           ud-select(v-model="user.selectLinkSp[0]" :options="storeOptions" :group="user.selectLinkSp" :index="0" placeholder="請選擇縣市")
           ud-select(v-model="user.selectLinkSp[1]" :options="storeOptions" :group="user.selectLinkSp" :index="1" placeholder="請選擇店點")
           ud-select(v-model="user.selectLinkSp[2]" :options="storeOptions" :group="user.selectLinkSp" :index="2" placeholder="請選擇日期")
-          ud-select(v-model="user.selectLinkSp[3]" :options="storeOptions" :group="user.selectLinkSp" :index="3" placeholder="請選擇時段")
       ud-form-item(label="地址" prop="twzip" flex)
         ud-select-twzip(ref="zip" v-model="user.twzip" flex)
       ud-form-item(label="預約日期" prop="date" flex)

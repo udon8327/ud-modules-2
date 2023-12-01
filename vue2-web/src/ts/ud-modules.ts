@@ -271,6 +271,7 @@ Vue.component('ud-radio', {
           v-bind="$attrs"
           @change="onChange"
           ref="radio"
+          :disabled="option.disabled"
         >
         <div class="radio-decorator"></div>
         <p>{{ combine ? option.value : option.label }}</p>
@@ -328,6 +329,7 @@ Vue.component('ud-checkbox', {
             v-bind="$attrs"
             @change="onChange"
             ref="checkbox"
+            :disabled="option.disabled"
           >
           <div class="checkbox-decorator" :class="{'is-solid': solid}"></div>
           <p>{{ combine ? option.value : option.label }}</p>

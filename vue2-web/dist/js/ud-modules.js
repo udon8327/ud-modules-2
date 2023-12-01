@@ -204,7 +204,7 @@ Vue.component('ud-textarea', {
 // Radio 單選框
 Vue.component('ud-radio', {
     name: "UdRadio",
-    template: "\n    <div class=\"ud-radio\" :class=\"{'is-flex': flex}\">\n      <label v-for=\"option in options\" :key=\"option.value\">\n        <input\n          type=\"radio\"\n          v-model=\"modelValue\"\n          :value=\"option.value\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n          ref=\"radio\"\n        >\n        <div class=\"radio-decorator\"></div>\n        <p>{{ combine ? option.value : option.label }}</p>\n      </label>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-radio\" :class=\"{'is-flex': flex}\">\n      <label v-for=\"option in options\" :key=\"option.value\">\n        <input\n          type=\"radio\"\n          v-model=\"modelValue\"\n          :value=\"option.value\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n          ref=\"radio\"\n          :disabled=\"option.disabled\"\n        >\n        <div class=\"radio-decorator\"></div>\n        <p>{{ combine ? option.value : option.label }}</p>\n      </label>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: null,
@@ -230,7 +230,7 @@ Vue.component('ud-radio', {
 // Checkbox 多選框
 Vue.component('ud-checkbox', {
     name: "UdCheckbox",
-    template: "\n    <div class=\"ud-checkbox\" :class=\"{'is-flex': flex}\">\n      <template v-if=\"typeof(options) === 'string' || options === null\">\n        <label>\n          <input\n            type=\"checkbox\"\n            v-model=\"modelValue\"\n            :value=\"options\"\n            v-bind=\"$attrs\"\n            @change=\"onChange\"\n            ref=\"checkbox\"\n          >\n          <div class=\"checkbox-decorator\" :class=\"{'is-solid': solid}\"></div>\n          <p><slot>{{ options }}</slot></p>\n        </label>\n      </template>\n      <template v-else>\n        <label v-for=\"option in options\" :key=\"option.value\">\n          <input\n            type=\"checkbox\"\n            :value=\"option.value\"\n            v-model=\"modelValue\"\n            v-bind=\"$attrs\"\n            @change=\"onChange\"\n            ref=\"checkbox\"\n          >\n          <div class=\"checkbox-decorator\" :class=\"{'is-solid': solid}\"></div>\n          <p>{{ combine ? option.value : option.label }}</p>\n        </label>\n      </template>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-checkbox\" :class=\"{'is-flex': flex}\">\n      <template v-if=\"typeof(options) === 'string' || options === null\">\n        <label>\n          <input\n            type=\"checkbox\"\n            v-model=\"modelValue\"\n            :value=\"options\"\n            v-bind=\"$attrs\"\n            @change=\"onChange\"\n            ref=\"checkbox\"\n          >\n          <div class=\"checkbox-decorator\" :class=\"{'is-solid': solid}\"></div>\n          <p><slot>{{ options }}</slot></p>\n        </label>\n      </template>\n      <template v-else>\n        <label v-for=\"option in options\" :key=\"option.value\">\n          <input\n            type=\"checkbox\"\n            :value=\"option.value\"\n            v-model=\"modelValue\"\n            v-bind=\"$attrs\"\n            @change=\"onChange\"\n            ref=\"checkbox\"\n            :disabled=\"option.disabled\"\n          >\n          <div class=\"checkbox-decorator\" :class=\"{'is-solid': solid}\"></div>\n          <p>{{ combine ? option.value : option.label }}</p>\n        </label>\n      </template>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: null,
