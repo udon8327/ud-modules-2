@@ -1,86 +1,104 @@
 # ud-modules 文件
 
-# Form
+# Form 表單
 ## <font color=#ebc600>Button 按鈕 ud-button</font>
+  ``` html
+  <ud-button @click="onClick">按鈕</ud-button>
+  ```
   ### props
-  * icon: CSS的icon，直接帶入class
+  * icon: CSS的icon，直接帶入class | String
     ``` html
     <ud-button icon="el-icon-refresh">按鈕</ud-button> <!-- element ui icon -->
     <ud-button icon="bi bi-apple">按鈕</ud-button> <!-- bootstrap icon -->
     <ud-button icon="fa-solid fa-poo">按鈕</ud-button> <!-- font awesome icon -->
     ```
-  * image: 圖片的icon，直接帶入圖片url
+  * image: 圖片的icon，直接帶入圖片url | String
     ``` html
     <ud-button image="img/refresh.png">按鈕</ud-button> 
     ```
-    也可使用slot(name="icon")插入圖片  
+    也可使用slot(name="icon")插入圖片
     ``` html
     <ud-button>按鈕<img slot="icon" src="img/refresh.png"></ud-button> 
     ```
-    或是直接使用slot插入任意內容  
+    或是直接使用slot插入任意內容
     ``` html
     <ud-button>按鈕<div>任意內容</div></ud-button> 
     ```
-  * loading: 載入中，預設為false
-    ``` html
-    <ud-button loading>按鈕</ud-button> 
-    ```
-  * disabled: 禁止點擊，預設為false
-    ``` html
-    <ud-button disabled>按鈕</ud-button> 
-    ```
-  * plain: 線條化，預設為false
-    ``` html
-    <ud-button plain>按鈕</ud-button> 
-    ```
-  * round: 圓角，預設為false
-    ``` html
-    <ud-button round>按鈕</ud-button> 
-    ```
-  * circle: 圓型，預設為false
-    ``` html
-    <ud-button circle>按鈕</ud-button> 
-    ```
-  * throttle: 函式節流，幾秒內最多觸發一次，預設為false
+  * loading: 載入中 | Boolean(false)
+  * disabled: 禁止點擊 | Boolean(false)
+  * plain: 線條化 | Boolean(false)
+  * round: 圓角 | Boolean(false)
+  * circle: 圓形 | Boolean(false)
+  * throttle: 函式節流，幾秒內最多觸發一次 | Boolean(false)
     ``` html
     <ud-button throttle @click="test">按鈕</ud-button> 
     ```
-  * throttleTime: 函式節流間隔時間(ms)，預設為1000
+  * throttleTime: 函式節流間隔時間(ms) | Number(1000)
     ``` html
     <ud-button throttle :throttle-time="2000" @click="test">按鈕</ud-button> 
     ```
 
 ## <font color=#ebc600>Input 輸入框 ud-input</font>
   ### props
+  * placeholder: 替代文字 | String
+  * center: 文字是否置中 | Boolean(false)
+  ### methods
+  * focus: 焦點
+    ``` html
+    <ud-input ref="target"></ud-input>
+    this.$refs.target.focus();
+    ```
+  * blur: 離開焦點
+    ``` html
+    <ud-input ref="target"></ud-input>
+    this.$refs.target.blur();
+    ```
+
+## <font color=#ebc600>Textarea 多行輸入框 ud-textarea</font>
+  ### props
+  * placeholder: 替代文字 | String
+  * rows: 預設行數 | Number(4)
+  * show-limit: 是否顯示字數限制(與limit併用) | Boolean(false)
+    ``` html
+    <ud-textarea v-model="test" :limit="99" show-limit></ud-textarea>
+    ```
+  * limit: 字數限制 | Number(null)
+  * no-resize: 禁止改變大小 | Boolean(false)
+  ### methods
+  * 同ud-input
+## <font color=#ebc600>Radio 單選框 ud-radio</font>
+  ### props
   * placeholder: 替代文字
     ``` html
-    <ud-input v-model="test" center></ud-input>
+    <ud-textarea v-model="test" placeholder="替代文字"></ud-textarea>
     ```
-  * center: 文字是否置中，預設為false
+  * rows: 預設行數
     ``` html
-    <ud-input v-model="test" center></ud-input>
+    <ud-textarea v-model="test" :rows="8"></ud-textarea>
+    ```
+  * showLimit: 是否顯示字數限制(與limit併用)
+    ``` html
+    <ud-textarea v-model="test" :limit="99" show-limit></ud-textarea>
+    ```
+  * limit: 字數限制
+    ``` html
+    <ud-textarea v-model="test" :limit="99"></ud-textarea>
+    ```
+  * noResize: 禁止改變大小
+    ``` html
+    <ud-textarea v-model="test" no-resize></ud-textarea>
     ```
   ### methods
   * focus: 焦點
     ``` html
-    <ud-input ref="input"></ud-input>
-    ```
-    ``` js
-    this.$refs.input.focus();
+    <ud-textarea ref="target"></ud-textarea>
+    this.$refs.target.focus();
     ```
   * blur: 離開焦點
     ``` html
-    <ud-input ref="input"></ud-input>
+    <ud-textarea ref="target"></ud-textarea>
+    this.$refs.target.blur();
     ```
-    ``` js
-    this.$refs.input.blur();
-    ```
-
-## <font color=#ebc600>InputPhone 電話號碼連動輸入框 ud-input-phone</font>
-
-## <font color=#ebc600>Textarea 多行輸入框 ud-textarea</font>
-
-## <font color=#ebc600>Radio 單選框 ud-radio</font>
 
 ## <font color=#ebc600>Checkbox 多選框 ud-checkbox</font>
 

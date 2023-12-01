@@ -2,6 +2,7 @@
 
 // ==================== Vue組件庫(Extra)目錄 ====================
 // Form
+//   InputPhone 電話號碼連動輸入框 -----> ud-input-phone
 //   Upload 上傳 -----> ud-upload
 //   ImageUpload 圖片上傳預覽 -----> ud-image-upload
 //   ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
@@ -30,6 +31,17 @@
 //   Editor 文字編輯器 -----> ud-editor
 
 //-----------------------Form-----------------------
+// InputPhone 電話號碼連動輸入框
+.ud-input-phone
+  display: flex
+  justify-content: center
+  align-items: center
+  .ud-input:nth-of-type(1)
+    flex: 0 0 34%
+  .separator
+    font-size: 18px
+    margin: 0 5px
+
 // Upload 上傳
 .ud-upload
 

@@ -3,6 +3,7 @@ declare var $: (selector: string) => any;
 /*
 ==================== Vue組件庫(Extra)目錄 ====================
 Form
+  InputPhone 電話號碼連動輸入框 -----> ud-input-phone
   Upload 上傳 -----> ud-upload
   ImageUpload 圖片上傳預覽 -----> ud-image-upload
   ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
@@ -52,6 +53,87 @@ Animation
 */
 
 //-----------------------Form-----------------------
+// InputPhone 電話號碼連動輸入框
+Vue.component('ud-input-phone', {
+  name: 'UdInputPhone',
+  template: `
+    <div class="ud-input-phone">
+      <ud-input
+        v-model="modelValue[0]"
+        @input="onInput(1)"
+        ref="input1"
+        :placeholder="placeholder[0]"
+        type="tel"
+        maxlength="4"
+      >
+      </ud-input>
+      <span class="separator">{{ separator }}</span>
+      <ud-input
+        v-model="modelValue[1]"
+        @input="onInput(2)"
+        ref="input2"
+        :placeholder="placeholder[1]"
+        type="tel"
+        maxlength="3"
+      >
+      </ud-input>
+      <span class="separator">{{ separator }}</span>
+      <ud-input
+        v-model="modelValue[2]"
+        @input="onInput(3)"
+        ref="input3"
+        :placeholder="placeholder[2]"
+        type="tel"
+        maxlength="3"
+      >
+      </ud-input>
+    </div>
+  `,
+  inheritAttrs: false,
+  props: {
+    value: {
+      type: Array,
+      default: ["", "", ""]
+    },
+    placeholder: {
+      type: Array,
+      default: ["", "", ""]
+    },
+    autoFocus: {
+      type: Boolean,
+      default: true
+    },
+    separator: {
+      type: String,
+      default: ""
+    }
+  },
+  computed: {
+    modelValue: {
+      get(){ return this.value },
+      set(val){ this.$emit('input', val) }
+    },
+  },
+  mounted() {
+  },
+  methods: {
+    onInput() {
+      if(this.autoFocus) {
+        if(this.modelValue[0].length === 4) {
+          this.$refs.input2.focus();
+        }
+        if(this.modelValue[1].length === 3) {
+          this.$refs.input3.focus();
+        }
+      }
+      this.$parent.$emit('validate'); // 通知FormItem校驗
+    },
+    focus() {
+      this.$refs.input.focus();
+    }
+  }
+})
+
 // Upload 上傳
 Vue.component('ud-upload', {
   name: "UdUpload",

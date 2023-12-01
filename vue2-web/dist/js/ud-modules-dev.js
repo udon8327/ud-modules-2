@@ -1,6 +1,7 @@
 /*
 ==================== Vue組件庫(Extra)目錄 ====================
 Form
+  InputPhone 電話號碼連動輸入框 -----> ud-input-phone
   Upload 上傳 -----> ud-upload
   ImageUpload 圖片上傳預覽 -----> ud-image-upload
   ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
@@ -49,6 +50,54 @@ Animation
 
 */
 //-----------------------Form-----------------------
+// InputPhone 電話號碼連動輸入框
+Vue.component('ud-input-phone', {
+    name: 'UdInputPhone',
+    template: "\n    <div class=\"ud-input-phone\">\n      <ud-input\n        v-model=\"modelValue[0]\"\n        @input=\"onInput(1)\"\n        ref=\"input1\"\n        :placeholder=\"placeholder[0]\"\n        type=\"tel\"\n        maxlength=\"4\"\n      >\n      </ud-input>\n      <span class=\"separator\">{{ separator }}</span>\n      <ud-input\n        v-model=\"modelValue[1]\"\n        @input=\"onInput(2)\"\n        ref=\"input2\"\n        :placeholder=\"placeholder[1]\"\n        type=\"tel\"\n        maxlength=\"3\"\n      >\n      </ud-input>\n      <span class=\"separator\">{{ separator }}</span>\n      <ud-input\n        v-model=\"modelValue[2]\"\n        @input=\"onInput(3)\"\n        ref=\"input3\"\n        :placeholder=\"placeholder[2]\"\n        type=\"tel\"\n        maxlength=\"3\"\n      >\n      </ud-input>\n    </div>\n  ",
+    inheritAttrs: false,
+    props: {
+        value: {
+            type: Array,
+            default: ["", "", ""]
+        },
+        placeholder: {
+            type: Array,
+            default: ["", "", ""]
+        },
+        autoFocus: {
+            type: Boolean,
+            default: true
+        },
+        separator: {
+            type: String,
+            default: ""
+        }
+    },
+    computed: {
+        modelValue: {
+            get: function () { return this.value; },
+            set: function (val) { this.$emit('input', val); }
+        },
+    },
+    mounted: function () {
+    },
+    methods: {
+        onInput: function () {
+            if (this.autoFocus) {
+                if (this.modelValue[0].length === 4) {
+                    this.$refs.input2.focus();
+                }
+                if (this.modelValue[1].length === 3) {
+                    this.$refs.input3.focus();
+                }
+            }
+            this.$parent.$emit('validate'); // 通知FormItem校驗
+        },
+        focus: function () {
+            this.$refs.input.focus();
+        }
+    }
+});
 // Upload 上傳
 Vue.component('ud-upload', {
     name: "UdUpload",

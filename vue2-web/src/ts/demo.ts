@@ -85,10 +85,12 @@ let vm = new Vue({
     setTimeout(() => {
       this.$refs.omg.blur();
     }, 3000);
-    // udAxios.get("http://localhost:3000/cats?sex=4")
-    //   .then((res) => {
-    //     console.log('res: ', res);
-    //   })
+    udAxios.post("/tests", {}, {
+      noAlert: true,
+    })
+      .then((res) => {
+        console.log('res: ', res);
+      })
     // this.udAlert({
     //   confirm: true,
     //   maskClose: true,

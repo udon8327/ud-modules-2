@@ -13,7 +13,6 @@ v1.0.0
 Form
   Button 按鈕 -----> ud-button
   Input 輸入框 -----> ud-input
-  InputPhone 電話號碼連動輸入框 -----> ud-input-phone
   Textarea 多行輸入框 -----> ud-textarea
   Radio 單選框 -----> ud-radio
   Checkbox 多選框 -----> ud-checkbox
@@ -166,54 +165,6 @@ Vue.component('ud-input', {
         }
     }
 });
-// InputPhone 電話號碼連動輸入框
-Vue.component('ud-input-phone', {
-    name: 'UdInputPhone',
-    template: "\n    <div class=\"ud-input-phone\">\n      <ud-input\n        v-model=\"modelValue[0]\"\n        @input=\"onInput(1)\"\n        ref=\"input1\"\n        :placeholder=\"placeholder[0]\"\n        type=\"tel\"\n        maxlength=\"4\"\n      >\n      </ud-input>\n      <span class=\"separator\">{{ separator }}</span>\n      <ud-input\n        v-model=\"modelValue[1]\"\n        @input=\"onInput(2)\"\n        ref=\"input2\"\n        :placeholder=\"placeholder[1]\"\n        type=\"tel\"\n        maxlength=\"3\"\n      >\n      </ud-input>\n      <span class=\"separator\">{{ separator }}</span>\n      <ud-input\n        v-model=\"modelValue[2]\"\n        @input=\"onInput(3)\"\n        ref=\"input3\"\n        :placeholder=\"placeholder[2]\"\n        type=\"tel\"\n        maxlength=\"3\"\n      >\n      </ud-input>\n    </div>\n  ",
-    inheritAttrs: false,
-    props: {
-        value: {
-            type: Array,
-            default: ["", "", ""]
-        },
-        placeholder: {
-            type: Array,
-            default: ["", "", ""]
-        },
-        autoFocus: {
-            type: Boolean,
-            default: true
-        },
-        separator: {
-            type: String,
-            default: ""
-        }
-    },
-    computed: {
-        modelValue: {
-            get: function () { return this.value; },
-            set: function (val) { this.$emit('input', val); }
-        },
-    },
-    mounted: function () {
-    },
-    methods: {
-        onInput: function () {
-            if (this.autoFocus) {
-                if (this.modelValue[0].length === 4) {
-                    this.$refs.input2.focus();
-                }
-                if (this.modelValue[1].length === 3) {
-                    this.$refs.input3.focus();
-                }
-            }
-            this.$parent.$emit('validate'); // 通知FormItem校驗
-        },
-        focus: function () {
-            this.$refs.input.focus();
-        }
-    }
-});
 // Textarea 多行輸入框
 Vue.component('ud-textarea', {
     name: "UdTextarea",
@@ -223,7 +174,7 @@ Vue.component('ud-textarea', {
         value: null,
         rows: { default: 4 },
         showLimit: Boolean,
-        limit: { default: null },
+        limit: { default: 0 },
         noResize: Boolean // 禁止改變大小
     },
     computed: {

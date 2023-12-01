@@ -31,9 +31,9 @@
       <div class="container">
         <div class="wrapper">
           <div class="test-area">
-            <button @mouseover="test">測試按鈕</button>
+            <ud-radio v-model="user.radio" :options="options" flex></ud-radio>
             <ud-button @click="test" throttle>測試按鈕</ud-button>
-            <ud-input ref="omg" v-model="user.name" @input="test"></ud-input>
+            <ud-textarea v-model="user.info"></ud-textarea>
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>

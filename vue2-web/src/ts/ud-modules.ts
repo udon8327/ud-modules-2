@@ -6,7 +6,6 @@ v1.0.0
 Form
   Button 按鈕 -----> ud-button
   Input 輸入框 -----> ud-input
-  InputPhone 電話號碼連動輸入框 -----> ud-input-phone
   Textarea 多行輸入框 -----> ud-textarea
   Radio 單選框 -----> ud-radio
   Checkbox 多選框 -----> ud-checkbox
@@ -202,87 +201,6 @@ Vue.component('ud-input', {
   }
 })
 
-// InputPhone 電話號碼連動輸入框
-Vue.component('ud-input-phone', {
-  name: 'UdInputPhone',
-  template: `
-    <div class="ud-input-phone">
-      <ud-input
-        v-model="modelValue[0]"
-        @input="onInput(1)"
-        ref="input1"
-        :placeholder="placeholder[0]"
-        type="tel"
-        maxlength="4"
-      >
-      </ud-input>
-      <span class="separator">{{ separator }}</span>
-      <ud-input
-        v-model="modelValue[1]"
-        @input="onInput(2)"
-        ref="input2"
-        :placeholder="placeholder[1]"
-        type="tel"
-        maxlength="3"
-      >
-      </ud-input>
-      <span class="separator">{{ separator }}</span>
-      <ud-input
-        v-model="modelValue[2]"
-        @input="onInput(3)"
-        ref="input3"
-        :placeholder="placeholder[2]"
-        type="tel"
-        maxlength="3"
-      >
-      </ud-input>
-    </div>
-  `,
-  inheritAttrs: false,
-  props: {
-    value: {
-      type: Array,
-      default: ["", "", ""]
-    },
-    placeholder: {
-      type: Array,
-      default: ["", "", ""]
-    },
-    autoFocus: {
-      type: Boolean,
-      default: true
-    },
-    separator: {
-      type: String,
-      default: ""
-    }
-  },
-  computed: {
-    modelValue: {
-      get(){ return this.value },
-      set(val){ this.$emit('input', val) }
-    },
-  },
-  mounted() {
-  },
-  methods: {
-    onInput() {
-      if(this.autoFocus) {
-        if(this.modelValue[0].length === 4) {
-          this.$refs.input2.focus();
-        }
-        if(this.modelValue[1].length === 3) {
-          this.$refs.input3.focus();
-        }
-      }
-      this.$parent.$emit('validate'); // 通知FormItem校驗
-    },
-    focus() {
-      this.$refs.input.focus();
-    }
-  }
-})
-
 // Textarea 多行輸入框
 Vue.component('ud-textarea', {
   name: "UdTextarea",
@@ -307,9 +225,9 @@ Vue.component('ud-textarea', {
   inheritAttrs: false,
   props: {
     value: null,
-    rows: { default: 4 }, // 行數
-    showLimit: Boolean, // 是否顯示字數限制
-    limit: { default: null }, // 字數限制
+    rows: { default: 4 }, // 預設行數
+    showLimit: Boolean, // 是否顯示字數限制(與limit併用)
+    limit: { default: 0 }, // 字數限制
     noResize: Boolean // 禁止改變大小
   },
   computed: {

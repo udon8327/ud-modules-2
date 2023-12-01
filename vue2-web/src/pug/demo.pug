@@ -16,9 +16,9 @@ block modal
 
 block content
   .test-area
-    button(@mouseover="test") 測試按鈕
+    ud-radio(v-model="user.radio" :options="options" flex)
     ud-button(@click="test" throttle) 測試按鈕
-    ud-input(ref="omg" v-model="user.name" @input="test")
+    ud-textarea(v-model="user.info")
 
   .demo-area
     .title DEMO
