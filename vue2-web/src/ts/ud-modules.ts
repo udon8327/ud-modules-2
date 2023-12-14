@@ -1101,7 +1101,7 @@ Vue.component('ud-form-item', {
     },
     labelAlign: { // 標籤對齊
       type: String,
-    }
+    },
   },
   mounted() {
     this.$on('validate', () => {
@@ -1142,7 +1142,7 @@ Vue.component('ud-form-item', {
             if(value && !new RegExp('\/^[0-9a-zA-Z.+\\-]{7}$').test(value)) this.errorMessage = rule.message || "手機載具格式有誤，例: /ABC1234";
             break;
           case "uniform": // 統一編號驗證
-            if(value && !new RegExp('^[0-9]{8}$').test(value)) this.errorMessage = rule.message || "公司發票格式有誤，例: 12345678";
+            if(value && !new RegExp('^[0-9]{8}$').test(value)) this.errorMessage = rule.message || "統一編號格式有誤，例: 12345678";
             break;
           case "idcard": // 身分證字號驗證
             if(value && !new RegExp('^[A-Z](1|2)[0-9]{8}$').test(value)) this.errorMessage = rule.message || "身分證字號格式有誤，例: A123456789";
@@ -1177,8 +1177,11 @@ Vue.component('ud-form-item', {
               if(value && value !== this.form.model[rule.equalTo]) this.errorMessage = rule.message || "驗證碼錯誤";
             }
             break;
+          case "regex": // 自訂正則驗證
+            if(!new RegExp(rule.regex).test(value)) this.errorMessage = rule.message || "格式有誤，請重新輸入";
+            break;
           default:
-            if(!new RegExp(rule.type).test(value)) this.errorMessage = rule.message || "格式有誤，請重新輸入";
+            console.error("預期外的驗證類型: " + rule.type);
             break;
         }
         if(this.errorMessage) break;
@@ -1191,7 +1194,7 @@ Vue.component('ud-form-item', {
     },
     typeOf(val) {
       return val === undefined ? 'undefined' : val === null ? 'null' : val.constructor.name.toLowerCase();
-    }
+    },
   }
 })
 
@@ -1222,9 +1225,12 @@ Vue.component('ud-form', {
     rules: { // 驗證規則
       type: Object
     },
-    noErrorMsg: {
-      type: Boolean // 有無錯誤提示
-    }
+    noErrorMsg: { // 有無錯誤提示
+      type: Boolean
+    },
+    noErrorScroll: { // 驗證時不滾動至錯誤項目
+      type: Boolean
+    },
   },
   methods: {
     validate(successCb = () => {console.log('驗證成功')}, failedCb = () => {console.log('驗證失敗')}) {
@@ -1233,8 +1239,39 @@ Vue.component('ud-form', {
       // console.log('tasks: ', tasks);
       Promise.all(tasks)
         .then(() => successCb())
-        .catch(() => failedCb())
-    }
+        .catch(() => {
+          if(!this.noErrorScroll) {
+            this.$nextTick(() => this.scrollTo(".is-error"));
+          }
+          failedCb();
+        })
+    },
+    scrollTo(el = "top", speed = 5, offset = 0, callback = () => {}) {
+      let scrollTop = document.scrollingElement.scrollTop;
+      let top = 0;
+      if(typeof el === 'number') {
+        top = el + offset;
+      }else {
+        if(el === 'top') {
+          top = 0 + offset;
+        }else if(el === 'bottom') {
+          top = document.body.scrollHeight - document.body.clientHeight + offset;
+        }else {
+          top = document.querySelector(el)?.offsetTop + offset;
+        }
+      }
+      const scroll = () => {
+        scrollTop = scrollTop + (top - scrollTop) / speed;
+        if (Math.abs(scrollTop - top) <= 1) {
+          document.scrollingElement.scrollTop = top;
+          callback && callback();
+          return;
+        }
+        document.scrollingElement.scrollTop = scrollTop;
+        requestAnimationFrame(scroll);
+      };
+      scroll();
+    },
   }
 })
 
