@@ -868,7 +868,7 @@ Vue.component('ud-captcha', {
 // FormItem 表單驗證容器
 Vue.component('ud-form-item', {
     name: "UdFormItem",
-    template: "\n    <div class=\"ud-form-item\" :class=\"{'is-error': errorMessage, 'is-flex': flex}\">\n      <div class=\"ud-form-item-left\" :style=\"{ 'flex-basis': labelWidth, 'text-align': labelAlign }\">  \n        <img :src=\"icon\" v-if=\"icon\">\n        <label v-if=\"label\"><span v-if=\"required\">*</span>{{ label }}</label>\n      </div>\n      <div class=\"ud-form-item-right\">  \n        <slot></slot>\n        <p class=\"error-message\" v-if=\"errorMessage\">{{ errorMessage }}</p>\n      </div>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-form-item\" :class=\"{'is-error': errorMessage, 'is-flex': flex}\">\n      <div class=\"ud-form-item-left\" :v-if=\"label\" style=\"{ 'flex-basis': labelWidth, 'text-align': labelAlign }\">  \n        <img :src=\"icon\" v-if=\"icon\">\n        <label v-if=\"label\"><span v-if=\"required\">*</span>{{ label }}</label>\n      </div>\n      <div class=\"ud-form-item-right\">  \n        <slot></slot>\n        <p class=\"error-message\" v-if=\"errorMessage\">{{ errorMessage }}</p>\n      </div>\n    </div>\n  ",
     data: function () {
         return {
             errorMessage: '',
@@ -898,7 +898,7 @@ Vue.component('ud-form-item', {
         },
         labelAlign: {
             type: String,
-        }
+        },
     },
     mounted: function () {
         var _this = this;
@@ -939,13 +939,21 @@ Vue.component('ud-form-item', {
                             this.errorMessage = rule.message || "姓名格式有誤，不接受特殊符號";
                         break;
                     case "phone":// 電話驗證
-                        var valueAfter = typeOf(value) === 'array' ? value.join("") : value;
+                        var valueAfter = this.typeOf(value) === 'array' ? value.join("") : value;
                         if (valueAfter && !new RegExp('^09[0-9]{8}$').test(valueAfter))
                             this.errorMessage = rule.message || "電話格式有誤，例: 0929123456";
                         break;
                     case "email":// 電子郵件驗證
                         if (value && !new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$').test(value))
                             this.errorMessage = rule.message || "Email格式有誤，需包含'@'符號";
+                        break;
+                    case "carrier":// 手機載具驗證
+                        if (value && !new RegExp('\/^[0-9a-zA-Z.+\\-]{7}$').test(value))
+                            this.errorMessage = rule.message || "手機載具格式有誤，例: /ABC1234";
+                        break;
+                    case "uniform":// 統一編號驗證
+                        if (value && !new RegExp('^[0-9]{8}$').test(value))
+                            this.errorMessage = rule.message || "統一編號格式有誤，例: 12345678";
                         break;
                     case "idcard":// 身分證字號驗證
                         if (value && !new RegExp('^[A-Z](1|2)[0-9]{8}$').test(value))
@@ -987,9 +995,12 @@ Vue.component('ud-form-item', {
                                 this.errorMessage = rule.message || "驗證碼錯誤";
                         }
                         break;
-                    default:
-                        if (!new RegExp(rule.type).test(value))
+                    case "regex":// 自訂正則驗證
+                        if (!new RegExp(rule.regex).test(value))
                             this.errorMessage = rule.message || "格式有誤，請重新輸入";
+                        break;
+                    default:
+                        console.error("預期外的驗證類型: " + rule.type);
                         break;
                 }
                 if (this.errorMessage)
@@ -1000,7 +1011,10 @@ Vue.component('ud-form-item', {
             return new Promise(function (resolve, reject) {
                 _this.errorMessage ? reject() : resolve();
             });
-        }
+        },
+        typeOf: function (val) {
+            return val === undefined ? 'undefined' : val === null ? 'null' : val.constructor.name.toLowerCase();
+        },
     }
 });
 // Form 表單驗證
@@ -1027,11 +1041,15 @@ Vue.component('ud-form', {
             type: Object
         },
         noErrorMsg: {
-            type: Boolean // 有無錯誤提示
-        }
+            type: Boolean
+        },
+        noErrorScroll: {
+            type: Boolean
+        },
     },
     methods: {
         validate: function (successCb, failedCb) {
+            var _this = this;
             if (successCb === void 0) { successCb = function () { console.log('驗證成功'); }; }
             if (failedCb === void 0) { failedCb = function () { console.log('驗證失敗'); }; }
             this.submitLock = false;
@@ -1039,8 +1057,46 @@ Vue.component('ud-form', {
             // console.log('tasks: ', tasks);
             Promise.all(tasks)
                 .then(function () { return successCb(); })
-                .catch(function () { return failedCb(); });
-        }
+                .catch(function () {
+                if (!_this.noErrorScroll) {
+                    _this.$nextTick(function () { return _this.scrollTo(".is-error", 5, -10); });
+                }
+                failedCb();
+            });
+        },
+        scrollTo: function (el, speed, offset, callback) {
+            if (el === void 0) { el = "top"; }
+            if (speed === void 0) { speed = 5; }
+            if (offset === void 0) { offset = 0; }
+            if (callback === void 0) { callback = function () { }; }
+            var scrollTop = document.scrollingElement.scrollTop;
+            var top = 0;
+            if (typeof el === 'number') {
+                top = el + offset;
+            }
+            else {
+                if (el === 'top') {
+                    top = 0 + offset;
+                }
+                else if (el === 'bottom') {
+                    top = document.body.scrollHeight - document.body.clientHeight + offset;
+                }
+                else {
+                    top = document.querySelector(el) && document.querySelector(el).offsetTop + offset;
+                }
+            }
+            var scroll = function () {
+                scrollTop = scrollTop + (top - scrollTop) / speed;
+                if (Math.abs(scrollTop - top) <= 1) {
+                    document.scrollingElement.scrollTop = top;
+                    callback && callback();
+                    return;
+                }
+                document.scrollingElement.scrollTop = scrollTop;
+                requestAnimationFrame(scroll);
+            };
+            scroll();
+        },
     }
 });
 //-----------------------Layout-----------------------
@@ -1792,7 +1848,7 @@ var scrollTo = function (el, speed, offset, callback) {
             top = document.body.scrollHeight - document.body.clientHeight + offset;
         }
         else {
-            top = document.querySelector(el).offsetTop + offset;
+            top = document.querySelector(el) && document.querySelector(el).offsetTop + offset;
         }
     }
     var scroll = function () {

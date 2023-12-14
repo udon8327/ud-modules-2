@@ -1257,7 +1257,7 @@ Vue.component('ud-form', {
         }else if(el === 'bottom') {
           top = document.body.scrollHeight - document.body.clientHeight + offset;
         }else {
-          top = document.querySelector(el)?.offsetTop + offset;
+          top = document.querySelector(el) && document.querySelector(el).offsetTop + offset;
         }
       }
       const scroll = () => {
@@ -2091,7 +2091,7 @@ const scrollTo = (el = "top", speed = 5, offset = 0, callback = () => {}) => {
     }else if(el === 'bottom') {
       top = document.body.scrollHeight - document.body.clientHeight + offset;
     }else {
-      top = document.querySelector(el).offsetTop + offset;
+      top = document.querySelector(el) && document.querySelector(el).offsetTop + offset;
     }
   }
   const scroll = () => {
