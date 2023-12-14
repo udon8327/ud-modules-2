@@ -1241,7 +1241,7 @@ Vue.component('ud-form', {
         .then(() => successCb())
         .catch(() => {
           if(!this.noErrorScroll) {
-            this.$nextTick(() => this.scrollTo(".is-error"));
+            this.$nextTick(() => this.scrollTo(".is-error", 5, -10));
           }
           failedCb();
         })
