@@ -31,13 +31,7 @@
       <div class="container">
         <div class="wrapper">
           <div class="test-area">
-            <ud-radio v-model="user.radio" :options="options" flex></ud-radio>
-            <ud-checkbox v-model="user.checkbox" :options="options" flex></ud-checkbox>
-            <ud-checkbox v-model="user.isAgree" options="我同意使用者條款" solid></ud-checkbox>
-            <ud-checkbox v-model="user.isAgree">
-              <p>我同意<a href="https://www.google.com.tw/">使用者條款</a></p>
-            </ud-checkbox>
-            <ud-select v-model="user.select" :options="options" placeholder="請選擇櫃點"></ud-select>
+            <div class="title">TEST</div>
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>
@@ -88,9 +82,9 @@
                 <ud-switch v-model="user.isActive"></ud-switch>
               </ud-form-item>
               <ud-form-item label="" prop="isAgree">
-                <ud-checkbox v-model="user.isAgree" option="我同意使用者條款(作法一)"></ud-checkbox>
-                <ud-checkbox v-model="user.isAgree" option="條款">
-                  <p>我同意使用者條款(作法二)</p>
+                <ud-checkbox v-model="user.isAgree" options="我同意使用者條款" solid></ud-checkbox>
+                <ud-checkbox v-model="user.isAgree">
+                  <p>我同意<a href="https://www.google.com.tw/">使用者條款</a></p>
                 </ud-checkbox>
               </ud-form-item>
               <ud-form-item label="驗證碼" prop="captcha" flex>

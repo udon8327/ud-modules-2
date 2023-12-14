@@ -175,7 +175,7 @@
   * placeholder: 替代文字 | String
   * combine: 使用value做為label | Boolean(false)
   * center: 文字是否置中 | Boolean(false)
-  * group: 是否群組(雙向綁定的值所組成的陣列) | Array
+  * group: 組成群組(雙向綁定的值所組成的陣列) | Array
   * index: 群組索引(由0開始的數字) | Number
   * labelBy: label替代值 | String("label")
   * valueBy: value替代值 | String("value")

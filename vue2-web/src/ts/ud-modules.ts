@@ -394,7 +394,7 @@ Vue.component('ud-select', {
     placeholder: { default: "請選擇一項" }, // 取代文字
     combine: Boolean, // 使用value做為label
     center: Boolean, // 文字是否置中
-    group: { default: "" }, // 是否群組(雙向綁定的值所組成的陣列)
+    group: { default: "" }, // 組成群組(雙向綁定的值所組成的陣列)
     index: { default: 0 }, // 群組索引(由0開始的數字)
     labelBy: { default: "label" }, // label替代值
     valueBy: { default: "value" }, // value替代值
@@ -1062,7 +1062,7 @@ Vue.component('ud-form-item', {
   name: "UdFormItem",
   template: `
     <div class="ud-form-item" :class="{'is-error': errorMessage, 'is-flex': flex}">
-      <div class="ud-form-item-left" :style="{ 'flex-basis': labelWidth, 'text-align': labelAlign }">  
+      <div class="ud-form-item-left" :v-if="label" style="{ 'flex-basis': labelWidth, 'text-align': labelAlign }">  
         <img :src="icon" v-if="icon">
         <label v-if="label"><span v-if="required">*</span>{{ label }}</label>
       </div>
@@ -1132,11 +1132,17 @@ Vue.component('ud-form-item', {
             if(value && !new RegExp('^[a-zA-Z0-9_\u4e00-\u9fa5]+$').test(value)) this.errorMessage = rule.message || "姓名格式有誤，不接受特殊符號";
             break;
           case "phone": // 電話驗證
-            let valueAfter = typeOf(value) === 'array' ? value.join("") : value;
+            let valueAfter = this.typeOf(value) === 'array' ? value.join("") : value;
             if(valueAfter && !new RegExp('^09[0-9]{8}$').test(valueAfter)) this.errorMessage = rule.message || "電話格式有誤，例: 0929123456";
             break;
           case "email": // 電子郵件驗證
             if(value && !new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$').test(value)) this.errorMessage = rule.message || "Email格式有誤，需包含'@'符號";
+            break;
+          case "carrier": // 手機載具驗證
+            if(value && !new RegExp('\/^[0-9a-zA-Z.+\\-]{7}$').test(value)) this.errorMessage = rule.message || "手機載具格式有誤，例: /ABC1234";
+            break;
+          case "uniform": // 統一編號驗證
+            if(value && !new RegExp('^[0-9]{8}$').test(value)) this.errorMessage = rule.message || "公司發票格式有誤，例: 12345678";
             break;
           case "idcard": // 身分證字號驗證
             if(value && !new RegExp('^[A-Z](1|2)[0-9]{8}$').test(value)) this.errorMessage = rule.message || "身分證字號格式有誤，例: A123456789";
@@ -1182,6 +1188,9 @@ Vue.component('ud-form-item', {
       return new Promise((resolve, reject) => {
         this.errorMessage ? reject() : resolve();
       })
+    },
+    typeOf(val) {
+      return val === undefined ? 'undefined' : val === null ? 'null' : val.constructor.name.toLowerCase();
     }
   }
 })

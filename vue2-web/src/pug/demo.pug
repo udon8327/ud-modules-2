@@ -16,12 +16,7 @@ block modal
 
 block content
   .test-area
-    ud-radio(v-model="user.radio" :options="options" flex)
-    ud-checkbox(v-model="user.checkbox" :options="options" flex)
-    ud-checkbox(v-model="user.isAgree" options="我同意使用者條款" solid)
-    ud-checkbox(v-model="user.isAgree")
-      p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
-    ud-select(v-model="user.select" :options="options" placeholder="請選擇櫃點")
+    .title TEST
 
   .demo-area
     .title DEMO
@@ -58,9 +53,9 @@ block content
       ud-form-item(label="是否啟用" prop="isActive" flex)
         ud-switch(v-model="user.isActive")
       ud-form-item(label="" prop="isAgree")
-        ud-checkbox(v-model="user.isAgree" option="我同意使用者條款(作法一)")
-        ud-checkbox(v-model="user.isAgree" option="條款")
-          p 我同意使用者條款(作法二)
+        ud-checkbox(v-model="user.isAgree" options="我同意使用者條款" solid)
+        ud-checkbox(v-model="user.isAgree")
+          p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
       ud-form-item(label="驗證碼" prop="captcha" flex)
         .captcha-wrapper
           ud-input(v-model="user.captcha" placeholder="驗證碼" maxlength="4")
