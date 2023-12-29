@@ -1,32 +1,4 @@
-.test {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  color: black; }
-
-.test-area, .demo-area {
-  border: 1px solid #ccc;
-  padding: 15px 5%;
-  border-radius: 10px;
-  margin-bottom: 15px; }
-  .test-area .title, .demo-area .title {
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px; }
-  .test-area .ud-button, .demo-area .ud-button {
-    margin-bottom: 15px; }
-
-.captcha-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-  .captcha-wrapper .ud-input {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 40%;
-    flex: 0 0 40%;
-    margin-right: 5px; }
+img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; }

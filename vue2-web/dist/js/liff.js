@@ -1,7 +1,10 @@
 var vm = new Vue({
     el: "#app",
-    data: {},
+    data: {
+        profile: {},
+    },
     mounted: function () {
+        var _this = this;
         liff
             .init({
             liffId: "1655285115-WMzxMo6m",
@@ -17,9 +20,8 @@ var vm = new Vue({
                 .getFriendship()
                 .then(function (data) {
                 if (data.friendFlag) {
-                    console.log("liff init success");
                     liff.getProfile().then(function (res) {
-                        console.log('res: ', res);
+                        _this.profile = res;
                     });
                 }
                 else {

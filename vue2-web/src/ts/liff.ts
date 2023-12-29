@@ -1,7 +1,7 @@
 let vm = new Vue({
   el: "#app",
   data: {
-    
+    profile: {},
   },
   mounted() {
     liff
@@ -19,9 +19,8 @@ let vm = new Vue({
           .getFriendship()
           .then((data) => {
             if (data.friendFlag) {
-              console.log("liff init success");
               liff.getProfile().then((res) => {
-                console.log('res: ', res);
+                this.profile = res;
               })
             } else {
               location.href = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655285115&redirect_uri=${encodeURIComponent(
