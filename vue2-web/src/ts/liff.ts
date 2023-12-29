@@ -13,10 +13,6 @@ let vm = new Vue({
         liffId: "1655285115-WMzxMo6m",
       })
       .then(() => {
-        liff.getProfile().then((res) => {
-          this.profile = res;
-        })
-        return;
         // 檢查是否登入
         if (!liff.isLoggedIn()) {
           liff.login({ redirectUri: location.href });
