@@ -18,9 +18,11 @@ var vm = new Vue({
                 .then(function (data) {
                 if (data.friendFlag) {
                     console.log("liff init success");
+                    liff.getProfile().then(function (res) {
+                        console.log('res: ', res);
+                    });
                 }
                 else {
-                    sessionStorage.setItem("loginRedirectUrl", location.href);
                     location.href = "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1655285115&redirect_uri=" + encodeURIComponent(location.href) + "&scope=profile%20openid%20phone%20email&bot_prompt=aggressive&prompt=consent&state=" + Date.now();
                 }
             })
