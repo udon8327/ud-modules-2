@@ -9,12 +9,15 @@ var vm = new Vue({
         var _this = this;
         this.liffState = queryString("liff.state");
         this.id = queryString("id");
-        return;
         liff
             .init({
             liffId: "1655285115-WMzxMo6m",
         })
             .then(function () {
+            liff.getProfile().then(function (res) {
+                _this.profile = res;
+            });
+            return;
             // 檢查是否登入
             if (!liff.isLoggedIn()) {
                 liff.login({ redirectUri: location.href });
