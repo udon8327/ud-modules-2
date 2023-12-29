@@ -5,6 +5,10 @@ let vm = new Vue({
   data: {
   },
   mounted() {
+    liff
+      .init({
+        liffId: "1655285115-WMzxMo6m",
+      })
   },
   computed: {
   },
