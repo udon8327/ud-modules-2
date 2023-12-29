@@ -7,7 +7,7 @@ var vm = new Vue({
     },
     mounted: function () {
         var _this = this;
-        this.liffState = queryString("liffState");
+        this.liffState = queryString("liff.state");
         this.id = queryString("id");
         return;
         liff
