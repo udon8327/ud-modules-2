@@ -905,6 +905,12 @@ html, #app {
     @media (max-width: 340px) {
       .ud-html p, .ud-html span, .ud-html label {
         font-size: 14px; } }
+  .ud-html .ql-align-left {
+    text-align: left; }
+  .ud-html .ql-align-center {
+    text-align: center; }
+  .ud-html .ql-align-right {
+    text-align: right; }
 
 .ud-ellipsis {
   display: -webkit-box;
