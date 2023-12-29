@@ -8,6 +8,7 @@ let vm = new Vue({
   mounted() {
     this.liffState = queryString("liffState");
     this.id = queryString("id");
+    return;
     liff
       .init({
         liffId: "1655285115-WMzxMo6m",
