@@ -14,6 +14,9 @@ block content
   p displayName: {{ profile.displayName }}
   img(:src="profile.pictureUrl", alt="")
   p userId: {{ profile.userId }}
+  br
+  p liff.state: {{ liffState }}
+  p id: {{ id }}
 
 block js
   script(src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js")

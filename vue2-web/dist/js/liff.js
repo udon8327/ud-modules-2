@@ -2,9 +2,13 @@ var vm = new Vue({
     el: "#app",
     data: {
         profile: {},
+        liffState: "",
+        id: "",
     },
     mounted: function () {
         var _this = this;
+        this.liffState = queryString("liffState");
+        this.id = queryString("id");
         liff
             .init({
             liffId: "1655285115-WMzxMo6m",
