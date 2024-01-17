@@ -80,8 +80,13 @@ let vm = new Vue({
     ],
   },
   mounted() {
-    this.sessionStorage = sessionStorage.getItem("sessionStorage");
-    this.localStorage = localStorage.getItem("localStorage");
+    liff.init({liffId: "1655285115-LaWdxbOP"}).then(() => {
+      console.log("liff init success");
+      this.sessionStorage = sessionStorage.getItem("sessionStorage");
+      this.localStorage = localStorage.getItem("localStorage");
+    }).catch(() => {
+      console.log("liff init error");
+    })
     // udAxios.post("/tests", {}, {
     //   noAlert: true,
     // })
