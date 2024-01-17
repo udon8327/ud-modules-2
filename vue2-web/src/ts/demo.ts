@@ -157,5 +157,8 @@ let vm = new Vue({
         this.udAlert({msg: "驗證成功!!"})
       });
     },
+    toUrl(url) {
+      location.href = url;
+    }
   }
 });

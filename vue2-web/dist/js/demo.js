@@ -156,6 +156,9 @@ var vm = new Vue({
                 _this.udAlert({ msg: "驗證成功!!" });
             });
         },
+        toUrl: function (url) {
+            location.href = url;
+        }
     }
 });
 //# sourceMappingURL=demo.js.map
