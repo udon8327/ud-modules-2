@@ -17,6 +17,10 @@ block modal
 block content
   .test-area
     .title TEST
+    p sessionStorage: {{ sessionStorage }}
+    p localStorage: {{ localStorage }}
+    ud-button(@click="setItem") setItem
+    ud-button(@click="removeItem") removeItem
 
   .demo-area
     .title DEMO

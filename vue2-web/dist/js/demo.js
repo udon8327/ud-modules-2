@@ -3,6 +3,8 @@ var vm = new Vue({
     data: {
         isModalShow: false,
         isCollapse: false,
+        sessionStorage: "",
+        localStorage: "",
         gender: "",
         birth: "",
         user: {
@@ -76,6 +78,8 @@ var vm = new Vue({
         ],
     },
     mounted: function () {
+        this.sessionStorage = sessionStorage.getItem("sessionStorage");
+        this.localStorage = localStorage.getItem("localStorage");
         // udAxios.post("/tests", {}, {
         //   noAlert: true,
         // })
@@ -101,6 +105,14 @@ var vm = new Vue({
     },
     computed: {},
     methods: {
+        setItem: function () {
+            sessionStorage.setItem("sessionStorage", "true");
+            localStorage.setItem("localStorage", "true");
+        },
+        removeItem: function () {
+            sessionStorage.removeItem("sessionStorage");
+            localStorage.removeItem("localStorage");
+        },
         test: function () {
             console.log(Date.now());
         },
