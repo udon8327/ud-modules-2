@@ -5,6 +5,7 @@ var vm = new Vue({
         isCollapse: false,
         sessionStorage: "",
         localStorage: "",
+        liffStatus: "",
         gender: "",
         birth: "",
         user: {
@@ -83,6 +84,7 @@ var vm = new Vue({
             console.log("liff init success");
             _this.sessionStorage = sessionStorage.getItem("sessionStorage");
             _this.localStorage = localStorage.getItem("localStorage");
+            _this.liffStatus = "init success";
         }).catch(function () {
             console.log("liff init error");
         });
