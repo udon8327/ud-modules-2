@@ -1,6 +1,7 @@
 var vm = new Vue({
     el: "#app",
     data: {
+        test: true,
         isModalShow: false,
         isCollapse: false,
         sessionStorage: "",
@@ -155,6 +156,13 @@ var vm = new Vue({
             this.$refs.form.validate(function () {
                 _this.udAlert({ msg: "驗證成功!!" });
             });
+        },
+        clearVerify: function () {
+            var _this = this;
+            this.test = false;
+            setTimeout(function () {
+                _this.test = true;
+            }, 0);
         },
         toUrl: function (url) {
             location.href = url;

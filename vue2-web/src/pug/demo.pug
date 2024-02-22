@@ -28,8 +28,9 @@ block content
     .title DEMO
     ud-button(@click="test") TEST
     ud-form(:rules="rules" :model="user" ref="form")
-      ud-form-item(label="姓名" prop="name" flex)
+      ud-form-item(label="姓名" prop="name" flex v-if="test")
         ud-input(placeholder="請輸入您的姓名" v-model="user.name")
+      ud-button(@click="clearVerify")
       ud-form-item(label="備註" prop="note" flex)
         ud-textarea(placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10")
       ud-form-item(label="年齡" prop="age" flex)

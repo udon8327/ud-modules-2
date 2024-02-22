@@ -3,6 +3,7 @@ declare var $: (selector: string) => any;
 let vm = new Vue({
   el: "#app",
   data: {
+    test: true,
     isModalShow: false,
     isCollapse: false,
     sessionStorage: "",
@@ -156,6 +157,12 @@ let vm = new Vue({
       this.$refs.form.validate(() => {
         this.udAlert({msg: "驗證成功!!"})
       });
+    },
+    clearVerify: function(){
+      this.test = false;
+      setTimeout(() => {
+        this.test = true;
+      }, 0);
     },
     toUrl(url) {
       location.href = url;

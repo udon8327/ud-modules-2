@@ -43,9 +43,10 @@
             <div class="title">DEMO</div>
             <ud-button @click="test">TEST</ud-button>
             <ud-form :rules="rules" :model="user" ref="form">
-              <ud-form-item label="姓名" prop="name" flex>
+              <ud-form-item label="姓名" prop="name" flex v-if="test">
                 <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
               </ud-form-item>
+              <ud-button @click="clearVerify"></ud-button>
               <ud-form-item label="備註" prop="note" flex>
                 <ud-textarea placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10"></ud-textarea>
               </ud-form-item>
