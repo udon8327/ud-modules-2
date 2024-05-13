@@ -863,6 +863,7 @@ Vue.component('ud-switch', {
           type="checkbox"
           v-model="modelValue"
           v-bind="$attrs"
+          @change="onChange"
         >
         <div class="switch-decorator">
           <div class="circle"></div>
@@ -880,7 +881,14 @@ Vue.component('ud-switch', {
       get(){ return this.value },
       set(val){ this.$emit('input', val) }
     }
-  }
+  },
+  methods: {
+    onChange() {
+      this.$nextTick(() => {
+        this.$emit("change", this.modelValue)
+      });
+    }
+  },
 })
 
 // DatePicker 日期選擇器 (依賴：element-ui)

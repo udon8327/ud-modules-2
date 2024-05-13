@@ -707,7 +707,7 @@ Vue.component('ud-select-twzip', {
 // Switch 開關
 Vue.component('ud-switch', {
     name: "UdSwitch",
-    template: "\n    <div class=\"ud-switch\">\n      <label>\n        <input \n          type=\"checkbox\"\n          v-model=\"modelValue\"\n          v-bind=\"$attrs\"\n        >\n        <div class=\"switch-decorator\">\n          <div class=\"circle\"></div>\n        </div>\n        <slot></slot>\n      </label>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-switch\">\n      <label>\n        <input \n          type=\"checkbox\"\n          v-model=\"modelValue\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n        >\n        <div class=\"switch-decorator\">\n          <div class=\"circle\"></div>\n        </div>\n        <slot></slot>\n      </label>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         value: { default: false },
@@ -717,7 +717,15 @@ Vue.component('ud-switch', {
             get: function () { return this.value; },
             set: function (val) { this.$emit('input', val); }
         }
-    }
+    },
+    methods: {
+        onChange: function () {
+            var _this = this;
+            this.$nextTick(function () {
+                _this.$emit("change", _this.modelValue);
+            });
+        }
+    },
 });
 // DatePicker 日期選擇器 (依賴：element-ui)
 Vue.component('ud-date-picker', {
