@@ -1,1 +1,27 @@
 @import '_variables.sass'
+
+body
+  background-color: #f3efd6
+
+.container
+  padding: 0px
+  position: relative
+  .close
+    position: absolute
+    right: 8px
+    top: 8px
+    background-color: rgba(#000, 0.3)
+    width: 32px
+    height: 32px
+    border-radius: 50px
+    display: flex
+    justify-content: center
+    align-items: center
+    transition: all 0.2s ease
+    cursor: pointer
+    &:hover
+      opacity: 0.8
+    p
+      font-size: 22px
+      line-height: 24px
+      color: #fff
