@@ -2,8 +2,8 @@
   <div class="ud-input">
     <input
       ref="input"
+      v-model="value"
       v-bind="$attrs"
-      :value="modelValue"
       :class="{ 'is-center': center }"
       @input="onInput"
     >
@@ -16,15 +16,20 @@ export default {
   name: 'UdInput',
   inheritAttrs: false,
   props: {
-    modelValue: "", // 綁定值
+    modelValue: null,
     center: Boolean, // 是否置中
+  },
+  computed: {
+    value: {
+      get(){ return this.modelValue == null ? "" : this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
+    },
   },
   mounted() {
   },
   methods: {
-    onInput($event) {
+    onInput() {
       this.$parent.$emit('validate'); // 通知FormItem校驗
-      this.$emit('update:modelValue', $event.target.value);
     },
     focus() {
       this.$refs.input.focus();
