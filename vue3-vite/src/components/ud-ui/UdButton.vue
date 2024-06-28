@@ -1,7 +1,6 @@
 <template>
   <div class="ud-button">
     <button
-      ref="button"
       @click="clickHandler"
       v-bind="$attrs"
       :disabled="disabled || loading"
@@ -10,7 +9,6 @@
         'is-plain': plain,
         'is-round': round,
         'is-circle': circle,
-        'is-icon': image
       }"
     >
       <div class="button-wrapper">
@@ -25,39 +23,7 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
-import { throttle } from "@/utils/ud-utils";
-
-defineOptions({inheritAttrs: false});
-const props = defineProps({
-  icon: String, // CSS的icon
-  image: String, // 圖片的icon
-  loading: Boolean, // 載入中
-  disabled: Boolean, // 禁止點擊
-  plain: Boolean, // 線條化
-  round: Boolean, // 圓角
-  circle: Boolean, // 圓型
-  throttle: Boolean // 函式節流
-});
-const emit = defineEmits(["click"]);
-
-const button = ref(null);
-
-onMounted(() => {
-});
-
-const clickHandler = (evt) => {
-  if (props.throttle) {
-    throttle(() => emit("click", evt), 10000);
-    emit("click", evt);
-  } else {
-    emit("click", evt);
-  }
-};
-</script>
-
-<!-- <script>
+<script>
 import { throttle } from '@/utils/ud-utils'
 
 export default {
@@ -71,7 +37,8 @@ export default {
     plain: Boolean, // 線條化
     round: Boolean, // 圓角
     circle: Boolean, // 圓型
-    throttle: Boolean // 函式節流
+    throttle: Boolean, // 函式節流
+    throttleTime: { default: 1000 } // 函式節流間隔時間
   },
   methods: {
     clickHandler(evt) {
@@ -82,30 +49,31 @@ export default {
   mounted() {
     if(!this.throttle) return;
     this.$el.addEventListener('click', throttle(
-        evt => this.$emit('click', evt)
+        evt => this.$emit('click', evt),
+        this.throttleTime
       )
     );
   }
 }
-</script> -->
+</script>
 
 <style lang="sass" scoped>
 .ud-button
   button
-    appearance: none
+    background-color: $main
+    border: 1px solid $main
+    color: #fff
+    padding: 10px
+    border-radius: 5px
     width: 100%
-    padding: 5px 10px
-    min-height: 40px
-    border: 1px solid #000
-    border-radius: 0px
-    background-color: #000
-    transition: all 0.2s ease
     min-width: 0px
     max-width: 100%
     cursor: pointer
     box-shadow: none
+    appearance: none
     text-align: center
     outline: none !important
+    transition: all 0.2s ease
     position: relative
     .button-wrapper
       display: inline-flex
@@ -113,10 +81,7 @@ export default {
       align-items: center
       position: relative
       span
-        font-size: 15px
-        line-height: 16px
-        letter-spacing: 2px
-        color: #fff
+        font-size: 16px
       .button-icon
         position: absolute
         left: -32px
@@ -146,25 +111,21 @@ export default {
       opacity: 0.85
     &.is-plain
       background-color: #fff
-      border: 1px solid #000
-      span
-        color: #000
+      border: 1px solid $main
+      color: $main
+      &:hover,&:focus
+        background-color: $main
+        border: 1px solid $main
+        color: #fff
     &.is-disabled
       background-color: #ddd
       border: 1px solid #ccc
       color: #888
       cursor: not-allowed
-      img
-        opacity: 0.4 !important
-      span
-        color: #888 !important
     &.is-round
       border-radius: 50px
     &.is-circle
       border-radius: 50%
       width: 40px
       height: 40px
-    &.is-icon
-      .button-wrapper
-        transform: translate(6px, 0)
 </style>

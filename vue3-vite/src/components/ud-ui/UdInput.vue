@@ -2,9 +2,8 @@
   <div class="ud-input">
     <input
       ref="input"
-      v-model="modelValue"
       v-bind="$attrs"
-      v-on="inputListeners"
+      :value="modelValue"
       :class="{ 'is-center': center }"
       @input="onInput"
     >
@@ -17,26 +16,15 @@ export default {
   name: 'UdInput',
   inheritAttrs: false,
   props: {
-    value: null,
-    center: Boolean // 是否置中
-  },
-  computed: {
-    modelValue: {
-      get(){ return this.value == null ? "" : this.value },
-      set(val){ this.$emit('input', val) }
-    },
-    inputListeners() {
-      return Object.assign({},
-        this.$listeners,
-        { input: event => {} }
-      )
-    }
+    modelValue: "", // 綁定值
+    center: Boolean, // 是否置中
   },
   mounted() {
   },
   methods: {
-    onInput() {
+    onInput($event) {
       this.$parent.$emit('validate'); // 通知FormItem校驗
+      this.$emit('update:modelValue', $event.target.value);
     },
     focus() {
       this.$refs.input.focus();
@@ -58,7 +46,7 @@ export default {
     font-size: 14px
     color: #000
     border: 1px solid #ccc
-    border-radius: 0px
+    border-radius: 4px
     background-color: #fff
     transition: all 0.2s ease
     &.is-center

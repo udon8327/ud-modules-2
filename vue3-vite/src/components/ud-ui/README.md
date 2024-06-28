@@ -1,333 +1,259 @@
-# UD-UI Document
+# ud-modules 文件
 
-## UdAlert 警告彈窗
-### props
-* isShow: false, // 是否顯示
-* noButton: false, // 是否沒有按鈕
-* confirm: false, // 是否有確認+取消鈕
-* maskClose: false, // 點擊遮罩關閉
-* btnClose: false, // 右上關閉按鈕
-* scrollLock: false, // 是否鎖定背景頁面捲動
-* title: '', // 標題文字
-* msg: "網路通信錯誤，請稍候再試", // 訊息文字
-* cancelText: "取消", // 取消鈕文字
-* onCancel: () => {}, // 取消鈕callback
-* confirmText: "確定", // 確認鈕文字
-* onConfirm: () => {}, // 確認鈕callback
-* resolve: '', // 保存resolve
-* reject: '', // 保存reject
-* image: "", // 圖片路徑
-* time: 0, // 多久後自動關閉
-```js
-this.udAlert("發生錯誤/n請稍候再試");
-// or
-this.udAlert({
-  message: "發生錯誤/n請稍候再試",
-  onConfirm: () => console.log("按了確定");
-})
-```
----
-
-## UdArrow CSS箭頭
-```
-
-```
----
-
-## UdButton 按鈕
-```
-
-```
----
-
-## UdCaptcha 圖形驗證碼
-```
-
-```
----
-
-## UdCheckbox 多選框
-```
-
-```
----
-
-## UdCollapse 摺疊容器
-```
-
-```
----
-
-## UdCountdown 倒數計時
-```
-
-```
----
-
-## UdDatePicker 日期選擇器
-```
-
-```
----
-
-## UdEllipsis 文字省略
-```
-
-```
----
-
-## UdFlex 通用排版容器
-```
-
-```
----
-
-## UdForm 表單驗證
-```
-
-```
----
-
-## UdFormItem 表單驗證容器
-```
-
-```
----
-
-## UdHtml 用戶自定義訊息
-```
-
-```
----
-
-## UdInput 輸入框
-```
-
-```
----
-
-## UdLoading 載入中
-```
-
-```
----
-
-## UdModal 通用彈窗
-```
-
-```
----
-
-## UdQrcode 取得QRcode圖片
-```
-
-```
----
-
-## UdRadio 單選框
-```
-
-```
----
-
-## UdRatio 等比例自適應容器
-```
-
-```
----
-
-## UdSelect 下拉框
-```
-
-```
----
-
-## UdSelectDate 日期連動下拉框
-```
-
-```
----
-
-## UdSelectLink 連動下拉框
-```
-
-```
----
-
-## UdSelectMultiple 下拉多選框
-```
-
-```
----
-
-## UdSelectTwzip 台灣行政區連動下拉框
-```
-
-```
----
-
-## UdSwitch 開關
-```
-
-```
----
-
-## UdTextarea 多行輸入框
-```
-
-```
----
-
-
-## 建議環境
-* `NPM` v7.19.1
-* `Node` v14.15.0
-* `Yarn` v1.22.10
-
----
-
-## 包管理器
-* `yarn`
-
-  常用指令：
+# Form 表單
+## <font color=#ebc600>Button 按鈕 ud-button</font>
+  ``` html
+  <ud-button @click="onClick">按鈕</ud-button>
   ```
-  $ yarn 或 yarn install   // 安裝package.json上的所有套件
+  ### props
+  * icon: CSS的icon，直接帶入class | String
+    ``` html
+    <ud-button icon="el-icon-refresh">按鈕</ud-button> <!-- element ui icon -->
+    <ud-button icon="bi bi-apple">按鈕</ud-button> <!-- bootstrap icon -->
+    <ud-button icon="fa-solid fa-poo">按鈕</ud-button> <!-- font awesome icon -->
+    ```
+  * image: 圖片的icon，直接帶入圖片url | String
+    ``` html
+    <ud-button image="img/refresh.png">按鈕</ud-button> 
+    ```
+    也可使用slot(name="icon")插入圖片
+    ``` html
+    <ud-button>按鈕<img slot="icon" src="img/refresh.png"></ud-button> 
+    ```
+    或是直接使用slot插入任意內容
+    ``` html
+    <ud-button>按鈕<div>任意內容</div></ud-button> 
+    ```
+  * loading: 載入中 | Boolean(false)
+  * disabled: 禁止點擊 | Boolean(false)
+  * plain: 線條化 | Boolean(false)
+  * round: 圓角 | Boolean(false)
+  * circle: 圓形 | Boolean(false)
+  * throttle: 函式節流，幾秒內最多觸發一次 | Boolean(false)
+    ``` html
+    <ud-button throttle @click="test">按鈕</ud-button> 
+    ```
+  * throttleTime: 函式節流間隔時間(ms) | Number(1000)
+    ``` html
+    <ud-button throttle :throttle-time="2000" @click="test">按鈕</ud-button> 
+    ```
 
-  $ yarn add [package]   // 安裝套件 後面加上@可指定版本
-
-  $ yarn add [package] -D   // 安裝套件(於devDependencies)
-
-  $ yarn remove [package]  // 移除套件
-
-  $ yarn upgrade   // 更新node-modules
+## <font color=#ebc600>Input 輸入框 ud-input</font>
+  ``` html
+  <ud-input v-model="value" placeholder="請輸入文字" center></ud-textarea>
   ```
+  ### props
+  * placeholder: 替代文字 | String
+  * center: 文字是否置中 | Boolean(false)
+  ### methods
+  * focus: 焦點
+    ``` html
+    <ud-input ref="target"></ud-input>
+    ```
+    ``` js
+    this.$refs.target.focus();
+    ```
+  * blur: 離開焦點
+    ``` html
+    <ud-input ref="target"></ud-input>
+    ```
+    ``` js
+    this.$refs.target.blur();
+    ```
 
----
-
-## 預處理語言
-
-https://medium.com/itsems-frontend/adding-pug-sass-to-your-project-a77668123f6b
-* `pug`
+## <font color=#ebc600>Textarea 多行輸入框 ud-textarea</font>
+  ``` html
+  <ud-textarea v-model="value" placeholder="請輸入文字" :rows="8" show-limit :limit="99" no-resize></ud-textarea>
   ```
-  $ vue add pug  // 於vue-cli安裝vue官方pug插件
+  ### props
+  * placeholder: 替代文字 | String
+  * rows: 預設行數 | Number(4)
+  * showLimit: 是否顯示字數限制(與limit併用) | Boolean(false)
+  * limit: 字數限制 | Number(null)
+  * noResize: 禁止改變大小 | Boolean(false)
+  ### methods
+  * 同ud-input
+
+## <font color=#ebc600>Radio 單選框 ud-radio</font>
+  ``` html
+  <ud-radio v-model="value" :options="options" flex></ud-radio>
   ```
+  ``` js
+  options: [
+    {label: "選項一", value: "1"},
+    {label: "選項二", value: "2"},
+    {label: "選項三", value: "3", disabled: true},
+  ],
+  ```
+  ### props
+  * options: 選項 | Array
+  * flex: 是否並排 | Boolean(false)
+  * combine: 使用value做為label | Boolean(false)
+
+## <font color=#ebc600>Checkbox 多選框 ud-checkbox</font>
+  多選時v-model需綁定Array
+  ``` html
+  <ud-checkbox v-model="value" :options="options" flex></ud-checkbox>
+  ```
+  ``` js
+  options: [
+    {label: "選項一", value: "1"},
+    {label: "選項二", value: "2"},
+    {label: "選項三", value: "3", disabled: true},
+  ],
+  ```
+  單選時v-model需綁定Boolean
+  ``` html
+  <!-- options可帶入字串 -->
+  <ud-checkbox v-model="value" options="我同意使用者條款"></ud-checkbox>
   
-  以`<template lang="pug"></template>`使用
+  <!-- options也可不帶改用slot塞入任意內容 -->
+  <ud-checkbox v-model="value">
+    <p>我同意<a href="https://www.google.com.tw/">使用者條款</a></p>
+  </ud-checkbox>
+  ```
+  ### props
+  * options: 選項 | String、Array
+  * flex: 是否並排 | Boolean(false)
+  * combine: 使用value做為label | Boolean(false)
+  * solid: 打勾改為實心 | Boolean(false)
 
-  線上轉換工具：https://html2pug.vercel.app/
-  
-  vscode轉換套件：[html2pug](https://marketplace.visualstudio.com/items?itemName=dbalas.vscode-html2pug)
+## <font color=#ebc600>Select 下拉框 ud-select</font>
+  ``` html
+  <ud-select v-model="value" :options="options" placeholder="請選擇櫃點"></ud-select>
+  ```
+  ``` js
+  options: [
+    {label: "選項一", value: "1"},
+    {label: "選項二", value: "2"},
+    {label: "選項三", value: "3", disabled: true},
+  ],
+  ```
+  將多個獨立的ud-select進行連動
+  ``` html
+  <ud-select v-model="valueGroup[0]" :options="storeOptions" :group="valueGroup" :index="0" placeholder="請選擇縣市"></ud-select>
+  <ud-select v-model="valueGroup[1]" :options="storeOptions" :group="valueGroup" :index="1" placeholder="請選擇櫃點"></ud-select>
+  <ud-select v-model="valueGroup[2]" :options="storeOptions" :group="valueGroup" :index="2" placeholder="請選擇日期"></ud-select>
+  ```
+  ``` js
+  data: {
+    valueGroup: ["", "", ""],
+    storeOptions: [
+      {label: "台北市", value: "taipei", children: [
+        {label: "中正區", value: "100", children: [
+          {label: "2023-12-01", value: "1" },
+          {label: "2023-12-02", value: "2", disabled: "true" }
+        ]},
+        {label: "大安區", value: "106", disabled: true, children: [
+          {label: "2023-12-03", value: "3" },
+          {label: "2023-12-04", value: "4" },
+        ]},
+        {label: "信義區", value: "110", children: [
+          {label: "2023-12-05", value: "5" },
+          {label: "2023-12-06", value: "6" },
+        ]},
+      ]},
+      {label: "新北市", value: "newTaipei", children: [
+        {label: "板橋區", value: "220", children: [
+          {label: "2023-12-07", value: "7" },
+          {label: "2023-12-08", value: "8" },
+        ]},
+        {label: "永和區", value: "234", children: [
+          {label: "2023-12-09", value: "9" },
+          {label: "2023-12-10", value: "10", disabled: true },
+        ]},
+        {label: "新店區", value: "231", children: [
+          {label: "2023-12-11", value: "11", disabled: true },
+          {label: "2023-12-12", value: "12", disabled: true },
+        ]},
+      ]},
+    ],
+  },
+  ```
+  ### props
+  * options: 選項 | Array
+  * placeholder: 替代文字 | String
+  * combine: 使用value做為label | Boolean(false)
+  * center: 文字是否置中 | Boolean(false)
+  * group: 組成群組(雙向綁定的值所組成的陣列) | Array
+  * index: 群組索引(由0開始的數字) | Number
+  * labelBy: label替代值 | String("label")
+  * valueBy: value替代值 | String("value")
+  * childrenBy: children替代值 | String("children")
+  ``` html
+  <ud-select v-model="valueGroup[0]" :options="storeOptions" :group="valueGroup" :index="0" placeholder="請選擇縣市" label-by="name" value-by="id" children-by="list"></ud-select>
+  <ud-select v-model="valueGroup[1]" :options="storeOptions" :group="valueGroup" :index="1" placeholder="請選擇櫃點" label-by="name" value-by="id" children-by="list"></ud-select>
+  <ud-select v-model="valueGroup[2]" :options="storeOptions" :group="valueGroup" :index="2" placeholder="請選擇日期" label-by="name" value-by="id" children-by="list"></ud-select>
+  ```
 
-* `sass`
+## <font color=#ebc600>SelectMultiple 下拉複選框 ud-select-multiple</font>
 
-  以`<stype lang="sass"></style>`使用
+## <font color=#ebc600>SelectLink 連動下拉框 ud-select-link</font>
 
-  目前sass編譯器使用dart-sass
+## <font color=#ebc600>SelectDate 日期連動下拉框 ud-select-date</font>
 
-  深層嵌套請使用`::v-deep`或`/deep/`語法
+## <font color=#ebc600>SelectTwzip 台灣行政區連動下拉框 ud-select-twzip</font>
 
-  線上轉換工具：http://css2sass.herokuapp.com/
+## <font color=#ebc600>Switch 開關 ud-switch</font>
 
----
-## 使用套件
+## <font color=#ebc600>DatePicker 日期選擇器 ud-date-picker</font>
 
-* [vue](https://cn.vuejs.org/v2/guide/) v2.6.11：漸進式JavaScript框架  
+## <font color=#ebc600>Captcha 圖形驗證碼 ud-captcha</font>
 
-* [vue-router](https://router.vuejs.org/zh/guide/#html) v3.2.0：Vue.js官方的路由管理器
+## <font color=#ebc600>FormItem 表單驗證容器 ud-form-item</font>
 
-* [vuex](https://router.vuejs.org/zh/guide/#html) v3.4.0：Vue.js應用程式開發的狀態管理模式
+## <font color=#ebc600>Form 表單驗證 ud-form</font>
 
-* [axios](https://axios-http.com/zh/docs/intro) v0.21.1：處理AJAX請求
-
-* `其他套件可依專案需求自行安裝👌`
-
----
-## 組件與工具
-
-* 組件
-
-  src/components/`ud-ui`：已全域註冊可直接使用的一些常用前端組件，用以快速搭建前端應用，可依專案需求直接修改做客製化，說明文件待補😭
-
-* 工具
-
-  src/utils/`ud-utils`：已全域註冊可直接使用的一些常用工具函式，用以快速搭建前端應用，可依專案需求直接修改做客製化，說明文件待補😭
-
----
-
-## 專案使用說明
-
-### `前端安裝方式`
-
- 1. 打開git clone下來的專案目錄
-
- 2. 打開終端機輸入下列指令安裝套件
-
+# Layout
+## <font color=#ebc600>Arrow CSS箭頭 ud-arrow</font>
+``` html
+<ud-arrow width="5" size="6" direction="down">
 ```
-$ yarn
-```
+## <font color=#ebc600>Collapse 摺疊容器 ud-collapse</font>
 
- 3. 複製.env.example範例檔並更名為.env填入專案需要的環境變數
+## <font color=#ebc600>Ratio 等比例自適應容器 ud-ratio</font>
 
- 4. 輸入以下指令開始 Enjoy!
+# Notice
+## <font color=#ebc600>Alert 警告彈窗 ud-alert</font>
+  ### options
+  * confirm: false 是否有確認+取消鈕
+  * maskClose: false 點擊遮罩關閉
+  * btnClose: false 右上關閉按鈕
+  * scrollLock: true 是否鎖定背景頁面捲動
+  * title: "" 標題文字
+  * message: "" 訊息文字(msg也可以，接受html語法)
+  * cancelText: "取消" 取消鈕文字
+  * onCancel: () => {} 取消鈕callback(也可使用.then)
+  * confirmText: "確定" 確認鈕文字
+  * onConfirm: () => {} 確認鈕callback(也可使用.catch)
 
-```
-$ yarn serve
-```
-### `前端部署方式`
+  ```js
+  this.udAlert("發生錯誤\n請稍候再試<i>！</i>");
+  // or
+  this.udAlert({
+    confirm: true,
+    maskClose: true,
+    btnClose: true,
+    scrollLock: false,
+    title: "錯誤",
+    message: "發生錯誤\n請稍候再試<i>！</i>",
+    confirmText: "確定鈕",
+    onConfirm: () => {
+      console.log("點擊確定");
+    },
+    cancelText: "取消鈕",
+  }).catch(() => {
+    console.log("點擊取消");
+  })
+  ```
 
-* 有CICD：
+## <font color=#ebc600>Modal 通用彈窗 ud-modal</font>
 
-1. 調整/deployment資料夾內的檔案來設定流程
+## <font color=#ebc600>Loading 載入中 ud-loading</font>
 
-2. 推上git測試或正式分支後便會開始跑自動部署流程
+# Tools
+## <font color=#ebc600>Html 自定義訊息 ud-html</font>
 
-* 無CICD：
+## <font color=#ebc600>Ellipsis 文字省略 ud-ellipsis</font>
 
-1. 需自行打包成dist並放至正確目錄，可新增.env.development和.env.production分別對應開發與生產環境
-```
-$ yarn build
-```
-
----
-
-## 專案src目錄介紹
-
-* `assets`：靜態資源目錄，放置圖片、影片或字型等靜態資源檔
-
-* `components`：組件目錄，放置非頁面級的單獨vue組件檔
-
-* `router`：前端路由目錄，放置Vue Router路由設定檔
-
-* `services`：api服務目錄，放置與api服務相關的封裝檔
-
-* `store`：Vuex目錄，放置Vuex設定檔
-
-* `style`：樣式目錄，放置css、scss、sass等樣式檔
-
-* `utils`：工具目錄，放置各種工具類函式或資源
-
-* `views`：視圖目錄，放置頁面級的vue視圖組件檔
-
----
-
-## 關於架構
-
-1. 命名盡量採取`駝峰式`
-
-2. 檔案請依照上述`專案src目錄介紹`的結構分類擺放
-
-3. 如果只有單一個頁面會用到的 **CSS** 請寫在 **Vue** 檔裡，且使用 `<style scoped></style>` 包裝起來，scoped 可防止影響到其他檔案的 **CSS**
-
-4. 路由請按照 **功能分類**，請參照 `src/router/index.js`，將路由以 `import` 方式引入進去，防止日後檔案維護困難
-
-5. 需要組件間通信或維持狀態的資料才使用`Vuex`
-
----
-
-## 手機開發
-
-由於目前的cookie登入機制會被瀏覽器跨網站追蹤阻擋而導致無限登入，若要於手機上開發請先於手機設定裡暫時允許chrome或safari的跨網站追蹤。
- 
-## 備註
-
-  感謝您花時間看到這裡！🙏
+## <font color=#ebc600>Countdown 倒數計時 ud-countdown</font>
