@@ -6,15 +6,10 @@ import router from './router'
 
 import "@/style/all.sass";
 
-// import UdUi from "./components/ud-ui";
-// Vue.use(UdUi);
-
 const app = createApp(App)
 
-import UdButton from './components/ud-ui/UdButton.vue';
-app.component("UdButton", UdButton)
-import UdInput from './components/ud-ui/UdInput.vue';
-app.component("UdInput", UdInput)
+import UdUi from "./components/ud-ui";
+app.use(UdUi);
 
 app.use(createPinia())
 app.use(router)

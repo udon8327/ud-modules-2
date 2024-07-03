@@ -18,7 +18,6 @@ Form
   ud-form：表單驗證
 
 Layout
-  ud-flex：通用排版容器
   ud-arrow：CSS箭頭
   ud-collapse：摺疊容器
   ud-ratio：等比例自適應容器
@@ -32,39 +31,35 @@ Tools
   ud-html：用戶自定義訊息
   ud-ellipsis：文字省略
   ud-countdown：倒數計時
-  ud-qrcode：取得QRcode圖片
 */
 
-import Vue from 'vue'
-import udAxios from '@/services/ud-axios'
+// import udAxios from '@/services/ud-axios'
 import * as udUtils from '@/utils/ud-utils'
 
-import UdAlert from './UdAlert'
-import UdArrow from './UdArrow'
-import UdButton from "./UdButton"
-import UdCaptcha from "./UdCaptcha"
-import UdCheckbox from "./UdCheckbox"
-import UdCollapse from "./UdCollapse"
-import UdCountdown from "./UdCountdown"
-import UdDatePicker from "./UdDatePicker"
-import UdEllipsis from "./UdEllipsis"
-import UdFlex from "./UdFlex"
-import UdForm from "./UdForm"
-import UdFormItem from "./UdFormItem"
-import UdHtml from "./UdHtml"
-import UdInput from "./UdInput"
-import UdLoading from "./UdLoading"
-import UdModal from "./UdModal"
-import UdQrcode from "./UdQrcode"
-import UdRadio from "./UdRadio"
-import UdRatio from "./UdRatio"
-import UdSelect from "./UdSelect"
-import UdSelectMultiple from "./UdSelectMultiple"
-import UdSelectDate from "./UdSelectDate"
-import UdSelectLink from "./UdSelectLink"
-import UdSelectTwzip from "./UdSelectTwzip"
-import UdSwitch from "./UdSwitch"
-import UdTextarea from "./UdTextarea"
+import UdAlert from "./UdAlert.vue"
+import UdArrow from "./UdArrow.vue"
+import UdButton from "./UdButton.vue"
+import UdCaptcha from "./UdCaptcha.vue"
+import UdCheckbox from "./UdCheckbox.vue"
+import UdCollapse from "./UdCollapse.vue"
+import UdCountdown from "./UdCountdown.vue"
+import UdDatePicker from "./UdDatePicker.vue"
+import UdEllipsis from "./UdEllipsis.vue"
+import UdForm from "./UdForm.vue"
+import UdFormItem from "./UdFormItem.vue"
+import UdHtml from "./UdHtml.vue"
+import UdInput from "./UdInput.vue"
+import UdLoading from "./UdLoading.vue"
+import UdModal from "./UdModal.vue"
+import UdRadio from "./UdRadio.vue"
+import UdRatio from "./UdRatio.vue"
+import UdSelect from "./UdSelect.vue"
+import UdSelectMultiple from "./UdSelectMultiple.vue"
+import UdSelectDate from "./UdSelectDate.vue"
+import UdSelectLink from "./UdSelectLink.vue"
+import UdSelectTwzip from "./UdSelectTwzip.vue"
+import UdSwitch from "./UdSwitch.vue"
+import UdTextarea from "./UdTextarea.vue"
 
 // 組件註冊列表
 const udComponents = [
@@ -77,14 +72,12 @@ const udComponents = [
   UdCountdown,
   UdDatePicker,
   UdEllipsis,
-  UdFlex,
   UdForm,
   UdFormItem,
   UdHtml,
   UdInput,
   UdLoading,
   UdModal,
-  UdQrcode,
   UdRadio,
   UdRatio,
   UdSelect,
@@ -97,37 +90,37 @@ const udComponents = [
 ]
 
 // 組件呼叫方法
-const udAlertExtend = Vue.extend(UdAlert);
-const udAlert = options => {
-  let instance = new udAlertExtend();
-  typeof options === 'string' ? instance.msg = options : Object.assign(instance, options);
-  document.body.appendChild(instance.$mount().$el);
-  return instance.show();
-};
-export { udAlert }
+// const udAlertExtend = Vue.extend(UdAlert);
+// const udAlert = options => {
+//   let instance = new udAlertExtend();
+//   typeof options === 'string' ? instance.msg = options : Object.assign(instance, options);
+//   document.body.appendChild(instance.$mount().$el);
+//   return instance.show();
+// };
+// export { udAlert }
 
-const udLoadingExtend = Vue.extend(UdLoading);
-const udLoading = {
-  instance: null,
-  open: (options = {}) => {
-    udLoading.instance = new udLoadingExtend({
-      el: document.createElement("div"),
-      data() { return options }
-    })
-    if(udLoading.instance.fixed) document.body.style.overflowY = 'hidden';
-    document.body.appendChild(udLoading.instance.$el);
-  },
-  close: () => udLoading.instance.destroy()
-};
-export { udLoading }
+// const udLoadingExtend = Vue.extend(UdLoading);
+// const udLoading = {
+//   instance: null,
+//   open: (options = {}) => {
+//     udLoading.instance = new udLoadingExtend({
+//       el: document.createElement("div"),
+//       data() { return options }
+//     })
+//     if(udLoading.instance.fixed) document.body.style.overflowY = 'hidden';
+//     document.body.appendChild(udLoading.instance.$el);
+//   },
+//   close: () => udLoading.instance.destroy()
+// };
+// export { udLoading }
 
 // ud-ui插件註冊方法
-const install = Vue => {
-  Object.keys(udUtils).forEach(item => Vue.prototype[item] = udUtils[item]);
-  udComponents.forEach(item => Vue.component(item.name, item));
-  Vue.prototype.udAxios = udAxios;
-  Vue.prototype.udAlert = udAlert;
-  Vue.prototype.udLoading = udLoading;
+const install = (app) => {
+  Object.keys(udUtils).forEach(item => app.config.globalProperties[item] = udUtils[item]);
+  udComponents.forEach(item => app.component(item.name, item));
+  // app.config.globalProperties.udAxios = udAxios;
+  // app.config.globalProperties.udAlert = udAlert;
+  // app.config.globalProperties.udLoading = udLoading;
 }
 
 export default install;

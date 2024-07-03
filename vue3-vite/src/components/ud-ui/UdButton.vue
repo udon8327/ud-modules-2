@@ -2,7 +2,7 @@
   <div class="ud-button">
     <button
       @click="clickHandler"
-      v-bind="$attrs"
+      v-bind="filteredAttrs"
       :disabled="disabled || loading"
       :class="{
         'is-disabled': disabled || loading,
@@ -40,19 +40,26 @@ export default {
     throttle: Boolean, // 函式節流
     throttleTime: { default: 1000 } // 函式節流間隔時間
   },
+  computed: {
+    filteredAttrs() {
+      // 從$attrs濾掉重複的onClick事件
+      return delete this.$attrs.onClick;
+    }
+  },
   methods: {
     clickHandler(evt) {
-      if(this.throttle) return;
+      evt.stopPropagation();
+      // if(this.throttle) return;
       this.$emit('click', evt);
     }
   },
   mounted() {
-    if(!this.throttle) return;
-    this.$el.addEventListener('click', throttle(
-        evt => this.$emit('click', evt),
-        this.throttleTime
-      )
-    );
+    // if(!this.throttle) return;
+    // this.$el.addEventListener('click', throttle(
+    //     evt => this.$emit('click', evt),
+    //     this.throttleTime
+    //   )
+    // );
   }
 }
 </script>

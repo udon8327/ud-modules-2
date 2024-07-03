@@ -1,7 +1,7 @@
 import axios from "axios";
 // import router from '@/router'
 // import store from '@/store'
-import { udAlert, udLoading } from "@/components/ud-ui";
+// import { udAlert, udLoading } from "@/components/ud-ui";
 
 // axios 全局預設值
 // axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL; // API基礎路徑
