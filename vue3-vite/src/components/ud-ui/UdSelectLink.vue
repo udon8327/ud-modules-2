@@ -1,10 +1,10 @@
 <template>
   <div class="ud-select-link" :class="{'is-flex': flex}">
-    <ud-select v-model="modelValue[0]" :options="firstArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
+    <ud-select v-model="value[0]" :options="firstArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
     <slot></slot>
-    <ud-select v-model="modelValue[1]" :options="secondArr" :placeholder="placeholder[1]" :combine="combine"></ud-select>
+    <ud-select v-model="value[1]" :options="secondArr" :placeholder="placeholder[1]" :combine="combine"></ud-select>
     <slot name="second"></slot>
-    <ud-select v-model="modelValue[2]" :options="thirdArr" :placeholder="placeholder[2]" :combine="combine" v-if="third"></ud-select>
+    <ud-select v-model="value[2]" :options="thirdArr" :placeholder="placeholder[2]" :combine="combine" v-if="third"></ud-select>
     <slot name="third"></slot>
   </div>
 </template>
@@ -13,7 +13,7 @@
 export default {
   name: 'UdSelectLink',
   props: {
-    value: null, // value值
+    modelValue: null, // value值
     options: null, // 選項 [Array]
     placeholder: { // placeholder值 [Array]
       default: () => {
@@ -25,18 +25,18 @@ export default {
     combine: Boolean, // 是否label直接使用value值
   },
   computed: {
-    modelValue: {
-      get(){ return this.value },
-      set(val){ this.$emit('input', val) }
+    value: {
+      get(){ return this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
     },
     firstValue() {
-      return this.modelValue[0];
+      return this.value[0];
     },
     secondValue() {
-      return this.modelValue[1];
+      return this.value[1];
     },
     thirdValue() {
-      return this.modelValue[2];
+      return this.value[2];
     },
     firstArr() {
       let temp = this.options;
@@ -44,33 +44,33 @@ export default {
     },
     secondArr() {
       let temp = [];
-      if(this.modelValue[0]){
-        temp = this.options.find(option => option.value === this.modelValue[0]).children;
+      if(this.value[0]){
+        temp = this.options.find(option => option.value === this.value[0]).children;
       }
       return temp;
     },
     thirdArr() {
       let temp = [];
-      if(this.modelValue[1]){
-        temp = this.secondArr.find(option => option.value === this.modelValue[1]).children;
+      if(this.value[1]){
+        temp = this.secondArr.find(option => option.value === this.value[1]).children;
       }
       return temp;
     },
   },
   watch: {
     firstValue() {
-      this.modelValue.splice(1, 1, "");
+      this.value.splice(1, 1, "");
     },
     secondValue() {
-      if(this.third) this.modelValue.splice(2, 1, "");
+      if(this.third) this.value.splice(2, 1, "");
     },
   },
   mounted() {
-    this.$on('validate', () => {
-      this.$nextTick(() => {
-        this.$parent.$emit('validate'); // 通知FormItem校驗
-      })
-    })
+    // this.$on('validate', () => {
+    //   this.$nextTick(() => {
+    //     this.$parent.$emit('validate'); // 通知FormItem校驗
+    //   })
+    // })
   }
 }
 </script>

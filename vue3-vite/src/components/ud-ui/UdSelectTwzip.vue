@@ -1,8 +1,8 @@
 <template>
   <div class="ud-select-twzip" :class="{'is-flex': flex}">
-    <ud-select v-model="modelValue[0]" :options="firstArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
+    <ud-select v-model="value[0]" :options="firstArr" :placeholder="placeholder[0]" :combine="combine"></ud-select>
     <slot></slot>
-    <ud-select v-model="modelValue[1]" :options="secondArr" :placeholder="placeholder[1]" :combine="combine"></ud-select>
+    <ud-select v-model="value[1]" :options="secondArr" :placeholder="placeholder[1]" :combine="combine"></ud-select>
     <slot name="second"></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@
 export default {
   name: 'UdSelectTwzip',
   props: {
-    value: null, // value值
+    modelValue: null, // value值
     placeholder: { // placeholder值 [Array]
       default: () => {
         return ["請選擇縣市", "請選擇行政區"];
@@ -154,18 +154,18 @@ export default {
     }
   },
   computed: {
-    modelValue: {
-      get(){ return this.value },
-      set(val){ this.$emit('input', val) }
+    value: {
+      get(){ return this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
     },
     firstValue() {
-      return this.modelValue[0];
+      return this.value[0];
     },
     secondValue() {
-      return this.modelValue[1];
+      return this.value[1];
     },
     thirdValue() {
-      return this.modelValue[2];
+      return this.value[2];
     },
     firstArr() {
       let temp = this.options;
@@ -173,25 +173,25 @@ export default {
     },
     secondArr() {
       let temp = [];
-      if(this.modelValue[0]){
-        temp = this.options.find(option => option.value === this.modelValue[0]).children;
+      if(this.value[0]){
+        temp = this.options.find(option => option.value === this.value[0]).children;
       }
       return temp;
     },
     thirdArr() {
       let temp = [];
-      if(this.modelValue[1]){
-        temp = this.secondArr.find(option => option.value === this.modelValue[1]).children;
+      if(this.value[1]){
+        temp = this.secondArr.find(option => option.value === this.value[1]).children;
       }
       return temp;
     },
   },
   watch: {
     firstValue() {
-      this.modelValue.splice(1, 1, "");
+      this.value.splice(1, 1, "");
     },
     secondValue() {
-      if(this.third) this.modelValue.splice(2, 1, "");
+      if(this.third) this.value.splice(2, 1, "");
     },
   },
   methods: {
@@ -200,11 +200,11 @@ export default {
     }
   },
   mounted() {
-    this.$on('validate', () => {
-      this.$nextTick(() => {
-        this.$parent.$emit('validate'); // 通知FormItem校驗
-      })
-    })
+    // this.$on('validate', () => {
+    //   this.$nextTick(() => {
+    //     this.$parent.$emit('validate'); // 通知FormItem校驗
+    //   })
+    // })
   }
 }
 </script>

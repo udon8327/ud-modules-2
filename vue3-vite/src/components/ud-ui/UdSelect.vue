@@ -1,8 +1,8 @@
 <template>
   <div class="ud-select">
     <select 
-      v-model="modelValue" 
-      :data-placeholder-selected="modelValue.length === 0"
+      v-model="value" 
+      :data-placeholder-selected="value.length === 0"
       v-bind="$attrs"
       @change="onChange"
       ref="select"
@@ -20,7 +20,7 @@ export default {
   name: 'UdSelect',
   inheritAttrs: false,
   props: {
-    value: { default: "" }, // value值
+    modelValue: { default: "" }, // value值
     options: { // 選項
       default: () => {
         return [
@@ -43,9 +43,9 @@ export default {
     }
   },
   computed: {
-    modelValue: {
-      get(){ return this.value == null ? "" : this.value },
-      set(val){ this.$emit('input', val) }
+    value: {
+      get(){ return this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
     },
     optionsArr() {
       this.groupWatch = [...this.group];

@@ -3,7 +3,7 @@
     <label>
       <input 
         type="checkbox"
-        v-model="modelValue"
+        v-model="value"
         v-bind="$attrs"
       >
       <div class="switch-decorator">
@@ -19,12 +19,12 @@ export default {
   name: 'UdSwitch',
   inheritAttrs: false,
   props: {
-    value: { default: false }, // value值
+    modelValue: { default: false }, // value值
   },
   computed: {
-    modelValue: {
-      get(){ return this.value },
-      set(val){ this.$emit('input', val) }
+    value: {
+      get(){ return this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
     }
   }
 }

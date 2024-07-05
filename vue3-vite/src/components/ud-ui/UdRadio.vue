@@ -4,7 +4,7 @@
     <label v-if="option">
       <input
         type="radio"
-        v-model="modelValue"
+        v-model="value"
         :value="option"
         v-bind="$attrs"
         @change="onChange"
@@ -19,7 +19,7 @@
     <label v-for="option in options" :key="option.value" v-if="options">
       <input
         type="radio"
-        v-model="modelValue"
+        v-model="value"
         :value="option.value"
         v-bind="$attrs"
         @change="onChange"
@@ -39,7 +39,7 @@ export default {
   name: 'UdRadio',
   inheritAttrs: false,
   props: {
-    value: null, // value值
+    modelValue: null, // value值
     option: null, // 單選項[string, number]
     options: null, // 多選項[object]
     flex: Boolean, // 是否並排
@@ -47,15 +47,15 @@ export default {
     combine: Boolean // 使用value做為label
   },
   computed: {
-    modelValue: {
-      get(){ return this.value },
-      set(val){ this.$emit('input', val) }
+    value: {
+      get(){ return this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
     }
   },
   methods: {
     onChange() {
       this.$parent.$emit('validate'); // 通知FormItem校驗
-      this.$emit('change', this.$refs.radio.value);
+      // this.$emit('change', this.$refs.radio.value);
     }
   }
 }

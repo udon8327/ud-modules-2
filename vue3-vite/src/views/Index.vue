@@ -1,14 +1,28 @@
 <template lang="pug">
 #index
   ud-button(@click="toDemo") Demo
+  ud-input(v-model="test")
+  p {{ test }}
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+const test = ref("");
+const toDemo = () => {
+  router.push("/demo");
+}
+</script>
+
+<!-- <script>
 export default {
   name: "Index",
   components: {},
   data() {
     return {
+      test: "",
     };
   },
   mounted() {},
@@ -18,7 +32,7 @@ export default {
     },
   },
 };
-</script>
+</script> -->
 
 <style lang="sass" scoped>
 </style>

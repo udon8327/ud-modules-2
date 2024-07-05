@@ -2,9 +2,8 @@
   <div class="ud-textarea">
     <textarea
       ref="textarea"
-      v-model="modelValue"
+      v-model="value"
       v-bind="$attrs"
-      v-on="inputListeners"
       :rows="rows"
       :class="{ 'is-no-resize': noResize }"
       @input="onInput"
@@ -21,26 +20,20 @@ export default {
   name: 'UdTextarea',
   inheritAttrs: false,
   props: {
-    value: null,
+    modelValue: null,
     rows: { default: 4 }, // 行數
     showLimit: Boolean, // 是否顯示字數限制
     limit: { default: 0 }, // 字數限制
     noResize: Boolean // 禁止改變大小
   },
   computed: {
-    modelValue: {
-      get(){ return this.value == null ? "" : this.value },
-      set(val){ this.$emit('input', val) }
+    value: {
+      get(){ return this.modelValue == null ? "" : this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
     },
     valueLength() {
       return this.value.length;
     },
-    inputListeners() {
-      return Object.assign({},
-        this.$listeners,
-        { input: event => {} }
-      )
-    }
   },
   methods: {
     onInput() {

@@ -5,7 +5,7 @@
         <input
           type="checkbox"
           :value="option.value"
-          v-model="modelValue"
+          v-model="value"
           v-bind="$attrs"
           @change="onChange"
           ref="checkbox"
@@ -18,7 +18,7 @@
       <label>
         <input
           type="checkbox"
-          v-model="modelValue"
+          v-model="value"
           :value="option"
           v-bind="$attrs"
           @change="onChange"
@@ -36,7 +36,7 @@ export default {
   name: 'UdCheckbox',
   inheritAttrs: false,
   props: {
-    value: null, // value值 單個時綁定Boolean 多個時綁定Array
+    modelValue: null, // value值 單個時綁定Boolean 多個時綁定Array
     option: null, // 單選項
     options: null, // 多選項
     flex: Boolean, // 是否並排
@@ -44,9 +44,9 @@ export default {
     noLabel: Boolean, // 是否有label
   },
   computed: {
-    modelValue: {
-      get(){ return this.value },
-      set(val){ this.$emit('input', val) }
+    value: {
+      get(){ return this.modelValue },
+      set(val){ this.$emit('update:modelValue', val) }
     }
   },
   methods: {
