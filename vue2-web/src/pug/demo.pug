@@ -26,8 +26,7 @@ block content
 
   .demo-area
     .title DEMO
-    test(displayName="Test")
-    ud-button(@click="test") TEST
+    ud-button(@click="tests" throttle) TEST2
     ud-form(:rules="rules" :model="user" ref="form")
       ud-form-item(label="姓名" prop="name" flex v-if="test")
         ud-input(placeholder="請輸入您的姓名" v-model="user.name")

@@ -1,10 +1,10 @@
 <template>
   <div class="ud-select-date" :class="{'is-flex': flex}">
-    <ud-select v-model="value[0]" :options="firstArr" :placeholder="placeholder[0]" combine></ud-select>
+    <ud-select v-model="value[0]" :options="firstArr" :placeholder="placeholder[0]" combine @validate="validate"></ud-select>
     <slot></slot>
-    <ud-select v-model="value[1]" :options="secondArr" :placeholder="placeholder[1]" combine></ud-select>
+    <ud-select v-model="value[1]" :options="secondArr" :placeholder="placeholder[1]" combine @validate="validate"></ud-select>
     <slot name="second"></slot>
-    <ud-select v-model="value[2]" :options="thirdArr" :placeholder="placeholder[2]" combine v-if="third"></ud-select>
+    <ud-select v-model="value[2]" :options="thirdArr" :placeholder="placeholder[2]" combine v-if="third" @validate="validate"></ud-select>
     <slot name="third"></slot>
   </div>
 </template>
@@ -79,13 +79,14 @@ export default {
       if(this.third) this.value.splice(2, 1, "");
     },
   },
-  mounted() {
-    // this.$on('validate', () => {
-    //   this.$nextTick(() => {
-    //     this.$parent.$emit('validate'); // 通知FormItem校驗
-    //   })
-    // })
-  }
+  mounted() {},
+  methods: {
+    validate() {
+      this.$nextTick(() => {
+        this.$parent.$emit('validate'); // 通知FormItem校驗
+      })
+    },
+  },
 }
 </script>
 

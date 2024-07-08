@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { throttle } from '@/utils/ud-utils'
+import { throttle } from 'lodash';
 
 export default {
   name: 'UdButton',
@@ -42,24 +42,23 @@ export default {
   },
   computed: {
     filteredAttrs() {
-      // 從$attrs濾掉重複的onClick事件
-      return delete this.$attrs.onClick;
+      const { onClick, ...attrs } = this.$attrs;
+      return attrs;
     }
   },
   methods: {
     clickHandler(evt) {
-      evt.stopPropagation();
-      // if(this.throttle) return;
+      if(this.throttle) return;
       this.$emit('click', evt);
-    }
+    },
   },
   mounted() {
-    // if(!this.throttle) return;
-    // this.$el.addEventListener('click', throttle(
-    //     evt => this.$emit('click', evt),
-    //     this.throttleTime
-    //   )
-    // );
+    if(!this.throttle) return;
+    this.$el.addEventListener('click', throttle(
+        evt => this.$emit('click', evt),
+        this.throttleTime
+      )
+    );
   }
 }
 </script>

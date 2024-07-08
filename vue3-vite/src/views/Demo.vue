@@ -1,7 +1,7 @@
 <template lang="pug">
 #demo
   ud-button(@click="toIndex") Index
-  ud-button.cat(@click="onTest" throttle) 貓
+  ud-button.cat(@click="onTest" @blur="onBlur" @focus="onFocus") 貓
   ud-form(:rules="rules" :model="user" ref="form")
     ud-input(placeholder="請輸入您的姓名" v-model="user.name" @change="onChange" @blur="onBlur" @focus="onFocus")
     p {{ user.name || "user.name" }}

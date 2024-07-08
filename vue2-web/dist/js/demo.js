@@ -80,15 +80,14 @@ var vm = new Vue({
         ],
     },
     mounted: function () {
-        var _this = this;
-        liff.init({ liffId: "1655285115-LaWdxbOP" }).then(function () {
-            console.log("liff init success");
-            _this.sessionStorage = sessionStorage.getItem("sessionStorage");
-            _this.localStorage = localStorage.getItem("localStorage");
-            _this.liffStatus = "init success";
-        }).catch(function () {
-            console.log("liff init error");
-        });
+        // liff.init({liffId: "1655285115-LaWdxbOP"}).then(() => {
+        //   console.log("liff init success");
+        //   this.sessionStorage = sessionStorage.getItem("sessionStorage");
+        //   this.localStorage = localStorage.getItem("localStorage");
+        //   this.liffStatus = "init success";
+        // }).catch(() => {
+        //   console.log("liff init error");
+        // })
         // udAxios.post("/tests", {}, {
         //   noAlert: true,
         // })
@@ -122,7 +121,7 @@ var vm = new Vue({
             sessionStorage.removeItem("sessionStorage");
             localStorage.removeItem("localStorage");
         },
-        test: function () {
+        tests: function () {
             console.log(Date.now());
         },
         focus: function (type) {
