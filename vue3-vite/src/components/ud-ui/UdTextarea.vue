@@ -23,12 +23,12 @@ export default {
     modelValue: null,
     rows: { default: 4 }, // 行數
     showLimit: Boolean, // 是否顯示字數限制
-    limit: { default: 0 }, // 字數限制
+    limit: { default: 0 }, // 字數限制(純顯示，要限制請自行加上maxlength屬性)
     noResize: Boolean // 禁止改變大小
   },
   computed: {
     value: {
-      get(){ return this.modelValue == null ? "" : this.modelValue },
+      get(){ return this.modelValue },
       set(val){ this.$emit('update:modelValue', val) }
     },
     valueLength() {
