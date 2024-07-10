@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     onChange() {
-      this.$parent.$emit('validate'); // 通知FormItem校驗
+      this.$mitt.emit("validate"); // 通知FormItem校驗
       // this.$emit('change', this.$refs.radio.value);
     }
   }

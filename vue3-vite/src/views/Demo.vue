@@ -1,12 +1,14 @@
 <template lang="pug">
 #demo
-  ud-button(@click="toIndex") Index
-  ud-button.cat(@click="onTest" @blur="onBlur" @focus="onFocus") 貓
+  .link-button
+    ud-button(@click="toIndex" circle plain) X
   ud-form(:rules="rules" :model="user" ref="form")
-    ud-input(placeholder="請輸入您的姓名" v-model="user.name" @change="onChange" @blur="onBlur" @focus="onFocus")
+    ud-form-item(label="姓名" prop="name" flex)
+      ud-input(placeholder="請輸入您的姓名" v-model="user.name")
     p {{ user.name || "user.name" }}
-    ud-textarea(placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10")
+    ud-textarea(placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10" @change="onChange" @blur="onBlur" @focus="onFocus")
     p {{ user.note || "user.note" }}
+    ud-html(:text="user.note")
     ud-input(placeholder="請輸入您的年齡" v-model="user.age" type="tel")
     p {{ user.age || "user.age" }}
     ud-radio(v-model="user.radio" :options="options" flex)
@@ -147,6 +149,11 @@ export default {
     onTest() {
       console.log(this.getRandom());
     },
+    formSubmit() {
+      this.$refs.form.validate(() => {
+        console.log("驗證成功");
+      });
+    },
     toIndex() {
       this.$router.push("/index");
     },
@@ -164,4 +171,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.link-button
+  position: absolute
+  right: 10px
+  top: 10px
 </style>

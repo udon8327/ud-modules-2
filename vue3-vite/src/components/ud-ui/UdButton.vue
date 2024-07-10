@@ -1,8 +1,9 @@
 <template>
   <div class="ud-button">
     <button
-      @click="clickHandler"
+      ref="button"
       v-bind="filteredAttrs"
+      :type="type"
       :disabled="disabled || loading"
       :class="{
         'is-disabled': disabled || loading,
@@ -10,6 +11,7 @@
         'is-round': round,
         'is-circle': circle,
       }"
+      @click="onClick"
     >
       <div class="button-wrapper">
         <span><slot>按鈕</slot></span>
@@ -30,8 +32,9 @@ export default {
   name: 'UdButton',
   inheritAttrs: false,
   props: {
-    icon: { default: '' }, // CSS的icon
-    image: { default: '' }, // 圖片的icon
+    type: { default: "button" },
+    icon: { default: "" }, // CSS的icon
+    image: { default: "" }, // 圖片的icon
     loading: Boolean, // 載入中
     disabled: Boolean, // 禁止點擊
     plain: Boolean, // 線條化
@@ -47,7 +50,7 @@ export default {
     }
   },
   methods: {
-    clickHandler(evt) {
+    onClick(evt) {
       if(this.throttle) return;
       this.$emit('click', evt);
     },

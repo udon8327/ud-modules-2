@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     value: {
-      get(){ return this.modelValue == null ? "" : this.modelValue },
+      get(){ return this.modelValue },
       set(val){ this.$emit('update:modelValue', val) }
     },
   },
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     onInput() {
-      this.$parent.$emit('validate'); // 通知FormItem校驗
+      this.$mitt.emit("validate"); // 通知FormItem校驗
     },
     focus() {
       this.$refs.input.focus();

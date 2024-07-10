@@ -3,7 +3,7 @@
     <div class="ud-form-item-left" :style="{ 'flex-basis': labelWidth, 'text-align': labelAlign }">  
       <label v-if="label">{{ label }}</label>
     </div>
-    <div class="ud-form-item-right">  
+    <div class="ud-form-item-right" @validate="test">  
       <slot></slot>
       <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
     </div>
@@ -39,12 +39,15 @@ export default {
     }
   },
   mounted() {
-    this.$on('validate', () => {
+    this.$mitt.on("validate", () => {
       if(!this.prop) return;
       this.validate(false);
-    })
+    });
   },
   methods: {
+    test() {
+      console.log("test");
+    },
     validate(submit) {
       if(this.form.submitLock) return;
       const rules = this.form.rules[this.prop]; // 獲取校驗規則

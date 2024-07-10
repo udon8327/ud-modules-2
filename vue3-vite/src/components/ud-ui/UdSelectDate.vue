@@ -83,7 +83,7 @@ export default {
   methods: {
     validate() {
       this.$nextTick(() => {
-        this.$parent.$emit('validate'); // 通知FormItem校驗
+        this.$mitt.emit("validate"); // 通知FormItem校驗
       })
     },
   },

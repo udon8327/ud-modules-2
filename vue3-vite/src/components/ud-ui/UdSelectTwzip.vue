@@ -196,13 +196,13 @@ export default {
   },
   methods: {
     onChange() {
-      this.$parent.$emit('validate'); // 通知FormItem校驗
+      this.$mitt.emit("validate"); // 通知FormItem校驗
     }
   },
   mounted() {
     // this.$on('validate', () => {
     //   this.$nextTick(() => {
-    //     this.$parent.$emit('validate'); // 通知FormItem校驗
+    //     this.$mitt.emit("validate"); // 通知FormItem校驗
     //   })
     // })
   }

@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     onInput() {
-      this.$parent.$emit('validate'); // 通知FormItem校驗
+      this.$mitt.emit("validate"); // 通知FormItem校驗
     },
     focus() {
       this.$refs.textarea.focus();
