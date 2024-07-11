@@ -16,14 +16,39 @@ const router = createRouter({
       path: '/demo',
       name: 'demo',
       component: () => import('@/views/Demo.vue')
-    }
+    },
+
+    // 錯誤頁
+    {
+      path: "/404",
+      name: "error404",
+      component: () => import("@/views/error/404.vue"),
+      meta: {
+        title: "404 Not Found",
+      },
+    },
+    {
+      path: "/422",
+      name: "error422",
+      component: () => import("@/views/error/422.vue"),
+      meta: {
+        title: "422 Forbidden",
+      },
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: "/404",
+    },
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('to: ', to);
-  console.log('from: ', from);
+  // console.log(`from: ${ from.path }, to: ${ to.path }`);
   next()
 })
+
+router.afterEach(() => {
+  // console.log('to: ', to);
+});
 
 export default router

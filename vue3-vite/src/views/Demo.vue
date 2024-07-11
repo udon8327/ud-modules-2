@@ -32,14 +32,14 @@
     ud-form-item(label="是否啟用" prop="isActive" flex)
       ud-switch(v-model="formData.isActive")
     ud-form-item(label="" prop="isAgree")
-      ud-checkbox(v-model="formData.isAgree" options="我同意使用者條款" solid)
+      //- ud-checkbox(v-model="formData.isAgree" options="我同意使用者條款" solid)
       ud-checkbox(v-model="formData.isAgree")
         p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
-    ud-form-item(label="驗證碼" prop="captcha" flex)
-      .captcha-wrapper
-        ud-input(v-model="formData.captcha" placeholder="驗證碼" maxlength="4")
-        ud-captcha(v-model="formData.captchaCode")
-    div(style="margin-bottom: 60px")
+    //- ud-form-item(label="驗證碼" prop="captcha" flex)
+    //-   .captcha-wrapper
+    //-     ud-input(v-model="formData.captcha" placeholder="驗證碼" maxlength="4")
+    //-     ud-captcha(v-model="formData.captchaCode")
+    hr(style="margin-bottom: 20px")
 
     ud-button(@click="formSubmit") 送出表單
     ud-button(@click="isCollapse = !isCollapse") 摺疊容器&nbsp
@@ -157,7 +157,10 @@ export default {
     },
     onFocus(e) {
       console.log("onFocus", e); 
-    }
+    },
+    timeup() {
+      console.log('timeup');
+    },
   },
 };
 </script>
