@@ -3,12 +3,12 @@
 
     <label v-if="option">
       <input
+        ref="radio"
         type="radio"
         v-model="value"
-        :value="option"
         v-bind="$attrs"
+        :value="option"
         @change="onChange"
-        ref="radio"
       >
       <div class="radio-decorator"
         :style="{'border-radius': radius}"
@@ -16,14 +16,15 @@
       <p v-if="combine">{{ option }}</p>
     </label>
 
-    <label v-for="option in options" :key="option.value" v-if="options">
+    <label v-for="option in options" :key="option.value" v-if="options" :class="{'is-disabled': option.disabled}">
       <input
+        ref="radio"
         type="radio"
         v-model="value"
-        :value="option.value"
         v-bind="$attrs"
+        :value="option.value"
+        :disabled="option.disabled"
         @change="onChange"
-        ref="radio"
       >
       <div class="radio-decorator"
         :style="{'border-radius': radius}"
@@ -74,6 +75,12 @@ export default {
     cursor: pointer
     display: flex
     align-items: center
+    &.is-disabled
+      p
+        color: #ccc
+      .radio-decorator
+        border: 1px solid #e3e3e3
+        background-color: #f3f3f3
     p
       font-size: 15px
       line-height: 20px

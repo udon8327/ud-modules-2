@@ -23,7 +23,7 @@ export default {
     modelValue: null,
     rows: { default: 4 }, // 行數
     showLimit: Boolean, // 是否顯示字數限制
-    limit: { default: 0 }, // 字數限制(純顯示，要限制請自行加上maxlength屬性)
+    limit: { default: 0 }, // 字數限制提示(需限字數請自行加上maxlength屬性)
     noResize: Boolean // 禁止改變大小
   },
   computed: {
