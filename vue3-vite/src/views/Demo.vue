@@ -1,20 +1,31 @@
 <template lang="pug">
 #demo
+  .grid-area
+    .grid-wrapper
+      .grid 1
+      .grid 2
+      .grid 3
+      .grid 4
+      .grid 5
+      .grid 6
+      .grid 7
+      .grid 8
+      .grid 9
+      .grid 10
+    
   .link-button
     ud-button(@click="toIndex" circle plain) X
   ud-form(:rules="rules" :model="formData" ref="form")
     ud-form-item(label="姓名" prop="name" flex)
       ud-input(placeholder="請輸入您的姓名" v-model="formData.name")
     ud-form-item(label="備註" prop="note" flex)
-      ud-textarea(placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="10" @change="onChange" @blur="onBlur" @focus="onFocus" no-resize)
+      ud-textarea(placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="10" no-resize)
     ud-form-item(label="年齡" prop="age" flex) 
       ud-input(placeholder="請輸入您的年齡" v-model="formData.age" type="tel")
     ud-form-item(label="單選" prop="radio" flex)
-      //- ud-radio(v-model="formData.radio" :options="options" flex disabled)
-      ud-radio(v-model="formData.radio" option="A" flex combine)
-      ud-radio(v-model="formData.radio" option="B" flex combine)
+      ud-radio(v-model="formData.radio" :options="options" flex @change="onChange" @blur="onBlur" @focus="onFocus")
     ud-form-item(label="多選" prop="checkbox" flex)
-      ud-checkbox(v-model="formData.checkbox" :options="options" flex)
+      ud-checkbox(v-model="formData.checkbox" :options="options" flex @change="onChange" @blur="onBlur" @focus="onFocus")
     ud-form-item(label="下拉" prop="select" flex)
       ud-select(v-model="formData.select" :options="options" flex center)
     ud-form-item(label="下拉連動" prop="selectLink" flex)
@@ -34,7 +45,6 @@
     ud-form-item(label="是否啟用" prop="isActive" flex)
       ud-switch(v-model="formData.isActive")
     ud-form-item(label="" prop="isAgree")
-      //- ud-checkbox(v-model="formData.isAgree" options="我同意使用者條款" solid)
       ud-checkbox(v-model="formData.isAgree")
         p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
     //- ud-form-item(label="驗證碼" prop="captcha" flex)
@@ -102,9 +112,9 @@ export default {
         captcha: [{type: "required"}, {type: "equal", equalTo: "captchaCode", caseIgnore: "true"}],
       },
       options: [
-        {label: "甲", value: "a", disabled: true},
+        {label: "甲", value: "a"},
         {label: "乙", value: "b"},
-        {label: "丙", value: "c"},
+        {label: "丙", value: "c", disabled: true},
       ],
       storeOptions: [
         {label: "台北市", value: "taipei", children: [
@@ -151,8 +161,8 @@ export default {
     toIndex() {
       this.$router.push("/index");
     },
-    onChange(val) {
-      console.log("onChange", val); 
+    onChange(e) {
+      console.log("onChange", e); 
     },
     onBlur(e) {
       console.log("onBlur", e); 
@@ -172,4 +182,21 @@ export default {
   position: absolute
   right: 10px
   top: 10px
+
+.grid-area
+  background-color: rgba(aqua, 0.5)
+  padding: 15px
+  .grid-wrapper
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-auto-rows: minmax(100px, auto)
+    column-gap: 10px
+    row-gap: 10px
+    .grid
+      border: 1px solid #ccc
+      &:nth-of-type(1)
+        grid-column-start: 1
+        grid-column-end: 3
+        grid-row-start: 1
+        grid-row-end: 4
 </style>

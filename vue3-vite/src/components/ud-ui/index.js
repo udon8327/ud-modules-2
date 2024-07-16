@@ -1,11 +1,11 @@
 /*
 ==================== Vue組件庫(Basic)目錄 ====================
 Form
-  ud-button：按鈕
-  ud-input：輸入框
-  ud-textarea：多行輸入框
-  ud-radio：單選框
-  ud-checkbox：多選框
+  ud-button：按鈕 V
+  ud-input：輸入框 V
+  ud-textarea：多行輸入框 V
+  ud-radio：單選框 V
+  ud-checkbox：多選框 V
   ud-select：下拉框
   ud-select-multiple：下拉多選框
   ud-select-link：連動下拉框

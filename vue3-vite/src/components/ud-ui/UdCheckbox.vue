@@ -1,31 +1,35 @@
 <template>
   <div class="ud-checkbox" :class="{'is-flex': flex}">
     <template v-if="options">
-      <label v-for="option in options" :key="option.value">
+      <label v-for="option in options" :key="option[valueBy]" :class="{'is-disabled': option.disabled}">
         <input
+          ref="checkbox"
           type="checkbox"
-          :value="option.value"
           v-model="value"
           v-bind="$attrs"
+          :value="option[valueBy]"
+          :disabled="option.disabled"
           @change="onChange"
-          ref="checkbox"
         >
-        <div class="checkbox-decorator"></div>
-        <p v-if="!noLabel">{{ combine ? option.value : option.label }}</p>
+        <div class="checkbox-decorator"
+          :style="{'border-radius': radius}"
+        ></div>
+        <p>{{ option[labelBy] }}</p>
       </label>
     </template>
     <template v-else>
       <label>
         <input
+          ref="checkbox"
           type="checkbox"
           v-model="value"
-          :value="option"
           v-bind="$attrs"
           @change="onChange"
-          ref="checkbox"
         >
-        <div class="checkbox-decorator"></div>
-        <p v-if="!noLabel"><slot>{{ option }}</slot></p>
+        <div class="checkbox-decorator"
+          :style="{'border-radius': radius}"
+        ></div>
+        <p><slot></slot></p>
       </label>
     </template>
   </div>
@@ -37,11 +41,11 @@ export default {
   inheritAttrs: false,
   props: {
     modelValue: null, // value值 單個時綁定Boolean 多個時綁定Array
-    option: null, // 單選項
-    options: null, // 多選項
+    options: null, // 選項
     flex: Boolean, // 是否並排
-    combine: Boolean, // 使用value做為label
-    noLabel: Boolean, // 是否有label
+    radius: { default: "3px" }, // 圓角
+    labelBy: { default: "label" }, // label替代值
+    valueBy: { default: "value" }, // value替代值
   },
   computed: {
     value: {
@@ -52,7 +56,6 @@ export default {
   methods: {
     onChange() {
       this.$mitt.emit("validate"); // 通知FormItem校驗
-      this.$emit('change', this.$refs.checkbox.value);
     }
   }
 }
@@ -70,6 +73,12 @@ export default {
     cursor: pointer
     display: flex
     align-items: center
+    &.is-disabled
+      p
+        color: #ccc
+      .checkbox-decorator
+        border: 1px solid #e3e3e3
+        background-color: #f3f3f3
     p
       font-size: 16px
     input

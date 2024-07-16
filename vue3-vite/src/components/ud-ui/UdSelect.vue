@@ -1,11 +1,12 @@
 <template>
   <div class="ud-select">
     <select 
-      v-model="value" 
-      :data-placeholder-selected="value.length === 0"
-      v-bind="$attrs"
-      @change="onChange"
       ref="select"
+      v-model="value" 
+      v-bind="$attrs"
+      :data-placeholder-selected="value.length === 0"
+      :class="{hasValue: value.length !== 0}"
+      @change="onChange"
     >
       <option value="" disabled selected>{{ placeholder }}</option>
       <option v-for="option in optionsArr" :value="option[valueBy]" :key="option[valueBy]" :disabled="option.disabled">
@@ -132,6 +133,9 @@ export default {
     transition: all 0.2s ease
     transition-property: border
     cursor: pointer
+    &.hasValue
+      &[data-placeholder-selected]
+        color: #000
     option
       color: #000
     &:focus

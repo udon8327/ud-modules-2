@@ -1,37 +1,20 @@
 <template>
   <div class="ud-radio" :class="{'is-flex': flex}">
-
-    <label v-if="option">
+    <label v-for="option in options" :key="option[valueBy]" :class="{'is-disabled': option.disabled}">
       <input
         ref="radio"
         type="radio"
         v-model="value"
         v-bind="$attrs"
-        :value="option"
-        @change="onChange"
-      >
-      <div class="radio-decorator"
-        :style="{'border-radius': radius}"
-      ></div>
-      <p v-if="combine">{{ option }}</p>
-    </label>
-
-    <label v-for="option in options" :key="option.value" v-if="options" :class="{'is-disabled': option.disabled}">
-      <input
-        ref="radio"
-        type="radio"
-        v-model="value"
-        v-bind="$attrs"
-        :value="option.value"
+        :value="option[valueBy]"
         :disabled="option.disabled"
         @change="onChange"
       >
       <div class="radio-decorator"
         :style="{'border-radius': radius}"
       ></div>
-      <p>{{ combine ? option.value : option.label }}</p>
+      <p>{{ option[labelBy] }}</p>
     </label>
-
   </div>
 </template>
 
@@ -40,12 +23,12 @@ export default {
   name: 'UdRadio',
   inheritAttrs: false,
   props: {
-    modelValue: null, // value值
-    option: null, // 單選項[string, number]
-    options: null, // 多選項[object]
+    modelValue: null,
+    options: null, // 選項[object]
     flex: Boolean, // 是否並排
     radius: { default: "50px" }, // 圓角
-    combine: Boolean // 使用value做為label
+    labelBy: { default: "label" }, // label替代值
+    valueBy: { default: "value" }, // value替代值
   },
   computed: {
     value: {
@@ -56,7 +39,6 @@ export default {
   methods: {
     onChange() {
       this.$mitt.emit("validate"); // 通知FormItem校驗
-      // this.$emit('change', this.$refs.radio.value);
     }
   }
 }
