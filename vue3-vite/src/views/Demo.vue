@@ -1,18 +1,5 @@
 <template lang="pug">
 #demo
-  .grid-area
-    .grid-wrapper
-      .grid 1
-      .grid 2
-      .grid 3
-      .grid 4
-      .grid 5
-      .grid 6
-      .grid 7
-      .grid 8
-      .grid 9
-      .grid 10
-    
   .link-button
     ud-button(@click="toIndex" circle plain) X
   ud-form(:rules="rules" :model="formData" ref="form")
@@ -69,10 +56,13 @@
 </template>
 
 <script>
+import Tree from "@/components/Tree.vue";
 
 export default {
   name: "Index",
-  components: {},
+  components: {
+    Tree,
+  },
   data() {
     return {
       isModalShow: false,
@@ -148,7 +138,8 @@ export default {
       ],
     };
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     getRandom() {
       console.log(this.getRandom());
@@ -182,21 +173,4 @@ export default {
   position: absolute
   right: 10px
   top: 10px
-
-.grid-area
-  background-color: rgba(aqua, 0.5)
-  padding: 15px
-  .grid-wrapper
-    display: grid
-    grid-template-columns: 1fr 1fr 1fr
-    grid-auto-rows: minmax(100px, auto)
-    column-gap: 10px
-    row-gap: 10px
-    .grid
-      border: 1px solid #ccc
-      &:nth-of-type(1)
-        grid-column-start: 1
-        grid-column-end: 3
-        grid-row-start: 1
-        grid-row-end: 4
 </style>

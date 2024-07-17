@@ -17,6 +17,11 @@ const router = createRouter({
       name: 'demo',
       component: () => import('@/views/Demo.vue')
     },
+    {
+      path: '/tree-demo',
+      name: 'TreeDemo',
+      component: () => import('@/views/TreeDemo.vue')
+    },
 
     // 錯誤頁
     {

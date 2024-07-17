@@ -34,5 +34,9 @@ export default {
 };
 </script> -->
 
+<style lang="sass">
+.container
+  max-width: 100% !important
+</style>
 <style lang="sass" scoped>
 </style>
