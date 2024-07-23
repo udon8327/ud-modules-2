@@ -3,8 +3,13 @@
   .link-button
     ud-button(@click="toIndex" circle plain) X
   .tree-area
-    ud-input(v-model="treeName")
-    tree(:data="treeList")
+    .tree-trigger-area
+      .tree-trigger
+        h6 觸發條件
+        p 加入好友
+    .tree-line
+    .tree-condition-area
+      tree(:data="treeList")
   .grid-area
     .grid-wrapper
       .grid 1
@@ -32,8 +37,10 @@ export default {
       treeName: "",
       treeList: [
         {
-          label: "測試",
-          layer: 1,
+          type: "",
+          name: "條件",
+          days: 1,
+          condition: {},
           children: [],
         }
       ],
@@ -42,17 +49,21 @@ export default {
   mounted() {
     this.$mitt.on("addItem", (val) => {
       // console.log("addItem", val);
-      if (val.item.length < 4) {
-        val.item.push({
-          label: this.treeName || "測試",
-          children: [],
-        });
-      }
+      val.item.push({
+        type: "",
+        name: "條件",
+        days: 1,
+        condition: {},
+        children: [],
+      });
     });
     this.$mitt.on("addChildren", (val) => {
       // console.log("addChildren", val);
       val.item.children.push({
-        label: this.treeName || "測試",
+        type: "",
+        name: "條件",
+        days: 1,
+        condition: {},
         children: [],
       });
     });
@@ -79,6 +90,31 @@ export default {
   position: absolute
   right: 10px
   top: 10px
+.tree-area
+  padding: 15px
+  display: flex
+  .tree-trigger-area
+    flex: 0 0 1
+    .tree-trigger
+      width: 120px
+      border: 1px solid #ccc
+      text-align: center
+      cursor: pointer
+      h6
+        background-color: #eee
+        padding: 4px
+      p
+        padding: 8px
+  .tree-line
+    width: 40px
+    flex: 0 0 40px
+    height: 1px
+    background-color: #ccc
+    margin-top: 50px
+  .tree-condition-area
+    flex: 1 1 0
+    margin-left: -160px
+    margin-top: 115px
 .grid-area
   background-color: rgba(aqua, 0.5)
   padding: 15px
