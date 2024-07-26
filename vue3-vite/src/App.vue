@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
-  header
-    img(src="@/assets/images/logo/logo.png")
+  //- header
+  //-   img(src="@/assets/images/logo/logo.png")
   .container
     .wrapper
       router-view
