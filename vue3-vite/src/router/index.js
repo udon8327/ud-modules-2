@@ -5,12 +5,12 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      redirect: "/index",
+      component: () => import('@/views/TreeDemo.vue')
     },
     {
       path: "/index",
       name: "Index",
-      component: () => import("@/views/TreeDemo.vue"),
+      component: () => import("@/views/Index.vue"),
     },
     {
       path: '/demo',
