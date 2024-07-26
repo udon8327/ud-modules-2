@@ -1,7 +1,5 @@
 <template lang="pug">
 #tree-demo
-  .link-button
-    ud-button(@click="toIndex" circle plain) X
   .tree-area
     .tree-trigger-area
       .tree-trigger
@@ -61,9 +59,6 @@ export default {
     });
   },
   methods: {
-    toIndex() {
-      this.$router.push("/index");
-    },
   },
 };
 </script>
@@ -74,6 +69,8 @@ export default {
 </style>
 
 <style lang="sass" scoped>
+h6, p
+  font-size: 14px
 .link-button
   position: absolute
   right: 10px
@@ -95,8 +92,14 @@ export default {
   .tree-line
     width: 1px
     height: 40px
-    background-color: #ccc
+    background-color: #000
     margin-left: 70px
+    position: relative
+    &::after
+      content: "v"
+      position: absolute
+      bottom: -6px
+      transform: translate(-45%, 0%)
   .tree-condition-area
     display: flex
     align-items: flex-start

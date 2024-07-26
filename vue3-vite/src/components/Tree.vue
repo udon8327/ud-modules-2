@@ -2,16 +2,18 @@
 .tree-wrapper(v-for="(item, index) in data" :key="item.id")
   .condition-wrapper
     .condition
-      .days
+      .days(:class="{'hidden': index > 0}")
         p {{ item.days }}天後
-      p {{ item.name + (index + 1) }}
-      .button-wrapper
-        ud-button(@click="addChildren(index, item)" circle plain :class="{'disabled': item.children?.length !== 0}") ↓
-        ud-button(@click="addItem(index)" circle plain :class="{'disabled': index !== data.length - 1 || index > 2}") →
-        ud-button(@click="removeItem(index)" circle plain) ✕
-      .line-v
-      .tree-end(v-if="item.children?.length === 0")
-        p 結束
+        .line-v
+      .content-wrapper
+        h6 {{ item.name + (index + 1) }}
+        .button-wrapper
+          ud-button(@click="addChildren(index, item)" circle plain :class="{'disabled': item.children?.length !== 0}") ↓
+          ud-button(@click="addItem(index)" circle plain :class="{'disabled': index !== data.length - 1 || index > 2}") →
+          ud-button(@click="removeItem(index)" circle plain) ✕
+        .line-v
+        .tree-end(v-if="item.children?.length === 0")
+          p 結束
     .line-h(v-if="index < data.length - 1")
   .children-wrapper
     tree(:data="item.children" v-if="item.children?.length > 0")
@@ -58,6 +60,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+:deep(.ud-button)
+  button
+    width: 30px !important
+    height: 30px !important
+    padding: 0
 .tree-wrapper
   position: relative
   .condition-wrapper
@@ -66,37 +73,64 @@ export default {
     .condition
       width: 140px
       flex: 0 0 140px
-      border: 1px solid #ccc
       display: block
-      padding: 4px
       position: relative
       p
         width: 100%
-      .button-wrapper
-        display: flex
-        justify-content: space-between
-        ::v-deep .ud-button
-          button
-            &.disabled
-              opacity: 0.2
-              pointer-events: none
-      .line-v
-        width: 1px
-        background-color: #000
-        min-height: 25px
-        position: absolute
-        left: 50%
-        bottom: -26px
-        transform: translate(-50%, 0%)
-        &::after
-          content: "v"
+      .days
+        margin: 0 auto
+        border-radius: 50px
+        border: 1px solid #ccc
+        width: 100px
+        margin-bottom: 20px
+        position: relative
+        &.hidden
+          visibility: hidden
+        p
+          font-size: 14px
+          cursor: pointer
+        .line-v
+          width: 1px
+          background-color: #000
+          min-height: 20px
           position: absolute
-          bottom: -6px
-          transform: translate(-45%, 0%)
+          left: 50%
+          bottom: -21px
+          transform: translate(-50%, 0%)
+      .content-wrapper
+        border: 1px solid #ccc
+        padding: 8px
+        h6
+          font-size: 14px
+          background-color: #eee
+          margin: -8px -8px 8px -8px
+          padding: 4px
+          cursor: pointer
+        .button-wrapper
+          display: flex
+          justify-content: space-between
+          :deep(.ud-button)
+            button
+              &.disabled
+                opacity: 0.2
+                pointer-events: none
+        .line-v
+          width: 1px
+          background-color: #000
+          min-height: 25px
+          position: absolute
+          left: 50%
+          bottom: -26px
+          transform: translate(-50%, 0%)
+          &::after
+            content: "v"
+            position: absolute
+            bottom: -6px
+            transform: translate(-45%, 0%)
     .line-h
       height: 1px
       background-color: #000
-      margin-top: 48px
+      margin-top: 84px
       flex: 1 1 0
       min-width: 15px
       position: relative
@@ -109,6 +143,8 @@ export default {
         top: 50%
         transform: translate(-50%,-50%)
         font-size: 12px
+        white-space: nowrap
+        z-index: 10
   .children-wrapper
     display: flex
     align-items: flex-start
