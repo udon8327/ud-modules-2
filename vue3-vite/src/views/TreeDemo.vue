@@ -58,7 +58,7 @@ export default {
       val.item.splice(val.index, 1);
     });
     this.$mitt.on("testItem", (val) => {
-      // console.log("removeItem", val);
+      // console.log("testItem", val);
       val.item.days++;
     });
   },
