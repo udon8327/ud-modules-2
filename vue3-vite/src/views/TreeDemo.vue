@@ -49,6 +49,7 @@ export default {
   mounted() {
     this.$mitt.on("addItem", (val) => {
       // console.log("addItem", val);
+      if (val.item.length > 3) return;
       val.item.push({
         type: "",
         name: "條件",
@@ -91,12 +92,11 @@ export default {
   right: 10px
   top: 10px
 .tree-area
-  padding: 15px
-  display: flex
+  padding: 15px 15px 60px 15px
+  overflow-x: auto
   .tree-trigger-area
-    flex: 0 0 1
     .tree-trigger
-      width: 120px
+      width: 140px
       border: 1px solid #ccc
       text-align: center
       cursor: pointer
@@ -106,15 +106,13 @@ export default {
       p
         padding: 8px
   .tree-line
-    width: 40px
-    flex: 0 0 40px
-    height: 1px
+    width: 1px
+    height: 40px
     background-color: #ccc
-    margin-top: 50px
+    margin-left: 70px
   .tree-condition-area
-    flex: 1 1 0
-    margin-left: -160px
-    margin-top: 115px
+    display: flex
+    align-items: flex-start
 .grid-area
   background-color: rgba(aqua, 0.5)
   padding: 15px
