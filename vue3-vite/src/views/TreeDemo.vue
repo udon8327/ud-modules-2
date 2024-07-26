@@ -57,6 +57,10 @@ export default {
       // console.log("removeItem", val);
       val.item.splice(val.index, 1);
     });
+    this.$mitt.on("testItem", (val) => {
+      // console.log("removeItem", val);
+      val.item.days++;
+    });
   },
   methods: {
   },
@@ -91,7 +95,7 @@ h6, p
         padding: 8px
   .tree-line
     width: 1px
-    height: 40px
+    height: 50px
     background-color: #000
     margin-left: 70px
     position: relative

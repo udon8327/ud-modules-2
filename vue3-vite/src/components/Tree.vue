@@ -11,6 +11,7 @@
           ud-button(@click="addChildren(index, item)" circle plain :class="{'disabled': item.children?.length !== 0}") ↓
           ud-button(@click="addItem(index)" circle plain :class="{'disabled': index !== data.length - 1 || index > 2}") →
           ud-button(@click="removeItem(index)" circle plain) ✕
+          ud-button(@click="testItem(index, item)" circle plain v-if="index === 0") +
         .line-v
         .tree-end(v-if="item.children?.length === 0")
           p 結束
@@ -55,6 +56,12 @@ export default {
         index,
       });
     },
+    testItem(index, item) {
+      this.$mitt.emit("testItem", {
+        item,
+        index,
+      });
+    },
   }
 }
 </script>
@@ -68,7 +75,7 @@ export default {
 .tree-wrapper
   position: relative
   .condition-wrapper
-    padding: 0px 0px 25px 0px
+    padding: 0px 0px 50px 0px
     display: flex
     .condition
       width: 140px
@@ -117,10 +124,10 @@ export default {
         .line-v
           width: 1px
           background-color: #000
-          min-height: 25px
+          min-height: 50px
           position: absolute
           left: 50%
-          bottom: -26px
+          bottom: -50px
           transform: translate(-50%, 0%)
           &::after
             content: "v"
@@ -132,7 +139,7 @@ export default {
       background-color: #000
       margin-top: 84px
       flex: 1 1 0
-      min-width: 15px
+      min-width: 50px
       position: relative
       &::after
         content: "其他"
@@ -153,7 +160,7 @@ export default {
     padding: 5px 15px
     position: absolute
     left: 50%
-    bottom: -60px
+    bottom: -86px
     transform: translate(-50%, 0%)
 .condition
   display: flex
