@@ -3,7 +3,9 @@
   .condition-wrapper
     .condition
       .days(:class="{'hidden': index > 0}")
-        p {{ item.days }}天後
+        .days-wrapper
+          p {{ item.days }}天後
+          ud-button(@click="testItem(index, item)" circle plain v-if="index === 0") ＋
         .line-v
       .content-wrapper
         h6 {{ item.name + (index + 1) }}
@@ -11,7 +13,6 @@
           ud-button(@click="addChildren(index, item)" circle plain :class="{'disabled': item.children?.length !== 0}") ↓
           ud-button(@click="addItem(index)" circle plain :class="{'disabled': index !== data.length - 1 || index > 2}") →
           ud-button(@click="removeItem(index)" circle plain) ✕
-          ud-button(@click="testItem(index, item)" circle plain v-if="index === 0") ＋
         .line-v
         .tree-end(v-if="item.children?.length === 0")
           p 結束
@@ -93,9 +94,19 @@ export default {
         position: relative
         &.hidden
           visibility: hidden
-        p
-          font-size: 14px
-          cursor: pointer
+        .days-wrapper
+          display: flex
+          align-items: center
+          padding: 3px
+          p
+            font-size: 14px
+            cursor: pointer
+            transform: translate(5px, 0)
+          :deep(.ud-button)
+            button
+              width: 25px !important
+              height: 25px !important
+              padding: 0
         .line-v
           width: 1px
           background-color: #000
