@@ -6,13 +6,13 @@
         p {{ item.days }}天後
       p {{ item.name + (index + 1) }}
       .button-wrapper
-        ud-button(@click="addChildren(index, item)" circle plain) ↓
-        ud-button(@click="addItem(index)" circle plain) →
+        ud-button(@click="addChildren(index, item)" circle plain :class="{'disabled': item.children?.length !== 0}") ↓
+        ud-button(@click="addItem(index)" circle plain :class="{'disabled': index !== data.length - 1 || index > 2}") →
         ud-button(@click="removeItem(index)" circle plain) ✕
       .line-v
+      .tree-end(v-if="item.children?.length === 0")
+        p 結束
     .line-h(v-if="index < data.length - 1")
-    .tree-end(v-if="item.children?.length === 0")
-      p 結束
   .children-wrapper
     tree(:data="item.children" v-if="item.children?.length > 0")
 </template>
@@ -66,7 +66,6 @@ export default {
     .condition
       width: 140px
       flex: 0 0 140px
-      cursor: pointer
       border: 1px solid #ccc
       display: block
       padding: 4px
@@ -76,20 +75,40 @@ export default {
       .button-wrapper
         display: flex
         justify-content: space-between
+        ::v-deep .ud-button
+          button
+            &.disabled
+              opacity: 0.2
+              pointer-events: none
       .line-v
         width: 1px
-        background-color: #ccc
+        background-color: #000
         min-height: 25px
         position: absolute
         left: 50%
         bottom: -26px
         transform: translate(-50%, 0%)
+        &::after
+          content: "v"
+          position: absolute
+          bottom: -6px
+          transform: translate(-45%, 0%)
     .line-h
       height: 1px
-      background-color: #ccc
+      background-color: #000
       margin-top: 48px
       flex: 1 1 0
       min-width: 15px
+      position: relative
+      &::after
+        content: "其他"
+        background-color: #fff
+        padding: 0 3px
+        position: absolute
+        left: 50%
+        top: 50%
+        transform: translate(-50%,-50%)
+        font-size: 12px
   .children-wrapper
     display: flex
     align-items: flex-start
@@ -98,7 +117,7 @@ export default {
     padding: 5px 15px
     position: absolute
     left: 50%
-    bottom: -35px
+    bottom: -60px
     transform: translate(-50%, 0%)
 .condition
   display: flex

@@ -10,18 +10,6 @@
     .tree-line
     .tree-condition-area
       tree(:data="treeList")
-  .grid-area
-    .grid-wrapper
-      .grid 1
-      .grid 2
-      .grid 3
-      .grid 4
-      .grid 5
-      .grid 6
-      .grid 7
-      .grid 8
-      .grid 9
-      .grid 10
 </template>
 
 <script>
@@ -49,7 +37,6 @@ export default {
   mounted() {
     this.$mitt.on("addItem", (val) => {
       // console.log("addItem", val);
-      if (val.item.length > 3) return;
       val.item.push({
         type: "",
         name: "條件",
@@ -113,20 +100,4 @@ export default {
   .tree-condition-area
     display: flex
     align-items: flex-start
-.grid-area
-  background-color: rgba(aqua, 0.5)
-  padding: 15px
-  .grid-wrapper
-    display: grid
-    grid-template-columns: 1fr 1fr 1fr
-    grid-auto-rows: minmax(100px, auto)
-    column-gap: 10px
-    row-gap: 10px
-    .grid
-      border: 1px solid #ccc
-      &:nth-of-type(1)
-        grid-column-start: 1
-        grid-column-end: 3
-        grid-row-start: 1
-        grid-row-end: 4
 </style>
