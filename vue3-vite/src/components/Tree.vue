@@ -11,7 +11,7 @@
           ud-button(@click="addChildren(index, item)" circle plain :class="{'disabled': item.children?.length !== 0}") ↓
           ud-button(@click="addItem(index)" circle plain :class="{'disabled': index !== data.length - 1 || index > 2}") →
           ud-button(@click="removeItem(index)" circle plain) ✕
-          ud-button(@click="testItem(index, item)" circle plain v-if="index === 0") +
+          ud-button(@click="testItem(index, item)" circle plain v-if="index === 0") ＋
         .line-v
         .tree-end(v-if="item.children?.length === 0")
           p 結束
