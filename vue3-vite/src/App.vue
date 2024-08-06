@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
-  //- header
-  //-   img(src="@/assets/images/logo/logo.png")
+  header
+    img(src="@/assets/images/logo/logo.png")
   .container
     .wrapper
       router-view
@@ -15,6 +15,7 @@ header
   background-color: $main
   height: 72px
   position: relative
+  margin-bottom: 15px
   img
     height: 100%
     position: absolute
@@ -23,7 +24,7 @@ header
     transform: translate(-50%, -50%)
 
 .container
-  max-width: 460px
+  max-width: 540px
   margin: 0 auto
   text-align: center
   min-height: 100%

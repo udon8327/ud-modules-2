@@ -33,6 +33,7 @@ export default {
     };
   },
   mounted() {
+    document.querySelector(".container").style.maxWidth = "100%";
     this.$mitt.on("addItem", (val) => {
       // console.log("addItem", val);
       val.item.push({
@@ -66,11 +67,6 @@ export default {
   },
 };
 </script>
-
-<style lang="sass">
-.container
-  max-width: 100% !important
-</style>
 
 <style lang="sass" scoped>
 h6, p

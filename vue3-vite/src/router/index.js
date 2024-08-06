@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: () => import('@/views/TreeDemo.vue')
+      redirect: "/index",
     },
     {
       path: "/index",
