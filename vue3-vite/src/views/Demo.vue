@@ -1,7 +1,5 @@
 <template lang="pug">
 #demo
-  .link-button
-    ud-button(@click="toIndex" circle plain) X
   ud-form(:rules="rules" :model="formData" ref="form")
     ud-form-item(label="姓名" prop="name" flex)
       ud-input(placeholder="請輸入您的姓名" v-model="formData.name")
@@ -168,9 +166,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-.link-button
-  position: absolute
-  right: 10px
-  top: 10px
-</style>
+<style lang="sass" scoped></style>

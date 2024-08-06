@@ -2,7 +2,6 @@
 #index
   ud-input(v-model="test")
   p {{ test }}
-  ud-button(@click="toUrl('/demo')") ud-modules
   ud-button(@click="toUrl('/tree-demo')") 漸進式訊息demo
 </template>
 
