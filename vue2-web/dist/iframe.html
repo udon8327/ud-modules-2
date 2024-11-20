@@ -15,13 +15,16 @@
     <title>ud-vue2</title>
     <link href="css/main.css" rel="stylesheet">
     <link href="css/ud-modules.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
+    <link href="css/iframe.css" rel="stylesheet">
   </head>
   <body>
     <noscript>Your browser does not support JavaScript!</noscript>
     <div id="app" v-cloak>
       <div class="container">
         <div class="wrapper">
+          <div class="close" @click="close()">
+            <p>✕</p>
+          </div><img src="img/game.jpg" alt="">
         </div>
       </div>
     </div>
@@ -39,6 +42,6 @@
     </script>
     <script src="js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/iframe.js"></script>
   </body>
 </html>

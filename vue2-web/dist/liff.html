@@ -15,13 +15,21 @@
     <title>ud-vue2</title>
     <link href="css/main.css" rel="stylesheet">
     <link href="css/ud-modules.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css" rel="stylesheet">
+    <link href="css/liff.css" rel="stylesheet">
   </head>
   <body>
     <noscript>Your browser does not support JavaScript!</noscript>
     <div id="app" v-cloak>
       <div class="container">
         <div class="wrapper">
+          <h1>LIFF</h1>
+          <p>displayName: {{ profile.displayName }}</p><img :src="profile.pictureUrl" alt="">
+          <p>userId: {{ profile.userId }}</p><br>
+          <p>liff.state: {{ liffState }}</p>
+          <p>id: {{ id }}</p>
         </div>
       </div>
     </div>
@@ -39,6 +47,8 @@
     </script>
     <script src="js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
-    <script src="js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js"></script>
+    <script src="js/liff-login.js"></script>
+    <script src="js/liff.js"></script>
   </body>
 </html>
