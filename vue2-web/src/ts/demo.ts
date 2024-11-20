@@ -13,8 +13,8 @@ let vm = new Vue({
     birth: "",
     user: {
       name: "",
-      phone: ["", "", ""],
-      note: "",
+      phone: "",
+      email: "",
       age: "",
       birthday: "",
       radio: "",
@@ -28,11 +28,12 @@ let vm = new Vue({
       captcha: "",
       captchaCode: "",
       isAgree: false,
+      note: "",
     },
     rules: {
       name: [{type: "required"}, {type: "name" }],
-      phone: [{type: "required"}],
-      note: [{type: "required"}],
+      phone: [{type: "required"}, {type: "phone" }],
+      email: [{type: "required"}, {type: "email" }],
       age: [{type: "required"}, {type: "number" }],
       birthday: [{type: "required"}, {type: "date" }],
       radio: [{type: "required"}],
@@ -116,21 +117,6 @@ let vm = new Vue({
   computed: {
   },
   methods: {
-    setItem() {
-      sessionStorage.setItem("sessionStorage", "true");
-      localStorage.setItem("localStorage", "true");
-    },
-    removeItem() {
-      sessionStorage.removeItem("sessionStorage");
-      localStorage.removeItem("localStorage");
-    },
-    tests() {
-      console.log(Date.now());
-    },
-    focus(type) {
-      $(type).focus();
-      // $(type).trigger("click");
-    },
     getData() {
       udAxios.get('test')
         .then(res => {
@@ -153,16 +139,13 @@ let vm = new Vue({
     timeup() {
       console.log('時間到');
     },
-    formSubmit: function(){
+    formSubmit() {
       this.$refs.form.validate(() => {
         this.udAlert({msg: "驗證成功!!"})
       });
     },
-    clearVerify: function(){
-      this.test = false;
-      setTimeout(() => {
-        this.test = true;
-      }, 0);
+    clearVerify() {
+
     },
     toUrl(url) {
       location.href = url;

@@ -31,30 +31,28 @@
       <div class="container">
         <div class="wrapper">
           <div class="test-area">
-            <div class="title">TEST</div>
-            <p>LIFF: {{ liffStatus }}</p>
-            <p>sessionStorage: {{ sessionStorage }}</p>
-            <p>localStorage: {{ localStorage }}</p>
-            <ud-button @click="setItem">setItem</ud-button>
-            <ud-button @click="removeItem">removeItem</ud-button>
-            <ud-button @click="toUrl('https://www.google.com.tw/')">Google</ud-button>
+            <div class="title">TEST
+              <ud-button @click="clearVerify">清除驗證</ud-button>
+              <ud-button @click="formSubmit">送出表單</ud-button>
+            </div>
           </div>
           <div class="demo-area">
             <div class="title">DEMO</div>
-            <ud-button @click="tests" throttle>TEST2</ud-button>
             <ud-form :rules="rules" :model="user" ref="form">
-              <ud-form-item label="姓名" prop="name" flex v-if="test">
-                <ud-input placeholder="請輸入您的姓名" v-model="user.name"></ud-input>
+              <ud-form-item label="姓名" prop="name" flex>
+                <ud-input v-model.trim="user.name" placeholder="請輸入您的姓名"></ud-input>
               </ud-form-item>
-              <ud-button @click="clearVerify"></ud-button>
-              <ud-form-item label="備註" prop="note" flex>
-                <ud-textarea placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10"></ud-textarea>
+              <ud-form-item label="電話" prop="phone" flex>
+                <ud-input v-model.trim="user.phone" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10"></ud-input>
+              </ud-form-item>
+              <ud-form-item label="Email" prop="email" flex>
+                <ud-input v-model.trim="user.email" placeholder="請輸入您的Email" inputmode="email"></ud-input>
               </ud-form-item>
               <ud-form-item label="年齡" prop="age" flex>
-                <ud-input placeholder="請輸入您的年齡" v-model="user.age" type="tel"></ud-input>
+                <ud-input v-model.trim="user.age" placeholder="請輸入您的年齡" inputmode="numeric"></ud-input>
               </ud-form-item>
               <ud-form-item label="生日" prop="birthday" flex>
-                <ud-input placeholder="請輸入您的生日" v-model="user.birthday"></ud-input>
+                <ud-input v-model.trim="user.birthday" placeholder="請輸入您的生日"></ud-input>
               </ud-form-item>
               <ud-form-item label="單選" prop="radio" flex>
                 <ud-radio v-model="user.radio" :options="options" flex></ud-radio>
@@ -87,6 +85,9 @@
               </ud-form-item>
               <ud-form-item label="是否啟用" prop="isActive" flex>
                 <ud-switch v-model="user.isActive"></ud-switch>
+              </ud-form-item>
+              <ud-form-item label="備註" prop="note" flex>
+                <ud-textarea placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10"></ud-textarea>
               </ud-form-item>
               <ud-form-item label="" prop="isAgree">
                 <ud-checkbox v-model="user.isAgree" options="我同意使用者條款" solid></ud-checkbox>

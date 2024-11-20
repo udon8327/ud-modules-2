@@ -11,8 +11,8 @@ var vm = new Vue({
         birth: "",
         user: {
             name: "",
-            phone: ["", "", ""],
-            note: "",
+            phone: "",
+            email: "",
             age: "",
             birthday: "",
             radio: "",
@@ -26,11 +26,12 @@ var vm = new Vue({
             captcha: "",
             captchaCode: "",
             isAgree: false,
+            note: "",
         },
         rules: {
             name: [{ type: "required" }, { type: "name" }],
-            phone: [{ type: "required" }],
-            note: [{ type: "required" }],
+            phone: [{ type: "required" }, { type: "phone" }],
+            email: [{ type: "required" }, { type: "email" }],
             age: [{ type: "required" }, { type: "number" }],
             birthday: [{ type: "required" }, { type: "date" }],
             radio: [{ type: "required" }],
@@ -113,21 +114,6 @@ var vm = new Vue({
     },
     computed: {},
     methods: {
-        setItem: function () {
-            sessionStorage.setItem("sessionStorage", "true");
-            localStorage.setItem("localStorage", "true");
-        },
-        removeItem: function () {
-            sessionStorage.removeItem("sessionStorage");
-            localStorage.removeItem("localStorage");
-        },
-        tests: function () {
-            console.log(Date.now());
-        },
-        focus: function (type) {
-            $(type).focus();
-            // $(type).trigger("click");
-        },
         getData: function () {
             udAxios.get('test')
                 .then(function (res) {
@@ -157,11 +143,6 @@ var vm = new Vue({
             });
         },
         clearVerify: function () {
-            var _this = this;
-            this.test = false;
-            setTimeout(function () {
-                _this.test = true;
-            }, 0);
         },
         toUrl: function (url) {
             location.href = url;

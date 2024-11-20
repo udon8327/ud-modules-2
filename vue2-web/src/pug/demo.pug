@@ -17,26 +17,22 @@ block modal
 block content
   .test-area
     .title TEST
-    p LIFF: {{ liffStatus }}
-    p sessionStorage: {{ sessionStorage }}
-    p localStorage: {{ localStorage }}
-    ud-button(@click="setItem") setItem
-    ud-button(@click="removeItem") removeItem
-    ud-button(@click="toUrl('https://www.google.com.tw/')") Google
+      ud-button(@click="clearVerify") 清除驗證
+      ud-button(@click="formSubmit") 送出表單
 
   .demo-area
     .title DEMO
-    ud-button(@click="tests" throttle) TEST2
     ud-form(:rules="rules" :model="user" ref="form")
-      ud-form-item(label="姓名" prop="name" flex v-if="test")
-        ud-input(placeholder="請輸入您的姓名" v-model="user.name")
-      ud-button(@click="clearVerify")
-      ud-form-item(label="備註" prop="note" flex)
-        ud-textarea(placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10")
+      ud-form-item(label="姓名" prop="name" flex)
+        ud-input(v-model.trim="user.name" placeholder="請輸入您的姓名")
+      ud-form-item(label="電話" prop="phone" flex)
+        ud-input(v-model.trim="user.phone" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10")
+      ud-form-item(label="Email" prop="email" flex)
+        ud-input(v-model.trim="user.email" placeholder="請輸入您的Email" inputmode="email")
       ud-form-item(label="年齡" prop="age" flex)
-        ud-input(placeholder="請輸入您的年齡" v-model="user.age" type="tel")
+        ud-input(v-model.trim="user.age" placeholder="請輸入您的年齡" inputmode="numeric")
       ud-form-item(label="生日" prop="birthday" flex)
-        ud-input(placeholder="請輸入您的生日" v-model="user.birthday")
+        ud-input(v-model.trim="user.birthday" placeholder="請輸入您的生日")
       ud-form-item(label="單選" prop="radio" flex)
         ud-radio(v-model="user.radio" :options="options" flex)
       ud-form-item(label="多選" prop="checkbox" flex)
@@ -59,6 +55,8 @@ block content
           p(slot="third") 日
       ud-form-item(label="是否啟用" prop="isActive" flex)
         ud-switch(v-model="user.isActive")
+      ud-form-item(label="備註" prop="note" flex)
+        ud-textarea(placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10")
       ud-form-item(label="" prop="isAgree")
         ud-checkbox(v-model="user.isAgree" options="我同意使用者條款" solid)
         ud-checkbox(v-model="user.isAgree")
