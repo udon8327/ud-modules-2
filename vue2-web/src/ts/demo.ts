@@ -180,7 +180,6 @@ let vm = new Vue({
         });
     },
     shareTargetPicker() {
-      // shareTargetPicker只能在LIFF或外部瀏覽器(除了LINE內建瀏覽器)使用
       if (!liff.isApiAvailable('shareTargetPicker')) {
         this.udAlert(
           "您的設備不支援好友分享功能\n請更新手機系統或LINE版本"
@@ -189,13 +188,13 @@ let vm = new Vue({
         });
         return;
       }
+      // shareTargetPicker只能在LIFF或外部瀏覽器(除了LINE內建瀏覽器)使用
       if (!liff.isInClient() && liff.getLineVersion()) {
         this.udAlert(
           "請點擊活動LIFF連結進入頁面\n才可使用好友分享功能"
         ).then(() => {
           location.href = LINE_OA_URL;
         });
-
         return;
       }
       liff.shareTargetPicker([
