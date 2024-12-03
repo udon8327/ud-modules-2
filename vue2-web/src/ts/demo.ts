@@ -203,7 +203,7 @@ let vm = new Vue({
                 return;
               }
               // LINE 10.11.0 -
-              this.udAlert("已取消分享");
+              // this.udAlert("已取消分享");
             }
           })
           .catch((error) => {

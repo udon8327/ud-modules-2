@@ -198,7 +198,7 @@ var vm = new Vue({
                             return;
                         }
                         // LINE 10.11.0 -
-                        _this.udAlert("已取消分享");
+                        // this.udAlert("已取消分享");
                     }
                 })
                     .catch(function (error) {
