@@ -174,7 +174,7 @@ let vm = new Vue({
         });
     },
     shareTargetPicker() {
-      alert(liff.isInClient());
+      alert(liff.isInClient() + ", " + liff.getOS() + ", " +  liff.getVersion() + ", " +  liff.getLineVersion());
       // shareTargetPicker只能在LIFF或外部瀏覽器(除了LINE內建瀏覽器)使用
       if (liff.isApiAvailable('shareTargetPicker')) {
         liff.shareTargetPicker([
@@ -186,17 +186,19 @@ let vm = new Vue({
           .then((res) => {
             if (res) {
               this.udAlert("分享成功！").then(() => {
-                liff.closeWindow();
+                // liff.closeWindow();
               })
             } else {
               const [majorVer, minorVer] = (liff.getLineVersion() || "").split('.');
-              if (parseInt(majorVer) == 10 && parseInt(minorVer) < 11) { // LINE 10.3.0 - 10.10.0
+              if (parseInt(majorVer) == 10 && parseInt(minorVer) < 11) {
+                // LINE 10.3.0 - 10.10.0
                 this.udAlert(
                   "您的 LINE 版本較舊，可能會造成無法分享成功。若分享失敗，請升級 LINE APP 後再嘗試。"
                 );
-              } else { // LINE 10.11.0 -
-                location.href = LINE_OA_URL;
+                return;
               }
+              // LINE 10.11.0 -
+              this.udAlert("已取消分享");
             }
           })
           .catch((error) => {
