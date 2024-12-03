@@ -191,7 +191,7 @@ let vm = new Vue({
       }
       if (!liff.isInClient() && liff.getLineVersion()) {
         this.udAlert(
-          "請在LIFF連結開啟此活動"
+          "請點擊活動LIFF連結進入頁面\n才可使用好友分享功能"
         ).then(() => {
           // location.href = LINE_OA_URL;
           liff.openWindow({
