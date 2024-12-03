@@ -190,10 +190,16 @@ let vm = new Vue({
         return;
       }
       if (!liff.isInClient() && liff.getLineVersion()) {
-        liff.openWindow({
-          url: location.href,
-          external: true,
+        this.udAlert(
+          "請在LIFF連結開啟此活動"
+        ).then(() => {
+          // location.href = LINE_OA_URL;
+          liff.openWindow({
+            url: location.href,
+            external: true,
+          });
         });
+
         return;
       }
       liff.shareTargetPicker([
