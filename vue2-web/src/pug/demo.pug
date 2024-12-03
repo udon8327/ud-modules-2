@@ -16,8 +16,12 @@ block modal
 
 block content
   .test-area
-    ud-button(@click="clearVerify" plain) 清除驗證
-    ud-button(@click="formSubmit") 送出表單
+    .test-wrapper
+      ud-button(@click="clearVerify" plain) 清除驗證
+      ud-button(@click="formSubmit") 送出表單
+    .test-wrapper
+      ud-button(@click="sendMessage") 傳送訊息
+      ud-button(@click="shareTargetPicker") 好友分享
 
   .profile-area
     ud-ratio(:src="profile.pictureUrl", alt="")

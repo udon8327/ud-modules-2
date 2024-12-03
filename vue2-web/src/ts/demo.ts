@@ -158,6 +158,62 @@ let vm = new Vue({
     },
     toUrl(url) {
       location.href = url;
-    }
+    },
+    sendMessage() {
+      liff.sendMessages([
+        {
+          "type": "text",
+          "text": "Hello, World!(sendMessages)"
+        }
+      ])
+        .then(() => {
+            console.log('Message sent successfully!');
+        })
+        .catch((err) => {
+            console.error('Error sending message:', err);
+        });
+    },
+    shareTargetPicker() {
+      if (liff.isApiAvailable('shareTargetPicker')) {
+        liff.shareTargetPicker([
+          {
+            "type": "text",
+            "text": "Hello, World!(shareTargetPicker)"
+          }
+        ])
+          .then((res) => {
+            if (res) {
+              this.udAlert("分享成功！").then(() => {
+                liff.closeWindow();
+              })
+            } else {
+              const [majorVer, minorVer] = (liff.getLineVersion() || "").split('.');
+              if (parseInt(majorVer) == 10 && parseInt(minorVer) < 11) {
+                // LINE 10.3.0 - 10.10.0
+                this.udAlert(
+                  "您的 LINE 版本較舊，可能會造成無法分享成功。若分享失敗，請升級 LINE APP 後再嘗試。"
+                );
+              } else {
+                // LINE 10.11.0 -
+                // sending message canceled
+                location.href = LINE_OA_URL;
+              }
+            }
+          })
+          .catch((error) => {
+            this.udAlert({
+              msg: `${error.code === 'EXCEPTION_IN_SUBWINDOW' ? '請在 LINE APP中 開啟活動\n以便使用好友分享功能' : '訊息分享失敗，請稍後再試'}\n[${error.code}] ${error.message}`,
+            }).then(() => {
+              location.href = LINE_OA_URL;
+            })
+          });
+      } else {
+        this.udAlert(
+          "您的設備不支援好友分享功能\n請更新手機系統或LINE版本"
+        ).then(() => {
+          location.href = LINE_OA_URL;
+        })
+      }
+    },
   }
 });

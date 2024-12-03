@@ -28,8 +28,14 @@
       <div class="container">
         <div class="wrapper">
           <div class="test-area">
-            <ud-button @click="clearVerify" plain>清除驗證</ud-button>
-            <ud-button @click="formSubmit">送出表單</ud-button>
+            <div class="test-wrapper">
+              <ud-button @click="clearVerify" plain>清除驗證</ud-button>
+              <ud-button @click="formSubmit">送出表單</ud-button>
+            </div>
+            <div class="test-wrapper">
+              <ud-button @click="sendMessage">傳送訊息</ud-button>
+              <ud-button @click="shareTargetPicker">好友分享</ud-button>
+            </div>
           </div>
           <div class="profile-area">
             <ud-ratio :src="profile.pictureUrl" alt=""></ud-ratio>
