@@ -15,9 +15,6 @@
     <title>ud-vue2</title>
     <link href="css/main.css" rel="stylesheet">
     <link href="css/ud-modules.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css" rel="stylesheet">
     <link href="css/demo.css" rel="stylesheet">
   </head>
   <body>
@@ -31,74 +28,78 @@
       <div class="container">
         <div class="wrapper">
           <div class="test-area">
-            <div class="title">TEST
-              <ud-button @click="clearVerify">清除驗證</ud-button>
-              <ud-button @click="formSubmit">送出表單</ud-button>
+            <ud-button @click="clearVerify" plain>清除驗證</ud-button>
+            <ud-button @click="formSubmit">送出表單</ud-button>
+          </div>
+          <div class="profile-area">
+            <ud-ratio :src="profile.pictureUrl" alt=""></ud-ratio>
+            <div class="profile-wrapper">
+              <h6>{{ profile.displayName }}</h6>
+              <p>{{ profile.userId }}</p>
             </div>
           </div>
           <div class="demo-area">
-            <div class="title">DEMO</div>
-            <ud-form :rules="rules" :model="user" ref="form">
+            <ud-form :rules="rules" :model="formData" ref="form">
               <ud-form-item label="姓名" prop="name" flex>
-                <ud-input v-model.trim="user.name" placeholder="請輸入您的姓名"></ud-input>
+                <ud-input v-model.trim="formData.name" placeholder="請輸入您的姓名"></ud-input>
               </ud-form-item>
               <ud-form-item label="電話" prop="phone" flex>
-                <ud-input v-model.trim="user.phone" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10"></ud-input>
+                <ud-input v-model.trim="formData.phone" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10"></ud-input>
               </ud-form-item>
               <ud-form-item label="Email" prop="email" flex>
-                <ud-input v-model.trim="user.email" placeholder="請輸入您的Email" inputmode="email"></ud-input>
+                <ud-input v-model.trim="formData.email" placeholder="請輸入您的Email" inputmode="email"></ud-input>
               </ud-form-item>
               <ud-form-item label="年齡" prop="age" flex>
-                <ud-input v-model.trim="user.age" placeholder="請輸入您的年齡" inputmode="numeric"></ud-input>
+                <ud-input v-model.trim="formData.age" placeholder="請輸入您的年齡" inputmode="numeric"></ud-input>
               </ud-form-item>
               <ud-form-item label="生日" prop="birthday" flex>
-                <ud-input v-model.trim="user.birthday" placeholder="請輸入您的生日"></ud-input>
+                <ud-input v-model.trim="formData.birthday" placeholder="請輸入您的生日"></ud-input>
               </ud-form-item>
               <ud-form-item label="單選" prop="radio" flex>
-                <ud-radio v-model="user.radio" :options="options" flex></ud-radio>
+                <ud-radio v-model="formData.radio" :options="options" flex></ud-radio>
               </ud-form-item>
               <ud-form-item label="多選" prop="checkbox" flex>
-                <ud-checkbox v-model="user.checkbox" :options="options" flex></ud-checkbox>
+                <ud-checkbox v-model="formData.checkbox" :options="options" flex></ud-checkbox>
               </ud-form-item>
               <ud-form-item label="下拉" prop="select" flex>
-                <ud-select v-model="user.select" :options="options" flex center></ud-select>
+                <ud-select v-model="formData.select" :options="options" flex center></ud-select>
               </ud-form-item>
               <ud-form-item label="下拉連動" prop="selectLink" flex>
-                <ud-select-link v-model="user.selectLink" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third></ud-select-link>
+                <ud-select-link v-model="formData.selectLink" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third></ud-select-link>
               </ud-form-item>
               <ud-form-item label="下拉連動(獨立)" prop="selectLinkSp">
                 <div class="d-flex">
-                  <ud-select v-model="user.selectLinkSp[0]" :options="storeOptions" :group="user.selectLinkSp" :index="0" placeholder="請選擇縣市"></ud-select>
-                  <ud-select v-model="user.selectLinkSp[1]" :options="storeOptions" :group="user.selectLinkSp" :index="1" placeholder="請選擇店點"></ud-select>
-                  <ud-select v-model="user.selectLinkSp[2]" :options="storeOptions" :group="user.selectLinkSp" :index="2" placeholder="請選擇日期"></ud-select>
+                  <ud-select v-model="formData.selectLinkSp[0]" :options="storeOptions" :group="formData.selectLinkSp" :index="0" placeholder="請選擇縣市"></ud-select>
+                  <ud-select v-model="formData.selectLinkSp[1]" :options="storeOptions" :group="formData.selectLinkSp" :index="1" placeholder="請選擇店點"></ud-select>
+                  <ud-select v-model="formData.selectLinkSp[2]" :options="storeOptions" :group="formData.selectLinkSp" :index="2" placeholder="請選擇日期"></ud-select>
                 </div>
               </ud-form-item>
               <ud-form-item label="地址" prop="twzip" flex>
-                <ud-select-twzip ref="zip" v-model="user.twzip" flex></ud-select-twzip>
+                <ud-select-twzip ref="zip" v-model="formData.twzip" flex></ud-select-twzip>
               </ud-form-item>
               <ud-form-item label="預約日期" prop="date" flex>
-                <ud-select-date v-model="user.date" flex third roc>
+                <ud-select-date v-model="formData.date" flex third roc>
                   <p>年</p>
                   <p slot="second">月</p>
                   <p slot="third">日</p>
                 </ud-select-date>
               </ud-form-item>
               <ud-form-item label="是否啟用" prop="isActive" flex>
-                <ud-switch v-model="user.isActive"></ud-switch>
+                <ud-switch v-model="formData.isActive"></ud-switch>
               </ud-form-item>
               <ud-form-item label="備註" prop="note" flex>
-                <ud-textarea placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10"></ud-textarea>
+                <ud-textarea placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="10"></ud-textarea>
               </ud-form-item>
               <ud-form-item label="" prop="isAgree">
-                <ud-checkbox v-model="user.isAgree" options="我同意使用者條款" solid></ud-checkbox>
-                <ud-checkbox v-model="user.isAgree">
+                <ud-checkbox v-model="formData.isAgree" options="我同意使用者條款" solid></ud-checkbox>
+                <ud-checkbox v-model="formData.isAgree">
                   <p>我同意<a href="https://www.google.com.tw/">使用者條款</a></p>
                 </ud-checkbox>
               </ud-form-item>
               <ud-form-item label="驗證碼" prop="captcha" flex>
                 <div class="captcha-wrapper">
-                  <ud-input v-model="user.captcha" placeholder="驗證碼" maxlength="4"></ud-input>
-                  <ud-captcha v-model="user.captchaCode"></ud-captcha>
+                  <ud-input v-model="formData.captcha" placeholder="驗證碼" maxlength="4"></ud-input>
+                  <ud-captcha v-model="formData.captchaCode"></ud-captcha>
                 </div>
               </ud-form-item>
               <div style="margin-bottom: 60px"></div>
@@ -132,9 +133,9 @@
         `);
       }
     </script>
+    <script src="js/config.js"></script>
     <script src="js/ud-modules.js"></script>
     <script src="js/ud-axios.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js"></script>
     <script src="js/demo.js"></script>
   </body>
 </html>

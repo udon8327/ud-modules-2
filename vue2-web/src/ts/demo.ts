@@ -3,15 +3,14 @@ declare var $: (selector: string) => any;
 let vm = new Vue({
   el: "#app",
   data: {
-    test: true,
+    profile: {
+      userId: "",
+      displayName: "",
+      pictureUrl: "",
+    },
     isModalShow: false,
     isCollapse: false,
-    sessionStorage: "",
-    localStorage: "",
-    liffStatus: "",
-    gender: "",
-    birth: "",
-    user: {
+    formData: {
       name: "",
       phone: "",
       email: "",
@@ -83,40 +82,50 @@ let vm = new Vue({
     ],
   },
   mounted() {
-    // liff.init({liffId: "1655285115-LaWdxbOP"}).then(() => {
-    //   console.log("liff init success");
-    //   this.sessionStorage = sessionStorage.getItem("sessionStorage");
-    //   this.localStorage = localStorage.getItem("localStorage");
-    //   this.liffStatus = "init success";
-    // }).catch(() => {
-    //   console.log("liff init error");
-    // })
-    // udAxios.post("/tests", {}, {
-    //   noAlert: true,
-    // })
-    //   .then((res) => {
-    //     console.log('res: ', res);
-    //   })
-    // this.udAlert({
-    //   confirm: true,
-    //   maskClose: true,
-    //   btnClose: true,
-    //   scrollLock: false,
-    //   title: "錯誤",
-    //   message: "發生錯誤\n請稍候再試<i>！</i>",
-    //   confirmText: "確定鈕",
-    //   onConfirm: () => {
-    //     console.log("點擊確定");
-    //   },
-    //   cancelText: "取消鈕",
-    // }).catch(() => {
-    //   console.log("點擊取消");
-    // })
-    // this.postData();
+    this.liffLogin();
   },
   computed: {
   },
   methods: {
+    liffLogin() {
+      liff
+        .init({
+          liffId: LINE_LIFF_ID,
+        })
+        .then(() => {
+          // 檢查是否登入
+          if (!liff.isLoggedIn()) {
+            liff.login({ redirectUri: location.href });
+            return;
+          }
+          // 檢查是否好友
+          liff
+            .getFriendship()
+            .then((data) => {
+              if (data.friendFlag) {
+                liff.getProfile().then((res) => {
+                  this.profile = res;
+                })
+              } else {
+                location.href = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${
+                  LINE_LOGIN_CHANNEL_ID
+                }&redirect_uri=${encodeURIComponent(
+                  location.href
+                )}&scope=profile%20openid%20phone%20email&bot_prompt=aggressive&prompt=consent&state=${Date.now()}`;
+              }
+            })
+            .catch(() => {
+              udAlert(`LIFF初始化失敗，請稍後再試`).then(() => {
+                location.href = LINE_OA_URL;
+              });
+            });
+        })
+        .catch((err) => {
+          udAlert(`[${err.code}] ${err.message}\nLIFF初始化失敗，請稍後再試`).then(() => {
+            location.href = LINE_OA_URL
+          });
+        });
+    },
     getData() {
       udAxios.get('test')
         .then(res => {

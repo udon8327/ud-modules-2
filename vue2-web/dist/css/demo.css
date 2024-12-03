@@ -1,31 +1,44 @@
-.test {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  color: black; }
-
-.test-area, .demo-area {
-  border: 1px solid #ccc;
-  padding: 15px 5%;
-  border-radius: 10px;
+.test-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin-bottom: 15px; }
-  .test-area .title, .demo-area .title {
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px; }
-  .test-area .ud-button, .demo-area .ud-button {
-    margin-bottom: 15px; }
+  .test-area .ud-button {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 49%;
+    flex: 0 0 49%; }
 
-.captcha-wrapper {
+.profile-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 15px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .profile-area .ud-ratio {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 15%;
+    flex: 0 0 15%;
+    border-radius: 50%;
+    overflow: hidden; }
+  .profile-area .profile-wrapper {
+    margin-left: 10px; }
+    .profile-area .profile-wrapper p {
+      color: #999;
+      font-size: 14px; }
+
+.demo-area .captcha-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; }
-  .captcha-wrapper .ud-input {
+  .demo-area .captcha-wrapper .ud-input {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 40%;
     flex: 0 0 40%;

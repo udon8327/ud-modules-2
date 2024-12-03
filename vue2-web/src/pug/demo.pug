@@ -1,9 +1,9 @@
 extends _layout.pug
 
 block css
-  link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet')
-  link(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css' rel='stylesheet')
-  link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css' rel='stylesheet')
+  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet')
+  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css' rel='stylesheet')
+  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css' rel='stylesheet')
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet')
   link(href='css/demo.css' rel='stylesheet')
 
@@ -16,55 +16,59 @@ block modal
 
 block content
   .test-area
-    .title TEST
-      ud-button(@click="clearVerify") 清除驗證
-      ud-button(@click="formSubmit") 送出表單
+    ud-button(@click="clearVerify" plain) 清除驗證
+    ud-button(@click="formSubmit") 送出表單
+
+  .profile-area
+    ud-ratio(:src="profile.pictureUrl", alt="")
+    .profile-wrapper
+      h6 {{ profile.displayName }}
+      p {{ profile.userId }}
 
   .demo-area
-    .title DEMO
-    ud-form(:rules="rules" :model="user" ref="form")
+    ud-form(:rules="rules" :model="formData" ref="form")
       ud-form-item(label="姓名" prop="name" flex)
-        ud-input(v-model.trim="user.name" placeholder="請輸入您的姓名")
+        ud-input(v-model.trim="formData.name" placeholder="請輸入您的姓名")
       ud-form-item(label="電話" prop="phone" flex)
-        ud-input(v-model.trim="user.phone" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10")
+        ud-input(v-model.trim="formData.phone" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10")
       ud-form-item(label="Email" prop="email" flex)
-        ud-input(v-model.trim="user.email" placeholder="請輸入您的Email" inputmode="email")
+        ud-input(v-model.trim="formData.email" placeholder="請輸入您的Email" inputmode="email")
       ud-form-item(label="年齡" prop="age" flex)
-        ud-input(v-model.trim="user.age" placeholder="請輸入您的年齡" inputmode="numeric")
+        ud-input(v-model.trim="formData.age" placeholder="請輸入您的年齡" inputmode="numeric")
       ud-form-item(label="生日" prop="birthday" flex)
-        ud-input(v-model.trim="user.birthday" placeholder="請輸入您的生日")
+        ud-input(v-model.trim="formData.birthday" placeholder="請輸入您的生日")
       ud-form-item(label="單選" prop="radio" flex)
-        ud-radio(v-model="user.radio" :options="options" flex)
+        ud-radio(v-model="formData.radio" :options="options" flex)
       ud-form-item(label="多選" prop="checkbox" flex)
-        ud-checkbox(v-model="user.checkbox" :options="options" flex)
+        ud-checkbox(v-model="formData.checkbox" :options="options" flex)
       ud-form-item(label="下拉" prop="select" flex)
-        ud-select(v-model="user.select" :options="options" flex center)
+        ud-select(v-model="formData.select" :options="options" flex center)
       ud-form-item(label="下拉連動" prop="selectLink" flex)
-        ud-select-link(v-model="user.selectLink" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third)
+        ud-select-link(v-model="formData.selectLink" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third)
       ud-form-item(label="下拉連動(獨立)" prop="selectLinkSp")
         .d-flex
-          ud-select(v-model="user.selectLinkSp[0]" :options="storeOptions" :group="user.selectLinkSp" :index="0" placeholder="請選擇縣市")
-          ud-select(v-model="user.selectLinkSp[1]" :options="storeOptions" :group="user.selectLinkSp" :index="1" placeholder="請選擇店點")
-          ud-select(v-model="user.selectLinkSp[2]" :options="storeOptions" :group="user.selectLinkSp" :index="2" placeholder="請選擇日期")
+          ud-select(v-model="formData.selectLinkSp[0]" :options="storeOptions" :group="formData.selectLinkSp" :index="0" placeholder="請選擇縣市")
+          ud-select(v-model="formData.selectLinkSp[1]" :options="storeOptions" :group="formData.selectLinkSp" :index="1" placeholder="請選擇店點")
+          ud-select(v-model="formData.selectLinkSp[2]" :options="storeOptions" :group="formData.selectLinkSp" :index="2" placeholder="請選擇日期")
       ud-form-item(label="地址" prop="twzip" flex)
-        ud-select-twzip(ref="zip" v-model="user.twzip" flex)
+        ud-select-twzip(ref="zip" v-model="formData.twzip" flex)
       ud-form-item(label="預約日期" prop="date" flex)
-        ud-select-date(v-model="user.date" flex third roc)
+        ud-select-date(v-model="formData.date" flex third roc)
           p 年
           p(slot="second") 月
           p(slot="third") 日
       ud-form-item(label="是否啟用" prop="isActive" flex)
-        ud-switch(v-model="user.isActive")
+        ud-switch(v-model="formData.isActive")
       ud-form-item(label="備註" prop="note" flex)
-        ud-textarea(placeholder="請輸入您的備註" v-model="user.note" show-limit :limit="10")
+        ud-textarea(placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="10")
       ud-form-item(label="" prop="isAgree")
-        ud-checkbox(v-model="user.isAgree" options="我同意使用者條款" solid)
-        ud-checkbox(v-model="user.isAgree")
+        ud-checkbox(v-model="formData.isAgree" options="我同意使用者條款" solid)
+        ud-checkbox(v-model="formData.isAgree")
           p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
       ud-form-item(label="驗證碼" prop="captcha" flex)
         .captcha-wrapper
-          ud-input(v-model="user.captcha" placeholder="驗證碼" maxlength="4")
-          ud-captcha(v-model="user.captchaCode")
+          ud-input(v-model="formData.captcha" placeholder="驗證碼" maxlength="4")
+          ud-captcha(v-model="formData.captchaCode")
       div(style="margin-bottom: 60px")
 
       ud-button(@click="formSubmit") 送出表單
@@ -80,6 +84,7 @@ block content
       ud-ellipsis(:max-line="2") 文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略
       br
       ud-countdown(:time="120" @timeup="timeup()" type="minute")
+
 block js
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js')
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js')
   script(src="js/demo.js")

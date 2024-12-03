@@ -16,7 +16,7 @@
 
 // udAxios 自定義預設值
 const udAxios = axios.create({
-  baseURL: "https://mock.udons.site", // API基礎路徑
+  baseURL: BASE_URL, // API基礎路徑
   timeout: 30000, // 請求超時時間,
   // withCredentials: true, // 允許攜帶cookie
   // headers: { // 自定義headers

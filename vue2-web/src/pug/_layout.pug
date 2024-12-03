@@ -13,8 +13,6 @@ html(lang='zh-Hant-TW')
     meta(property="og:description" content="ud-vue2")
     link(href='img/favicon.ico' rel='shortcut icon')
     title ud-vue2
-    //- link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css' rel='stylesheet')
-    //- link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css' rel='stylesheet')
     link(href='css/main.css' rel='stylesheet')
     link(href='css/ud-modules.css' rel='stylesheet')
     //- link(href='https://ud-modules.udons.site/css/ud-modules.css' rel='stylesheet')
@@ -34,7 +32,6 @@ html(lang='zh-Hant-TW')
     //- script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
     script(src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js")
-    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/index.js')
     script.
       if(!window.Vue){
         document.write(`
@@ -42,6 +39,7 @@ html(lang='zh-Hant-TW')
           <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"><\/script>
         `);
       }
+    script(src="js/config.js")
     script(src="js/ud-modules.js")
     //- script(src="https://ud-modules.udons.site/js/ud-modules.js")
     //- script(src="js/ud-modules-dev.js")
