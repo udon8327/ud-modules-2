@@ -26,6 +26,7 @@ block content
       .profile-wrapper
         h6 {{ profile.displayName }}
         p {{ profile.userId }}
+        p {{ profile.info }}
     .btn-wrapper
       ud-button(@click="sendMessage" plain) 傳送訊息
       ud-button(@click="shareTargetPicker") 好友分享

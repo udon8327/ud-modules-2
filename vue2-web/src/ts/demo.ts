@@ -9,6 +9,7 @@ let vm = new Vue({
       userId: "",
       displayName: "",
       pictureUrl: "",
+      info: "",
     },
     formData: {
       name: "",
@@ -105,6 +106,11 @@ let vm = new Vue({
               if (data.friendFlag) {
                 liff.getProfile().then((res) => {
                   this.profile = res;
+                  this.profile.info = 
+                    liff.isInClient() + ", " + 
+                    liff.getOS() + ", " + 
+                    liff.getLineVersion() + ", " + 
+                    liff.getLanguage();
                 })
               } else {
                 location.href = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${
@@ -174,7 +180,6 @@ let vm = new Vue({
         });
     },
     shareTargetPicker() {
-      alert(liff.isInClient() + ", " + liff.getOS() + ", " +  liff.getVersion() + ", " +  liff.getLineVersion());
       // shareTargetPicker只能在LIFF或外部瀏覽器(除了LINE內建瀏覽器)使用
       if (liff.isApiAvailable('shareTargetPicker')) {
         liff.shareTargetPicker([
