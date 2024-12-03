@@ -170,6 +170,8 @@ var vm = new Vue({
         },
         shareTargetPicker: function () {
             var _this = this;
+            alert(liff.isInClient());
+            // shareTargetPicker只能在LIFF或外部瀏覽器(除了LINE內建瀏覽器)使用
             if (liff.isApiAvailable('shareTargetPicker')) {
                 liff.shareTargetPicker([
                     {
