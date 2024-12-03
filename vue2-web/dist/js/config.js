@@ -8,14 +8,14 @@ switch (location.hostname) {
         BASE_URL = "https://mock.udons.site";
         LINE_LOGIN_CHANNEL_ID = "1655285115";
         LINE_OA_URL = "https://line.me/R/ti/p/@524wuemo";
-        LINE_LIFF_ID = "1655285115-AYjbLKMr";
+        LINE_LIFF_ID = "1655285115-w926gzYP";
         break;
     // 測試機
     case "ud-modules-vue2.udons.site":
         BASE_URL = "https://mock.udons.site";
         LINE_LOGIN_CHANNEL_ID = "1655285115";
         LINE_OA_URL = "https://line.me/R/ti/p/@524wuemo";
-        LINE_LIFF_ID = "1655285115-AYjbLKMr";
+        LINE_LIFF_ID = "1655285115-w926gzYP";
         break;
     // 本機開發
     default:
