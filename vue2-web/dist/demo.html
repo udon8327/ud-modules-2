@@ -27,24 +27,21 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
-          <div class="test-area">
-            <div class="test-wrapper">
-              <ud-button @click="clearVerify" plain>清除驗證</ud-button>
-              <ud-button @click="formSubmit">送出表單</ud-button>
+          <div class="test-area"></div>
+          <div class="liff-area">
+            <div class="liff-wrapper">
+              <ud-ratio :src="profile.pictureUrl" alt=""></ud-ratio>
+              <div class="profile-wrapper">
+                <h6>{{ profile.displayName }}</h6>
+                <p>{{ profile.userId }}</p>
+              </div>
             </div>
-            <div class="test-wrapper">
-              <ud-button @click="sendMessage">傳送訊息</ud-button>
+            <div class="btn-wrapper">
+              <ud-button @click="sendMessage" plain>傳送訊息</ud-button>
               <ud-button @click="shareTargetPicker">好友分享</ud-button>
             </div>
           </div>
-          <div class="profile-area">
-            <ud-ratio :src="profile.pictureUrl" alt=""></ud-ratio>
-            <div class="profile-wrapper">
-              <h6>{{ profile.displayName }}</h6>
-              <p>{{ profile.userId }}</p>
-            </div>
-          </div>
-          <div class="demo-area">
+          <div class="form-area">
             <ud-form :rules="rules" :model="formData" ref="form">
               <ud-form-item label="姓名" prop="name" flex>
                 <ud-input v-model.trim="formData.name" placeholder="請輸入您的姓名"></ud-input>
@@ -109,20 +106,27 @@
                 </div>
               </ud-form-item>
               <div style="margin-bottom: 60px"></div>
-              <ud-button @click="formSubmit">送出表單</ud-button>
-              <ud-button @click="isCollapse = !isCollapse">摺疊容器&nbsp
-                <ud-arrow color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'"></ud-arrow>
-              </ud-button>
-              <ud-collapse v-model="isCollapse" :duration="0.4">
-                <ud-ratio src="img/01.jpg" bg-size="contain"></ud-ratio>
-              </ud-collapse>
+              <div class="btn-wrapper">
+                <ud-button @click="clearVerify" plain>清除驗證</ud-button>
+                <ud-button @click="formSubmit">送出表單</ud-button>
+              </div>
+            </ud-form>
+          </div>
+          <div class="module-area">
+            <div class="btn-wrapper">
               <ud-button @click="alert()">Alert</ud-button>
               <ud-button @click="isModalShow = true">Model</ud-button>
-              <ud-html text="&lt;i&gt;用戶&lt;/i&gt;自定
+            </div>
+            <ud-button @click="isCollapse = !isCollapse">摺疊容器&nbsp
+              <ud-arrow color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'"></ud-arrow>
+            </ud-button>
+            <ud-collapse v-model="isCollapse" :duration="0.4">
+              <ud-ratio src="img/01.jpg" bg-size="contain"></ud-ratio>
+            </ud-collapse>
+            <ud-html text="&lt;i&gt;用戶&lt;/i&gt;自定
 &lt;h3&gt;義訊息&lt;/h3&gt;"></ud-html><br>
-              <ud-ellipsis :max-line="2">文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略</ud-ellipsis><br>
-              <ud-countdown :time="120" @timeup="timeup()" type="minute"></ud-countdown>
-            </ud-form>
+            <ud-ellipsis :max-line="2">文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略</ud-ellipsis><br>
+            <ud-countdown :time="120" @timeup="timeup()" type="minute"></ud-countdown>
           </div>
         </div>
       </div>

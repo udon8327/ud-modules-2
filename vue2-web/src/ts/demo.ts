@@ -3,13 +3,13 @@ declare var $: (selector: string) => any;
 let vm = new Vue({
   el: "#app",
   data: {
+    isModalShow: false,
+    isCollapse: false,
     profile: {
       userId: "",
       displayName: "",
       pictureUrl: "",
     },
-    isModalShow: false,
-    isCollapse: false,
     formData: {
       name: "",
       phone: "",

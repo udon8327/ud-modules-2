@@ -16,20 +16,21 @@ block modal
 
 block content
   .test-area
-    .test-wrapper
-      ud-button(@click="clearVerify" plain) 清除驗證
-      ud-button(@click="formSubmit") 送出表單
-    .test-wrapper
-      ud-button(@click="sendMessage") 傳送訊息
+    //- .btn-wrapper
+    //-   ud-button(@click="clearVerify" plain) 清除驗證
+    //-   ud-button(@click="formSubmit") 送出表單
+
+  .liff-area
+    .liff-wrapper
+      ud-ratio(:src="profile.pictureUrl", alt="")
+      .profile-wrapper
+        h6 {{ profile.displayName }}
+        p {{ profile.userId }}
+    .btn-wrapper
+      ud-button(@click="sendMessage" plain) 傳送訊息
       ud-button(@click="shareTargetPicker") 好友分享
 
-  .profile-area
-    ud-ratio(:src="profile.pictureUrl", alt="")
-    .profile-wrapper
-      h6 {{ profile.displayName }}
-      p {{ profile.userId }}
-
-  .demo-area
+  .form-area
     ud-form(:rules="rules" :model="formData" ref="form")
       ud-form-item(label="姓名" prop="name" flex)
         ud-input(v-model.trim="formData.name" placeholder="請輸入您的姓名")
@@ -75,19 +76,25 @@ block content
           ud-captcha(v-model="formData.captchaCode")
       div(style="margin-bottom: 60px")
 
-      ud-button(@click="formSubmit") 送出表單
-      ud-button(@click="isCollapse = !isCollapse") 摺疊容器&nbsp
-        ud-arrow(color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'")
-      ud-collapse(v-model="isCollapse" :duration="0.4")
-        ud-ratio(src="img/01.jpg" bg-size="contain")
+      .btn-wrapper
+        ud-button(@click="clearVerify" plain) 清除驗證
+        ud-button(@click="formSubmit") 送出表單
+
+  .module-area
+    .btn-wrapper
       ud-button(@click="alert()") Alert
       ud-button(@click="isModalShow = true") Model
 
-      ud-html(text="<i>用戶</i>自定\n<h3>義訊息</h3>")
-      br
-      ud-ellipsis(:max-line="2") 文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略
-      br
-      ud-countdown(:time="120" @timeup="timeup()" type="minute")
+    ud-button(@click="isCollapse = !isCollapse") 摺疊容器&nbsp
+      ud-arrow(color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'")
+    ud-collapse(v-model="isCollapse" :duration="0.4")
+      ud-ratio(src="img/01.jpg" bg-size="contain")
+
+    ud-html(text="<i>用戶</i>自定\n<h3>義訊息</h3>")
+    br
+    ud-ellipsis(:max-line="2") 文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略
+    br
+    ud-countdown(:time="120" @timeup="timeup()" type="minute")
 
 block js
   //- script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js')

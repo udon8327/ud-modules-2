@@ -1,47 +1,52 @@
-.test-area {
+.btn-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin-bottom: 10px; }
-  .test-area .test-wrapper {
+  .btn-wrapper .ud-button {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 49%;
+    flex: 0 0 49%; }
+
+.test-area {
+  margin-bottom: 15px; }
+
+.liff-area {
+  margin-bottom: 15px; }
+  .liff-area .liff-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     margin-bottom: 10px; }
-    .test-area .test-wrapper .ud-button {
+    .liff-area .liff-wrapper .ud-ratio {
       -webkit-box-flex: 0;
-      -ms-flex: 0 0 49%;
-      flex: 0 0 49%; }
+      -ms-flex: 0 0 15%;
+      flex: 0 0 15%;
+      border-radius: 50%;
+      overflow: hidden; }
+    .liff-area .liff-wrapper .profile-wrapper {
+      margin-left: 10px; }
+      .liff-area .liff-wrapper .profile-wrapper p {
+        color: #999;
+        font-size: 14px; }
 
-.profile-area {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 10px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-  .profile-area .ud-ratio {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 15%;
-    flex: 0 0 15%;
-    border-radius: 50%;
-    overflow: hidden; }
-  .profile-area .profile-wrapper {
-    margin-left: 10px; }
-    .profile-area .profile-wrapper p {
-      color: #999;
-      font-size: 14px; }
-
-.demo-area .captcha-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-  .demo-area .captcha-wrapper .ud-input {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 40%;
-    flex: 0 0 40%;
-    margin-right: 5px; }
+.form-area {
+  margin-bottom: 15px; }
+  .form-area .captcha-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .form-area .captcha-wrapper .ud-input {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 40%;
+      flex: 0 0 40%;
+      margin-right: 5px; }
