@@ -181,45 +181,50 @@ let vm = new Vue({
     },
     shareTargetPicker() {
       // shareTargetPicker只能在LIFF或外部瀏覽器(除了LINE內建瀏覽器)使用
-      if (liff.isApiAvailable('shareTargetPicker')) {
-        liff.shareTargetPicker([
-          {
-            "type": "text",
-            "text": "Hello, World!(shareTargetPicker)"
-          }
-        ])
-          .then((res) => {
-            if (res) {
-              this.udAlert("分享成功！").then(() => {
-                // liff.closeWindow();
-              })
-            } else {
-              const [majorVer, minorVer] = (liff.getLineVersion() || "").split('.');
-              if (parseInt(majorVer) == 10 && parseInt(minorVer) < 11) {
-                // LINE 10.3.0 - 10.10.0
-                this.udAlert(
-                  "您的 LINE 版本較舊，可能會造成無法分享成功。若分享失敗，請升級 LINE APP 後再嘗試。"
-                );
-                return;
-              }
-              // LINE 10.11.0 -
-              // this.udAlert("已取消分享");
-            }
-          })
-          .catch((error) => {
-            this.udAlert({
-              msg: `${error.code === 'EXCEPTION_IN_SUBWINDOW' ? '請在 LINE APP中 開啟活動\n以便使用好友分享功能' : '訊息分享失敗，請稍後再試'}\n[${error.code}] ${error.message}`,
-            }).then(() => {
-              location.href = LINE_OA_URL;
-            })
-          });
-      } else {
+      if (!liff.isApiAvailable('shareTargetPicker')) {
         this.udAlert(
           "您的設備不支援好友分享功能\n請更新手機系統或LINE版本"
         ).then(() => {
           location.href = LINE_OA_URL;
-        })
+        });
+        return;
       }
+      if (!liff.isInClient() && liff.getLineVersion()) {
+        liff.openWindow({
+          url: location.href,
+          external: true,
+        });
+        return;
+      }
+      liff.shareTargetPicker([
+        {
+          "type": "text",
+          "text": "Hello, World!(shareTargetPicker)"
+        }
+      ])
+        .then((res) => {
+          if (res) {
+            this.udAlert("分享成功！").then(() => {
+              liff.closeWindow();
+            })
+          } else {
+            const [majorVer, minorVer] = (liff.getLineVersion() || "").split('.');
+            if (parseInt(majorVer) == 10 && parseInt(minorVer) < 11) { // LINE 10.3.0 - 10.10.0
+              this.udAlert(
+                "您的 LINE 版本較舊，可能會造成無法分享成功。若分享失敗，請升級 LINE APP 後再嘗試。"
+              );
+              return;
+            }
+            this.udAlert("已取消分享"); // LINE 10.11.0 -
+          }
+        })
+        .catch((error) => {
+          this.udAlert({
+            msg: `${error.code === 'EXCEPTION_IN_SUBWINDOW' ? '請在 LINE APP中 開啟活動\n以便使用好友分享功能' : '訊息分享失敗，請稍後再試'}\n[${error.code}] ${error.message}`,
+          }).then(() => {
+            location.href = LINE_OA_URL;
+          })
+        });
     },
   }
 });
