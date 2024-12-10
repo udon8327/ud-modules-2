@@ -349,23 +349,6 @@ html, #app {
     .ud-select select.center {
       text-align-last: center; }
 
-.ud-select-multiple {
-  position: relative;
-  cursor: pointer; }
-  .ud-select-multiple:before {
-    content: "";
-    width: 0;
-    height: 0;
-    border-color: #333 transparent transparent;
-    border-style: solid;
-    border-width: 11px 7px 0;
-    top: 50%;
-    margin-top: -.2em;
-    right: 10%;
-    position: absolute;
-    z-index: 1;
-    pointer-events: none; }
-
 .ud-select-link, .ud-select-twzip, .ud-select-date {
   margin-bottom: 0; }
   .ud-select-link.is-flex, .ud-select-twzip.is-flex, .ud-select-date.is-flex {
@@ -434,51 +417,6 @@ html, #app {
       -webkit-transition: all .2s ease;
       -o-transition: all .2s ease;
       transition: all .2s ease; }
-
-.ud-date-picker .ud-select {
-  width: 100% !important; }
-
-.ud-date-picker .el-input__prefix {
-  display: none; }
-
-.ud-date-picker .el-input__inner {
-  padding: 0 !important;
-  -webkit-transition: all 0s ease;
-  -o-transition: all 0s ease;
-  transition: all 0s ease; }
-
-.ud-date-picker .el-input__suffix {
-  display: none; }
-
-.ud-date-picker input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 0px;
-  border: 1px solid #f3f5f6;
-  font-size: 14px;
-  padding: 5px 10px;
-  width: 100%;
-  min-height: 38px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  background-color: #f3f5f6;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  font-size: 14px; }
-  .ud-date-picker input::-webkit-input-placeholder {
-    color: #868686; }
-  .ud-date-picker input:-ms-input-placeholder {
-    color: #868686; }
-  .ud-date-picker input::-ms-input-placeholder {
-    color: #868686; }
-  .ud-date-picker input::placeholder {
-    color: #868686; }
-  .ud-date-picker input:focus {
-    outline: 0;
-    border: 1px solid #22273b; }
 
 .ud-captcha {
   position: relative;
@@ -887,7 +825,8 @@ html, #app {
 
 .ud-html {
   text-align: left;
-  font-size: 14px; }
+  font-size: 14px;
+  word-break: break-all; }
   .ud-html h1 {
     font-size: 32px; }
   .ud-html h2 {

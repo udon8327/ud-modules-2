@@ -26,4 +26,3 @@ switch (location.hostname) {
         LINE_LIFF_ID = "1655285115-AYjbLKMr";
         break;
 }
-//# sourceMappingURL=config.js.map

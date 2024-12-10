@@ -26,4 +26,3 @@ switch (location.hostname) {
         break;
 }
 //# sourceMappingURL=config.js.map
-//# sourceMappingURL=config.js.map

@@ -3,10 +3,12 @@ declare var $: (selector: string) => any;
 /*
 ==================== Vue組件庫(Extra)目錄 ====================
 Form
+  SelectMultiple 下拉複選框 -----> ud-select-multiple
   InputPhone 電話號碼連動輸入框 -----> ud-input-phone
   Upload 上傳 -----> ud-upload
   ImageUpload 圖片上傳預覽 -----> ud-image-upload
   ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
+  DatePicker 日期選擇器 -----> ud-date-picker
 
 Data
   Table 表格 -----> ud-table
@@ -53,6 +55,47 @@ Animation
 */
 
 //-----------------------Form-----------------------
+// SelectMultiple 下拉複選框 (依賴：element-ui)
+Vue.component('ud-select-multiple', {
+  name: "UdSelectMultiple",
+  template: `
+    <div class="ud-select-multiple">
+      <el-select
+        v-model="modelValue"
+        multiple
+        collapse-tags
+        :placeholder="placeholder"
+        ref="select"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    </div>
+  `,
+  inheritAttrs: false,
+  props: {
+    value: null, // value值
+    options: null, // 選項
+    placeholder: { default: "請選擇一項" }, // 取代文字
+  },
+  computed: {
+    modelValue: {
+      get(){ return this.value },
+      set(val){ this.$emit('input', val) }
+    },
+  },
+  methods: {
+    onChange() {
+      this.$parent.$emit('validate'); // 通知FormItem校驗
+      this.$emit('change', this.$refs.select.value);
+    },
+  }
+})
+
 // InputPhone 電話號碼連動輸入框
 Vue.component('ud-input-phone', {
   name: 'UdInputPhone',
@@ -278,6 +321,84 @@ Vue.component("ud-image-multi-upload", {
     }
   }
 });
+
+// DatePicker 日期選擇器 (依賴：element-ui)
+Vue.component('ud-date-picker', {
+  name: 'UdDatePicker',
+  template: `
+    <div class="ud-date-picker">
+      <el-date-picker
+        class="ud-select"
+        v-model="modelValue"
+        v-bind="$attrs"
+        type="date"
+        :value-format="valueFormat"
+        :align="align"
+        :placeholder="placeholder"
+        :editable="editable"
+        ref="date"
+        @change="onChange"
+      >
+      </el-date-picker>
+    </div>
+  `,
+  inheritAttrs: false,
+  props: {
+    value: null,
+    center: Boolean, // 是否置中
+    valueFormat: { // 時間格式化
+      default: "yyyy-MM-dd"
+    },
+    align: { // 對齊
+      default: "center"
+    },
+    placeholder: {
+      default: "請選擇日期"
+    },
+    editable: {
+      default: false
+    }
+  },
+  computed: {
+    modelValue: {
+      get(){ return this.value },
+      set(val){ this.$emit('input', val) }
+    },
+  },
+  mounted() {
+    if(this.center) this.centerSelect();
+    window.addEventListener("resize", this.centerSelect);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.centerSelect);
+  },
+  methods: {
+    onChange() {
+      if(this.center) this.centerSelect();
+      this.$parent.$emit('validate'); // 通知FormItem校驗
+      this.$emit('change', this.$refs.date.$el.querySelector('.el-input__inner').value);
+    },
+    getTextWidth(text, target) {
+      let el = document.createElement('span');
+      let fontSize = window.getComputedStyle(target).fontSize || '14px';
+      el.textContent = text;
+      el.style.display = 'inline-block';
+      el.style.fontSize = fontSize;
+      document.body.appendChild(el);
+      let elmWidth = el.offsetWidth;
+      el.remove();
+      return elmWidth;
+    },
+    centerSelect() {
+      let el = this.$refs.date.$el.querySelector('.el-input__inner');
+      let elValue = this.$refs.date.value;
+      let text = "";
+      elValue ? text = elValue : text = this.placeholder;
+      let emptySpace = el.offsetWidth - this.getTextWidth(text, el);
+      el.style.textIndent = `${ ( emptySpace / 2 ) }px`;
+    }
+  }
+})
 
 //-----------------------Data-----------------------
 // Table 表格

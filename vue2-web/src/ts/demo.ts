@@ -12,6 +12,7 @@ let vm = new Vue({
       info: "",
     },
     formData: {
+      test: [],
       name: "",
       phone: "",
       email: "",

@@ -8,12 +8,10 @@
 //   Radio 單選框 -----> ud-radio
 //   Checkbox 多選框 -----> ud-checkbox
 //   Select 下拉框 -----> ud-select
-//   SelectMultiple 下拉多選框 -----> ud-select-multiple
 //   SelectLink 連動下拉框 -----> ud-select-link
 //   SelectDate 日期連動下拉框 -----> ud-select-date
 //   SelectTwzip 台灣行政區連動下拉框 -----> ud-select-twzip
 //   Switch 開關 -----> ud-switch
-//   DatePicker 日期選擇器 -----> ud-date-picker
 //   Captcha 圖形驗證碼 -----> ud-captcha
 //   FormItem 表單驗證容器 -----> ud-form-item
 //   Form 表單驗證 -----> ud-form
@@ -310,24 +308,6 @@ html,#app
     &.center
       text-align-last: center
 
-// SelectMultiple 下拉多選框
-.ud-select-multiple
-  position: relative
-  cursor: pointer
-  &:before
-    content: ""
-    width: 0
-    height: 0
-    border-color: #333 transparent transparent
-    border-style: solid
-    border-width: 11px 7px 0
-    top: 50%
-    margin-top: -.2em
-    right: 10%
-    position: absolute
-    z-index: 1
-    pointer-events: none
-
 // SelectLink 連動下拉框
 // SelectDate 日期連動下拉框
 // SelectTwzip 台灣行政區連動下拉框
@@ -381,36 +361,6 @@ html,#app
         border-radius: 50%
         background: #f7f7f7
         transition: all .2s ease
-
-// Date-picker 日期選擇器
-.ud-date-picker
-  .ud-select
-    width: 100% !important
-  .el-input__prefix
-    display: none
-  .el-input__inner
-    padding: 0 !important
-    transition: all 0s ease
-  .el-input__suffix
-    display: none
-  input
-    appearance: none
-    border-radius: 0px
-    border: 1px solid #f3f5f6
-    font-size: 14px
-    padding: 5px 10px
-    width: 100%
-    min-height: 38px
-    box-sizing: border-box
-    background-color: #f3f5f6
-    transition: all 0.2s ease
-    cursor: pointer
-    font-size: 14px
-    &::placeholder
-      color: #868686
-    &:focus
-      outline: 0
-      border: 1px solid $main
 
 // Captcha 圖形驗證碼
 .ud-captcha

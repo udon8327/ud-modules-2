@@ -3,7 +3,7 @@ extends _layout.pug
 block css
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet')
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css' rel='stylesheet')
-  //- link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css' rel='stylesheet')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/theme-chalk/index.css' rel='stylesheet')
   //- link(href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet')
   link(href='css/demo.css' rel='stylesheet')
 
@@ -98,5 +98,5 @@ block content
     ud-countdown(:time="120" @timeup="timeup()" type="minute")
 
 block js
-  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js')
   script(src="js/demo.js")

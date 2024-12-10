@@ -1,10 +1,12 @@
 /*
 ==================== Vue組件庫(Extra)目錄 ====================
 Form
+  SelectMultiple 下拉複選框 -----> ud-select-multiple
   InputPhone 電話號碼連動輸入框 -----> ud-input-phone
   Upload 上傳 -----> ud-upload
   ImageUpload 圖片上傳預覽 -----> ud-image-upload
   ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
+  DatePicker 日期選擇器 -----> ud-date-picker
 
 Data
   Table 表格 -----> ud-table
@@ -50,6 +52,29 @@ Animation
 
 */
 //-----------------------Form-----------------------
+// SelectMultiple 下拉複選框 (依賴：element-ui)
+Vue.component('ud-select-multiple', {
+    name: "UdSelectMultiple",
+    template: "\n    <div class=\"ud-select-multiple\">\n      <el-select\n        v-model=\"modelValue\"\n        multiple\n        collapse-tags\n        :placeholder=\"placeholder\"\n        ref=\"select\"\n      >\n        <el-option\n          v-for=\"item in options\"\n          :key=\"item.value\"\n          :label=\"item.label\"\n          :value=\"item.value\">\n        </el-option>\n      </el-select>\n    </div>\n  ",
+    inheritAttrs: false,
+    props: {
+        value: null,
+        options: null,
+        placeholder: { default: "請選擇一項" },
+    },
+    computed: {
+        modelValue: {
+            get: function () { return this.value; },
+            set: function (val) { this.$emit('input', val); }
+        },
+    },
+    methods: {
+        onChange: function () {
+            this.$parent.$emit('validate'); // 通知FormItem校驗
+            this.$emit('change', this.$refs.select.value);
+        },
+    }
+});
 // InputPhone 電話號碼連動輸入框
 Vue.component('ud-input-phone', {
     name: 'UdInputPhone',
@@ -202,6 +227,69 @@ Vue.component("ud-image-multi-upload", {
             this.image_list = [];
             this.preview_list = [];
             this.$refs.input.value = "";
+        }
+    }
+});
+// DatePicker 日期選擇器 (依賴：element-ui)
+Vue.component('ud-date-picker', {
+    name: 'UdDatePicker',
+    template: "\n    <div class=\"ud-date-picker\">\n      <el-date-picker\n        class=\"ud-select\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        type=\"date\"\n        :value-format=\"valueFormat\"\n        :align=\"align\"\n        :placeholder=\"placeholder\"\n        :editable=\"editable\"\n        ref=\"date\"\n        @change=\"onChange\"\n      >\n      </el-date-picker>\n    </div>\n  ",
+    inheritAttrs: false,
+    props: {
+        value: null,
+        center: Boolean,
+        valueFormat: {
+            default: "yyyy-MM-dd"
+        },
+        align: {
+            default: "center"
+        },
+        placeholder: {
+            default: "請選擇日期"
+        },
+        editable: {
+            default: false
+        }
+    },
+    computed: {
+        modelValue: {
+            get: function () { return this.value; },
+            set: function (val) { this.$emit('input', val); }
+        },
+    },
+    mounted: function () {
+        if (this.center)
+            this.centerSelect();
+        window.addEventListener("resize", this.centerSelect);
+    },
+    destroyed: function () {
+        window.removeEventListener("resize", this.centerSelect);
+    },
+    methods: {
+        onChange: function () {
+            if (this.center)
+                this.centerSelect();
+            this.$parent.$emit('validate'); // 通知FormItem校驗
+            this.$emit('change', this.$refs.date.$el.querySelector('.el-input__inner').value);
+        },
+        getTextWidth: function (text, target) {
+            var el = document.createElement('span');
+            var fontSize = window.getComputedStyle(target).fontSize || '14px';
+            el.textContent = text;
+            el.style.display = 'inline-block';
+            el.style.fontSize = fontSize;
+            document.body.appendChild(el);
+            var elmWidth = el.offsetWidth;
+            el.remove();
+            return elmWidth;
+        },
+        centerSelect: function () {
+            var el = this.$refs.date.$el.querySelector('.el-input__inner');
+            var elValue = this.$refs.date.value;
+            var text = "";
+            elValue ? text = elValue : text = this.placeholder;
+            var emptySpace = el.offsetWidth - this.getTextWidth(text, el);
+            el.style.textIndent = (emptySpace / 2) + "px";
         }
     }
 });
