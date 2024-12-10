@@ -31,8 +31,9 @@
       border-radius: 50%;
       overflow: hidden; }
     .liff-area .liff-wrapper .profile-wrapper {
-      margin-left: 10px;
-      font-family: "OpText"; }
+      margin-left: 10px; }
+      .liff-area .liff-wrapper .profile-wrapper h6 {
+        font-family: "DINCondensedBold", "LXGW WenKai TC"; }
       .liff-area .liff-wrapper .profile-wrapper p {
         color: #999;
         font-size: 14px; }
