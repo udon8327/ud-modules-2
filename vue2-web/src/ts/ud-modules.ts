@@ -1196,9 +1196,7 @@ Vue.component('ud-collapse', {
     value: {
       default: false
     },
-    duration: {
-      default: 0.2
-    }
+    duration: { default: 0.2 } // 開闔速度
   },
   computed: {
     durationSecond() {

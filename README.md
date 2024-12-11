@@ -329,27 +329,37 @@
 
 # Layout
 ## <font color=#ebc600>Arrow CSS箭頭 ud-arrow</font>
-``` html
-<ud-arrow width="5" size="6" direction="down">
-```
+  ``` html
+  <ud-arrow width="5" size="6" direction="down">
+  ```
+  ### props
+  * color: 顏色 | String("#333")
+  * width: 寬度 | String("3")
+  * size: 大小 | String("3")
+  * direction: 方向 | String("right")
+
 ## <font color=#ebc600>Collapse 摺疊容器 ud-collapse</font>
+  ``` html
+  <ud-button @click="isCollapse = !isCollapse">摺疊容器</ud-button>
+    <ud-arrow color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'">
+  <ud-collapse v-model="isCollapse" :duration="0.4">
+    <p>這是文字</p>
+    <p>這是文字</p>
+    <p>這是文字</p>
+  </ud-collapse>
+  ```
+  ### props
+  * duration: 開闔速度 | Number(0.2)
 
 ## <font color=#ebc600>Ratio 等比例自適應容器 ud-ratio</font>
+  ``` html
+  <ud-ratio src="img/01.jpg" bg-size="contain"></ud-ratio>
+  ```
+  ### props
+  * duration: 開闔速度 | Number(0.2)
 
 # Notice
 ## <font color=#ebc600>Alert 警告彈窗 ud-alert</font>
-  ### options
-  * confirm: false 是否有確認+取消鈕
-  * maskClose: false 點擊遮罩關閉
-  * btnClose: false 右上關閉按鈕
-  * scrollLock: true 是否鎖定背景頁面捲動
-  * title: "" 標題文字
-  * message: "" 訊息文字(msg也可以，接受html語法)
-  * cancelText: "取消" 取消鈕文字
-  * onCancel: () => {} 取消鈕callback(也可使用.then)
-  * confirmText: "確定" 確認鈕文字
-  * onConfirm: () => {} 確認鈕callback(也可使用.catch)
-
   ```js
   this.udAlert("發生錯誤\n請稍候再試<i>！</i>");
   // or
@@ -369,6 +379,17 @@
     console.log("點擊取消");
   })
   ```
+  ### options
+  * confirm: false 是否有確認+取消鈕
+  * maskClose: false 點擊遮罩關閉
+  * btnClose: false 右上關閉按鈕
+  * scrollLock: true 是否鎖定背景頁面捲動
+  * title: "" 標題文字
+  * message: "" 訊息文字(msg也可以，接受html語法)
+  * cancelText: "取消" 取消鈕文字
+  * onCancel: () => {} 取消鈕callback(也可使用.then)
+  * confirmText: "確定" 確認鈕文字
+  * onConfirm: () => {} 確認鈕callback(也可使用.catch)
 
 ## <font color=#ebc600>Modal 通用彈窗 ud-modal</font>
 
