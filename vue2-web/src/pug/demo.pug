@@ -43,40 +43,38 @@ block content
         ud-input(v-model.trim="formData.age" placeholder="請輸入您的年齡" inputmode="numeric")
       ud-form-item(label="生日" prop="birthday" flex)
         ud-input(v-model.trim="formData.birthday" placeholder="請輸入您的生日")
+      ud-form-item(label="備註" prop="note" flex)
+        ud-textarea(placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="10")
       ud-form-item(label="單選" prop="radio" flex)
         ud-radio(v-model="formData.radio" :options="options" flex)
       ud-form-item(label="多選" prop="checkbox" flex)
         ud-checkbox(v-model="formData.checkbox" :options="options" flex)
       ud-form-item(label="下拉" prop="select" flex)
-        ud-select(v-model="formData.select" :options="options" flex center)
-      ud-form-item(label="下拉連動" prop="selectLink" flex)
-        ud-select-link(v-model="formData.selectLink" :options="storeOptions" :placeholder="['縣市', '行政區', '分店']" flex third)
-      ud-form-item(label="下拉連動(獨立)" prop="selectLinkSp")
+        ud-select(v-model="formData.select" :options="options" flex center @change="test")
+      ud-form-item(label="下拉連動" prop="selectGroup" flex)
         .d-flex
-          ud-select(v-model="formData.selectLinkSp[0]" :options="storeOptions" :group="formData.selectLinkSp" :index="0" placeholder="請選擇縣市")
-          ud-select(v-model="formData.selectLinkSp[1]" :options="storeOptions" :group="formData.selectLinkSp" :index="1" placeholder="請選擇店點")
-          ud-select(v-model="formData.selectLinkSp[2]" :options="storeOptions" :group="formData.selectLinkSp" :index="2" placeholder="請選擇日期")
-      ud-form-item(label="地址" prop="twzip" flex)
-        ud-select-twzip(ref="zip" v-model="formData.twzip" flex)
+          ud-select(v-model="formData.selectGroup[0]" :options="storeOptions" :group="formData.selectGroup" :index="0" placeholder="縣市")
+          ud-select(v-model="formData.selectGroup[1]" :options="storeOptions" :group="formData.selectGroup" :index="1" placeholder="櫃點")
+          ud-select(v-model="formData.selectGroup[2]" :options="storeOptions" :group="formData.selectGroup" :index="2" placeholder="時段")
+      ud-form-item(label="下拉連動" prop="selectLink" flex)
+        ud-select-link(v-model="formData.selectLink" :options="storeOptions" :placeholder="['縣市', '櫃點', '時段']" flex third)
       ud-form-item(label="預約日期" prop="date" flex)
         ud-select-date(v-model="formData.date" flex third roc)
           p 年
           p(slot="second") 月
           p(slot="third") 日
+      ud-form-item(label="地址" prop="twzip" flex)
+        ud-select-twzip(ref="zip" v-model="formData.twzip" flex)
       ud-form-item(label="是否啟用" prop="isActive" flex)
         ud-switch(v-model="formData.isActive")
-      ud-form-item(label="備註" prop="note" flex)
-        ud-textarea(placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="10")
-      ud-form-item(label="" prop="isAgree")
-        ud-checkbox(v-model="formData.isAgree" options="我同意使用者條款" solid)
-        ud-checkbox(v-model="formData.isAgree")
-          p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
       ud-form-item(label="驗證碼" prop="captcha" flex)
         .captcha-wrapper
           ud-input(v-model="formData.captcha" placeholder="驗證碼" maxlength="4")
           ud-captcha(v-model="formData.captchaCode")
-      div(style="margin-bottom: 60px")
-
+      ud-form-item(label="" prop="isAgree")
+        ud-checkbox(v-model="formData.isAgree" options="我同意使用者條款" solid)
+        ud-checkbox(v-model="formData.isAgree")
+          p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
       .btn-wrapper
         ud-button(@click="clearVerify" plain) 清除驗證
         ud-button(@click="formSubmit") 送出表單

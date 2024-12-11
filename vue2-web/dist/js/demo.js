@@ -20,7 +20,7 @@ var vm = new Vue({
             checkbox: [],
             select: "",
             selectLink: ["", "", ""],
-            selectLinkSp: ["", "", ""],
+            selectGroup: ["", "", ""],
             twzip: ["", ""],
             date: ["", "", ""],
             isActive: false,
@@ -39,7 +39,7 @@ var vm = new Vue({
             checkbox: [{ type: "required" }],
             select: [{ type: "required" }],
             selectLink: [{ type: "required" }],
-            selectLinkSp: [{ type: "required" }],
+            selectGroup: [{ type: "required" }],
             twzip: [{ type: "required" }],
             date: [{ type: "required" }],
             isAgree: [{ type: "required", message: "請先同意相關使用條款" },],
@@ -86,6 +86,9 @@ var vm = new Vue({
     },
     computed: {},
     methods: {
+        test: function (val) {
+            console.log('val: ', val);
+        },
         liffLogin: function () {
             var _this = this;
             liff

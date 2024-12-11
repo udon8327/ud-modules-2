@@ -119,6 +119,7 @@
   * solid: 打勾改為實心 | Boolean(false)
 
 ## <font color=#ebc600>Select 下拉框 ud-select</font>
+  單獨一個ud-select
   ``` html
   <ud-select v-model="value" :options="options" placeholder="請選擇櫃點"></ud-select>
   ```
@@ -129,7 +130,7 @@
     {label: "選項三", value: "3", disabled: true},
   ],
   ```
-  將多個獨立的ud-select進行連動
+  將多個獨立的ud-select群組起來進行下拉連動
   ``` html
   <ud-select v-model="valueGroup[0]" :options="storeOptions" :group="valueGroup" :index="0" placeholder="請選擇縣市"></ud-select>
   <ud-select v-model="valueGroup[1]" :options="storeOptions" :group="valueGroup" :index="1" placeholder="請選擇櫃點"></ud-select>
@@ -180,29 +181,151 @@
   * labelBy: label替代值 | String("label")
   * valueBy: value替代值 | String("value")
   * childrenBy: children替代值 | String("children")
-  ``` html
-  <ud-select v-model="valueGroup[0]" :options="storeOptions" :group="valueGroup" :index="0" placeholder="請選擇縣市" label-by="name" value-by="id" children-by="list"></ud-select>
-  <ud-select v-model="valueGroup[1]" :options="storeOptions" :group="valueGroup" :index="1" placeholder="請選擇櫃點" label-by="name" value-by="id" children-by="list"></ud-select>
-  <ud-select v-model="valueGroup[2]" :options="storeOptions" :group="valueGroup" :index="2" placeholder="請選擇日期" label-by="name" value-by="id" children-by="list"></ud-select>
-  ```
-
-## <font color=#ebc600>SelectMultiple 下拉複選框 ud-select-multiple</font>
 
 ## <font color=#ebc600>SelectLink 連動下拉框 ud-select-link</font>
+  要做連動下拉已經不建議使用此群組，而是直接將多個ud-select群組起來使用，可以不受數量與DOM的限制
+  ``` html
+  <ud-select-link v-model="valueGroup" :options="storeOptions" :placeholder="['縣市', '櫃點', '時段']" flex third></ud-select-link>
+  ```
+  ``` js
+  data: {
+    valueGroup: ["", "", ""],
+    storeOptions: [
+      {label: "台北市", value: "taipei", children: [
+        {label: "中正區", value: "100", children: [
+          {label: "2023-12-01", value: "1" },
+          {label: "2023-12-02", value: "2", disabled: "true" } 
+        ]},
+        {label: "大安區", value: "106", disabled: true, children: [
+          {label: "2023-12-03", value: "3" },
+          {label: "2023-12-04", value: "4" },
+        ]},
+        {label: "信義區", value: "110", children: [
+          {label: "2023-12-05", value: "5" },
+          {label: "2023-12-06", value: "6" },
+        ]},
+      ]},
+      {label: "新北市", value: "newTaipei", children: [
+        {label: "板橋區", value: "220", children: [
+          {label: "2023-12-07", value: "7" },
+          {label: "2023-12-08", value: "8" },
+        ]},
+        {label: "永和區", value: "234", children: [
+          {label: "2023-12-09", value: "9" },
+          {label: "2023-12-10", value: "10", disabled: true },
+        ]},
+        {label: "新店區", value: "231", children: [
+          {label: "2023-12-11", value: "11", disabled: true },
+          {label: "2023-12-12", value: "12", disabled: true },
+        ]},
+      ]},
+    ],
+  },
+  ```
+  ### props
+  * options: 選項 | Array
+  * placeholder: 替代文字 | Array
+  * third: 是否有第三項 | Boolean(false)
+  * flex: 是否並排 | Boolean(false)
+  * combine: 使用value做為label | Boolean(false)
 
 ## <font color=#ebc600>SelectDate 日期連動下拉框 ud-select-date</font>
+  會自動更新年份
+  ``` html
+  <ud-select-date v-model="formData.date" flex third roc>
+    <p>年</p>
+    <p slot="second">月</p>
+    <p slot="third">日</p>
+  </ud-select-date>
+  ```
+  ### props
+  * placeholder: 替代文字 | Array
+  * third: 是否有第三項(日) | Boolean(false)
+  * flex: 是否並排 | Boolean(false)
+  * roc: 是否為民國年 | Boolean(false)
 
 ## <font color=#ebc600>SelectTwzip 台灣行政區連動下拉框 ud-select-twzip</font>
+  ``` html
+  <ud-select-twzip ref="zip" v-model="formData.twzip" flex></ud-select-twzip>
+  ```
+  ### props
+  * placeholder: 替代文字 | Array
+  * flex: 是否並排 | Boolean(false)
+  * combine: 是否label直接使用value值 | Boolean(false)
 
 ## <font color=#ebc600>Switch 開關 ud-switch</font>
-
-## <font color=#ebc600>DatePicker 日期選擇器 ud-date-picker</font>
+  ``` html
+  <ud-switch v-model="formData.isActive"></ud-switch>
+  ```
+  ### props
+  * placeholder: 替代文字 | Array
+  * flex: 是否並排 | Boolean(false)
+  * combine: 是否label直接使用value值 | Boolean(false)
 
 ## <font color=#ebc600>Captcha 圖形驗證碼 ud-captcha</font>
+  ``` html
+  <ud-input v-model="formData.captcha" placeholder="驗證碼" maxlength="4"></ud-input>
+  <ud-captcha v-model="formData.captchaCode"></ud-captcha>
+  ```
+  ### props
+  * color: 字體顏色 | String("#989799")
+  * bgColor: 背景顏色 | String("#000")
+  * randomColor: 隨機點線的顏色 | String("#777")
+  * font: 字體設定 | String("20px Arial")
+  * noLine: 無隨機線 | Boolean(false)
+  * noDots: 無隨機點 | Boolean(false)
+  * noRefresh: 無刷新鈕 | Boolean(false)
 
 ## <font color=#ebc600>FormItem 表單驗證容器 ud-form-item</font>
+  ``` html
+  <ud-form :rules="rules" :model="formData" ref="form">
+    <ud-form-item label="姓名" prop="name" flex>
+      <ud-input v-model.trim="formData.name" placeholder="請輸入您的姓名"></ud-input>
+    </ud-form-item>
+  </ud-form>
+  <ud-button @click="formSubmit">送出表單</ud-button>
+  ```
+  ``` js
+  methods: {
+    formSubmit() {
+      this.$refs.form.validate(() => {
+        // 驗證成功後的處理
+      });
+    },
+  }
+  ```
+  ### props
+  * required: 必填提示 | Boolean(false),
+  * icon: icon路徑 | String
+  * label: 標籤內容 | String
+  * prop: 驗證名稱 | String
+  * flex: 是否並排 | Boolean(false)
+  * labelWidth: 標籤寬度 | String
+  * labelAlign: 標籤對齊 | String
 
 ## <font color=#ebc600>Form 表單驗證 ud-form</font>
+  ``` html
+  <ud-form :rules="rules" :model="formData" ref="form">
+    <ud-form-item label="姓名" prop="name" flex>
+      <ud-input v-model.trim="formData.name" placeholder="請輸入您的姓名"></ud-input>
+    </ud-form-item>
+  </ud-form>
+  <ud-button @click="formSubmit">送出表單</ud-button>
+  ```
+  ``` js
+  methods: {
+    formSubmit() {
+      this.$refs.form.validate(() => {
+        // 驗證成功後的處理
+      });
+    },
+  }
+  ```
+  ### props
+  * model: 驗證資料 | Object
+  * rules: 驗證規則 | Object
+  * noErrorMsg: 有無錯誤提示 | Boolean(false)
+  * noErrorScroll: 驗證時不滾動至錯誤項目 | Boolean(false)
 
 # Layout
 ## <font color=#ebc600>Arrow CSS箭頭 ud-arrow</font>

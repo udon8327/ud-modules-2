@@ -329,8 +329,9 @@ html, #app {
     background-color: #fff;
     color: #333;
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 5px 20px 5px 10px;
     width: 100%;
+    min-width: 64px;
     margin: 0;
     -webkit-transition: border 0.2s ease;
     -o-transition: border 0.2s ease;
