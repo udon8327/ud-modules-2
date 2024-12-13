@@ -156,7 +156,13 @@ let vm = new Vue({
       udAlert("警告\n彈窗");
     },
     timeup() {
-      console.log('時間到');
+      udAlert('時間到！');
+    },
+    countdown() {
+      this.$refs.cd.countdown();
+    },
+    reset() {
+      this.$refs.cd.reset();
     },
     formSubmit() {
       this.$refs.form.validate(() => {

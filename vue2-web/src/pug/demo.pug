@@ -93,7 +93,7 @@ block content
     br
     ud-ellipsis(:max-line="2") 文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略
     br
-    ud-countdown(:time="120" @timeup="timeup()" type="minute")
+    ud-countdown(ref="countdown" :time="120" @timeup="timeup" type="minute")
 
 block js
   script(src='https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.3/index.js')

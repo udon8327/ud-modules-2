@@ -151,7 +151,13 @@ var vm = new Vue({
             udAlert("警告\n彈窗");
         },
         timeup: function () {
-            console.log('時間到');
+            udAlert('時間到！');
+        },
+        countdown: function () {
+            this.$refs.cd.countdown();
+        },
+        reset: function () {
+            this.$refs.cd.reset();
         },
         formSubmit: function () {
             var _this = this;

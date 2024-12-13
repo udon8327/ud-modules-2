@@ -1282,7 +1282,7 @@ const UdAlert = {
       btnClose: false, // 右上關閉按鈕
       scrollLock: true, // 是否鎖定背景頁面捲動
       title: "", // 標題文字
-      message: "", // 訊息文字(也可接受msg)
+      message: "", // 訊息文字(msg也可以，接受html語法)
       cancelText: "取消", // 取消鈕文字
       onCancel: () => {}, // 取消鈕callback
       confirmText: "確定", // 確認鈕文字
@@ -1370,8 +1370,8 @@ Vue.component("ud-modal", {
     title: { default: "通用標題" }, // 通用標題
     message: { default: "通用訊息" }, // 通用訊息
     value: { default: 0 }, // 開關值
-    maskClose: Boolean, // 遮罩關閉
-    btnClose: Boolean, // 按鈕關閉
+    maskClose: Boolean, // 點擊遮罩關閉
+    btnClose: Boolean, // 右上關閉按鈕
     fullScreen: Boolean, // 是否全螢幕
     zIndex: { default: 100 }, // z-index層級
     noBg: Boolean // 背景是否透明
@@ -1496,7 +1496,7 @@ Vue.component('ud-countdown', {
   `,
   props: {
     time: { default: 60 }, // 倒數秒數
-    delay: Boolean, // 延遲開始倒數
+    delay: Boolean, // 是否不要立刻開始倒數
     type: { default: "second" } // 時間格式
   },
   data() {

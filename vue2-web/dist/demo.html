@@ -130,7 +130,7 @@
             <ud-html text="&lt;i&gt;用戶&lt;/i&gt;自定
 &lt;h3&gt;義訊息&lt;/h3&gt;"></ud-html><br>
             <ud-ellipsis :max-line="2">文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略文字省略</ud-ellipsis><br>
-            <ud-countdown :time="120" @timeup="timeup()" type="minute"></ud-countdown>
+            <ud-countdown ref="countdown" :time="120" @timeup="timeup" type="minute"></ud-countdown>
           </div>
         </div>
       </div>

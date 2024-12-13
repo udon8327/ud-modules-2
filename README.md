@@ -360,7 +360,7 @@
 
 # Notice
 ## <font color=#ebc600>Alert 警告彈窗 ud-alert</font>
-  ```js
+  ``` js
   this.udAlert("發生錯誤\n請稍候再試<i>！</i>");
   // or
   this.udAlert({
@@ -380,24 +380,88 @@
   })
   ```
   ### options
-  * confirm: false 是否有確認+取消鈕
-  * maskClose: false 點擊遮罩關閉
-  * btnClose: false 右上關閉按鈕
-  * scrollLock: true 是否鎖定背景頁面捲動
-  * title: "" 標題文字
-  * message: "" 訊息文字(msg也可以，接受html語法)
-  * cancelText: "取消" 取消鈕文字
-  * onCancel: () => {} 取消鈕callback(也可使用.then)
-  * confirmText: "確定" 確認鈕文字
-  * onConfirm: () => {} 確認鈕callback(也可使用.catch)
+  * confirm: 是否有確認+取消鈕 | Boolean(false)
+  * maskClose: 點擊遮罩關閉 | Boolean(false)
+  * btnClose: 右上關閉按鈕 | Boolean(false)
+  * scrollLock: 是否鎖定背景頁面捲動 | Boolean(true)
+  * title: 標題文字 | String("")
+  * message: 訊息文字(msg也可以，接受html語法) | String("")
+  * cancelText: 取消鈕文字 | String("取消")
+  * onCancel: 取消鈕callback(也可使用.then) | Function(() => {})
+  * confirmText: 確認鈕文字 | String("確定")
+  * onConfirm: () => 確認鈕callback(也可使用.catch) | Function(() => {})
 
 ## <font color=#ebc600>Modal 通用彈窗 ud-modal</font>
+  ``` html
+  <ud-modal v-model="isModalShow" mask-close btn-close>
+    <ud-button @click="isModalShow = false" plain>關閉</ud-button>
+  </ud-modal>
+  ```
+  ### props
+  * title: 通用標題 | String("通用標題")
+  * message: 通用訊息 | String("通用訊息")
+  * maskClose: 點擊遮罩關閉 | Boolean(false)
+  * btnClose: 右上關閉按鈕 | Boolean(false)
+  * fullScreen: 是否全螢幕 | Boolean(false)
+  * zIndex: z-index層級 | Number(100)
+  * noBg: 背景是否透明 | Boolean(false)
 
 ## <font color=#ebc600>Loading 載入中 ud-loading</font>
+  ``` js
+  // 開啟Loading效果
+  this.udLoading.open({
+    fixed: true,
+    message: "測試"
+  });
+  // 關閉Loading效果
+  this.udLoading.close();
+  ```
+  ### options
+  * fixed: 是否固定body | Boolean(false)
+  * theme: 戴入主題 | String(例："white")
+  * iconType: icon類型 | String("css")[css:CSS, font:字型, img:圖片]
+  * iconFont: 字型icon的class | String(例："fas fa-spinner fa-pulse")
+  * iconImg: 圖片icon的路徑 | String(例："https://image.flaticon.com/icons/svg/553/553265.svg")
+  * message: 載入訊息 | String("")
 
 # Tools
 ## <font color=#ebc600>Html 自定義訊息 ud-html</font>
+  ``` html
+  <ud-html text="<i>用戶</i>自定\n<h3>義訊息</h3>"></ud-html>
+  ```
+  ### props
+  * text: 文字 | String("<h1>H1 用戶自定義訊息</h1><h2>H2 用戶自定義訊息</h2><h3>H3 用戶自定義訊息</h3><h4>H4 用戶自定義訊息</h4><h5>H5 用戶自定義訊息</h5><h6>H6 用戶自定義訊息</h6>\n<p>p 用戶自定義訊息</p><span>span 用戶自定義訊息</span>")
 
 ## <font color=#ebc600>Ellipsis 文字省略 ud-ellipsis</font>
+  超過指定行數的文字不顯示且在最後顯示省略符號
+  ``` html
+  <ud-ellipsis :max-line="2">這是文字</ud-ellipsis>
+  ```
+  ### props
+  * maxLine: 指定省略行數 | Number(1)
 
 ## <font color=#ebc600>Countdown 倒數計時 ud-countdown</font>
+  顯示倒數計時的文字
+  ``` html
+  <ud-countdown ref="cd" :time="120" @timeup="timeup" type="minute" delay></ud-countdown>
+  ```
+  ``` js
+  methods: {
+    timeup() {
+      udAlert("時間到！");
+    },
+    start() {
+      this.$refs.cd.countdown();
+    },
+    reset() {
+      this.$refs.cd.reset();
+    },
+  }
+  ```
+  ### props
+  * time: 倒數秒數 | Number(60)
+  * delay: 是否不要立刻開始倒數 | Boolean(1)
+  * type: 時間格式 | String("second")["second": 顯示秒, "minute": 顯示分秒]
+  ### methods
+  * countdown: 開始倒數 | Function(() => {})
+  * reset: 重新開始倒數 | Function(() => {})
