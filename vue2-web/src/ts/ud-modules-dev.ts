@@ -1,61 +1,61 @@
 declare var $: (selector: string) => any;
 
 /*
-==================== Vue組件庫(Extra)目錄 ====================
+==================== ud-modules 常用組件(開發中) ====================
 Form
-  SelectMultiple 下拉複選框 -----> ud-select-multiple
-  InputPhone 電話號碼連動輸入框 -----> ud-input-phone
-  Upload 上傳 -----> ud-upload
-  ImageUpload 圖片上傳預覽 -----> ud-image-upload
-  ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
-  DatePicker 日期選擇器 -----> ud-date-picker
+  ud-select-multiple：下拉複選框(依賴：element-ui)
+  ud-input-phone：電話號碼連動輸入框
+  ud-upload：上傳
+  ud-image-upload：圖片上傳預覽
+  ud-image-multi-upload：圖片上傳預覽(多張)
+  ud-date-picker：日期選擇器(依賴：element-ui)
 
 Data
-  Table 表格 -----> ud-table
-  Pagination 分頁 -----> ud-pagination
+  ud-table：表格
+  ud-pagination：分頁
 
 Notice
-  Notify 通知訊息 -----> ud-notify
-  Popover 氣泡框 -----> ud-popover
+  ud-notify：通知訊息
+  ud-popover：氣泡框
 
 Tools
-  CountdownExpire 倒數計時(時限) -----> ud-countdown-expire
+  ud-countdown-expire：倒數計時(時限)
 
 Layout
-  Flex 通用排版容器 -----> ud-flex
+  ud-flex：通用排版容器
 
 Application
-  Carousel 圖片輪播 -----> ud-carousel
-  Youtube 水管播放 -----> ud-youtube
-  YoutubeApi 水管播放(控制版) -----> ud-youtube-api
-  GoogleMap 估狗地圖 -----> ud-google-map
-  Select2 搜尋下拉框 -----> ud-select2
-  Scratch 刮刮樂 -----> ud-scratch
-  Editor 文字編輯器 -----> ud-editor
+  ud-carousel：圖片輪播
+  ud-youtube：水管播放
+  ud-youtube-api：水管播放(控制版)
+  ud-google-map：估狗地圖
+  ud-select2：搜尋下拉框
+  ud-scratch：刮刮樂
+  ud-editor：文字編輯器
 
-// ==================== 工具函數目錄 ====================
+// ==================== ud-utils 常用函式(開發中) ====================
 String
-  取得隨機十六進制顏色 -----> randomHexColorCode
-  轉義HTML(防XSS攻擊) -----> escapeHTML
-  駝峰式轉換 -----> convertCamelCase
-  將字串內URL轉為超連結 -----> replaceURLToLink
+  randomHexColorCode：取得隨機十六進制顏色
+  escapeHTML：轉義HTML(防XSS攻擊)
+  convertCamelCase：駝峰式轉換
+  replaceURLToLink：將字串內URL轉為超連結
 
 Browser
-  動態加載css文件 -----> loadStyle
-  動態載入插件 -----> insertPlugin
+  loadStyle：動態加載css文件
+  insertPlugin：動態載入插件
 
 Web
-  HTTP跳轉HTTPS -----> httpsRedirect
-  檢驗URL連接是否有效 -----> getUrlState
-  CDN備援 -----> cdnBackup
+  httpsRedirect：HTTP跳轉HTTPS
+  getUrlState：檢驗URL連接是否有效
+  cdnBackup：CDN備援
 
 Animation
-  RAF通用動畫函式 -----> animate
+  animate：RAF通用動畫函式
 
 */
 
 //-----------------------Form-----------------------
-// SelectMultiple 下拉複選框 (依賴：element-ui)
+// ud-select-multiple：下拉複選框(依賴：element-ui)
 Vue.component('ud-select-multiple', {
   name: "UdSelectMultiple",
   template: `
@@ -96,7 +96,7 @@ Vue.component('ud-select-multiple', {
   }
 })
 
-// InputPhone 電話號碼連動輸入框
+// ud-input-phone：電話號碼連動輸入框
 Vue.component('ud-input-phone', {
   name: 'UdInputPhone',
   template: `
@@ -177,7 +177,7 @@ Vue.component('ud-input-phone', {
   }
 })
 
-// Upload 上傳
+// ud-upload：上傳
 Vue.component('ud-upload', {
   name: "UdUpload",
   template: `
@@ -188,7 +188,7 @@ Vue.component('ud-upload', {
   },
 })
 
-// ImageUpload 圖片上傳預覽
+// ud-image-upload：圖片上傳預覽
 Vue.component("ud-image-upload", {
   name: "UdImageUpload",
   template: `
@@ -271,7 +271,7 @@ Vue.component("ud-image-upload", {
   }
 });
 
-// ImageMultiUpload 圖片上傳預覽(多張)
+// ud-image-multi-upload：圖片上傳預覽(多張)
 Vue.component("ud-image-multi-upload", {
   name: "UdImageMultiUpload",
   template: `
@@ -322,7 +322,7 @@ Vue.component("ud-image-multi-upload", {
   }
 });
 
-// DatePicker 日期選擇器 (依賴：element-ui)
+// ud-date-picker：日期選擇器(依賴：element-ui)
 Vue.component('ud-date-picker', {
   name: 'UdDatePicker',
   template: `
@@ -401,7 +401,7 @@ Vue.component('ud-date-picker', {
 })
 
 //-----------------------Data-----------------------
-// Table 表格
+// ud-table：表格
 Vue.component('ud-table', {
   name: "UdTable",
   template: `
@@ -412,7 +412,7 @@ Vue.component('ud-table', {
   },
 })
 
-// Pagination 分頁
+// ud-pagination：分頁
 Vue.component('ud-pagination', {
   name: "UdPagination",
   template: `
@@ -424,7 +424,7 @@ Vue.component('ud-pagination', {
 })
 
 //-----------------------Notice-----------------------
-// Notify 通知訊息
+// ud-notify：通知訊息
 Vue.component('ud-notify', {
   name: "UdNotify",
   template: `
@@ -435,7 +435,7 @@ Vue.component('ud-notify', {
   },
 })
 
-// Popover 氣泡框
+// ud-popover：氣泡框
 Vue.component('ud-popover', {
   name: "UdPopover",
   template: `
@@ -447,7 +447,7 @@ Vue.component('ud-popover', {
 })
 
 //-----------------------Tools-----------------------
-// CountdownExpire 倒數計時(時限)
+// ud-countdown-expire：倒數計時(時限)
 Vue.component('ud-countdown-expire', {
   name: "UdCountdownExpire",
   template: `
@@ -483,7 +483,7 @@ Vue.component('ud-countdown-expire', {
 })
 
 //-----------------------Layout----------------------------
-// Flex 通用排版容器
+// ud-flex：通用排版容器
 Vue.component('ud-flex', {
   name: "UdFlex",
   template: `
@@ -497,7 +497,7 @@ Vue.component('ud-flex', {
 })
 
 //-----------------------Application-----------------------
-//Carousel 圖片輪播
+//ud-carousel：圖片輪播
 Vue.component('ud-carousel', {
   name: "udCarousel",
   template: `
@@ -623,7 +623,7 @@ Vue.component('ud-carousel', {
   }
 })
 
-// Youtube 水管播放
+// ud-youtube：水管播放
 Vue.component('ud-youtube', {
   name: "UdYoutube",
   template: `
@@ -652,7 +652,7 @@ Vue.component('ud-youtube', {
   },
 })
 
-// YoutubeApi 水管播放(控制版)
+// ud-youtube-api：水管播放(控制版)
 Vue.component('ud-youtube-api', {
   name: "UdYoutubeApi",
   template: `
@@ -720,7 +720,7 @@ Vue.component('ud-youtube-api', {
   },
 })
 
-// GoogleMap 估狗地圖
+// ud-google-map：估狗地圖
 Vue.component('ud-google-map', {
   name: "UdGoogleMap",
   template: `
@@ -736,7 +736,7 @@ Vue.component('ud-google-map', {
   },
 })
 
-// Select2 搜尋下拉框套件
+// ud-select2：搜尋下拉框套件
 // dependencies:
 //   "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
 //   "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
@@ -783,7 +783,7 @@ Vue.component('ud-select2', {
   }
 })
 
-// Scratch 刮刮樂
+// ud-scratch：刮刮樂
 // dependencies:
 //   "plugins/scratchcard/scratchcard.min.js"
 // reference:
@@ -835,7 +835,7 @@ Vue.component('ud-scratch', {
   },
 })
 
-// Editor 文字編輯器
+// ud-editor：文字編輯器
 Vue.component('ud-editor', {
   name: "UdEditor",
   template: '<h1>文案編輯器</h1>'
@@ -843,7 +843,7 @@ Vue.component('ud-editor', {
 
 //-----------------------Web-----------------------
 /**
- * 取得隨機十六進制顏色碼
+ * randomHexColorCode：取得隨機十六進制顏色碼
  */
 function randomHexColorCode(){
   let temp = (Math.random() * 0xfffff * 1000000).toString(16);
@@ -851,7 +851,7 @@ function randomHexColorCode(){
 };
 
 /**
- * 轉義HTML(防XSS攻擊)
+ * escapeHTML：轉義HTML(防XSS攻擊)
  * @param  {String} str 代入值
  * escapeHTML('<a href="#">Me & you</a>'); -> '&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;'
  */
@@ -867,7 +867,7 @@ function escapeHTML(str){
 }
 
 /**
- * 駝峰式轉換
+ * convertCamelCase：駝峰式轉換
  * @param  {String} str 代入值
  * convertCamelCase("camelCase"); -> camel-case
  */
@@ -876,7 +876,7 @@ function convertCamelCase(str = ''){
 }
 
 /**
- * 將字串內URL轉為超連結
+ * replaceURLToLink：將字串內URL轉為超連結
  * @param  {String} text 代入值
  */
 function replaceURLToLink(text) {
@@ -890,7 +890,7 @@ function replaceURLToLink(text) {
 
 //-----------------------Browser-----------------------
 /**
- * 動態加載css文件
+ * loadStyle：動態加載css文件
  * @param  {String} url 文件路徑
  */
 function loadStyle(url) {
@@ -907,7 +907,7 @@ function loadStyle(url) {
 }
 
 /**
- * 動態載入插件
+ * insertPlugin：動態載入插件
  * @param  {String} src 路徑
  */
 function insertPlugin(src){
@@ -918,14 +918,14 @@ function insertPlugin(src){
 
 //-----------------------Web-----------------------
 /**
- * HTTP跳轉HTTPS
+ * httpsRedirect：HTTP跳轉HTTPS
  */
 function httpsRedirect(){
   if (location.protocol !== 'https:') location.replace('https://' + location.href.split('//')[1]);
 };
 
 /**
- * 檢驗URL連接是否有效
+ * getUrlState：檢驗URL連接是否有效
  * @param  {String} URL 網址
  */
 function getUrlState(URL) {
@@ -949,7 +949,7 @@ function getUrlState(URL) {
 }
 
 /**
- * CDN備援
+ * cdnBackup：CDN備援
  */
 function cdnBackup(){
   if(!window.Vue){
@@ -970,7 +970,7 @@ function cdnBackup(){
 
 //-----------------------Animation-----------------------
 /** 
- * RAF通用動畫函式
+ * animate：RAF通用動畫函式
  * @param  {String} timing 指定時間
  * @param  {Object} draw 繪製
  * @param  {Object} duration 持續時間

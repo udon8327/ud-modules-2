@@ -8,39 +8,38 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 var _this = this;
 /*
-v1.0.0
-==================== Vue組件庫(Basic)目錄 ====================
+==================== ud-modules 常用組件 ====================
 Form
-  Button 按鈕 -----> ud-button
-  Input 輸入框 -----> ud-input
-  Textarea 多行輸入框 -----> ud-textarea
-  Radio 單選框 -----> ud-radio
-  Checkbox 多選框 -----> ud-checkbox
-  Select 下拉框 -----> ud-select
-  SelectLink 連動下拉框 -----> ud-select-link
-  SelectDate 日期連動下拉框 -----> ud-select-date
-  SelectTwzip 台灣行政區連動下拉框 -----> ud-select-twzip
-  Switch 開關 -----> ud-switch
-  Captcha 圖形驗證碼 -----> ud-captcha
-  FormItem 表單驗證容器 -----> ud-form-item
-  Form 表單驗證 -----> ud-form
+  ud-button：按鈕
+  ud-input：輸入框
+  ud-textarea：多行輸入框
+  ud-radio：單選框
+  ud-checkbox：多選框
+  ud-select：下拉框
+  ud-select-link：連動下拉框
+  ud-select-date：日期連動下拉框
+  ud-select-twzip：台灣行政區連動下拉框
+  ud-switch：開關
+  ud-captcha：圖形驗證碼
+  ud-form-item：表單驗證容器
+  ud-form：表單驗證
 
 Layout
-  Arrow CSS箭頭 -----> ud-arrow
-  Collapse 摺疊容器 -----> ud-collapse
-  Ratio 等比例自適應容器 -----> ud-ratio
+  ud-arrow：CSS箭頭
+  ud-collapse：摺疊容器
+  ud-ratio：等比例自適應容器
 
 Notice
-  Alert 警告彈窗 -----> ud-alert
-  Modal 通用彈窗 -----> ud-modal
-  Loading 載入中 -----> ud-loading
+  ud-alert：警告彈窗
+  ud-modal：通用彈窗
+  ud-loading：載入中
 
 Tools
-  Html 自定義訊息 -----> ud-html
-  Ellipsis 文字省略 -----> ud-ellipsis
-  Countdown 倒數計時 -----> ud-countdown
+  ud-html：自定義訊息
+  ud-ellipsis：文字省略
+  ud-countdown：倒數計時
 
-==================== 工具函數目錄 ====================
+==================== ud-utils 常用函式 ====================
 String
   nl2br：將字串內換行符\n轉為<br>
   getRandomString：取得隨機字串
@@ -101,7 +100,7 @@ Web
   isMobile：判斷是否移動裝置
 */
 //-----------------------Form-----------------------
-// Button 按鈕
+// ud-button：按鈕
 Vue.component('ud-button', {
     name: 'UdButton',
     template: "\n    <div class=\"ud-button\">\n      <button\n        @click=\"clickHandler\"\n        v-bind=\"$attrs\"\n        :disabled=\"disabled || loading\"\n        :class=\"{\n          'is-disabled': disabled || loading,\n          'is-plain': plain,\n          'is-round': round,\n          'is-circle': circle,\n        }\"\n      >\n        <div class=\"button-wrapper\">\n          <span><slot>\u6309\u9215</slot></span>\n          <div class=\"button-icon\">\n            <div class=\"icon-loading\" v-if=\"loading\"></div>\n            <i :class=\"icon\" v-if=\"icon && !loading\"></i>\n            <img :src=\"image\" alt=\"\" v-if=\"image && !loading\">\n            <slot name=\"icon\" v-if=\"!loading\"></slot>\n          </div>\n        </div>\n      </button>\n    </div>\n  ",
@@ -131,7 +130,7 @@ Vue.component('ud-button', {
         this.$el.addEventListener('click', throttle(function (evt) { return _this.$emit('click', evt); }, this.throttleTime));
     }
 });
-// Input 輸入框
+// ud-input：輸入框
 Vue.component('ud-input', {
     name: 'UdInput',
     template: "\n    <div class=\"ud-input\">\n      <input\n        ref=\"input\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        v-on=\"inputListeners\"\n        :class=\"{ 'is-center': center }\"\n        @input=\"onInput\"\n      >\n      <slot></slot>\n    </div>\n  ",
@@ -163,7 +162,7 @@ Vue.component('ud-input', {
         }
     }
 });
-// Textarea 多行輸入框
+// ud-textarea：多行輸入框
 Vue.component('ud-textarea', {
     name: "UdTextarea",
     template: "\n    <div class=\"ud-textarea\">\n      <textarea\n        ref=\"textarea\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        v-on=\"inputListeners\"\n        :rows=\"rows\"\n        :class=\"{ 'is-no-resize': noResize }\"\n        @input=\"onInput\"\n        :maxlength=\"limit\"\n      >\n      </textarea>\n      <div class=\"textarea-limit\" v-if=\"showLimit\" :class=\"{ 'limit-input': value.length > 0 }\">\n        <span>{{ valueLength }}/{{ limit }}</span>\n      </div>\n    </div>\n  ",
@@ -199,7 +198,7 @@ Vue.component('ud-textarea', {
         }
     }
 });
-// Radio 單選框
+// ud-radio：單選框
 Vue.component('ud-radio', {
     name: "UdRadio",
     template: "\n    <div class=\"ud-radio\" :class=\"{'is-flex': flex}\">\n      <label v-for=\"option in options\" :key=\"option.value\">\n        <input\n          type=\"radio\"\n          v-model=\"modelValue\"\n          :value=\"option.value\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n          ref=\"radio\"\n          :disabled=\"option.disabled\"\n        >\n        <div class=\"radio-decorator\"></div>\n        <p>{{ combine ? option.value : option.label }}</p>\n      </label>\n    </div>\n  ",
@@ -225,7 +224,7 @@ Vue.component('ud-radio', {
         }
     }
 });
-// Checkbox 多選框
+// ud-checkbox：多選框
 Vue.component('ud-checkbox', {
     name: "UdCheckbox",
     template: "\n    <div class=\"ud-checkbox\" :class=\"{'is-flex': flex}\">\n      <template v-if=\"typeof(options) === 'string' || options === null\">\n        <label>\n          <input\n            type=\"checkbox\"\n            v-model=\"modelValue\"\n            :value=\"options\"\n            v-bind=\"$attrs\"\n            @change=\"onChange\"\n            ref=\"checkbox\"\n          >\n          <div class=\"checkbox-decorator\" :class=\"{'is-solid': solid}\"></div>\n          <p><slot>{{ options }}</slot></p>\n        </label>\n      </template>\n      <template v-else>\n        <label v-for=\"option in options\" :key=\"option.value\">\n          <input\n            type=\"checkbox\"\n            :value=\"option.value\"\n            v-model=\"modelValue\"\n            v-bind=\"$attrs\"\n            @change=\"onChange\"\n            ref=\"checkbox\"\n            :disabled=\"option.disabled\"\n          >\n          <div class=\"checkbox-decorator\" :class=\"{'is-solid': solid}\"></div>\n          <p>{{ combine ? option.value : option.label }}</p>\n        </label>\n      </template>\n    </div>\n  ",
@@ -252,7 +251,7 @@ Vue.component('ud-checkbox', {
         }
     }
 });
-// Select 下拉框
+// ud-select：下拉框
 Vue.component('ud-select', {
     name: "UdSelect",
     template: "\n    <div class=\"ud-select\">\n      <select \n        v-model=\"modelValue\" \n        :data-placeholder-selected=\"modelValue.length === 0\"\n        v-bind=\"$attrs\"\n        @change=\"onChange\"\n        ref=\"select\"\n        :class=\"{ center: center }\"\n      >\n        <option value=\"\" disabled selected>{{ placeholder }}</option>\n        <option v-for=\"option in optionsArr\" :value=\"option[valueBy]\" :key=\"option[valueBy]\" :disabled=\"option.disabled\">\n          {{ combine ? option[valueBy] : option[labelBy] }}\n        </option>\n      </select>\n    </div>\n  ",
@@ -324,7 +323,7 @@ Vue.component('ud-select', {
         },
     }
 });
-// SelectLink 連動下拉框
+// ud-select-link：連動下拉框
 Vue.component('ud-select-link', {
     name: "UdSelectLink",
     template: "\n    <div class=\"ud-select-link\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"modelValue[0]\" :options=\"firstArr\" :placeholder=\"placeholder[0]\" :combine=\"combine\"></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"modelValue[1]\" :options=\"secondArr\" :placeholder=\"placeholder[1]\" :combine=\"combine\"></ud-select>\n      <slot name=\"second\"></slot>\n      <ud-select v-model=\"modelValue[2]\" :options=\"thirdArr\" :placeholder=\"placeholder[2]\" :combine=\"combine\" v-if=\"third\"></ud-select>\n      <slot name=\"third\"></slot>\n    </div>\n  ",
@@ -393,7 +392,7 @@ Vue.component('ud-select-link', {
         });
     }
 });
-// SelectDate 日期連動下拉框
+// ud-select-date：日期連動下拉框
 Vue.component('ud-select-date', {
     name: "UdSelectDate",
     template: "\n    <div class=\"ud-select-date\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"modelValue[0]\" v-bind=\"$attrs\" :options=\"firstArr\" :placeholder=\"placeholder[0]\" combine></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"modelValue[1]\" v-bind=\"$attrs\" :options=\"secondArr\" :placeholder=\"placeholder[1]\" combine></ud-select>\n      <slot name=\"second\"></slot>\n      <ud-select v-model=\"modelValue[2]\" v-bind=\"$attrs\" :options=\"thirdArr\" :placeholder=\"placeholder[2]\" combine v-if=\"third\"></ud-select>\n      <slot name=\"third\"></slot>\n    </div>\n  ",
@@ -478,7 +477,7 @@ Vue.component('ud-select-date', {
         });
     }
 });
-// SelectTwzip 台灣行政區連動下拉框
+// ud-select-twzip：台灣行政區連動下拉框
 Vue.component('ud-select-twzip', {
     name: "UdSelectTwzip",
     template: "\n    <div class=\"ud-select-twzip\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"county\" id=\"county\" @change=\"onCountyChange()\" :options=\"countyArr\" :placeholder=\"placeholder[0]\" :combine=\"combine\"></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"district\" id=\"district\" :options=\"districtArr\" :placeholder=\"placeholder[1]\" :combine=\"combine\"></ud-select>\n      <slot name=\"second\"></slot>\n    </div>\n  ",
@@ -679,7 +678,7 @@ Vue.component('ud-select-twzip', {
         }
     },
 });
-// Switch 開關
+// ud-switch：開關
 Vue.component('ud-switch', {
     name: "UdSwitch",
     template: "\n    <div class=\"ud-switch\">\n      <label>\n        <input \n          type=\"checkbox\"\n          v-model=\"modelValue\"\n          v-bind=\"$attrs\"\n          @change=\"onChange\"\n        >\n        <div class=\"switch-decorator\">\n          <div class=\"circle\"></div>\n        </div>\n        <slot></slot>\n      </label>\n    </div>\n  ",
@@ -702,7 +701,7 @@ Vue.component('ud-switch', {
         }
     },
 });
-// Captcha 圖形驗證碼
+// ud-captcha：圖形驗證碼
 Vue.component('ud-captcha', {
     name: "UdCaptcha",
     template: "\n    <div class=\"ud-captcha\">\n      <div class=\"canvas-area\" ref=\"canvasArea\">\n        <canvas id=\"verify-canvas\" width=\"100\" height=\"38\" style=\"display: none;\"></canvas>\n        <img ref=\"codeimg\" @click=\"refresh\">\n        <input type=\"hidden\" v-model=\"inputVal\">\n      </div>\n      <div class=\"refresh\" @click=\"refresh\" v-if=\"!noRefresh\">\n        <img src=\"img/refresh.png\">\n      </div>\n    </div>\n  ",
@@ -785,7 +784,7 @@ Vue.component('ud-captcha', {
         }
     }
 });
-// FormItem 表單驗證容器
+// ud-form-item：表單驗證容器
 Vue.component('ud-form-item', {
     name: "UdFormItem",
     template: "\n    <div class=\"ud-form-item\" :class=\"{'is-error': errorMessage, 'is-flex': flex}\">\n      <div class=\"ud-form-item-left\" :v-if=\"label\" style=\"{ 'flex-basis': labelWidth, 'text-align': labelAlign }\">  \n        <img :src=\"icon\" v-if=\"icon\">\n        <label v-if=\"label\"><span v-if=\"required\">*</span>{{ label }}</label>\n      </div>\n      <div class=\"ud-form-item-right\">  \n        <slot></slot>\n        <p class=\"error-message\" v-if=\"errorMessage\">{{ errorMessage }}</p>\n      </div>\n    </div>\n  ",
@@ -933,7 +932,7 @@ Vue.component('ud-form-item', {
         },
     }
 });
-// Form 表單驗證
+// ud-form：表單驗證
 Vue.component('ud-form', {
     name: "UdForm",
     template: "\n    <div class=\"ud-form\" :class=\"{'is-no-error-msg': noErrorMsg}\">\n      <slot></slot>\n    </div>\n  ",
@@ -1016,7 +1015,7 @@ Vue.component('ud-form', {
     }
 });
 //-----------------------Layout-----------------------
-// Arrow CSS箭頭
+// ud-arrow：CSS箭頭
 Vue.component('ud-arrow', {
     name: "UdArrow",
     template: "\n    <i \n      class=\"ud-arrow\"\n      :class=[direction]\n      :style=\"{\n        'border-color': color,\n        'border-width': '0 ' + width + 'px ' + width + 'px 0',\n        padding: size + 'px'\n      }\">\n    </i>\n  ",
@@ -1027,7 +1026,7 @@ Vue.component('ud-arrow', {
         direction: { default: "right" } //方向
     }
 });
-// Collapse 摺疊容器
+// ud-collapse：摺疊容器
 Vue.component('ud-collapse', {
     name: "UdCollapse",
     template: "\n    <div class=\"ud-collapse\" :style=\"{'transition-duration': durationSecond}\">\n      <div class=\"ud-collapse-wrapper\">\n        <slot></slot>\n      </div>\n    </div>\n  ",
@@ -1065,7 +1064,7 @@ Vue.component('ud-collapse', {
         }
     }
 });
-// Ratio 等比例自適應容器
+// ud-ratio：等比例自適應容器
 Vue.component('ud-ratio', {
     name: "UdRatio",
     template: "\n    <div class=\"ud-ratio\">\n      <div class=\"ud-ratio-bg\" :style=\"{\n        backgroundImage: 'url(' + src + ')', \n        paddingBottom: height + '%', \n        borderRadius: radius,\n        backgroundSize: bgSize\n      }\">\n        <slot></slot>\n      </div>\n    </div>\n  ",
@@ -1077,7 +1076,7 @@ Vue.component('ud-ratio', {
     }
 });
 //-----------------------Notice-----------------------
-// Alert 警告彈窗
+// ud-alert：警告彈窗
 var UdAlert = {
     name: "UdAlert",
     template: "\n    <transition name=\"fade\">\n      <div class=\"ud-alert\" v-if=\"isShow\" @click.self=\"maskHandler\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-close\" v-if=\"btnClose\" @click=\"destroy\">\n            <i class=\"icon-close\"></i>\n          </div>\n          <div class=\"ud-modal-header\" v-if=\"title\">\n            <p v-html=\"nl2br(title)\"></p>\n          </div>\n          <div class=\"ud-modal-body\">\n            <p v-html=\"nl2br(message)\"></p>\n          </div>\n          <div class=\"ud-modal-footer\">\n            <ud-button @click=\"cancelHandler\" plain v-if=\"confirm\">{{ cancelText }}</ud-button>\n            <ud-button @click=\"confirmHandler\">{{ confirmText }}</ud-button>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
@@ -1152,7 +1151,7 @@ var udAlert = function (options) {
     return instance.show();
 };
 Vue.prototype.udAlert = udAlert;
-// Modal 通用彈窗
+// ud-modal：通用彈窗
 Vue.component("ud-modal", {
     name: "UdModal",
     template: "\n    <transition name=\"fade\">\n      <div class=\"ud-modal\" v-if=\"isShow\" @click.self=\"maskHandler\" :class=\"{ 'full-screen': fullScreen }\" :style=\"{ zIndex: zIndex }\">\n        <div class=\"ud-modal-wrapper\" :class=\"{ 'no-bg': noBg }\">\n          <div class=\"ud-modal-close\" v-if=\"btnClose\" @click=\"isShow = 0\">\n            <i class=\"icon-close\"></i>\n          </div>\n          <div class=\"ud-modal-header\" v-if=\"!$slots.default\">\n            <p>{{ title }}</p>\n          </div>\n          <div class=\"ud-modal-body\">\n            <p v-if=\"!$slots.default\">{{ message }}</p>\n            <slot></slot>\n          </div>\n          <div class=\"ud-modal-footer\" v-if=\"!$slots.default\">\n            <div class=\"button-area\">\n              <ud-button @click=\"isShow = 0\">\u78BA\u8A8D</ud-button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
@@ -1179,7 +1178,7 @@ Vue.component("ud-modal", {
         },
     }
 });
-// Loading 載入中
+// ud-loading：載入中
 var UdLoading = {
     name: "UdLoading",
     template: "\n    <transition name=\"loading\">\n      <div class=\"ud-loading\" v-show=\"isShow\" :class=\"{'theme-white': theme === 'white'}\">\n        <div class=\"ud-modal-wrapper\">\n          <div class=\"ud-modal-content\">\n            <div class=\"ud-modal-header\">\n              <div v-if=\"iconType === 'css'\" class=\"icon-css\"></div>\n              <i v-else-if=\"iconType === 'font'\" class=\"icon-font\" :class=\"iconFont\"></i>\n              <img v-else class=\"icon-img\" :src=\"iconImg\">\n            </div>\n            <div class=\"ud-modal-body\">\n              <p v-html=\"nl2br(message)\"></p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </transition>\n  ",
@@ -1229,7 +1228,7 @@ var udLoading = {
 };
 Vue.prototype.udLoading = udLoading;
 //-----------------------Tools-----------------------
-// Html 用戶自定義訊息
+// ud-html：自定義訊息
 Vue.component('ud-html', {
     name: "UdHtml",
     template: "\n    <div class=\"ud-html\" v-html=\"nl2br(text)\"></div>\n  ",
@@ -1246,7 +1245,7 @@ Vue.component('ud-html', {
         }
     }
 });
-// Ellipsis 文字省略
+// ud-ellipsis：文字省略
 Vue.component('ud-ellipsis', {
     name: "UdEllipsis",
     template: "\n    <p class=\"ud-ellipsis\" :style=\"{webkitLineClamp: maxLine}\">\n      <slot></slot>\n    </p>\n  ",
@@ -1254,7 +1253,7 @@ Vue.component('ud-ellipsis', {
         maxLine: { default: 1, } // 指定省略行數
     }
 });
-// Countdown 倒數計時
+// ud-countdown：倒數計時
 Vue.component('ud-countdown', {
     name: "UdCountdown",
     template: "\n    <span class=\"ud-countdown\" ref=\"count\">{{formatCountTime}}</span>\n  ",

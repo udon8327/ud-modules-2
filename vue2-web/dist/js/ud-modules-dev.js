@@ -1,58 +1,58 @@
 /*
-==================== Vue組件庫(Extra)目錄 ====================
+==================== ud-modules 常用組件(開發中) ====================
 Form
-  SelectMultiple 下拉複選框 -----> ud-select-multiple
-  InputPhone 電話號碼連動輸入框 -----> ud-input-phone
-  Upload 上傳 -----> ud-upload
-  ImageUpload 圖片上傳預覽 -----> ud-image-upload
-  ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
-  DatePicker 日期選擇器 -----> ud-date-picker
+  ud-select-multiple：下拉複選框(依賴：element-ui)
+  ud-input-phone：電話號碼連動輸入框
+  ud-upload：上傳
+  ud-image-upload：圖片上傳預覽
+  ud-image-multi-upload：圖片上傳預覽(多張)
+  ud-date-picker：日期選擇器(依賴：element-ui)
 
 Data
-  Table 表格 -----> ud-table
-  Pagination 分頁 -----> ud-pagination
+  ud-table：表格
+  ud-pagination：分頁
 
 Notice
-  Notify 通知訊息 -----> ud-notify
-  Popover 氣泡框 -----> ud-popover
+  ud-notify：通知訊息
+  ud-popover：氣泡框
 
 Tools
-  CountdownExpire 倒數計時(時限) -----> ud-countdown-expire
+  ud-countdown-expire：倒數計時(時限)
 
 Layout
-  Flex 通用排版容器 -----> ud-flex
+  ud-flex：通用排版容器
 
 Application
-  Carousel 圖片輪播 -----> ud-carousel
-  Youtube 水管播放 -----> ud-youtube
-  YoutubeApi 水管播放(控制版) -----> ud-youtube-api
-  GoogleMap 估狗地圖 -----> ud-google-map
-  Select2 搜尋下拉框 -----> ud-select2
-  Scratch 刮刮樂 -----> ud-scratch
-  Editor 文字編輯器 -----> ud-editor
+  ud-carousel：圖片輪播
+  ud-youtube：水管播放
+  ud-youtube-api：水管播放(控制版)
+  ud-google-map：估狗地圖
+  ud-select2：搜尋下拉框
+  ud-scratch：刮刮樂
+  ud-editor：文字編輯器
 
-// ==================== 工具函數目錄 ====================
+// ==================== ud-utils 常用函式(開發中) ====================
 String
-  取得隨機十六進制顏色 -----> randomHexColorCode
-  轉義HTML(防XSS攻擊) -----> escapeHTML
-  駝峰式轉換 -----> convertCamelCase
-  將字串內URL轉為超連結 -----> replaceURLToLink
+  randomHexColorCode：取得隨機十六進制顏色
+  escapeHTML：轉義HTML(防XSS攻擊)
+  convertCamelCase：駝峰式轉換
+  replaceURLToLink：將字串內URL轉為超連結
 
 Browser
-  動態加載css文件 -----> loadStyle
-  動態載入插件 -----> insertPlugin
+  loadStyle：動態加載css文件
+  insertPlugin：動態載入插件
 
 Web
-  HTTP跳轉HTTPS -----> httpsRedirect
-  檢驗URL連接是否有效 -----> getUrlState
-  CDN備援 -----> cdnBackup
+  httpsRedirect：HTTP跳轉HTTPS
+  getUrlState：檢驗URL連接是否有效
+  cdnBackup：CDN備援
 
 Animation
-  RAF通用動畫函式 -----> animate
+  animate：RAF通用動畫函式
 
 */
 //-----------------------Form-----------------------
-// SelectMultiple 下拉複選框 (依賴：element-ui)
+// ud-select-multiple：下拉複選框(依賴：element-ui)
 Vue.component('ud-select-multiple', {
     name: "UdSelectMultiple",
     template: "\n    <div class=\"ud-select-multiple\">\n      <el-select\n        v-model=\"modelValue\"\n        multiple\n        collapse-tags\n        :placeholder=\"placeholder\"\n        ref=\"select\"\n      >\n        <el-option\n          v-for=\"item in options\"\n          :key=\"item.value\"\n          :label=\"item.label\"\n          :value=\"item.value\">\n        </el-option>\n      </el-select>\n    </div>\n  ",
@@ -75,7 +75,7 @@ Vue.component('ud-select-multiple', {
         },
     }
 });
-// InputPhone 電話號碼連動輸入框
+// ud-input-phone：電話號碼連動輸入框
 Vue.component('ud-input-phone', {
     name: 'UdInputPhone',
     template: "\n    <div class=\"ud-input-phone\">\n      <ud-input\n        v-model=\"modelValue[0]\"\n        @input=\"onInput(1)\"\n        ref=\"input1\"\n        :placeholder=\"placeholder[0]\"\n        type=\"tel\"\n        maxlength=\"4\"\n      >\n      </ud-input>\n      <span class=\"separator\">{{ separator }}</span>\n      <ud-input\n        v-model=\"modelValue[1]\"\n        @input=\"onInput(2)\"\n        ref=\"input2\"\n        :placeholder=\"placeholder[1]\"\n        type=\"tel\"\n        maxlength=\"3\"\n      >\n      </ud-input>\n      <span class=\"separator\">{{ separator }}</span>\n      <ud-input\n        v-model=\"modelValue[2]\"\n        @input=\"onInput(3)\"\n        ref=\"input3\"\n        :placeholder=\"placeholder[2]\"\n        type=\"tel\"\n        maxlength=\"3\"\n      >\n      </ud-input>\n    </div>\n  ",
@@ -123,13 +123,13 @@ Vue.component('ud-input-phone', {
         }
     }
 });
-// Upload 上傳
+// ud-upload：上傳
 Vue.component('ud-upload', {
     name: "UdUpload",
     template: "\n\n  ",
     props: {},
 });
-// ImageUpload 圖片上傳預覽
+// ud-image-upload：圖片上傳預覽
 Vue.component("ud-image-upload", {
     name: "UdImageUpload",
     template: "\n    <div class=\"ud-image-upload\">\n      <div class=\"preview-area\">\n        <img :src=\"preview\" ref=\"preview\">\n      </div>\n      <div class=\"info-area\">\n        <div class=\"info-left\">\n          <p v-if=\"!image\">\u672A\u9078\u64C7\u6A94\u6848</p>\n          <p v-if=\"image\" ref=\"fileName\">\u6A94\u6848\u540D\u7A31\uFF1A{{ image.name }}</p>\n          <p v-if=\"image\" ref=\"fileSize\">\u6A94\u6848\u5927\u5C0F\uFF1A{{ parseInt(image.size/1024) }}KB</p>\n        </div>\n        <div class=\"info-right\">\n          <input type=\"file\" accept=\"image/*\" ref=\"file\" @change=\"previewImage\">\n          <ud-button @click=\"clickInput\">\u4E0A\u50B3\u5716\u7247</ud-button>\n        </div>\n      </div>\n    </div>\n  ",
@@ -195,7 +195,7 @@ Vue.component("ud-image-upload", {
         }
     }
 });
-// ImageMultiUpload 圖片上傳預覽(多張)
+// ud-image-multi-upload：圖片上傳預覽(多張)
 Vue.component("ud-image-multi-upload", {
     name: "UdImageMultiUpload",
     template: "\n    <div class=\"ud-image-multi-upload\">\n      <input type=\"file\" accept=\"image/*\" multiple=\"multiple\" ref=\"input\" @change=\"previewMultiImage\">\n      <template v-if=\"preview_list.length\">\n        <div class=\"image-preview\">\n          <div v-for=\"item, index in preview_list\" :key=\"index\">\n            <img :src=\"item\"/>\n            <div class=\"image-info\">\n              <p>\u6A94\u6848\u540D\u7A31\uFF1A{{ image_list[index].name }}</p>\n              <p>\u6A94\u6848\u5927\u5C0F\uFF1A{{ parseInt(image_list[index].size/1024) }}KB</p>\n            </div>\n          </div>\n          <ud-button @click=\"reset\">\u522A\u9664\u5716\u7247</ud-button>\n        </div>\n      </template>\n    </div>\n  ",
@@ -230,7 +230,7 @@ Vue.component("ud-image-multi-upload", {
         }
     }
 });
-// DatePicker 日期選擇器 (依賴：element-ui)
+// ud-date-picker：日期選擇器(依賴：element-ui)
 Vue.component('ud-date-picker', {
     name: 'UdDatePicker',
     template: "\n    <div class=\"ud-date-picker\">\n      <el-date-picker\n        class=\"ud-select\"\n        v-model=\"modelValue\"\n        v-bind=\"$attrs\"\n        type=\"date\"\n        :value-format=\"valueFormat\"\n        :align=\"align\"\n        :placeholder=\"placeholder\"\n        :editable=\"editable\"\n        ref=\"date\"\n        @change=\"onChange\"\n      >\n      </el-date-picker>\n    </div>\n  ",
@@ -294,33 +294,33 @@ Vue.component('ud-date-picker', {
     }
 });
 //-----------------------Data-----------------------
-// Table 表格
+// ud-table：表格
 Vue.component('ud-table', {
     name: "UdTable",
     template: "\n\n  ",
     props: {},
 });
-// Pagination 分頁
+// ud-pagination：分頁
 Vue.component('ud-pagination', {
     name: "UdPagination",
     template: "\n\n  ",
     props: {},
 });
 //-----------------------Notice-----------------------
-// Notify 通知訊息
+// ud-notify：通知訊息
 Vue.component('ud-notify', {
     name: "UdNotify",
     template: "\n\n  ",
     props: {},
 });
-// Popover 氣泡框
+// ud-popover：氣泡框
 Vue.component('ud-popover', {
     name: "UdPopover",
     template: "\n\n  ",
     props: {},
 });
 //-----------------------Tools-----------------------
-// CountdownExpire 倒數計時(時限)
+// ud-countdown-expire：倒數計時(時限)
 Vue.component('ud-countdown-expire', {
     name: "UdCountdownExpire",
     template: "\n    <div>\u8DDD\u96E25\u670813\u865F 15\u9EDE0\u52060\u79D2 \u9084\u6709</div>\n    <i></i>\n    <i></i>\n    <i></i>\n  ",
@@ -349,14 +349,14 @@ Vue.component('ud-countdown-expire', {
     },
 });
 //-----------------------Layout----------------------------
-// Flex 通用排版容器
+// ud-flex：通用排版容器
 Vue.component('ud-flex', {
     name: "UdFlex",
     template: "\n    <div class=\"ud-flex\">\n      <slot></slot>\n    </div>\n  ",
     props: {}
 });
 //-----------------------Application-----------------------
-//Carousel 圖片輪播
+//ud-carousel：圖片輪播
 Vue.component('ud-carousel', {
     name: "udCarousel",
     template: "\n    <div class=\"ud-carousel\" ref=\"carousel\"\n      @mouseenter.stop=\"toggleTimer = false\"\n      @mouseleave.stop=\"toggleTimer = true\"\n      @touchstart.stop=\"touchStart\"\n      @touchmove.stop=\"touchMove\"\n      :style=\"'min-height:' + minHeight\">\n      <keep-alive>\n        <transition :name=\"carouselName\">\n          <div class=\"item\"\n            v-for=\"(item, index) in carousels\"\n            v-if=\"show == index\"\n            :key=\"index\"\n          >\n            <a :href=\"item.href\"><img :src=\"item.img\"/></a>\n          </div>\n        </transition>\n      </keep-alive>\n\n      <!-- arrows -->\n      <div class=\"arrows-group\" v-if=\"arrows\">\n        <a class=\"button-prev\" href=\"#\" @click.prevent=\"toPrev\">\n          <slot name=\"arrows-prev\">\n            <img src=\"//akveo.github.io/eva-icons/outline/png/128/arrow-ios-back-outline.png\"/>\n          </slot>\n        </a>\n        <a class=\"button-next\" href=\"#\" @click.prevent=\"toNext\">\n          <slot name=\"arrows-next\">\n            <img src=\"//akveo.github.io/eva-icons/outline/png/128/arrow-ios-forward-outline.png\"/>\n          </slot>\n        </a>\n      </div>\n\n      <!-- dots -->\n      <div class=\"dot-group\" v-if=\"dots\">\n        <a v-for=\"(l, index) in len\" href=\"#\"\n          :class=\"{ 'active': show == index }\"\n          @click.prevent=\"show = index\"\n        ></a>\n      </div>\n\n    </div>\n  ",
@@ -443,7 +443,7 @@ Vue.component('ud-carousel', {
         });
     }
 });
-// Youtube 水管播放
+// ud-youtube：水管播放
 Vue.component('ud-youtube', {
     name: "UdYoutube",
     template: "\n    <div class=\"ud-youtube\">\n      <div class=\"video-wrapper\">\n        <iframe width=\"560\" height=\"315\" :src=\"videoIdAfter\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n      </div>\n    </div>\n  ",
@@ -469,7 +469,7 @@ Vue.component('ud-youtube', {
         }
     },
 });
-// YoutubeApi 水管播放(控制版)
+// ud-youtube-api：水管播放(控制版)
 Vue.component('ud-youtube-api', {
     name: "UdYoutubeApi",
     template: "\n    <div class=\"ud-youtube-api\">\n      <div class=\"video-wrapper\">\n        <div :id=\"videoId\" ref=\"player\"></div>\n      </div>\n    </div>\n  ",
@@ -531,7 +531,7 @@ Vue.component('ud-youtube-api', {
     },
     methods: {},
 });
-// GoogleMap 估狗地圖
+// ud-google-map：估狗地圖
 Vue.component('ud-google-map', {
     name: "UdGoogleMap",
     template: "\n    <div class=\"ud-google-map\" :style=\"{'padding-bottom': ratio + '%'}\">\n      <iframe :src=\"src\" :width=\"width\" :height=\"height\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>\n    </div>\n  ",
@@ -542,7 +542,7 @@ Vue.component('ud-google-map', {
         ratio: { default: 65.25 } // 比例
     },
 });
-// Select2 搜尋下拉框套件
+// ud-select2：搜尋下拉框套件
 // dependencies:
 //   "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
 //   "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
@@ -584,7 +584,7 @@ Vue.component('ud-select2', {
             .select2("destroy");
     }
 });
-// Scratch 刮刮樂
+// ud-scratch：刮刮樂
 // dependencies:
 //   "plugins/scratchcard/scratchcard.min.js"
 // reference:
@@ -629,14 +629,14 @@ Vue.component('ud-scratch', {
         }
     },
 });
-// Editor 文字編輯器
+// ud-editor：文字編輯器
 Vue.component('ud-editor', {
     name: "UdEditor",
     template: '<h1>文案編輯器</h1>'
 });
 //-----------------------Web-----------------------
 /**
- * 取得隨機十六進制顏色碼
+ * randomHexColorCode：取得隨機十六進制顏色碼
  */
 function randomHexColorCode() {
     var temp = (Math.random() * 0xfffff * 1000000).toString(16);
@@ -644,7 +644,7 @@ function randomHexColorCode() {
 }
 ;
 /**
- * 轉義HTML(防XSS攻擊)
+ * escapeHTML：轉義HTML(防XSS攻擊)
  * @param  {String} str 代入值
  * escapeHTML('<a href="#">Me & you</a>'); -> '&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;'
  */
@@ -658,7 +658,7 @@ function escapeHTML(str) {
     }[tag] || tag); });
 }
 /**
- * 駝峰式轉換
+ * convertCamelCase：駝峰式轉換
  * @param  {String} str 代入值
  * convertCamelCase("camelCase"); -> camel-case
  */
@@ -667,7 +667,7 @@ function convertCamelCase(str) {
     return str.replace(/([A-Z])/g, '-$1').toLowerCase();
 }
 /**
- * 將字串內URL轉為超連結
+ * replaceURLToLink：將字串內URL轉為超連結
  * @param  {String} text 代入值
  */
 function replaceURLToLink(text) {
@@ -682,7 +682,7 @@ function replaceURLToLink(text) {
 ;
 //-----------------------Browser-----------------------
 /**
- * 動態加載css文件
+ * loadStyle：動態加載css文件
  * @param  {String} url 文件路徑
  */
 function loadStyle(url) {
@@ -699,7 +699,7 @@ function loadStyle(url) {
     }
 }
 /**
- * 動態載入插件
+ * insertPlugin：動態載入插件
  * @param  {String} src 路徑
  */
 function insertPlugin(src) {
@@ -709,7 +709,7 @@ function insertPlugin(src) {
 }
 //-----------------------Web-----------------------
 /**
- * HTTP跳轉HTTPS
+ * httpsRedirect：HTTP跳轉HTTPS
  */
 function httpsRedirect() {
     if (location.protocol !== 'https:')
@@ -717,7 +717,7 @@ function httpsRedirect() {
 }
 ;
 /**
- * 檢驗URL連接是否有效
+ * getUrlState：檢驗URL連接是否有效
  * @param  {String} URL 網址
  */
 function getUrlState(URL) {
@@ -744,7 +744,7 @@ function getUrlState(URL) {
     }
 }
 /**
- * CDN備援
+ * cdnBackup：CDN備援
  */
 function cdnBackup() {
     if (!window.Vue) {
@@ -754,7 +754,7 @@ function cdnBackup() {
 }
 //-----------------------Animation-----------------------
 /**
- * RAF通用動畫函式
+ * animate：RAF通用動畫函式
  * @param  {String} timing 指定時間
  * @param  {Object} draw 繪製
  * @param  {Object} duration 持續時間

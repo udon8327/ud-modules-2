@@ -1,39 +1,38 @@
 declare var $: (selector: string) => any;
 
 /*
-v1.0.0
-==================== Vue組件庫(Basic)目錄 ====================
+==================== ud-modules 常用組件 ====================
 Form
-  Button 按鈕 -----> ud-button
-  Input 輸入框 -----> ud-input
-  Textarea 多行輸入框 -----> ud-textarea
-  Radio 單選框 -----> ud-radio
-  Checkbox 多選框 -----> ud-checkbox
-  Select 下拉框 -----> ud-select
-  SelectLink 連動下拉框 -----> ud-select-link
-  SelectDate 日期連動下拉框 -----> ud-select-date
-  SelectTwzip 台灣行政區連動下拉框 -----> ud-select-twzip
-  Switch 開關 -----> ud-switch
-  Captcha 圖形驗證碼 -----> ud-captcha
-  FormItem 表單驗證容器 -----> ud-form-item
-  Form 表單驗證 -----> ud-form
+  ud-button：按鈕
+  ud-input：輸入框
+  ud-textarea：多行輸入框
+  ud-radio：單選框
+  ud-checkbox：多選框
+  ud-select：下拉框
+  ud-select-link：連動下拉框
+  ud-select-date：日期連動下拉框
+  ud-select-twzip：台灣行政區連動下拉框
+  ud-switch：開關
+  ud-captcha：圖形驗證碼
+  ud-form-item：表單驗證容器
+  ud-form：表單驗證
 
 Layout
-  Arrow CSS箭頭 -----> ud-arrow
-  Collapse 摺疊容器 -----> ud-collapse
-  Ratio 等比例自適應容器 -----> ud-ratio
+  ud-arrow：CSS箭頭
+  ud-collapse：摺疊容器
+  ud-ratio：等比例自適應容器
 
 Notice
-  Alert 警告彈窗 -----> ud-alert
-  Modal 通用彈窗 -----> ud-modal
-  Loading 載入中 -----> ud-loading
+  ud-alert：警告彈窗
+  ud-modal：通用彈窗
+  ud-loading：載入中
 
 Tools
-  Html 自定義訊息 -----> ud-html
-  Ellipsis 文字省略 -----> ud-ellipsis
-  Countdown 倒數計時 -----> ud-countdown
+  ud-html：自定義訊息
+  ud-ellipsis：文字省略
+  ud-countdown：倒數計時
 
-==================== 工具函數目錄 ====================
+==================== ud-utils 常用函式 ====================
 String
   nl2br：將字串內換行符\n轉為<br>
   getRandomString：取得隨機字串
@@ -95,7 +94,7 @@ Web
 */
 
 //-----------------------Form-----------------------
-// Button 按鈕
+// ud-button：按鈕
 Vue.component('ud-button', {
   name: 'UdButton',
   template: `
@@ -151,7 +150,7 @@ Vue.component('ud-button', {
   }
 })
 
-// Input 輸入框
+// ud-input：輸入框
 Vue.component('ud-input', {
   name: 'UdInput',
   template: `
@@ -199,7 +198,7 @@ Vue.component('ud-input', {
   }
 })
 
-// Textarea 多行輸入框
+// ud-textarea：多行輸入框
 Vue.component('ud-textarea', {
   name: "UdTextarea",
   template: `
@@ -256,7 +255,7 @@ Vue.component('ud-textarea', {
   }
 })
 
-// Radio 單選框
+// ud-radio：單選框
 Vue.component('ud-radio', {
   name: "UdRadio",
   template: `
@@ -299,7 +298,7 @@ Vue.component('ud-radio', {
   }
 })
 
-// Checkbox 多選框
+// ud-checkbox：多選框
 Vue.component('ud-checkbox', {
   name: "UdCheckbox",
   template: `
@@ -359,7 +358,7 @@ Vue.component('ud-checkbox', {
   }
 })
 
-// Select 下拉框
+// ud-select：下拉框
 Vue.component('ud-select', {
   name: "UdSelect",
   template: `
@@ -440,7 +439,7 @@ Vue.component('ud-select', {
   }
 })
 
-// SelectLink 連動下拉框
+// ud-select-link：連動下拉框
 Vue.component('ud-select-link', {
   name: "UdSelectLink",
   template: `
@@ -515,7 +514,7 @@ Vue.component('ud-select-link', {
   }
 })
 
-// SelectDate 日期連動下拉框
+// ud-select-date：日期連動下拉框
 Vue.component('ud-select-date', {
   name: "UdSelectDate",
   template: `
@@ -605,7 +604,7 @@ Vue.component('ud-select-date', {
   }
 })
 
-// SelectTwzip 台灣行政區連動下拉框
+// ud-select-twzip：台灣行政區連動下拉框
 Vue.component('ud-select-twzip', {
   name: "UdSelectTwzip",
   template: `
@@ -810,7 +809,7 @@ Vue.component('ud-select-twzip', {
   },
 })
 
-// Switch 開關
+// ud-switch：開關
 Vue.component('ud-switch', {
   name: "UdSwitch",
   template: `
@@ -848,7 +847,7 @@ Vue.component('ud-switch', {
   },
 })
 
-// Captcha 圖形驗證碼
+// ud-captcha：圖形驗證碼
 Vue.component('ud-captcha', {
   name: "UdCaptcha",
   template: `
@@ -944,7 +943,7 @@ Vue.component('ud-captcha', {
   }
 })
 
-// FormItem 表單驗證容器
+// ud-form-item：表單驗證容器
 Vue.component('ud-form-item', {
   name: "UdFormItem",
   template: `
@@ -1082,7 +1081,7 @@ Vue.component('ud-form-item', {
   }
 })
 
-// Form 表單驗證
+// ud-form：表單驗證
 Vue.component('ud-form', {
   name: "UdForm",
   template: `
@@ -1160,7 +1159,7 @@ Vue.component('ud-form', {
 })
 
 //-----------------------Layout-----------------------
-// Arrow CSS箭頭
+// ud-arrow：CSS箭頭
 Vue.component('ud-arrow', {
   name: "UdArrow",
   template: `
@@ -1182,7 +1181,7 @@ Vue.component('ud-arrow', {
   }
 })
 
-// Collapse 摺疊容器
+// ud-collapse：摺疊容器
 Vue.component('ud-collapse', {
   name: "UdCollapse",
   template: `
@@ -1225,7 +1224,7 @@ Vue.component('ud-collapse', {
   }
 })
 
-// Ratio 等比例自適應容器
+// ud-ratio：等比例自適應容器
 Vue.component('ud-ratio', {
   name: "UdRatio",
   template: `
@@ -1250,7 +1249,7 @@ Vue.component('ud-ratio', {
 
 
 //-----------------------Notice-----------------------
-// Alert 警告彈窗
+// ud-alert：警告彈窗
 const UdAlert = {
   name: "UdAlert",
   template: `
@@ -1340,7 +1339,7 @@ const udAlert = options => {
 };
 Vue.prototype.udAlert = udAlert;
 
-// Modal 通用彈窗
+// ud-modal：通用彈窗
 Vue.component("ud-modal", {
   name: "UdModal",
   template: `
@@ -1389,7 +1388,7 @@ Vue.component("ud-modal", {
   }
 });
 
-// Loading 載入中
+// ud-loading：載入中
 const UdLoading = {
   name: "UdLoading",
   template: `
@@ -1455,7 +1454,7 @@ const udLoading = {
 Vue.prototype.udLoading = udLoading;
 
 //-----------------------Tools-----------------------
-// Html 用戶自定義訊息
+// ud-html：自定義訊息
 Vue.component('ud-html', {
   name: "UdHtml",
   template: `
@@ -1475,7 +1474,7 @@ Vue.component('ud-html', {
   }
 })
 
-// Ellipsis 文字省略
+// ud-ellipsis：文字省略
 Vue.component('ud-ellipsis', {
   name: "UdEllipsis",
   template: `
@@ -1488,7 +1487,7 @@ Vue.component('ud-ellipsis', {
   }
 })
 
-// Countdown 倒數計時
+// ud-countdown：倒數計時
 Vue.component('ud-countdown', {
   name: "UdCountdown",
   template: `

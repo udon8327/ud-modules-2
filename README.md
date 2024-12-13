@@ -1,7 +1,6 @@
-# ud-modules 文件
-
-# Form 表單
-## <font color=#ebc600>Button 按鈕 ud-button</font>
+# <font color="aqua">ud-modules 常用組件</font>
+## Form
+### <font color=#ebc600>ud-button：按鈕</font>
   ``` html
   <ud-button @click="onClick">按鈕</ud-button>
   ```
@@ -38,7 +37,7 @@
     <ud-button throttle :throttle-time="2000" @click="test">按鈕</ud-button> 
     ```
 
-## <font color=#ebc600>Input 輸入框 ud-input</font>
+### <font color=#ebc600>ud-input：輸入框</font>
   ``` html
   <ud-input v-model="value" placeholder="請輸入文字" center></ud-textarea>
   ```
@@ -61,7 +60,7 @@
     this.$refs.target.blur();
     ```
 
-## <font color=#ebc600>Textarea 多行輸入框 ud-textarea</font>
+### <font color=#ebc600>ud-textarea：多行輸入框</font>
   ``` html
   <ud-textarea v-model="value" placeholder="請輸入文字" :rows="8" show-limit :limit="99" no-resize></ud-textarea>
   ```
@@ -74,7 +73,7 @@
   ### methods
   * 同ud-input
 
-## <font color=#ebc600>Radio 單選框 ud-radio</font>
+### <font color=#ebc600>ud-radio：單選框</font>
   ``` html
   <ud-radio v-model="value" :options="options" flex></ud-radio>
   ```
@@ -90,7 +89,7 @@
   * flex: 是否並排 | Boolean(false)
   * combine: 使用value做為label | Boolean(false)
 
-## <font color=#ebc600>Checkbox 多選框 ud-checkbox</font>
+### <font color=#ebc600>ud-checkbox：多選框</font>
   多選時v-model需綁定Array
   ``` html
   <ud-checkbox v-model="value" :options="options" flex></ud-checkbox>
@@ -118,7 +117,7 @@
   * combine: 使用value做為label | Boolean(false)
   * solid: 打勾改為實心 | Boolean(false)
 
-## <font color=#ebc600>Select 下拉框 ud-select</font>
+### <font color=#ebc600>ud-select：下拉框</font>
   單獨一個ud-select
   ``` html
   <ud-select v-model="value" :options="options" placeholder="請選擇櫃點"></ud-select>
@@ -182,7 +181,7 @@
   * valueBy: value替代值 | String("value")
   * childrenBy: children替代值 | String("children")
 
-## <font color=#ebc600>SelectLink 連動下拉框 ud-select-link</font>
+### <font color=#ebc600>ud-select-link：連動下拉框</font>
   要做連動下拉已經不建議使用此群組，而是直接將多個ud-select群組起來使用，可以不受數量與DOM的限制
   ``` html
   <ud-select-link v-model="valueGroup" :options="storeOptions" :placeholder="['縣市', '櫃點', '時段']" flex third></ud-select-link>
@@ -229,7 +228,7 @@
   * flex: 是否並排 | Boolean(false)
   * combine: 使用value做為label | Boolean(false)
 
-## <font color=#ebc600>SelectDate 日期連動下拉框 ud-select-date</font>
+### <font color=#ebc600>ud-select-date：日期連動下拉框</font>
   會自動更新年份
   ``` html
   <ud-select-date v-model="formData.date" flex third roc>
@@ -244,7 +243,7 @@
   * flex: 是否並排 | Boolean(false)
   * roc: 是否為民國年 | Boolean(false)
 
-## <font color=#ebc600>SelectTwzip 台灣行政區連動下拉框 ud-select-twzip</font>
+### <font color=#ebc600>ud-select-twzip：台灣行政區連動下拉框</font>
   ``` html
   <ud-select-twzip ref="zip" v-model="formData.twzip" flex></ud-select-twzip>
   ```
@@ -253,7 +252,7 @@
   * flex: 是否並排 | Boolean(false)
   * combine: 是否label直接使用value值 | Boolean(false)
 
-## <font color=#ebc600>Switch 開關 ud-switch</font>
+### <font color=#ebc600>ud-switch：開關</font>
   ``` html
   <ud-switch v-model="formData.isActive"></ud-switch>
   ```
@@ -262,7 +261,7 @@
   * flex: 是否並排 | Boolean(false)
   * combine: 是否label直接使用value值 | Boolean(false)
 
-## <font color=#ebc600>Captcha 圖形驗證碼 ud-captcha</font>
+### <font color=#ebc600>ud-captcha：圖形驗證碼</font>
   ``` html
   <ud-input v-model="formData.captcha" placeholder="驗證碼" maxlength="4"></ud-input>
   <ud-captcha v-model="formData.captchaCode"></ud-captcha>
@@ -276,7 +275,7 @@
   * noDots: 無隨機點 | Boolean(false)
   * noRefresh: 無刷新鈕 | Boolean(false)
 
-## <font color=#ebc600>FormItem 表單驗證容器 ud-form-item</font>
+### <font color=#ebc600>ud-form-item：表單驗證容器</font>
   ``` html
   <ud-form :rules="rules" :model="formData" ref="form">
     <ud-form-item label="姓名" prop="name" flex>
@@ -303,7 +302,7 @@
   * labelWidth: 標籤寬度 | String
   * labelAlign: 標籤對齊 | String
 
-## <font color=#ebc600>Form 表單驗證 ud-form</font>
+### <font color=#ebc600>ud-form：表單驗證</font>
   ``` html
   <ud-form :rules="rules" :model="formData" ref="form">
     <ud-form-item label="姓名" prop="name" flex>
@@ -327,8 +326,8 @@
   * noErrorMsg: 有無錯誤提示 | Boolean(false)
   * noErrorScroll: 驗證時不滾動至錯誤項目 | Boolean(false)
 
-# Layout
-## <font color=#ebc600>Arrow CSS箭頭 ud-arrow</font>
+## Layout
+### <font color=#ebc600>ud-arrow：CSS箭頭</font>
   ``` html
   <ud-arrow width="5" size="6" direction="down">
   ```
@@ -338,7 +337,7 @@
   * size: 大小 | String("3")
   * direction: 方向 | String("right")
 
-## <font color=#ebc600>Collapse 摺疊容器 ud-collapse</font>
+### <font color=#ebc600>ud-collapse：摺疊容器</font>
   ``` html
   <ud-button @click="isCollapse = !isCollapse">摺疊容器</ud-button>
     <ud-arrow color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'">
@@ -351,15 +350,15 @@
   ### props
   * duration: 開闔速度 | Number(0.2)
 
-## <font color=#ebc600>Ratio 等比例自適應容器 ud-ratio</font>
+### <font color=#ebc600>ud-ratio：等比例自適應容器</font>
   ``` html
   <ud-ratio src="img/01.jpg" bg-size="contain"></ud-ratio>
   ```
   ### props
   * duration: 開闔速度 | Number(0.2)
 
-# Notice
-## <font color=#ebc600>Alert 警告彈窗 ud-alert</font>
+## Notice
+### <font color=#ebc600>ud-alert：警告彈窗</font>
   ``` js
   this.udAlert("發生錯誤\n請稍候再試<i>！</i>");
   // or
@@ -391,7 +390,7 @@
   * confirmText: 確認鈕文字 | String("確定")
   * onConfirm: () => 確認鈕callback(也可使用.catch) | Function(() => {})
 
-## <font color=#ebc600>Modal 通用彈窗 ud-modal</font>
+### <font color=#ebc600>ud-modal：通用彈窗</font>
   ``` html
   <ud-modal v-model="isModalShow" mask-close btn-close>
     <ud-button @click="isModalShow = false" plain>關閉</ud-button>
@@ -406,7 +405,7 @@
   * zIndex: z-index層級 | Number(100)
   * noBg: 背景是否透明 | Boolean(false)
 
-## <font color=#ebc600>Loading 載入中 ud-loading</font>
+### <font color=#ebc600>ud-loading：載入中</font>
   ``` js
   // 開啟Loading效果
   this.udLoading.open({
@@ -424,15 +423,15 @@
   * iconImg: 圖片icon的路徑 | String(例："https://image.flaticon.com/icons/svg/553/553265.svg")
   * message: 載入訊息 | String("")
 
-# Tools
-## <font color=#ebc600>Html 自定義訊息 ud-html</font>
+## Tools
+### <font color=#ebc600>ud-html：自定義訊息</font>
   ``` html
   <ud-html text="<i>用戶</i>自定\n<h3>義訊息</h3>"></ud-html>
   ```
   ### props
-  * text: 文字 | String("<h1>H1 用戶自定義訊息</h1><h2>H2 用戶自定義訊息</h2><h3>H3 用戶自定義訊息</h3><h4>H4 用戶自定義訊息</h4><h5>H5 用戶自定義訊息</h5><h6>H6 用戶自定義訊息</h6>\n<p>p 用戶自定義訊息</p><span>span 用戶自定義訊息</span>")
+  * text: 文字 | String("可帶入含標籤的HTML字段")
 
-## <font color=#ebc600>Ellipsis 文字省略 ud-ellipsis</font>
+### <font color=#ebc600>ud-ellipsis：文字省略</font>
   超過指定行數的文字不顯示且在最後顯示省略符號
   ``` html
   <ud-ellipsis :max-line="2">這是文字</ud-ellipsis>
@@ -440,7 +439,7 @@
   ### props
   * maxLine: 指定省略行數 | Number(1)
 
-## <font color=#ebc600>Countdown 倒數計時 ud-countdown</font>
+### <font color=#ebc600>ud-countdown：倒數計時</font>
   顯示倒數計時的文字
   ``` html
   <ud-countdown ref="cd" :time="120" @timeup="timeup" type="minute" delay></ud-countdown>
@@ -465,3 +464,20 @@
   ### methods
   * countdown: 開始倒數 | Function(() => {})
   * reset: 重新開始倒數 | Function(() => {})
+
+# <font color="aqua">ud-utils 常用函式</font>
+## String
+### <font color=#ebc600>nl2br：將字串內換行符\n轉為\<br\></font>
+  ``` js
+  nl2br(val="這是\n文字");
+  ```
+  ### options
+  * val: 傳入值 | String("")
+  * is_xhtml: 是否為xhtml | Boolean(false)
+
+### <font color=#ebc600>getRandomString：取得隨機字串</font>
+  ``` js
+  getRandomString(:length="15");
+  ```
+  ### options
+  * length: 指定字串長度 | Number(10)
