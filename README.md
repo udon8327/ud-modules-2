@@ -276,30 +276,14 @@
   * noRefresh: 無刷新鈕 | Boolean(false)
 
 ### <font color=#ebc600>ud-form-item：表單驗證容器</font>
-  ``` html
-  <ud-form :rules="rules" :model="formData" ref="form">
-    <ud-form-item label="姓名" prop="name" flex>
-      <ud-input v-model.trim="formData.name" placeholder="請輸入您的姓名"></ud-input>
-    </ud-form-item>
-  </ud-form>
-  <ud-button @click="formSubmit">送出表單</ud-button>
-  ```
-  ``` js
-  methods: {
-    formSubmit() {
-      this.$refs.form.validate(() => {
-        // 驗證成功後的處理
-      });
-    },
-  }
-  ```
+  基本與ud-form搭配使用，使用方式與驗證格式請參照ud-form
   ### props
   * required: 必填提示 | Boolean(false),
   * icon: icon路徑 | String
   * label: 標籤內容 | String
   * prop: 驗證名稱 | String
   * flex: 是否並排 | Boolean(false)
-  * labelWidth: 標籤寬度 | String
+  * labelWidth: 標籤寬度 | String("30%")
   * labelAlign: 標籤對齊 | String
 
 ### <font color=#ebc600>ud-form：表單驗證</font>
@@ -308,10 +292,23 @@
     <ud-form-item label="姓名" prop="name" flex>
       <ud-input v-model.trim="formData.name" placeholder="請輸入您的姓名"></ud-input>
     </ud-form-item>
+    <ud-form-item label="電話" prop="phone" flex>
+      <ud-input v-model.trim="formData.name" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10"></ud-input>
+    </ud-form-item>
   </ud-form>
   <ud-button @click="formSubmit">送出表單</ud-button>
   ```
   ``` js
+  data: {
+    formData: {
+      name: "",
+      phone: "",
+    },
+    rules: {
+      name: [{type: "required"}, {type: "name" }],
+      phone: [{type: "phone" }],
+    },
+  },
   methods: {
     formSubmit() {
       this.$refs.form.validate(() => {
@@ -323,6 +320,21 @@
   ### props
   * model: 驗證資料 | Object
   * rules: 驗證規則 | Object
+  ``` js
+  "required": // 必填驗證
+  "name": // 姓名驗證
+  "phone": // 電話驗證
+  "email": // 電子郵件驗證
+  "uniform": // 統一編號驗證
+  "idcard": // 身分證字號驗證
+  "date": // 日期驗證
+  "number": // 數字驗證
+  "url": // 網址驗證
+  "ip": // IP地址驗證
+  "hex": // Hex色碼驗證
+  "equal": // 相等驗證
+  "regex": // 自訂正則驗證
+  ```
   * noErrorMsg: 有無錯誤提示 | Boolean(false)
   * noErrorScroll: 驗證時不滾動至錯誤項目 | Boolean(false)
 
@@ -481,3 +493,33 @@
   ```
   ### options
   * length: 指定字串長度 | Number(10)
+
+### <font color=#ebc600>copyTextToClipboard：複製文字至剪貼簿</font>
+  ``` js
+  copyTextToClipboard('id').then(res => udAlert(`已複製\n${ res }`));
+  ```
+  ### options
+  * id: 要複製文字的元素id | String
+
+### <font color=#ebc600>getRandom：取得範圍內隨機整數</font>
+  ``` js
+  getRandom(5, 10); // 7
+  ```
+  ### options
+  * min: 隨機數最小值 | Number(0)
+  * max: 隨機數最大值 | Number(100)
+
+### <font color=#ebc600>roundNumber：四捨五入到指定位數</font>
+  ``` js
+  roundNumber(1.235, 2); // 1.24
+  ```
+  ### options
+  * val: 傳入值 | Number
+  * decimals: 指定位數 | Number(0)
+
+### <font color=#ebc600>formatNumber：數字加入千分位逗號</font>
+  ``` js
+  formatNumber(99999); // 99,999
+  ```
+  ### options
+  * val: 傳入值 | Number
