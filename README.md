@@ -477,11 +477,16 @@
   * countdown: 開始倒數 | Function(() => {})
   * reset: 重新開始倒數 | Function(() => {})
 
+
+
+
+
 # <font color="aqua">ud-utils 常用函式</font>
 ## String
 ### <font color=#ebc600>nl2br：將字串內換行符\n轉為\<br\></font>
   ``` js
-  nl2br(val="這是\n文字");
+  nl2br(val, is_xhtml);
+  nl2br("這是\n文字"); // "這是<br>文字"
   ```
   ### options
   * val: 傳入值 | String("")
@@ -489,20 +494,31 @@
 
 ### <font color=#ebc600>getRandomString：取得隨機字串</font>
   ``` js
-  getRandomString(:length="15");
+  getRandomString(length);
+  getRandomString(15); // I76kgOa7wGf2yCj
   ```
   ### options
   * length: 指定字串長度 | Number(10)
 
-### <font color=#ebc600>copyTextToClipboard：複製文字至剪貼簿</font>
+### <font color=#ebc600>copyTextById：複製指定元素上的文字至剪貼簿</font>
   ``` js
-  copyTextToClipboard('id').then(res => udAlert(`已複製\n${ res }`));
+  copyTextById(target);
+  copyTextById("title").then(res => udAlert(`已複製\n${ res }`));
   ```
   ### options
-  * id: 要複製文字的元素id | String
+  * target: 要複製文字的元素id | String
+
+### <font color=#ebc600>copyText：複製文字至剪貼簿</font>
+  ``` js
+  copyText(text);
+  copyText("要複製的文字").then(res => udAlert(`已複製\n${ res }`));
+  ```
+  ### options
+  * text: 要複製的文字 | String("")
 
 ### <font color=#ebc600>getRandom：取得範圍內隨機整數</font>
   ``` js
+  getRandom(min, max);
   getRandom(5, 10); // 7
   ```
   ### options
@@ -511,6 +527,8 @@
 
 ### <font color=#ebc600>roundNumber：四捨五入到指定位數</font>
   ``` js
+  roundNumber(val, decimals);
+  roundNumber(1.235, 2); // 1.24
   roundNumber(1.235, 2); // 1.24
   ```
   ### options
@@ -519,7 +537,90 @@
 
 ### <font color=#ebc600>formatNumber：數字加入千分位逗號</font>
   ``` js
+  formatNumber(number);
   formatNumber(99999); // 99,999
   ```
   ### options
   * val: 傳入值 | Number
+
+### <font color=#ebc600>padStart：數字補零</font>
+  ``` js
+  padStart(val, length, string)
+  padStart(5); // '05'
+  padStart(5, 4); // '0005'
+  padStart(5, 4, 2); // '2225'
+  ```
+  ### options
+  * val: 傳入值 | Number、String
+  * length: 要補到幾位 | Number(2)
+  * string: 要補的值 | Number(0)
+
+### <font color=#ebc600>imageLoaded：單張圖片載入完成</font>
+  ``` js
+  imageLoaded(url).then(...)
+  imageLoaded('imgUrl').then(...) // 圖片讀取完成時返回該Image物件
+  ```
+  ### options
+  * url: 圖片路徑 | String
+
+### <font color=#ebc600>imageAllLoaded：多張圖片載入完成</font>
+  ``` js
+  imageAllLoaded(arr).then(...);
+  imageAllLoaded(['imgUrl1','imgUrl2']).then(...) // 全部圖片都讀取完成時返回該Image物件組成的陣列
+  ```
+  ### options
+  * arr: 多張圖片路徑陣列 | Array
+
+### <font color=#ebc600>imageDownload：下載Img圖片</font>
+  ``` js
+  imageDownload(selector, name);
+  imageDownload('#image', '自訂圖片名稱');
+  ```
+  ### options
+  * selector: 圖片元素選擇器 | String
+  * name: 圖片名稱 | String("下載圖片")
+
+### <font color=#ebc600>imageDownload：下載Canvas圖片</font>
+  ``` js
+  canvasImageDownload(selector, name);
+  canvasImageDownload('canvas', '自訂圖片名稱');
+  ```
+  ### options
+  * selector: canvas元素選擇器 | String
+  * name: 圖片名稱 | String("下載圖片")
+
+### <font color=#ebc600>isArrayRepeat：陣列是否有重複值(不分型別)</font>
+  ``` js
+  isArrayRepeat(arr);
+  isArrayRepeat([1, 2, 2, 3]); // true
+  ```
+  ### options
+  * arr: 傳入值 | Array
+
+### <font color=#ebc600>removeArrayRepeat：移除陣列中的重複元素</font>
+  ``` js
+  removeArrayRepeat(arr);
+  removeArrayRepeat([1, 2, 2, 3]); // [1, 2, 3]
+  ```
+  ### options
+  * arr: 傳入值 | Array
+
+### <font color=#ebc600>flatArray：二維陣列扁平化</font>
+  ``` js
+  flatArray(arr, depth)
+  flatArray([1, [2], 3, 4]); // [1, 2, 3, 4]
+  flatArray([1, [2, [3, [4, 5], 6], 7], 8], 2); // [1, 2, 3, [4, 5], 6, 7, 8]
+  ```
+  ### options
+  * arr: 傳入值 | Array
+  * depth: 傳入值 | Number(1)
+
+### <font color=#ebc600>flatArray：返回陣列中某值的所有索引</font>
+  ``` js
+  indexOfAll(arr, val);
+  indexOfAll([1, 2, 3, 1, 2, 3], 1); // [0,3]
+  indexOfAll([1, 2, 3], 4); // []
+  ```
+  ### options
+  * arr: 傳入值 | Array
+  * val: 指定值 | Number

@@ -36,7 +36,8 @@ Tools
 String
   nl2br：將字串內換行符\n轉為<br>
   getRandomString：取得隨機字串
-  copyTextToClipboard：複製文字至剪貼簿
+  copyTextById：複製指定元素上的文字至剪貼簿
+  copyText：複製文字至剪貼簿
 
 Number
   getRandom：取得範圍內隨機整數
@@ -1562,20 +1563,64 @@ const getRandomString = (length = 10) =>{
 }
 
 /**
- * 複製文字至剪貼簿
- * @param {string} id 要複製文字的元素id
- * @example copyTextToClipboard('id').then(res => udAlert(`已複製\n${ res }`));
+ * 複製指定元素上的文字至剪貼簿
+ * @param {string} target 要複製文字的指定元素id
+ * @example copyTextById("title").then(res => udAlert(`已複製\n${ res }`));
  */
-const copyTextToClipboard = id => {
-  return new Promise(resolve => {
-    let textRange = document.createRange();
-    textRange.selectNode(document.getElementById(id));
-    let sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(textRange);
-    document.execCommand("copy");
-    resolve(textRange);
+const copyTextById = (target) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let textRange = document.createRange();
+      textRange.selectNode(document.getElementById(target));
+      let sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(textRange);
+      document.execCommand("copy");
+      resolve(textRange);
+    } catch (err) {
+      console.log("複製失敗: ", err);
+      reject(err);
+    }
   })
+}
+
+/**
+ * 複製文字至剪貼簿
+ * @param {string} text 要複製的文字
+ * @example copyText("要複製的文字").then(res => udAlert(`已複製\n${ res }`));
+ */
+const copyText = (text = "") => {
+  return new Promise((resolve, reject) => {
+    // 使用瀏覽器的 Clipboard API 進行文字複製
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      return navigator.clipboard.writeText(text)
+        .then(() => {
+          resolve(text);
+        })
+        .catch(err => {
+          console.log("複製失敗: ", err);
+          reject(err);
+        });
+    } else {
+      // 瀏覽器不支援 Clipboard API，使用 fallback 方法
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        resolve(text);
+      } catch (err) {
+        console.log("複製失敗: ", err);
+        reject(err);
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+  });
 }
 
 //-----------------------Number-----------------------
@@ -1605,7 +1650,7 @@ const roundNumber = (val, decimals = 0) => {
  * @param {number} val 傳入值
  * @example formatNumber(99999) -> 99,999
  */
-const formatNumber = val => {
+const formatNumber = (val) => {
   if(val == null) return val;
   let temp = val.toString();
   let pattern = /(-?\d+)(\d{3})/;
@@ -1650,7 +1695,7 @@ const padStart = (val, length = 2, string = 0) => {
  * @param {string} url 圖片路徑
  * @example imageLoaded('imgUrl').then(...) -> 圖片讀取完成時返回該Image物件
  */
-const imageLoaded = url => {
+const imageLoaded = (url) => {
   let img = new Image();
   img.src = url;
   return new Promise((resolve, reject) => {
@@ -1668,7 +1713,7 @@ const imageLoaded = url => {
  * @param {array} arr 多張圖片路徑陣列
  * @example imageAllLoaded(['imgUrl1','imgUrl2']).then(...) -> 全部圖片都讀取完成時返回該Image物件組成的陣列
  */
-const imageAllLoaded = arr => {
+const imageAllLoaded = (arr) => {
   let result = [];
   arr.forEach(item => {
     result.push(imageLoaded(item));

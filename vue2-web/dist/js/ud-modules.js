@@ -43,7 +43,8 @@ Tools
 String
   nl2br：將字串內換行符\n轉為<br>
   getRandomString：取得隨機字串
-  copyTextToClipboard：複製文字至剪貼簿
+  copyTextById：複製指定元素上的文字至剪貼簿
+  copyText：複製文字至剪貼簿
 
 Number
   getRandom：取得範圍內隨機整數
@@ -1330,19 +1331,67 @@ var getRandomString = function (length) {
     return temp;
 };
 /**
- * 複製文字至剪貼簿
- * @param {string} id 要複製文字的元素id
- * @example copyTextToClipboard('id').then(res => udAlert(`已複製\n${ res }`));
+ * 複製指定元素上的文字至剪貼簿
+ * @param {string} target 要複製文字的指定元素id
+ * @example copyTextById("title").then(res => udAlert(`已複製\n${ res }`));
  */
-var copyTextToClipboard = function (id) {
-    return new Promise(function (resolve) {
-        var textRange = document.createRange();
-        textRange.selectNode(document.getElementById(id));
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(textRange);
-        document.execCommand("copy");
-        resolve(textRange);
+var copyTextById = function (target) {
+    return new Promise(function (resolve, reject) {
+        try {
+            var textRange = document.createRange();
+            textRange.selectNode(document.getElementById(target));
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(textRange);
+            document.execCommand("copy");
+            resolve(textRange);
+        }
+        catch (err) {
+            console.log("複製失敗: ", err);
+            reject(err);
+        }
+    });
+};
+/**
+ * 複製文字至剪貼簿
+ * @param {string} text 要複製的文字
+ * @example copyText("要複製的文字").then(res => udAlert(`已複製\n${ res }`));
+ */
+var copyText = function (text) {
+    if (text === void 0) { text = ""; }
+    return new Promise(function (resolve, reject) {
+        // 使用瀏覽器的 Clipboard API 進行文字複製
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            return navigator.clipboard.writeText(text)
+                .then(function () {
+                resolve(text);
+            })
+                .catch(function (err) {
+                console.log("複製失敗: ", err);
+                reject(err);
+            });
+        }
+        else {
+            // 瀏覽器不支援 Clipboard API，使用 fallback 方法
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                resolve(text);
+            }
+            catch (err) {
+                console.log("複製失敗: ", err);
+                reject(err);
+            }
+            finally {
+                document.body.removeChild(textarea);
+            }
+        }
     });
 };
 //-----------------------Number-----------------------
