@@ -164,10 +164,13 @@ let vm = new Vue({
     reset() {
       this.$refs.cd.reset();
     },
-    formSubmit() {
+    submitVerify() {
       this.$refs.form.validate(() => {
-        this.udAlert({msg: "驗證成功!!"})
+        this.submit();
       });
+    },
+    submit() {
+      this.udAlert({msg: "驗證成功!!"});
     },
     clearVerify() {
 

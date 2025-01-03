@@ -624,3 +624,40 @@
   ### options
   * arr: 傳入值 | Array
   * val: 指定值 | Number
+
+### <font color=#ebc600>intersectionArray：兩陣列的交集</font>
+  ``` js
+  intersectionArray(arrA, arrB);
+  intersectionArray([1, 2, 3], [4, 3, 2]); // [2, 3]
+  ```
+  ### options
+  * arrA: 陣列A | Array
+  * arrB: 陣列B | Array
+
+### <font color=#ebc600>shuffleArray：洗牌陣列</font>
+  ``` js
+  shuffleArray(arr);
+  shuffleArray([1, 2, 3]); // [2, 3, 1];
+  ```
+  ### options
+  * arr: 傳入值 | Array
+
+### <font color=#ebc600>typeOf：精準型別判斷</font>
+  ``` js
+  typeOf(val);
+  typeOf(true); // boolean;
+  typeOf(123); // number;
+  typeOf([1, 2, 3]); // array;
+  ```
+  ### options
+  * val: 傳入值 | Any
+
+### <font color=#ebc600>filterObj：過濾物件鍵值</font>
+  ``` js
+  typeOf(val);
+  typeOf(true); // boolean;
+  typeOf(123); // number;
+  typeOf([1, 2, 3]); // array;
+  ```
+  ### options
+  * val: 傳入值 | Any

@@ -159,11 +159,14 @@ var vm = new Vue({
         reset: function () {
             this.$refs.cd.reset();
         },
-        formSubmit: function () {
+        submitVerify: function () {
             var _this = this;
             this.$refs.form.validate(function () {
-                _this.udAlert({ msg: "驗證成功!!" });
+                _this.submit();
             });
+        },
+        submit: function () {
+            this.udAlert({ msg: "驗證成功!!" });
         },
         clearVerify: function () {
         },

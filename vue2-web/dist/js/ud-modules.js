@@ -1627,6 +1627,9 @@ var shuffleArray = function (arr) {
 /**
  * 精準型別判斷
  * @param {any} val 傳入值
+ * @example typeOf(true); -> boolean;
+ * @example typeOf(123); -> number;
+ * @example typeOf([1, 2, 3]); -> array;
  */
 var typeOf = function (val) {
     return val === undefined ? 'undefined' : val === null ? 'null' : val.constructor.name.toLowerCase();
