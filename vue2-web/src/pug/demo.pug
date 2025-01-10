@@ -43,7 +43,7 @@ block content
       ud-form-item(label="年齡" prop="age" flex)
         ud-input(v-model.trim="formData.age" placeholder="請輸入您的年齡" inputmode="numeric")
       ud-form-item(label="生日" prop="birthday" flex)
-        ud-input(v-model.trim="formData.birthday" placeholder="請輸入您的生日")
+        date-picker(v-model="formData.birth" value-type="format" format="YYYY-MM-DD" :lang="lang" placeholder="請選擇您的生日")
       ud-form-item(label="備註" prop="note" flex)
         ud-textarea(placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="10")
       ud-form-item(label="單選" prop="radio" flex)

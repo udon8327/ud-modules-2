@@ -30,6 +30,23 @@
 
 .form-area
   margin-bottom: 15px
+  .mx-datepicker
+    width: 100%
+    .mx-input
+      appearance: none
+      min-height: 40px
+      color: #000
+      border: 1px solid #ccc
+      border-radius: 4px
+      box-shadow: none
+      &::placeholder
+        color: #aaa
+      &:focus
+        outline: 0
+        border: 1px solid #000
+      &:disabled
+        background-color: #efefef
+        cursor: not-allowed
   .captcha-wrapper
     display: flex
     align-items: center
