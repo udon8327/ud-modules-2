@@ -22,6 +22,11 @@ const router = createRouter({
       name: 'TreeDemo',
       component: () => import('@/views/TreeDemo.vue')
     },
+    {
+      path: '/camera-demo',
+      name: 'CameraDemo',
+      component: () => import('@/views/CameraDemo.vue')
+    },
 
     // 錯誤頁
     {
