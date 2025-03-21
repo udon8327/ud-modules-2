@@ -182,9 +182,6 @@ let vm = new Vue({
     toUrl(url) {
       location.href = url;
     },
-    scrollToTop() {
-      scrollToTarget();
-    },
     sendMessage() {
       liff.sendMessages([
         {

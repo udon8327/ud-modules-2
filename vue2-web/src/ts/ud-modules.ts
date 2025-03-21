@@ -18,7 +18,7 @@ Form
 Layout
   ud-arrow：CSS箭頭
   ud-collapse：摺疊容器
-  ud-image：等比例自適應容器
+  ud-image：等比例自適應圖片
 
 Notice
   ud-alert：警告彈窗
@@ -1603,12 +1603,13 @@ const deepClone = (obj, hash = new WeakMap()) => {
 /**
  * 物件key重命名
  * @param {object} obj 傳入值
+ * @param {object} keys 想要重命名的key組成的物件
  * @example renameKeys(obj, { line_uid: "lineUid", is_past: "isPast" });
  */
-const renameKeys = (obj, keysMap) => {
+const renameKeys = (obj, keys) => {
   return Object.keys(obj).reduce((acc, key) => ({
     ...acc,
-    ...{ [keysMap[key] || key]: obj[key] }
+    ...{ [keys[key] || key]: obj[key] }
   }), {});
 }
 
@@ -1883,7 +1884,7 @@ const isEmpty = val => {
  * @description 將幾次操作合併為一次操作進行
  * @param {function} fn 處理函式
  * @param {number} wait 停止後等待時間 預設為200ms
- * @example window.addEventListener('scroll', debounce(() => console.log(getRandom), 500));
+ * @example window.addEventListener('scroll', debounce(() => console.log("debounce"), 500));
  */
 const debounce = (fn, wait = 200) => {
   let timeout = null;
@@ -1899,7 +1900,7 @@ const debounce = (fn, wait = 200) => {
  * @description 一定時間內只觸發一次函式
  * @param {function} fn 處理函式
  * @param {number} delay 處理間隔時間 預設為1000ms
- * @example window.addEventListener('scroll', throttle(() => console.log(getRandom), 2000));
+ * @example window.addEventListener('scroll', throttle(() => console.log("throttle"), 2000));
  */
 const throttle = (fn, delay = 1000) => {
   let prev = Date.now();
@@ -1916,20 +1917,20 @@ const throttle = (fn, delay = 1000) => {
 
 /**
  * 查詢網址所帶參數
- * @param {string} key 鍵值
+ * @param {string} query 參數
  * @param {string} url 網址
- * @example queryString('id', https://foo?id=123) -> "123"
+ * @example queryString("id", "https://foo?id=123") -> "123"
  */
-const queryString = (key = "", url = location.href) => {
+const queryString = (query = "", url = location.href) => {
   let parseUrl = new URL(url);
-  return parseUrl.searchParams.get(key);
+  return parseUrl.searchParams.get(query);
 }
 
 /**
  * 判斷是否移動裝置
  * @param {string} os 作業系統('': 所有機型, apple: 蘋果, android: 安卓)
  */
-const isMobile = (os = '') => {
+const isMobile = (os = "") => {
   switch(os) {
     case 'apple':
       return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase());

@@ -181,53 +181,6 @@
   * valueBy: value替代值 | String("value")
   * childrenBy: children替代值 | String("children")
 
-### <font color=#ebc600>ud-select-link：連動下拉框</font>
-  要做連動下拉已經不建議使用此群組，而是直接將多個ud-select群組起來使用，可以不受數量與DOM的限制
-  ``` html
-  <ud-select-link v-model="valueGroup" :options="storeOptions" :placeholder="['縣市', '櫃點', '時段']" flex third></ud-select-link>
-  ```
-  ``` js
-  data: {
-    valueGroup: ["", "", ""],
-    storeOptions: [
-      {label: "台北市", value: "taipei", children: [
-        {label: "中正區", value: "100", children: [
-          {label: "2023-12-01", value: "1" },
-          {label: "2023-12-02", value: "2", disabled: "true" } 
-        ]},
-        {label: "大安區", value: "106", disabled: true, children: [
-          {label: "2023-12-03", value: "3" },
-          {label: "2023-12-04", value: "4" },
-        ]},
-        {label: "信義區", value: "110", children: [
-          {label: "2023-12-05", value: "5" },
-          {label: "2023-12-06", value: "6" },
-        ]},
-      ]},
-      {label: "新北市", value: "newTaipei", children: [
-        {label: "板橋區", value: "220", children: [
-          {label: "2023-12-07", value: "7" },
-          {label: "2023-12-08", value: "8" },
-        ]},
-        {label: "永和區", value: "234", children: [
-          {label: "2023-12-09", value: "9" },
-          {label: "2023-12-10", value: "10", disabled: true },
-        ]},
-        {label: "新店區", value: "231", children: [
-          {label: "2023-12-11", value: "11", disabled: true },
-          {label: "2023-12-12", value: "12", disabled: true },
-        ]},
-      ]},
-    ],
-  },
-  ```
-  ### props
-  * options: 選項 | Array
-  * placeholder: 替代文字 | Array
-  * third: 是否有第三項 | Boolean(false)
-  * flex: 是否並排 | Boolean(false)
-  * combine: 使用value做為label | Boolean(false)
-
 ### <font color=#ebc600>ud-select-date：日期連動下拉框</font>
   會自動更新年份
   ``` html
@@ -260,20 +213,6 @@
   * placeholder: 替代文字 | Array
   * flex: 是否並排 | Boolean(false)
   * combine: 是否label直接使用value值 | Boolean(false)
-
-### <font color=#ebc600>ud-captcha：圖形驗證碼</font>
-  ``` html
-  <ud-input v-model="formData.captcha" placeholder="驗證碼" maxlength="4"></ud-input>
-  <ud-captcha v-model="formData.captchaCode"></ud-captcha>
-  ```
-  ### props
-  * color: 字體顏色 | String("#989799")
-  * bgColor: 背景顏色 | String("#000")
-  * randomColor: 隨機點線的顏色 | String("#777")
-  * font: 字體設定 | String("20px Arial")
-  * noLine: 無隨機線 | Boolean(false)
-  * noDots: 無隨機點 | Boolean(false)
-  * noRefresh: 無刷新鈕 | Boolean(false)
 
 ### <font color=#ebc600>ud-form-item：表單驗證容器</font>
   基本與ud-form搭配使用，使用方式與驗證格式請參照ud-form
@@ -362,9 +301,9 @@
   ### props
   * duration: 開闔速度 | Number(0.2)
 
-### <font color=#ebc600>ud-ratio：等比例自適應容器</font>
+### <font color=#ebc600>ud-image：等比例自適應圖片</font>
   ``` html
-  <ud-ratio src="img/01.jpg" bg-size="contain"></ud-ratio>
+  <ud-image src="img/01.jpg" bg-size="contain"></ud-image>
   ```
   ### props
   * duration: 開闔速度 | Number(0.2)
@@ -479,65 +418,46 @@
 
 
 
-
-
 # <font color="aqua">ud-utils 常用函式</font>
 ## String
 ### <font color=#ebc600>nl2br：將字串內換行符\n轉為\<br\></font>
   ``` js
-  nl2br(val, is_xhtml);
+  nl2br(val = "", is_xhtml = false);
   nl2br("這是\n文字"); // "這是<br>文字"
   ```
   ### options
-  * val: 傳入值 | String("")
-  * is_xhtml: 是否為xhtml | Boolean(false)
+  * val: 傳入值 | String
+  * is_xhtml: 是否為xhtml | Boolean
 
 ### <font color=#ebc600>getRandomString：取得隨機字串</font>
   ``` js
-  getRandomString(length);
+  getRandomString(length = 10);
   getRandomString(15); // I76kgOa7wGf2yCj
   ```
   ### options
-  * length: 指定字串長度 | Number(10)
-
-### <font color=#ebc600>copyTextById：複製指定元素上的文字至剪貼簿</font>
-  ``` js
-  copyTextById(target);
-  copyTextById("title").then(res => udAlert(`已複製\n${ res }`));
-  ```
-  ### options
-  * target: 要複製文字的元素id | String
+  * length: 指定字串長度 | Number
 
 ### <font color=#ebc600>copyText：複製文字至剪貼簿</font>
   ``` js
-  copyText(text);
+  copyText(text = "");
   copyText("要複製的文字").then(res => udAlert(`已複製\n${ res }`));
   ```
   ### options
-  * text: 要複製的文字 | String("")
+  * text: 要複製的文字 | String
 
+## Number
 ### <font color=#ebc600>getRandom：取得範圍內隨機整數</font>
   ``` js
-  getRandom(min, max);
+  getRandom(min = 0, max = 100);
   getRandom(5, 10); // 7
   ```
   ### options
-  * min: 隨機數最小值 | Number(0)
-  * max: 隨機數最大值 | Number(100)
-
-### <font color=#ebc600>roundNumber：四捨五入到指定位數</font>
-  ``` js
-  roundNumber(val, decimals);
-  roundNumber(1.235, 2); // 1.24
-  roundNumber(1.235, 2); // 1.24
-  ```
-  ### options
-  * val: 傳入值 | Number
-  * decimals: 指定位數 | Number(0)
+  * min: 隨機數最小值 | Number
+  * max: 隨機數最大值 | Number
 
 ### <font color=#ebc600>formatNumber：數字加入千分位逗號</font>
   ``` js
-  formatNumber(number);
+  formatNumber(val);
   formatNumber(99999); // 99,999
   ```
   ### options
@@ -545,20 +465,21 @@
 
 ### <font color=#ebc600>padStart：數字補零</font>
   ``` js
-  padStart(val, length, string)
-  padStart(5); // '05'
-  padStart(5, 4); // '0005'
-  padStart(5, 4, 2); // '2225'
+  padStart(val, length = 2, string = 0)
+  padStart(5); // "05"
+  padStart(5, 4); // "0005"
+  padStart(5, 4, 2); // "2225"
   ```
   ### options
   * val: 傳入值 | Number、String
-  * length: 要補到幾位 | Number(2)
-  * string: 要補的值 | Number(0)
+  * length: 要補到幾位 | Number
+  * string: 要補的值 | Number
 
+## Image
 ### <font color=#ebc600>imageLoaded：單張圖片載入完成</font>
   ``` js
-  imageLoaded(url).then(...)
-  imageLoaded('imgUrl').then(...) // 圖片讀取完成時返回該Image物件
+  imageLoaded(url);
+  imageLoaded('imgUrl').then(...); // 圖片讀取完成時返回該Image物件
   ```
   ### options
   * url: 圖片路徑 | String
@@ -566,29 +487,21 @@
 ### <font color=#ebc600>imageAllLoaded：多張圖片載入完成</font>
   ``` js
   imageAllLoaded(arr).then(...);
-  imageAllLoaded(['imgUrl1','imgUrl2']).then(...) // 全部圖片都讀取完成時返回該Image物件組成的陣列
+  imageAllLoaded(['imgUrl1','imgUrl2']).then(...); // 全部圖片都讀取完成時返回該Image物件組成的陣列
   ```
   ### options
   * arr: 多張圖片路徑陣列 | Array
 
 ### <font color=#ebc600>imageDownload：下載Img圖片</font>
   ``` js
-  imageDownload(selector, name);
+  imageDownload(selector, name = "下載圖片");
   imageDownload('#image', '自訂圖片名稱');
   ```
   ### options
   * selector: 圖片元素選擇器 | String
-  * name: 圖片名稱 | String("下載圖片")
+  * name: 圖片名稱 | String
 
-### <font color=#ebc600>imageDownload：下載Canvas圖片</font>
-  ``` js
-  canvasImageDownload(selector, name);
-  canvasImageDownload('canvas', '自訂圖片名稱');
-  ```
-  ### options
-  * selector: canvas元素選擇器 | String
-  * name: 圖片名稱 | String("下載圖片")
-
+## Array
 ### <font color=#ebc600>isArrayRepeat：陣列是否有重複值(不分型別)</font>
   ``` js
   isArrayRepeat(arr);
@@ -605,16 +518,6 @@
   ### options
   * arr: 傳入值 | Array
 
-### <font color=#ebc600>flatArray：二維陣列扁平化</font>
-  ``` js
-  flatArray(arr, depth)
-  flatArray([1, [2], 3, 4]); // [1, 2, 3, 4]
-  flatArray([1, [2, [3, [4, 5], 6], 7], 8], 2); // [1, 2, 3, [4, 5], 6, 7, 8]
-  ```
-  ### options
-  * arr: 傳入值 | Array
-  * depth: 傳入值 | Number(1)
-
 ### <font color=#ebc600>flatArray：返回陣列中某值的所有索引</font>
   ``` js
   indexOfAll(arr, val);
@@ -625,23 +528,7 @@
   * arr: 傳入值 | Array
   * val: 指定值 | Number
 
-### <font color=#ebc600>intersectionArray：兩陣列的交集</font>
-  ``` js
-  intersectionArray(arrA, arrB);
-  intersectionArray([1, 2, 3], [4, 3, 2]); // [2, 3]
-  ```
-  ### options
-  * arrA: 陣列A | Array
-  * arrB: 陣列B | Array
-
-### <font color=#ebc600>shuffleArray：洗牌陣列</font>
-  ``` js
-  shuffleArray(arr);
-  shuffleArray([1, 2, 3]); // [2, 3, 1];
-  ```
-  ### options
-  * arr: 傳入值 | Array
-
+## Object
 ### <font color=#ebc600>typeOf：精準型別判斷</font>
   ``` js
   typeOf(val);
@@ -652,12 +539,139 @@
   ### options
   * val: 傳入值 | Any
 
-### <font color=#ebc600>filterObj：過濾物件鍵值</font>
+### <font color=#ebc600>deepClone：深拷貝</font>
   ``` js
-  typeOf(val);
-  typeOf(true); // boolean;
-  typeOf(123); // number;
-  typeOf([1, 2, 3]); // array;
+  deepClone(obj);
+  ```
+  ### options
+  * obj: 傳入值 | Object
+
+### <font color=#ebc600>renameKeys：物件key重命名</font>
+  ``` js
+  renameKeys(obj, keys);
+  renameKeys(obj, { line_uid: "lineUid", is_past: "isPast" });
+  ```
+  ### options
+  * obj: 傳入值 | Object
+  * keys: 想要重命名的key組成的物件 | Object
+
+## Time
+### <font color=#ebc600>isExistDate：判斷日期是否存在</font>
+  ``` js
+  isExistDate(date, split = "-");
+  isExistDate("2020-02-29"); // true
+  isExistDate("2019/02/29", "/"); // false
+  ```
+  ### options
+  * date: 日期字串 | String
+  * split: 分割符 | String
+
+### <font color=#ebc600>getDiffDate：取得前後幾天的日期</font>
+  ``` js
+  getDiffDate(days = 0);
+  getDiffDate(1); // "2020-07-01"
+  getDiffDate(0); // "2020-06-30"
+  getDiffDate(-2); // "2020-06-28"
+  ```
+  ### options
+  * days: 指定天數 可為負值 | Number
+
+### <font color=#ebc600>formatTime：時間格式化</font>
+  ``` js
+  formatTime(date = newDate(), format = "yyyy-MM-dd hh:mm:ss");
+  formatTime(new Date(), 'yyyyMMdd') // "20210726"
+  formatTime(new Date(), 'yyyy-MM-dd') // "2021-07-26"
+  formatTime(new Date(), 'yyyy-MM-dd hh:mm:ss') // "2021-07-26 14:08:00"
+  formatTime(new Date(1627280134101), 'yyyy-MM-dd hh:mm:ss') // "2021-07-26 14:15:34"
+  ```
+  ### options
+  * date: 傳入值(Date物件、timestamp或任何合法時間格式) | Any
+  * format: 轉換格式 | String
+
+## DOM
+### <font color=#ebc600>scrollToTarget：滾動至指定位置</font>
+  ``` js
+  scrollToTarget(el = "top", speed = 5, offset = 0, callback = () => {});
+  scrollToTarget(); // 滾動回項部
+  scrollToTarget('top', 1); // 瞬間回項部
+  scrollToTarget('.foobar', 10, -30, () => {console.log('滾動完成')});
+  ```
+  ### options
+  * el: 滾動位置('top': 頂部, 'bottom': 底部, '.foobar': 元素, 300: 像素) | Any
+  * speed: 滾動時間(瞬移為1,請勿設為0) | Number
+  * offset: 自定偏移(可接受正負數字) | Number
+  * callback: 回調函式 | Function
+
+### <font color=#ebc600>getPageScroll：取得頁面當前捲動長寬度</font>
+  ``` js
+  getPageScroll(type = "height");
+  ```
+  ### options
+  * type: 類型(width: 寬度, height: 高度) | String
+
+### <font color=#ebc600>getPageSize：取得頁面尺寸</font>
+  ``` js
+  getPageSize(scope = "view");
+  ```
+  ### options
+  * scope: 範圍(view: 可視頁面, full: 完整頁面) | String
+
+## Verify
+### <font color=#ebc600>isVerify：常用驗證函式</font>
+  ``` js
+  isVerify((val, type));
+  isVerify("1988-05-27", "date"); // true
+  isVerify("ABC", /[A-Z]/); // true
   ```
   ### options
   * val: 傳入值 | Any
+  * type: 驗證類型(可接受正則表達式) | String
+
+### <font color=#ebc600>isNumber：精準數字驗證</font>
+  ``` js
+  isNumber(val);
+  ```
+  ### options
+  * val: 傳入值 | Any
+
+### <font color=#ebc600>isEmpty：未填入驗證</font>
+  ``` js
+  isEmpty(val);
+  ```
+  ### options
+  * val: 傳入值 | Any
+
+## Web
+### <font color=#ebc600>debounce：函式防抖</font>
+  ``` js
+  debounce(fn, wait = 200); // 將幾次操作合併為一次操作進行
+  window.addEventListener('scroll', debounce(() => console.log("debounce"), 500));
+  ```
+  ### options
+  * fn: 處理函式 | Function
+  * wait: 停止後等待時間 | Number
+
+### <font color=#ebc600>throttle：函式節流</font>
+  ``` js
+  throttle(fn, delay = 1000); // 一定時間內只觸發一次函式
+  window.addEventListener('scroll', throttle(() => console.log("throttle"), 2000));
+  ```
+  ### options
+  * fn: 處理函式 | Function
+  * delay: 處理間隔時間 | Number
+
+### <font color=#ebc600>queryString：查詢網址所帶參數</font>
+  ``` js
+  queryString(query = "", url = location.href);
+  queryString("id", "https://foo?id=123"); // "123"
+  ```
+  ### options
+  * query: 參數 | String
+  * url: 網址 | String
+
+### <font color=#ebc600>isMobile：判斷是否移動裝置</font>
+  ``` js
+  isMobile(os = "");
+  ```
+  ### options
+  * os: 作業系統('': 所有機型, apple: 蘋果, android: 安卓) | String

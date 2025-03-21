@@ -25,7 +25,7 @@ Form
 Layout
   ud-arrow：CSS箭頭
   ud-collapse：摺疊容器
-  ud-image：等比例自適應容器
+  ud-image：等比例自適應圖片
 
 Notice
   ud-alert：警告彈窗
@@ -1403,11 +1403,12 @@ var deepClone = function (obj, hash) {
 /**
  * 物件key重命名
  * @param {object} obj 傳入值
+ * @param {object} keys 想要重命名的key組成的物件
  * @example renameKeys(obj, { line_uid: "lineUid", is_past: "isPast" });
  */
-var renameKeys = function (obj, keysMap) {
+var renameKeys = function (obj, keys) {
     return Object.keys(obj).reduce(function (acc, key) {
-        return (__assign({}, acc, (_a = {}, _a[keysMap[key] || key] = obj[key], _a)));
+        return (__assign({}, acc, (_a = {}, _a[keys[key] || key] = obj[key], _a)));
         var _a;
     }, {});
 };
@@ -1692,7 +1693,7 @@ var isEmpty = function (val) {
  * @description 將幾次操作合併為一次操作進行
  * @param {function} fn 處理函式
  * @param {number} wait 停止後等待時間 預設為200ms
- * @example window.addEventListener('scroll', debounce(() => console.log(getRandom), 500));
+ * @example window.addEventListener('scroll', debounce(() => console.log("debounce"), 500));
  */
 var debounce = function (fn, wait) {
     if (wait === void 0) { wait = 200; }
@@ -1708,7 +1709,7 @@ var debounce = function (fn, wait) {
  * @description 一定時間內只觸發一次函式
  * @param {function} fn 處理函式
  * @param {number} delay 處理間隔時間 預設為1000ms
- * @example window.addEventListener('scroll', throttle(() => console.log(getRandom), 2000));
+ * @example window.addEventListener('scroll', throttle(() => console.log("throttle"), 2000));
  */
 var throttle = function (fn, delay) {
     if (delay === void 0) { delay = 1000; }
@@ -1725,22 +1726,22 @@ var throttle = function (fn, delay) {
 };
 /**
  * 查詢網址所帶參數
- * @param {string} key 鍵值
+ * @param {string} query 參數
  * @param {string} url 網址
- * @example queryString('id', https://foo?id=123) -> "123"
+ * @example queryString("id", "https://foo?id=123") -> "123"
  */
-var queryString = function (key, url) {
-    if (key === void 0) { key = ""; }
+var queryString = function (query, url) {
+    if (query === void 0) { query = ""; }
     if (url === void 0) { url = location.href; }
     var parseUrl = new URL(url);
-    return parseUrl.searchParams.get(key);
+    return parseUrl.searchParams.get(query);
 };
 /**
  * 判斷是否移動裝置
  * @param {string} os 作業系統('': 所有機型, apple: 蘋果, android: 安卓)
  */
 var isMobile = function (os) {
-    if (os === void 0) { os = ''; }
+    if (os === void 0) { os = ""; }
     switch (os) {
         case 'apple':
             return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase());
