@@ -8,6 +8,8 @@
 //   ImageUpload 圖片上傳預覽 -----> ud-image-upload
 //   ImageMultiUpload 圖片上傳預覽(多張) -----> ud-image-multi-upload
 //   DatePicker 日期選擇器 -----> ud-date-picker
+//   SelectLink：連動下拉框 -----> ud-select-link
+//   Captcha：圖形驗證碼 -----> ud-captcha
 
 // Data
 //   Table 表格 -----> ud-table
@@ -149,6 +151,43 @@
     &:focus
       outline: 0
       border: 1px solid $main
+
+// SelectLink：連動下拉框
+.ud-select-link
+  margin-bottom: 0
+  &.is-flex
+    display: flex
+    justify-content: center
+    align-items: center
+    .ud-select
+      flex: 1 1 0
+      margin: 0 5px 0 0
+      &:last-of-type
+        margin: 0
+        + span,+ p
+          margin: 0 5px
+      + span,+ p
+        margin: 0 5px 0 0
+  .ud-select
+    margin-bottom: 5px
+
+// Captcha：圖形驗證碼
+.ud-captcha
+  position: relative
+  display: flex
+  .canvas-area
+    cursor: pointer
+    border: 1px solid #ced4da
+    margin-right: 5px
+    img
+      height: 40px
+  .refresh
+    display: flex
+    justify-content: center
+    align-items: center
+    img
+      width: 20px
+      cursor: pointer
 
 //-----------------------Data-----------------------
 // Table 表格

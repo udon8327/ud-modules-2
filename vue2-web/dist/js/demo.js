@@ -19,13 +19,10 @@ var vm = new Vue({
             radio: "",
             checkbox: [],
             select: "",
-            selectLink: ["", "", ""],
             selectGroup: ["", "", ""],
             twzip: ["", ""],
             date: ["", "", ""],
             isActive: false,
-            captcha: "",
-            captchaCode: "",
             isAgree: false,
             note: "",
         },
@@ -38,12 +35,10 @@ var vm = new Vue({
             radio: [{ type: "required" }],
             checkbox: [{ type: "required" }],
             select: [{ type: "required" }],
-            selectLink: [{ type: "required" }],
             selectGroup: [{ type: "required" }],
             twzip: [{ type: "required" }],
             date: [{ type: "required" }],
             isAgree: [{ type: "required", message: "請先同意相關使用條款" },],
-            captcha: [{ type: "required" }, { type: "equal", equalTo: "captchaCode", caseIgnore: "true" }],
         },
         options: [
             { label: "甲", value: "a", disabled: true },
@@ -181,6 +176,9 @@ var vm = new Vue({
         },
         toUrl: function (url) {
             location.href = url;
+        },
+        scrollToTop: function () {
+            scrollToTarget();
         },
         sendMessage: function () {
             liff.sendMessages([

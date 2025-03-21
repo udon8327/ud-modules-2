@@ -63,6 +63,9 @@ export default {
       val.item.days++;
     });
   },
+  unmounted() {
+    document.querySelector(".container").style.maxWidth = "460px";
+  },
   methods: {
   },
 };

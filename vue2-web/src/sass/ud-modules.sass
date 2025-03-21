@@ -8,18 +8,16 @@
 //   ud-radio：單選框
 //   ud-checkbox：多選框
 //   ud-select：下拉框
-//   ud-select-link：連動下拉框
 //   ud-select-date：日期連動下拉框
 //   ud-select-twzip：台灣行政區連動下拉框
 //   ud-switch：開關
-//   ud-captcha：圖形驗證碼
 //   ud-form-item：表單驗證容器
 //   ud-form：表單驗證
 
 //Layout
 //   ud-arrow：CSS箭頭
 //   ud-collapse：摺疊容器
-//   ud-ratio：等比例自適應容器
+//   ud-image：等比例自適應容器
 
 // Notice
 //   ud-alert：警告彈窗
@@ -309,10 +307,27 @@ html,#app
     &.center
       text-align-last: center
 
-// ud-select-link：連動下拉框
 // ud-select-date：日期連動下拉框
+.ud-select-date
+  margin-bottom: 0
+  &.is-flex
+    display: flex
+    justify-content: center
+    align-items: center
+    .ud-select
+      flex: 1 1 0
+      margin: 0 5px 0 0
+      &:last-of-type
+        margin: 0
+        + span,+ p
+          margin: 0 5px
+      + span,+ p
+        margin: 0 5px 0 0
+  .ud-select
+    margin-bottom: 5px
+
 // ud-select-twzip：台灣行政區連動下拉框
-.ud-select-link,.ud-select-twzip,.ud-select-date
+.ud-select-twzip
   margin-bottom: 0
   &.is-flex
     display: flex
@@ -362,24 +377,6 @@ html,#app
         border-radius: 50%
         background: #f7f7f7
         transition: all .2s ease
-
-// ud-captcha：圖形驗證碼
-.ud-captcha
-  position: relative
-  display: flex
-  .canvas-area
-    cursor: pointer
-    border: 1px solid #ced4da
-    margin-right: 5px
-    img
-      height: 40px
-  .refresh
-    display: flex
-    justify-content: center
-    align-items: center
-    img
-      width: 20px
-      cursor: pointer
 
 // ud-form-item：表單驗證容器
 .ud-form-item
@@ -459,9 +456,9 @@ html,#app
   overflow: hidden
   will-change: transform
 
-// ud-ratio：等比例自適應容器
-.ud-ratio
-  .ud-ratio-bg
+// ud-image：等比例自適應容器
+.ud-image
+  .ud-image-bg
     overflow: hidden
     width: 100%
     padding-bottom: 100%

@@ -16,18 +16,16 @@ Form
   ud-radio：單選框
   ud-checkbox：多選框
   ud-select：下拉框
-  ud-select-link：連動下拉框
   ud-select-date：日期連動下拉框
   ud-select-twzip：台灣行政區連動下拉框
   ud-switch：開關
-  ud-captcha：圖形驗證碼
   ud-form-item：表單驗證容器
   ud-form：表單驗證
 
 Layout
   ud-arrow：CSS箭頭
   ud-collapse：摺疊容器
-  ud-ratio：等比例自適應容器
+  ud-image：等比例自適應容器
 
 Notice
   ud-alert：警告彈窗
@@ -43,12 +41,10 @@ Tools
 String
   nl2br：將字串內換行符\n轉為<br>
   getRandomString：取得隨機字串
-  copyTextById：複製指定元素上的文字至剪貼簿
   copyText：複製文字至剪貼簿
 
 Number
   getRandom：取得範圍內隨機整數
-  roundNumber：四捨五入到指定位數
   formatNumber：數字加入千分位逗號
   padStart：數字補零
 
@@ -56,26 +52,18 @@ Image
   imageLoaded：單張圖片載入完成
   imageAllLoaded：多張圖片載入完成
   imageDownload：下載Img圖片
-  canvasImageDownload：下載Canvas圖片
 
 Array
   isArrayRepeat：陣列是否有重複值(不分型別)
   removeArrayRepeat：移除陣列中的重複元素
-  flatArray：二維陣列扁平化
   indexOfAll：返回陣列中某值的所有索引
-  intersectionArray：兩陣列的交集
-  shuffleArray：洗牌陣列
 
 Object
   typeOf：精準型別判斷
-  filterObj：過濾物件鍵值
-  deleteObj：刪除物件鍵值
-  deepCloneSimple：深拷貝(簡易版)
-  deepClone：深拷貝(完全版)
+  deepClone：深拷貝
   renameKeys：物件key重命名
 
 Time
-  isLeapYear：判斷是否為閏年
   isExistDate：判斷日期是否存在
   getDiffDate：取得前後幾天的日期
   formatTime：時間格式化
@@ -91,13 +79,9 @@ Verify
   isEmpty：未填入驗證
 
 Web
-  getCookie：取得Cookie的值
   debounce：函式防抖
   throttle：函式節流
   queryString：查詢網址所帶參數
-  parseUrl：解析網址
-  toUrl：網址跳轉
-  jumpReload：跳頁重整
   isMobile：判斷是否移動裝置
 */
 //-----------------------Form-----------------------
@@ -322,75 +306,6 @@ Vue.component('ud-select', {
             this.$parent.$emit('validate'); // 通知FormItem校驗
             this.$emit('change', this.$refs.select.value);
         },
-    }
-});
-// ud-select-link：連動下拉框
-Vue.component('ud-select-link', {
-    name: "UdSelectLink",
-    template: "\n    <div class=\"ud-select-link\" :class=\"{'is-flex': flex}\">\n      <ud-select v-model=\"modelValue[0]\" :options=\"firstArr\" :placeholder=\"placeholder[0]\" :combine=\"combine\"></ud-select>\n      <slot></slot>\n      <ud-select v-model=\"modelValue[1]\" :options=\"secondArr\" :placeholder=\"placeholder[1]\" :combine=\"combine\"></ud-select>\n      <slot name=\"second\"></slot>\n      <ud-select v-model=\"modelValue[2]\" :options=\"thirdArr\" :placeholder=\"placeholder[2]\" :combine=\"combine\" v-if=\"third\"></ud-select>\n      <slot name=\"third\"></slot>\n    </div>\n  ",
-    props: {
-        value: null,
-        options: null,
-        placeholder: {
-            default: function () {
-                return ["請選擇一項", "請選擇一項", "請選擇一項"];
-            }
-        },
-        third: Boolean,
-        flex: Boolean,
-        combine: Boolean,
-    },
-    computed: {
-        modelValue: {
-            get: function () { return this.value; },
-            set: function (val) { this.$emit('input', val); }
-        },
-        firstValue: function () {
-            return this.modelValue[0];
-        },
-        secondValue: function () {
-            return this.modelValue[1];
-        },
-        thirdValue: function () {
-            return this.modelValue[2];
-        },
-        firstArr: function () {
-            var temp = this.options;
-            return temp;
-        },
-        secondArr: function () {
-            var _this = this;
-            var temp = [];
-            if (this.modelValue[0]) {
-                temp = this.options.find(function (option) { return option.value === _this.modelValue[0]; }).children;
-            }
-            return temp;
-        },
-        thirdArr: function () {
-            var _this = this;
-            var temp = [];
-            if (this.modelValue[1]) {
-                temp = this.secondArr.find(function (option) { return option.value === _this.modelValue[1]; }).children;
-            }
-            return temp;
-        },
-    },
-    watch: {
-        firstValue: function () {
-            this.modelValue.splice(1, 1, "");
-        },
-        secondValue: function () {
-            if (this.third)
-                this.modelValue.splice(2, 1, "");
-        },
-    },
-    mounted: function () {
-        var _this = this;
-        this.$on('validate', function () {
-            _this.$nextTick(function () {
-                _this.$parent.$emit('validate'); // 通知FormItem校驗
-            });
-        });
     }
 });
 // ud-select-date：日期連動下拉框
@@ -702,89 +617,6 @@ Vue.component('ud-switch', {
         }
     },
 });
-// ud-captcha：圖形驗證碼
-Vue.component('ud-captcha', {
-    name: "UdCaptcha",
-    template: "\n    <div class=\"ud-captcha\">\n      <div class=\"canvas-area\" ref=\"canvasArea\">\n        <canvas id=\"verify-canvas\" width=\"100\" height=\"38\" style=\"display: none;\"></canvas>\n        <img ref=\"codeimg\" @click=\"refresh\">\n        <input type=\"hidden\" v-model=\"inputVal\">\n      </div>\n      <div class=\"refresh\" @click=\"refresh\" v-if=\"!noRefresh\">\n        <img src=\"img/refresh.png\">\n      </div>\n    </div>\n  ",
-    computed: {
-        inputVal: {
-            get: function () { return this.value; },
-            set: function (val) { this.$emit('input', val); }
-        }
-    },
-    props: {
-        value: String,
-        color: { default: "#989799" },
-        bgColor: { default: "#000" },
-        randomColor: { default: "#777" },
-        font: { default: "20px Arial" },
-        noLine: Boolean,
-        noDots: Boolean,
-        noRefresh: Boolean,
-    },
-    mounted: function () {
-        this.drawCode();
-    },
-    methods: {
-        drawCode: function () {
-            var nums = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz".split("");
-            var canvas = document.getElementById('verify-canvas'); // 取得HTML端畫布
-            var context = canvas.getContext("2d"); // 取得畫布2D上下文
-            context.fillStyle = this.bgColor; // 畫布填充色
-            context.fillRect(0, 0, canvas.width, canvas.height); // 清空畫布
-            context.fillStyle = this.color; // 設置字體顏色
-            context.font = this.font; // 設置字體
-            var rand = new Array();
-            var x = new Array();
-            var y = new Array();
-            for (var i = 0; i < 4; i++) {
-                rand[i] = nums[Math.floor(Math.random() * nums.length)];
-                x[i] = i * 16 + 16;
-                y[i] = Math.random() * 20 + 15;
-                context.fillText(rand[i], x[i], y[i]);
-            }
-            var code = rand.join('');
-            this.inputVal = code;
-            if (!this.noLine) {
-                for (var i = 0; i < 3; i++) {
-                    this.drawline(canvas, context);
-                }
-            }
-            if (!this.noDots) {
-                for (var i = 0; i < 30; i++) {
-                    this.drawDot(canvas, context);
-                }
-            }
-            this.convertCanvasToImage(canvas);
-        },
-        drawline: function (canvas, context) {
-            context.moveTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height)); // 隨機線的起點x座標是畫布x座標0位置 y座標是畫布高度的隨機數
-            context.lineTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height)); // 隨機線的終點x座標是畫布寬度 y座標是畫布高度的隨機數
-            context.lineWidth = 0.5; // 隨機線寬
-            context.strokeStyle = this.randomColor; // 隨機線描邊屬性
-            context.stroke(); // 描邊 即起點描到終點
-        },
-        drawDot: function (canvas, context) {
-            var px = Math.floor(Math.random() * canvas.width);
-            var py = Math.floor(Math.random() * canvas.height);
-            context.moveTo(px, py);
-            context.lineTo(px + 1, py + 1);
-            context.lineWidth = 0.2;
-            context.strokeStyle = this.randomColor;
-            context.stroke();
-        },
-        convertCanvasToImage: function (canvas) {
-            var image = this.$refs.codeimg;
-            image.src = canvas.toDataURL("image/png");
-            return image;
-        },
-        refresh: function () {
-            document.getElementById('verify-canvas').remove();
-            this.$refs.canvasArea.insertAdjacentHTML('afterbegin', '<canvas width="100" height="38" id="verify-canvas" style="display: none;"></canvas>');
-            this.drawCode();
-        }
-    }
-});
 // ud-form-item：表單驗證容器
 Vue.component('ud-form-item', {
     name: "UdFormItem",
@@ -1065,10 +897,10 @@ Vue.component('ud-collapse', {
         }
     }
 });
-// ud-ratio：等比例自適應容器
-Vue.component('ud-ratio', {
-    name: "UdRatio",
-    template: "\n    <div class=\"ud-ratio\">\n      <div class=\"ud-ratio-bg\" :style=\"{\n        backgroundImage: 'url(' + src + ')', \n        paddingBottom: height + '%', \n        borderRadius: radius,\n        backgroundSize: bgSize\n      }\">\n        <slot></slot>\n      </div>\n    </div>\n  ",
+// ud-image：等比例自適應容器
+Vue.component('ud-image', {
+    name: "UdImage",
+    template: "\n    <div class=\"ud-image\">\n      <div class=\"ud-image-bg\" :style=\"{\n        backgroundImage: 'url(' + src + ')', \n        paddingBottom: height + '%', \n        borderRadius: radius,\n        backgroundSize: bgSize\n      }\">\n        <slot></slot>\n      </div>\n    </div>\n  ",
     props: {
         src: { default: "https://i.imgur.com/s3w1Sm3.jpg" },
         height: { default: 100 },
@@ -1331,28 +1163,6 @@ var getRandomString = function (length) {
     return temp;
 };
 /**
- * 複製指定元素上的文字至剪貼簿
- * @param {string} target 要複製文字的指定元素id
- * @example copyTextById("title").then(res => udAlert(`已複製\n${ res }`));
- */
-var copyTextById = function (target) {
-    return new Promise(function (resolve, reject) {
-        try {
-            var textRange = document.createRange();
-            textRange.selectNode(document.getElementById(target));
-            var sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(textRange);
-            document.execCommand("copy");
-            resolve(textRange);
-        }
-        catch (err) {
-            console.log("複製失敗: ", err);
-            reject(err);
-        }
-    });
-};
-/**
  * 複製文字至剪貼簿
  * @param {string} text 要複製的文字
  * @example copyText("要複製的文字").then(res => udAlert(`已複製\n${ res }`));
@@ -1405,18 +1215,6 @@ var getRandom = function (min, max) {
     if (min === void 0) { min = 0; }
     if (max === void 0) { max = 100; }
     return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-/**
- * 四捨五入到指定位數
- * @param {number} val 傳入值
- * @param {number} decimals 指定位數 預設為0
- * @example roundNumber(1.235, 2) -> 1.24
- */
-var roundNumber = function (val, decimals) {
-    if (decimals === void 0) { decimals = 0; }
-    if (val == null)
-        return val;
-    return Number(Math.round(val + "e" + decimals) + "e-" + decimals);
 };
 /**
  * 數字加入千分位逗號
@@ -1525,22 +1323,6 @@ var imageDownload = function (selector, name) {
         a.dispatchEvent(event);
     };
 };
-/**
- * 下載Canvas圖片
- * @param {string} selector canvas元素選擇器
- * @param {string} name 圖片名稱 預設為'下載圖片'
- * @example canvasImageDownload('canvas', '自訂圖片名稱')
- */
-var canvasImageDownload = function (selector, name) {
-    if (name === void 0) { name = '下載圖片'; }
-    var canvas = document.querySelector(selector);
-    var url = canvas.toDataURL('image/png');
-    var a = document.createElement('a');
-    var event = new MouseEvent('click');
-    a.download = name;
-    a.href = url;
-    a.dispatchEvent(event);
-};
 //-----------------------Array-----------------------
 /**
  * 陣列是否有重複值(不分型別)
@@ -1570,19 +1352,6 @@ var removeArrayRepeat = function (arr) {
     return newArr;
 };
 /**
- * 二維陣列扁平化
- * @param {array} arr 傳入值
- * @param {number} depth 指定深度
- * @example flatArray([1, [2], 3, 4]); -> [1, 2, 3, 4]
- * @example flatArray([1, [2, [3, [4, 5], 6], 7], 8], 2); -> [1, 2, 3, [4, 5], 6, 7, 8]
- */
-var flatArray = function (arr, depth) {
-    if (depth === void 0) { depth = 1; }
-    if (arr == null)
-        return arr;
-    return arr.reduce(function (a, v) { return a.concat(depth > 1 && Array.isArray(v) ? flatArray(v, depth - 1) : v); }, []);
-};
-/**
  * 返回陣列中某值的所有索引
  * @param {array} arr 傳入值
  * @param {number} val 指定值
@@ -1593,35 +1362,6 @@ var indexOfAll = function (arr, val) {
     if (arr == null)
         return arr;
     return arr.reduce(function (acc, el, i) { return (el === val ? acc.concat([i]) : acc); }, []);
-};
-/**
- * 兩陣列的交集
- * @param {array} arrA 陣列A
- * @param {array} arrB 陣列B
- * @example intersectionArray([1, 2, 3], [4, 3, 2]); -> [2, 3]
- */
-var intersectionArray = function (arrA, arrB) {
-    if (arrA == null || arrB == null)
-        return null;
-    var s = new Set(arrB);
-    return arrA.filter(function (x) { return s.has(x); });
-};
-/**
- * 洗牌陣列
- * @param {array} arr 傳入值
- * @example shuffleArray([1, 2, 3]); -> [2, 3, 1];
- */
-var shuffleArray = function (arr) {
-    if (arr == null)
-        return arr;
-    var arrCopy = arr.slice();
-    var m = arrCopy.length;
-    while (m) {
-        var i = Math.floor(Math.random() * m--);
-        _a = [arrCopy[i], arrCopy[m]], arrCopy[m] = _a[0], arrCopy[i] = _a[1];
-    }
-    return arrCopy;
-    var _a;
 };
 //-----------------------Object-----------------------
 /**
@@ -1635,44 +1375,7 @@ var typeOf = function (val) {
     return val === undefined ? 'undefined' : val === null ? 'null' : val.constructor.name.toLowerCase();
 };
 /**
- * 過濾物件鍵值
- * @param {object} val 傳入值
- * @param {array} arr 過濾值的陣列
- * @example filterObj(obj, ["keyA", "keyB"]);
- */
-var filterObj = function (val, arr) {
-    var tempObj = JSON.parse(JSON.stringify(val));
-    for (var i in tempObj) {
-        if (arr.indexOf(i) === -1)
-            delete tempObj[i];
-    }
-    return tempObj;
-};
-/**
- * 刪除物件鍵值
- * @param {object} obj 傳入值
- * @param {array} arr 刪除值的陣列
- * @example deleteObj(obj, ["keyA", "keyB"]);
- */
-var deleteObj = function (obj, arr) {
-    var tempObj = JSON.parse(JSON.stringify(obj));
-    for (var i in tempObj) {
-        if (arr.indexOf(i) !== -1)
-            delete tempObj[i];
-    }
-    return tempObj;
-};
-/**
- * 深拷貝(簡易版)
- * @param {object} obj 傳入值
- */
-var deepCloneSimple = function (obj) {
-    if (obj == null)
-        return obj;
-    return JSON.parse(JSON.stringify(obj));
-};
-/**
- * 深拷貝(完全版)
+ * 深拷貝
  * @param {object} obj 傳入值
  */
 var deepClone = function (obj, hash) {
@@ -1709,15 +1412,6 @@ var renameKeys = function (obj, keysMap) {
     }, {});
 };
 //-----------------------Time-----------------------
-/**
- * 判斷是否為閏年
- * @param {number} year 年份
- */
-var isLeapYear = function (year) {
-    if (year == null)
-        return year;
-    return new Date(year, 1, 29).getDate() === 29;
-};
 /**
  *  判斷日期是否存在
  * @param {string} date 日期字串
@@ -1791,11 +1485,11 @@ var formatTime = function (date, format) {
  * @param {number} speed 滾動時間(瞬移為1,請勿設為0)
  * @param {number} offset 自定偏移(可接受正負數字)
  * @param {function} callback 回調函式
- * @example scrollTo(); -> 滾動回項部
- * @example scrollTo('top', 1); -> 瞬間回項部
- * @example scrollTo('.foobar', 10, -30, () => {console.log('滾動完成')});
+ * @example scrollToTarget(); -> 滾動回項部
+ * @example scrollToTarget('top', 1); -> 瞬間回項部
+ * @example scrollToTarget('.foobar', 10, -30, () => {console.log('滾動完成')});
  */
-var scrollTo = function (el, speed, offset, callback) {
+var scrollToTarget = function (el, speed, offset, callback) {
     if (el === void 0) { el = "top"; }
     if (speed === void 0) { speed = 5; }
     if (offset === void 0) { offset = 0; }
@@ -1994,16 +1688,6 @@ var isEmpty = function (val) {
 };
 //-----------------------Web-----------------------
 /**
- * 取得Cookie的值
- * @param {string} key 傳入值
- */
-var getCookie = function (key) {
-    var arr = document.cookie.match(new RegExp("(^| )" + key + "=([^;]*)(;|$)"));
-    if (arr != null)
-        return unescape(arr[2]);
-    return null;
-};
-/**
  * 函式防抖
  * @description 將幾次操作合併為一次操作進行
  * @param {function} fn 處理函式
@@ -2052,35 +1736,6 @@ var queryString = function (key, url) {
     return parseUrl.searchParams.get(key);
 };
 /**
- * 解析網址
- * @param {string} url 網址
- */
-var parseUrl = function (url) {
-    if (url === void 0) { url = location.href; }
-    if (url == null)
-        return url;
-    var parseUrl = new URL(url);
-    return parseUrl;
-};
-/**
- * 網址跳轉
- * @param {string} url 欲跳轉的網址
- */
-var toUrl = function (url) {
-    if (url == null)
-        return url;
-    window.location.href = url;
-};
-/**
- * 跳頁重整
- */
-var jumpReload = function () {
-    window.onpageshow = function (event) {
-        if (event.persisted)
-            window.location.reload();
-    };
-};
-/**
  * 判斷是否移動裝置
  * @param {string} os 作業系統('': 所有機型, apple: 蘋果, android: 安卓)
  */
@@ -2095,6 +1750,4 @@ var isMobile = function (os) {
             return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase());
     }
 };
-// 初始化執行
-jumpReload();
 //# sourceMappingURL=ud-modules.js.map

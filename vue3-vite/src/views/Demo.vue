@@ -38,13 +38,13 @@
     //-     ud-captcha(v-model="formData.captchaCode")
     hr(style="margin-bottom: 20px")
 
-    ud-button(@click="formSubmit") 送出表單
-    ud-button(@click="isCollapse = !isCollapse") 摺疊容器&nbsp
+    ud-button.mb-2(@click="formSubmit") 送出表單
+    ud-button.mb-2(@click="isCollapse = !isCollapse") 摺疊容器&nbsp
       ud-arrow(color="#fff" :size="4" :width="2" :direction="isCollapse ? 'up' : 'down'")
-    ud-collapse(v-model="isCollapse" :duration="0.4")
+    ud-collapse.mb-2(v-model="isCollapse" :duration="0.4")
       ud-ratio(src="img/01.jpg" bg-size="contain")
-    ud-button(@click="alert()") Alert
-    ud-button(@click="isModalShow = true") Model
+    ud-button.mb-2(@click="alert()") Alert
+    ud-button.mb-2(@click="isModalShow = true") Model
 
     ud-html(text="<i>用戶</i>自定\n<h3>義訊息</h3>")
     br

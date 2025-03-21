@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+prepros.config
+prepros-6.config
 
 # local env files
 .env
