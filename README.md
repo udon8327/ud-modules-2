@@ -130,6 +130,7 @@
   ],
   ```
   將多個獨立的ud-select群組起來進行下拉連動
+  舊版的ud-select-link已刪除 建議改用ud-select
   ``` html
   <ud-select v-model="valueGroup[0]" :options="storeOptions" :group="valueGroup" :index="0" placeholder="請選擇縣市"></ud-select>
   <ud-select v-model="valueGroup[1]" :options="storeOptions" :group="valueGroup" :index="1" placeholder="請選擇櫃點"></ud-select>
@@ -302,6 +303,7 @@
   * duration: 開闔速度 | Number(0.2)
 
 ### <font color=#ebc600>ud-image：等比例自適應圖片</font>
+  舊版叫ud-ratio 現已改名為ud-image
   ``` html
   <ud-image src="img/01.jpg" bg-size="contain"></ud-image>
   ```
