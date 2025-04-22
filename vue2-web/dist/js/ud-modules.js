@@ -442,7 +442,7 @@ Vue.component('ud-select-twzip', {
                 },
                 {
                     label: "新竹縣", value: "06",
-                    children: [{ label: "竹北市", value: "302" }, { label: "湖口鄉", value: "303" }, { label: "新豐鄉", value: "304" }, { label: "新埔鄉", value: "305" }, { label: "關西鎮", value: "306" }, { label: "芎林鄉", value: "307" }, { label: "寶山鄉", value: "308" },
+                    children: [{ label: "竹北市", value: "302" }, { label: "湖口鄉", value: "303" }, { label: "新豐鄉", value: "304" }, { label: "新埔鎮", value: "305" }, { label: "關西鎮", value: "306" }, { label: "芎林鄉", value: "307" }, { label: "寶山鄉", value: "308" },
                         { label: "竹東鎮", value: "310" }, { label: "五峰鄉", value: "311" }, { label: "橫山鄉", value: "312" }, { label: "尖石鄉", value: "313" }, { label: "北埔鄉", value: "314" }, { label: "峨眉鄉", value: "315" }]
                 },
                 {
