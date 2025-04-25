@@ -93,8 +93,13 @@ let vm = new Vue({
   computed: {
   },
   methods: {
-    test(val) {
-      console.log('val: ', val);
+    test() {
+      console.log('test');
+    },
+    openExternal() {
+      liff.openWindow(
+        { url: location.href, external: true }
+      );
     },
     liffLogin() {
       liff
