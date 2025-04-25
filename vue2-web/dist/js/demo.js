@@ -1,3 +1,5 @@
+// url：https://ud-modules-vue2.udons.site/demo.html
+// liff：https://liff.line.me/1655285115-w926gzYP
 var vm = new Vue({
     el: "#app",
     data: {
@@ -94,7 +96,10 @@ var vm = new Vue({
             console.log('test');
         },
         openExternal: function () {
-            liff.openWindow({ url: location.href, external: true });
+            location.href = "https://liff.line.me/1655285115-w926gzYP";
+            // liff.openWindow(
+            //   { url: "https://liff.line.me/1655285115-w926gzYP", external: true }
+            // );
         },
         liffLogin: function () {
             var _this = this;
