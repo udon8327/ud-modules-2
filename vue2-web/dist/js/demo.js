@@ -90,8 +90,11 @@ var vm = new Vue({
     },
     computed: {},
     methods: {
-        test: function (val) {
-            console.log('val: ', val);
+        test: function () {
+            console.log('test');
+        },
+        openExternal: function () {
+            liff.openWindow({ url: location.href, external: true });
         },
         liffLogin: function () {
             var _this = this;
