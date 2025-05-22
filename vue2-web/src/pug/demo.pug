@@ -19,7 +19,9 @@ block content
     //- .btn-wrapper
     //-   ud-button(@click="clearVerify" plain) 清除驗證
     //-   ud-button(@click="submitVerify") 送出表單
-    ud-button(@click="test") TEST
+    button(@click="test") TEST
+    ud-button(@click="test" debounce) 節流
+    ud-button(@click="test" throttle) 防抖
     ud-button(@click="openExternal") 外開瀏覽器
     a(href="https://liff.line.me/1655285115-w926gzYP" target="_blank") 外開瀏覽器
 

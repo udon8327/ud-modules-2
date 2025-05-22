@@ -6,7 +6,6 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-var _this = this;
 /*
 ==================== ud-modules 常用組件 ====================
 Form
@@ -88,7 +87,7 @@ Web
 // ud-button：按鈕
 Vue.component('ud-button', {
     name: 'UdButton',
-    template: "\n    <div class=\"ud-button\">\n      <button\n        @click=\"clickHandler\"\n        v-bind=\"$attrs\"\n        :disabled=\"disabled || loading\"\n        :class=\"{\n          'is-disabled': disabled || loading,\n          'is-plain': plain,\n          'is-round': round,\n          'is-circle': circle,\n        }\"\n      >\n        <div class=\"button-wrapper\">\n          <span><slot>\u6309\u9215</slot></span>\n          <div class=\"button-icon\">\n            <div class=\"icon-loading\" v-if=\"loading\"></div>\n            <i :class=\"icon\" v-if=\"icon && !loading\"></i>\n            <img :src=\"image\" alt=\"\" v-if=\"image && !loading\">\n            <slot name=\"icon\" v-if=\"!loading\"></slot>\n          </div>\n        </div>\n      </button>\n    </div>\n  ",
+    template: "\n    <div class=\"ud-button\">\n      <button\n        v-bind=\"$attrs\"\n        :disabled=\"disabled || loading\"\n        :class=\"{\n          'is-disabled': disabled || loading,\n          'is-plain': plain,\n          'is-round': round,\n          'is-circle': circle\n        }\"\n      >\n        <div class=\"button-wrapper\">\n          <span><slot>\u6309\u9215</slot></span>\n          <div class=\"button-icon\">\n            <div class=\"icon-loading\" v-if=\"loading\"></div>\n            <i :class=\"icon\" v-if=\"icon && !loading\"></i>\n            <img :src=\"image\" alt=\"\" v-if=\"image && !loading\">\n            <slot name=\"icon\" v-if=\"!loading\"></slot>\n          </div>\n        </div>\n      </button>\n    </div>\n  ",
     inheritAttrs: false,
     props: {
         icon: { default: '' },
@@ -99,21 +98,26 @@ Vue.component('ud-button', {
         round: Boolean,
         circle: Boolean,
         throttle: Boolean,
-        throttleTime: { default: 1000 } // 函式節流間隔時間
+        debounce: Boolean,
+        delay: { default: 1000 } // 節流/防抖 時間
+    },
+    mounted: function () {
+        var handler = this.baseClickHandler;
+        if (this.throttle) {
+            handler = throttle(handler, this.delay);
+        }
+        else if (this.debounce) {
+            handler = debounce(handler, this.delay);
+        }
+        this.$el.addEventListener('click', handler);
     },
     methods: {
-        clickHandler: function (evt) {
-            if (this.throttle)
+        baseClickHandler: function (evt) {
+            if (this.disabled || this.loading)
                 return;
             this.$emit('click', evt);
         },
     },
-    mounted: function () {
-        var _this = this;
-        if (!this.throttle)
-            return;
-        this.$el.addEventListener('click', throttle(function (evt) { return _this.$emit('click', evt); }, this.throttleTime));
-    }
 });
 // ud-input：輸入框
 Vue.component('ud-input', {
@@ -1692,16 +1696,22 @@ var isEmpty = function (val) {
  * 函式防抖
  * @description 將幾次操作合併為一次操作進行
  * @param {function} fn 處理函式
- * @param {number} wait 停止後等待時間 預設為200ms
+ * @param {number} delay 停止後等待時間 預設為1000ms
  * @example window.addEventListener('scroll', debounce(() => console.log("debounce"), 500));
  */
-var debounce = function (fn, wait) {
-    if (wait === void 0) { wait = 200; }
-    var timeout = null;
+var debounce = function (fn, delay) {
+    if (delay === void 0) { delay = 1000; }
+    var timer = null;
     return function () {
-        if (timeout !== null)
-            clearTimeout(timeout);
-        timeout = setTimeout(fn, wait);
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var context = this;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            fn.apply(context, args);
+        }, delay);
     };
 };
 /**
@@ -1713,14 +1723,17 @@ var debounce = function (fn, wait) {
  */
 var throttle = function (fn, delay) {
     if (delay === void 0) { delay = 1000; }
-    var prev = Date.now();
+    var last = 0;
     return function () {
-        var context = _this;
-        var args = arguments;
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var context = this;
         var now = Date.now();
-        if (now - prev >= delay) {
+        if (now - last >= delay) {
+            last = now;
             fn.apply(context, args);
-            prev = Date.now();
         }
     };
 };

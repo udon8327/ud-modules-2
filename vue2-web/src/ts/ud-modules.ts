@@ -85,14 +85,13 @@ Vue.component('ud-button', {
   template: `
     <div class="ud-button">
       <button
-        @click="clickHandler"
         v-bind="$attrs"
         :disabled="disabled || loading"
         :class="{
           'is-disabled': disabled || loading,
           'is-plain': plain,
           'is-round': round,
-          'is-circle': circle,
+          'is-circle': circle
         }"
       >
         <div class="button-wrapper">
@@ -116,23 +115,25 @@ Vue.component('ud-button', {
     plain: Boolean, // 線條化
     round: Boolean, // 圓角
     circle: Boolean, // 圓型
-    throttle: Boolean, // 函式節流
-    throttleTime: { default: 1000 } // 函式節流間隔時間
+    throttle: Boolean, // 節流模式
+    debounce: Boolean, // 防抖模式
+    delay: { default: 1000 } // 節流/防抖 時間
+  },
+  mounted() {
+    let handler = this.baseClickHandler;
+    if (this.throttle) {
+      handler = throttle(handler, this.delay);
+    } else if (this.debounce) {
+      handler = debounce(handler, this.delay);
+    }
+    this.$el.addEventListener('click', handler);
   },
   methods: {
-    clickHandler(evt) {
-      if(this.throttle) return;
+    baseClickHandler(evt) {
+      if (this.disabled || this.loading) return;
       this.$emit('click', evt);
     },
   },
-  mounted() {
-    if(!this.throttle) return;
-    this.$el.addEventListener('click', throttle(
-        evt => this.$emit('click', evt),
-        this.throttleTime
-      )
-    );
-  }
 })
 
 // ud-input：輸入框
@@ -1883,16 +1884,18 @@ const isEmpty = val => {
  * 函式防抖
  * @description 將幾次操作合併為一次操作進行
  * @param {function} fn 處理函式
- * @param {number} wait 停止後等待時間 預設為200ms
+ * @param {number} delay 停止後等待時間 預設為1000ms
  * @example window.addEventListener('scroll', debounce(() => console.log("debounce"), 500));
  */
-const debounce = (fn, wait = 200) => {
-  let timeout = null;
-  return () => {
-    if(timeout !== null)
-      clearTimeout(timeout);
-    timeout = setTimeout(fn, wait);
-  }
+const debounce = (fn, delay = 1000) => {
+  let timer = null;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
+  };
 }
 
 /**
@@ -1903,16 +1906,15 @@ const debounce = (fn, wait = 200) => {
  * @example window.addEventListener('scroll', throttle(() => console.log("throttle"), 2000));
  */
 const throttle = (fn, delay = 1000) => {
-  let prev = Date.now();
-  return () => {
-    let context = this;
-    let args = arguments;
-    let now = Date.now();
-    if (now - prev >= delay) {
+  let last = 0;
+  return function (...args) {
+    const context = this;
+    const now = Date.now();
+    if (now - last >= delay) {
+      last = now;
       fn.apply(context, args);
-      prev = Date.now();
     }
-  }
+  };
 }
 
 /**
