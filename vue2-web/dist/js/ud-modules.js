@@ -67,13 +67,13 @@ DOM
 Verify
   isVerify：常用驗證函式
   isNumber：精準數字驗證
-  isEmpty：未填入驗證 v
+  isEmpty：未填入驗證
 
 Web
-  debounce：函式防抖 v
-  throttle：函式節流 v
-  queryString：查詢網址所帶參數 v
-  isMobile：判斷是否移動裝置 v
+  debounce：函式防抖
+  throttle：函式節流
+  queryString：查詢網址所帶參數
+  isMobile：判斷是否移動裝置
 */
 
 //-----------------------Form-----------------------

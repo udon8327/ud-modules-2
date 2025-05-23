@@ -90,15 +90,11 @@ let vm = new Vue({
     }
   },
   mounted() {
-    console.log(nl2br("Line1\nLine2"));
     // this.liffLogin();
   },
   computed: {
   },
   methods: {
-    formatText(val) {
-      return nl2br(val);
-    },
     test() {
       console.log('test');
     },
