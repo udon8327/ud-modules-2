@@ -1,7 +1,7 @@
 /*
 ==================== ud-modules 常用組件 ====================
 Form
-  ud-button：按鈕
+  ud-button：按鈕 v
   ud-input：輸入框
   ud-textarea：多行輸入框
   ud-radio：單選框
@@ -60,20 +60,20 @@ Time
   formatTime：時間格式化
 
 DOM
-  scrollTo：滾動至指定位置
+  scrollToTarget：滾動至指定位置
   getPageScroll：取得頁面當前捲動高度(寬度)
   getPageSize：取得頁面尺寸
 
 Verify
   isVerify：常用驗證函式
   isNumber：精準數字驗證
-  isEmpty：未填入驗證
+  isEmpty：未填入驗證 v
 
 Web
-  debounce：函式防抖
-  throttle：函式節流
-  queryString：查詢網址所帶參數
-  isMobile：判斷是否移動裝置
+  debounce：函式防抖 v
+  throttle：函式節流 v
+  queryString：查詢網址所帶參數 v
+  isMobile：判斷是否移動裝置 v
 */
 
 //-----------------------Form-----------------------
@@ -1354,25 +1354,27 @@ Vue.component('ud-countdown', {
  * 將字串內換行符\n轉為<br>
  * @param {string} val 傳入值
  * @param {boolean} is_xhtml 是否為xhtml 預設為false
+ * @example nl2br("Line1\nLine2") -> "Line1<br>Line2"
  */
-const nl2br = (val = '', is_xhtml = false) => {
-  if(val == null) return val;
-  let breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
-  return (val + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-}
+const nl2br = (val = '', isXhtml = false) => {
+  if (typeof val !== 'string') return val;
+  const breakTag = isXhtml ? '<br />' : '<br>';
+  return val.replace(/(\r\n|\n\r|\r|\n)/g, breakTag);
+};
 
 /**
  * 取得隨機字串
  * @param {number} length 指定字串長度 預設為10
  */
-const getRandomString = (length = 10) =>{
-  let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-  let temp = "";
+const getRandomString = (length = 10) => {
+  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charsetLength = charset.length;
+  let result = '';
   for (let i = 0; i < length; i++) {
-    temp += chars.charAt(Math.floor(Math.random() * chars.length));
+    result += charset[Math.floor(Math.random() * charsetLength)];
   }
-  return temp;
-}
+  return result;
+};
 
 /**
  * 複製文字至剪貼簿
@@ -1381,37 +1383,43 @@ const getRandomString = (length = 10) =>{
  */
 const copyText = (text = "") => {
   return new Promise((resolve, reject) => {
-    // 使用瀏覽器的 Clipboard API 進行文字複製
-    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-      return navigator.clipboard.writeText(text)
-        .then(() => {
-          resolve(text);
-        })
+    if (!text) return reject(new Error("未提供文字"));
+    // 現代瀏覽器支援 Clipboard API
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => resolve(text))
         .catch(err => {
-          console.log("複製失敗: ", err);
-          reject(err);
+          console.error("Clipboard API 複製失敗:", err);
+          fallbackCopy();
         });
     } else {
-      // 瀏覽器不支援 Clipboard API，使用 fallback 方法
+      fallbackCopy();
+    }
+    // 備援方案
+    function fallbackCopy() {
       const textarea = document.createElement('textarea');
       textarea.value = text;
       textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
+      textarea.style.left = '-9999px';
+      textarea.setAttribute('readonly', 'true');
       document.body.appendChild(textarea);
-      textarea.focus();
       textarea.select();
       try {
-        document.execCommand('copy');
-        resolve(text);
+        const successful = document.execCommand('copy');
+        if (successful) {
+          resolve(text);
+        } else {
+          throw new Error("execCommand 失敗");
+        }
       } catch (err) {
-        console.log("複製失敗: ", err);
+        console.error("備援複製失敗:", err);
         reject(err);
       } finally {
         document.body.removeChild(textarea);
       }
     }
   });
-}
+};
 
 //-----------------------Number-----------------------
 /**
@@ -1421,8 +1429,11 @@ const copyText = (text = "") => {
  * @example getRandom(5, 10) -> 7
  */
 const getRandom = (min = 0, max = 100) => {
+  min = Math.ceil(Number(min));
+  max = Math.floor(Number(max));
+  if (isNaN(min) || isNaN(max) || min > max) return NaN;
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 /**
  * 數字加入千分位逗號
@@ -1430,43 +1441,23 @@ const getRandom = (min = 0, max = 100) => {
  * @example formatNumber(99999) -> 99,999
  */
 const formatNumber = (val) => {
-  if(val == null) return val;
-  let temp = val.toString();
-  let pattern = /(-?\d+)(\d{3})/;
-  while(pattern.test(temp)){
-    temp = temp.replace(pattern, "$1,$2");
-  }
-  return temp;
-}
+  if (val == null || isNaN(val)) return '';
+  return Number(val).toLocaleString();
+};
 
 /**
  * 數字補零
  * @param {number|string} val 傳入值
  * @param {number} length 要補到幾位 預設為2
- * @param {number|string} string 要補的值 預設為0
+ * @param {number|string} fillChar 要補的值，預設為 '0'
  * @example padStart(5) -> '05'
  * @example padStart(5, 4) -> '0005'
  * @example padStart(5, 4, 2) -> '2225'
  */
-const padStart = (val, length = 2, string = 0) => {
-  if(val == null) return val;
-  if(!String.prototype.padStart) {
-    String.prototype.padStart = function padStart(targetLength, padString) {
-      targetLength = targetLength >> 0;
-      padString = String(typeof padString !== 'undefined' ? padString : ' ');
-      if(this.length > targetLength) {
-        return String(this);
-      }else {
-        targetLength = targetLength - this.length;
-        if(targetLength > padString.length) {
-          padString += padString.repeat(targetLength / padString.length);
-        }
-        return padString.slice(0, targetLength) + String(this);
-      }
-    };
-  }
-  return val.toString().padStart(length, string);
-}
+const padStart = (val, length = 2, fillChar = '0') => {
+  if (val == null) return '';
+  return val.toString().padStart(length, fillChar.toString());
+};
 
 //-----------------------Image-----------------------
 /**
@@ -1475,59 +1466,64 @@ const padStart = (val, length = 2, string = 0) => {
  * @example imageLoaded('imgUrl').then(...) -> 圖片讀取完成時返回該Image物件
  */
 const imageLoaded = (url) => {
-  let img = new Image();
-  img.src = url;
   return new Promise((resolve, reject) => {
-    if(img.complete) {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error(`圖片載入失敗：${url}`));
+    img.src = url;
+    if (img.complete) {
       resolve(img);
-    }else {
-      img.onload = () => resolve(img);
-      img.onerror = (e) => reject(e);
     }
-  })
-}
+  });
+};
 
 /**
  * 多張圖片載入完成
- * @param {array} arr 多張圖片路徑陣列
+ * @param {array} urls 多張圖片路徑陣列
  * @example imageAllLoaded(['imgUrl1','imgUrl2']).then(...) -> 全部圖片都讀取完成時返回該Image物件組成的陣列
  */
-const imageAllLoaded = (arr) => {
-  let result = [];
-  arr.forEach(item => {
-    result.push(imageLoaded(item));
+const imageAllLoaded = (urls = []) => {
+  const loadImage = (src) => new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = (err) => reject(new Error(`圖片載入失敗：${src}`));
+    img.src = src;
   });
-  return new Promise((resolve, reject) => {
-    Promise.all(result)
-      .then(res => resolve(res))
-      .catch(err => reject(err));
-  })
-}
+  return Promise.all(urls.map(loadImage));
+};
 
 /**
  * 下載Img圖片
- * @param {string} selector 圖片元素選擇器
- * @param {string} name 圖片名稱 預設為'下載圖片'
- * @example imageDownload('#image', '自訂圖片名稱')
+ * @param {string} selector 圖片元素的選擇器
+ * @param {string} name 圖片名稱（預設為 "下載圖片"）
+ * @param {string} type 圖片格式（預設為 'image/jpeg'，可為 'image/png' 等）
+ * @example imageDownload('#image', '自訂圖片名稱', 'image/png')
  */
-const imageDownload = (selector, name = '下載圖片') => { 
-  let image = new Image();
-  image.setAttribute('crossOrigin', 'anonymous'); // 解決跨域 Canvas 污染問題
-  image.src = document.querySelector(selector).src;
-  image.onload = function() {
-    let canvas = document.createElement('canvas');
-    canvas.width = image.width;
-    canvas.height = image.height;
-    let context = canvas.getContext('2d');
-    context.drawImage(image, 0, 0, image.width, image.height);
-    let url = canvas.toDataURL('image/jpg');
-    let a = document.createElement('a');
-    let event = new MouseEvent('click');
+const imageDownload = (selector, name = '下載圖片', type = 'image/jpeg') => {
+  const imgElement = document.querySelector(selector);
+  if (!imgElement || !imgElement.src) {
+    console.warn('無效的圖片元素或未設定 src。');
+    return;
+  }
+  const image = new Image();
+  image.crossOrigin = 'anonymous'; // 避免跨域污染
+  image.src = imgElement.src;
+  image.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    const url = canvas.toDataURL(type);
+    const a = document.createElement('a');
     a.download = name;
     a.href = url;
-    a.dispatchEvent(event);
-  }
-}
+    a.click(); // 觸發下載
+  };
+  image.onerror = () => {
+    console.error('圖片載入失敗，可能因為跨域或圖片損毀。');
+  };
+};
 
 //-----------------------Array-----------------------
 /**
@@ -1535,26 +1531,20 @@ const imageDownload = (selector, name = '下載圖片') => {
  * @param {array} arr 傳入值
  * @example isArrayRepeat([1, 2, 2, 3]) -> true
  */
-const isArrayRepeat = arr => {
-  if(arr == null) return arr;
-  let obj = {};
-  for(let i in arr) {
-    if(obj[arr[i]]) return true;
-    obj[arr[i]] = true;
-  }
-  return false;
-}
+const isArrayRepeat = (arr) => {
+  if (!Array.isArray(arr)) return false;
+  return new Set(arr).size !== arr.length;
+};
 
 /**
  * 移除陣列中的重複元素
  * @param {array} arr 傳入值
  * @example removeArrayRepeat([1, 2, 2, 3]) -> [1, 2, 3]
  */
-const removeArrayRepeat = arr => {
-  if(arr == null) return arr;
-  let newArr = arr.filter((el, i, arr) => arr.indexOf(el) === i);
-  return newArr;
-}
+const removeArrayRepeat = (arr) => {
+  if (!Array.isArray(arr)) return [];
+  return [...new Set(arr)];
+};
 
 /**
  * 返回陣列中某值的所有索引
@@ -1564,9 +1554,13 @@ const removeArrayRepeat = arr => {
  * @example indexOfAll([1, 2, 3], 4); -> []
  */
 const indexOfAll = (arr, val) => {
-  if(arr == null) return arr;
-  return arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
-}
+  if (!Array.isArray(arr)) return [];
+  const result = [];
+  arr.forEach((el, i) => {
+    if (el === val) result.push(i);
+  });
+  return result;
+};
 
 //-----------------------Object-----------------------
 /**
@@ -1576,61 +1570,78 @@ const indexOfAll = (arr, val) => {
  * @example typeOf(123); -> number;
  * @example typeOf([1, 2, 3]); -> array;
  */
-const typeOf = val => {
-  return val === undefined ? 'undefined' : val === null ? 'null' : val.constructor.name.toLowerCase();
-}
+const typeOf = (val) => {
+  return Object.prototype.toString.call(val).slice(8, -1).toLowerCase();
+};
 
 /**
  * 深拷貝
- * @param {object} obj 傳入值
+ * @param {object} obj 傳入值 要拷貝的資料
+ * @param {WeakMap} hash 用於處理循環引用
  */
 const deepClone = (obj, hash = new WeakMap()) => {
-  if(obj == null) return obj;
-  if(obj instanceof RegExp) return new RegExp(obj);
-  if(obj instanceof Date) return new Date(obj);
-  if(obj instanceof Error) return new Error(obj);
-  if(typeof obj !== 'object') return obj;
-  if(hash.get(obj)) return hash.get(obj);
-  let cloneObj = new obj.constructor;
-  hash.set(obj, cloneObj);
-  for(let key in obj) {
-    if (obj.hasOwnProperty(key)) cloneObj[key] = deepClone(obj[key], hash);
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (obj instanceof Date) return new Date(obj);
+  if (obj instanceof RegExp) return new RegExp(obj);
+  if (obj instanceof Error) {
+    const err = new obj.constructor(obj.message);
+    err.stack = obj.stack;
+    return err;
   }
-  return cloneObj;
-}
+  if (hash.has(obj)) return hash.get(obj);
+  const clone = Array.isArray(obj) ? [] : Object.create(Object.getPrototypeOf(obj));
+  hash.set(obj, clone);
+  const keys = Reflect.ownKeys(obj); // 包含 symbol keys
+  for (const key of keys) {
+    clone[key] = deepClone(obj[key], hash);
+  }
+  return clone;
+};
 
 /**
  * 物件key重命名
  * @param {object} obj 傳入值
  * @param {object} keys 想要重命名的key組成的物件
- * @example renameKeys(obj, { line_uid: "lineUid", is_past: "isPast" });
+ * @example obj = renameKeys(obj, { line_uid: "lineUid", is_past: "isPast" });
  */
-const renameKeys = (obj, keys) => {
-  return Object.keys(obj).reduce((acc, key) => ({
-    ...acc,
-    ...{ [keys[key] || key]: obj[key] }
-  }), {});
-}
+const renameKeys = (obj, keys = {}) => {
+  if (typeof obj !== "object" || obj === null) return {};
+  const result = {};
+  for (const key in obj) {
+    const newKey = keys.hasOwnProperty(key) ? keys[key] : key;
+    result[newKey] = obj[key];
+  }
+  return result;
+};
 
 //-----------------------Time-----------------------
 /**
- *  判斷日期是否存在
+ * 判斷日期是否存在
  * @param {string} date 日期字串
  * @param {string} split 分割符 預設為"-"
  * @example isExistDate("2020-02-29"); -> true
  * @example isExistDate("2019/02/29", "/"); -> false
  */
 const isExistDate = (date, split = "-") => {
-  if(date == null) return date;
-  let dateArr = date.split(split);
-  let limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  let theYear = parseInt(dateArr[0]);
-  let theMonth = parseInt(dateArr[1]);
-  let theDay = parseInt(dateArr[2]);
-  let isLeap = new Date(theYear, 1, 29).getDate() === 29;
-  if(isLeap) limitInMonth[1] = 29;
-  return theDay > 0 && theDay <= limitInMonth[theMonth - 1];
-}
+  if (typeof date !== "string" || !date.includes(split)) return false;
+  const dateArr = date.split(split);
+  if (dateArr.length !== 3) return false;
+  const year = parseInt(dateArr[0], 10);
+  const month = parseInt(dateArr[1], 10);
+  const day = parseInt(dateArr[2], 10);
+  if (
+    isNaN(year) || isNaN(month) || isNaN(day) ||
+    month < 1 || month > 12 || day < 1
+  ) {
+    return false;
+  }
+  const testDate = new Date(year, month - 1, day);
+  return (
+    testDate.getFullYear() === year &&
+    testDate.getMonth() === month - 1 &&
+    testDate.getDate() === day
+  );
+};
 
 /**
  * 取得前後幾天的日期
@@ -1640,9 +1651,9 @@ const isExistDate = (date, split = "-") => {
  * @example getDiffDate(-2); -> "2020-06-28"
  */
 const getDiffDate = (days = 0) => {
-  let t = new Date();
-  t.setDate(t.getDate() + days);
-  return t.toISOString().split('T')[0];
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.toISOString().split('T')[0];
 };
 
 /**
@@ -1654,23 +1665,26 @@ const getDiffDate = (days = 0) => {
  * @example formatTime(new Date(), 'yyyy-MM-dd hh:mm:ss') -> "2021-07-26 14:08:00"
  * @example formatTime(new Date(1627280134101), 'yyyy-MM-dd hh:mm:ss') -> "2021-07-26 14:15:34"
  */
-const formatTime = (date = new Date(), format = "yyyy-MM-dd hh:mm:ss") => {
-  let o = {
-    "M+": date.getMonth() + 1, // 月份
-    "d+": date.getDate(), // 日
-    "H+": date.getHours(), // 小時
-    "h+": date.getHours(), // 小時
-    "m+": date.getMinutes(), // 分
-    "s+": date.getSeconds(), // 秒
-    "q+": Math.floor((date.getMonth() + 3) / 3), // 季度
-    "S": date.getMilliseconds() // 毫秒
+const formatTime = (input = new Date(), format = "yyyy-MM-dd HH:mm:ss") => {
+  const date = input instanceof Date ? input : new Date(input);
+  if (isNaN(date.getTime())) return "Invalid Date";
+  const map = {
+    "M+": date.getMonth() + 1, // 月 (1-12)
+    "d+": date.getDate(), // 日 (1-31)
+    "H+": date.getHours(), // 小時 (0-23)
+    "h+": date.getHours() % 12 || 12, // 小時 (1-12)
+    "m+": date.getMinutes(), // 分 (0-59)
+    "s+": date.getSeconds(), // 秒 (0-59)
+    "q+": Math.floor((date.getMonth() + 3) / 3), // 季度 (1-4)
+    "S": date.getMilliseconds() // 毫秒 (0-999)
   };
-  if(/(y+)/.test(format)) {
-    format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+  if (/(y+)/.test(format)) {
+    format = format.replace(RegExp.$1, (date.getFullYear() + "").slice(4 - RegExp.$1.length));
   }
-  for (var k in o) {
-    if(new RegExp("(" + k + ")").test(format)) {
-      format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+  for (let key in map) {
+    if (new RegExp("(" + key + ")").test(format)) {
+      const val = map[key] + "";
+      format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? val : val.padStart(RegExp.$1.length, "0"));
     }
   }
   return format;
@@ -1688,30 +1702,38 @@ const formatTime = (date = new Date(), format = "yyyy-MM-dd hh:mm:ss") => {
  * @example scrollToTarget('.foobar', 10, -30, () => {console.log('滾動完成')});
  */
 const scrollToTarget = (el = "top", speed = 5, offset = 0, callback = () => {}) => {
-  let scrollTop = document.scrollingElement.scrollTop;
-  let top = 0;
-  if(typeof el === 'number') {
-    top = el + offset;
-  }else {
-    if(el === 'top') {
-      top = 0 + offset;
-    }else if(el === 'bottom') {
-      top = document.body.scrollHeight - document.body.clientHeight + offset;
-    }else {
-      top = document.querySelector(el) && document.querySelector(el).offsetTop + offset;
+  if (speed <= 0) speed = 1;
+  const scrollingElement = document.scrollingElement || document.documentElement || document.body;
+  let currentScroll = scrollingElement.scrollTop;
+  let targetTop = 0;
+  if (typeof el === 'number') {
+    targetTop = el + offset;
+  } else if (el === 'top') {
+    targetTop = 0 + offset;
+  } else if (el === 'bottom') {
+    targetTop = scrollingElement.scrollHeight - window.innerHeight + offset;
+  } else {
+    const targetEl = document.querySelector(el);
+    if (!targetEl) {
+      console.warn(`scrollToTarget: 找不到元素 "${el}"，滾動至頂部`);
+      targetTop = 0 + offset;
+    } else {
+      const rect = targetEl.getBoundingClientRect();
+      targetTop = currentScroll + rect.top + offset;
     }
   }
-  const scroll = () => {
-    scrollTop = scrollTop + (top - scrollTop) / speed;
-    if (Math.abs(scrollTop - top) <= 1) {
-      document.scrollingElement.scrollTop = top;
-      callback && callback();
+  targetTop = Math.max(0, Math.min(targetTop, scrollingElement.scrollHeight - window.innerHeight));
+  const stepScroll = () => {
+    currentScroll += (targetTop - currentScroll) / speed;
+    if (Math.abs(currentScroll - targetTop) <= 1) {
+      scrollingElement.scrollTop = targetTop;
+      callback();
       return;
     }
-    document.scrollingElement.scrollTop = scrollTop;
-    requestAnimationFrame(scroll);
+    scrollingElement.scrollTop = currentScroll;
+    requestAnimationFrame(stepScroll);
   };
-  scroll();
+  stepScroll();
 };
 
 /**
@@ -1719,38 +1741,32 @@ const scrollToTarget = (el = "top", speed = 5, offset = 0, callback = () => {}) 
  * @param {string} type 類型(width: 寬度, height: 高度)
  */
 const getPageScroll = (type = 'height') => {
-  if(type === 'width') {
-    return document.documentElement.scrollLeft || document.body.scrollLeft;
+  if (type === 'width') {
+    return window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
   }
-  if(type === 'height') {
-    let bodyTop = 0;
-    if(typeof window.pageYOffset != "undefined") {
-      bodyTop = window.pageYOffset;
-    }else if(typeof document.compatMode != "undefined" && document.compatMode != "BackCompat") {
-      bodyTop = document.documentElement.scrollTop;
-    }else if(typeof document.body != "undefined") {
-      bodyTop = document.body.scrollTop;
-    }
-    return bodyTop;
+  if (type === 'height') {
+    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
   }
-}
+  throw new Error(`Invalid type: ${type}. Use "width" or "height".`);
+};
 
 /**
  * 取得頁面尺寸
  * @param {string} scope 範圍(view: 可視頁面, full: 完整頁面)
  */
 const getPageSize = (scope = 'view') => {
-  let el = document.compatMode == "BackCompat" ? document.body : document.documentElement;
-  if(scope === 'view') {
+  const el = document.compatMode === "BackCompat" ? document.body : document.documentElement;
+  if (scope === 'view') {
     return [el.clientWidth, el.clientHeight];
   }
-  if(scope === 'full') {
+  if (scope === 'full') {
     return [
-      Math.max(document.documentElement.scrollWidth, document.body.scrollWidth,el.clientWidth),
+      Math.max(document.documentElement.scrollWidth, document.body.scrollWidth, el.clientWidth),
       Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, el.clientHeight)
     ];
   }
-}
+  throw new Error(`Invalid scope: ${scope}. Use "view" or "full".`);
+};
 
 //-----------------------Verify-----------------------
 /**
@@ -1771,7 +1787,7 @@ const isVerify = (val, type) => {
       return /^09[0-9]{8}$/.test(val);
     // 電子郵件驗證
     case "email":
-      return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
+      return /^[a-zA-Z0-9](\.?[a-zA-Z0-9_\-+%])*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/.test(val);
     // 統一編號驗證
     case "uniform":
       return /^[0-9]{8}$/.test(val);
@@ -1783,7 +1799,7 @@ const isVerify = (val, type) => {
       return /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/.test(val);
     // 數字驗證
     case "number":
-      return !/^[0-9]+$/.test(val);
+      return /^\d+$/.test(val);
     // 網址驗證
     case "url":
       return new RegExp(
@@ -1847,35 +1863,23 @@ const isVerify = (val, type) => {
  * 精準數字驗證
  * @param {any} val 傳入值
  */
-const isNumber = val => {
-  return typeOf(val) !== "number" ? false : !isNaN(val);
-}
+const isNumber = (val) => {
+  return typeof val === 'number' && !isNaN(val);
+};
 
 /**
  * 未填入驗證
  * @param {any} val 傳入值
  */
-const isEmpty = val => {
-  switch(typeOf(val)) {
-    case "string":
-      return (val.trim().length === 0) ? true : false;
-    case "number":
-      return false;
-    case "boolean":
-      return val ? false : true;
-    case "array":
-      if(val.length === 0) return true;
-      return val.some(i => i.length === 0) ? true : false;
-    case "object":
-      return false;
-    case "null":
-      return true;
-    case "undefined":
-      return true;
-    default:
-      return false;
-  }
-}
+const isEmpty = (val) => {
+  if (val === null || val === undefined) return true;
+  if (typeof val === 'string') return val.trim().length === 0;
+  if (typeof val === 'boolean') return !val;
+  if (typeof val === 'number') return false;
+  if (Array.isArray(val)) return val.length === 0 || val.some(i => isEmpty(i));
+  if (typeof val === 'object') return Object.keys(val).length === 0;
+  return false;
+};
 
 //-----------------------Web-----------------------
 /**
@@ -1917,26 +1921,30 @@ const throttle = (fn, delay = 1000) => {
 
 /**
  * 查詢網址所帶參數
- * @param {string} query 參數
+ * @param {string} query 指定查詢參數名稱，若不傳則回傳全部參數
  * @param {string} url 網址
  * @example queryString("id", "https://foo?id=123") -> "123"
  */
-const queryString = (query = "", url = location.href) => {
-  let parseUrl = new URL(url);
-  return parseUrl.searchParams.get(query);
-}
+const queryString = (key, url = location.href) => {
+  const params = new URL(url).searchParams;
+  if (!key) {
+    return Object.fromEntries(params.entries());
+  }
+  return params.get(key);
+};
 
 /**
  * 判斷是否移動裝置
  * @param {string} os 作業系統('': 所有機型, apple: 蘋果, android: 安卓)
  */
 const isMobile = (os = "") => {
-  switch(os) {
-    case 'apple':
-      return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase());
-    case 'android':
-      return /android/i.test(navigator.userAgent.toLowerCase());
-    default:
-      return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase());
-  }
-}
+  const ua = navigator.userAgent.toLowerCase();
+  const matchers = {
+    apple: /iphone|ipod|ipad|macintosh/i,
+    android: /android/i,
+    all: /iphone|ipod|ipad|android.*mobile|windows.*phone|blackberry.*mobile/i,
+  };
+  if (os === 'apple') return matchers.apple.test(ua);
+  if (os === 'android') return matchers.android.test(ua);
+  return matchers.all.test(ua);
+};

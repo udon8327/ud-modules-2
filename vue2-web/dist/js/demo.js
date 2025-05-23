@@ -4,6 +4,7 @@
 let vm = new Vue({
   el: "#app",
   data: {
+    text: "Line1\nLine2",
     isModalShow: false,
     isCollapse: false,
     profile: {
@@ -89,11 +90,15 @@ let vm = new Vue({
     }
   },
   mounted() {
-    this.liffLogin();
+    console.log(nl2br("Line1\nLine2"));
+    // this.liffLogin();
   },
   computed: {
   },
   methods: {
+    formatText(val) {
+      return nl2br(val);
+    },
     test() {
       console.log('test');
     },
