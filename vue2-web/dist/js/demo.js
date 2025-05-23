@@ -90,13 +90,18 @@ let vm = new Vue({
     }
   },
   mounted() {
-    this.liffLogin();
+    // this.liffLogin();
   },
   computed: {
   },
   methods: {
+    onInput(e) {
+      console.log('e: ', e.key);
+    },
     test() {
       console.log('test');
+      console.log(this.formData.name);
+      console.log(this.formData.name.length);
     },
     openExternal() {
       location.href = "https://liff.line.me/1655285115-w926gzYP";

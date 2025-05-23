@@ -84,6 +84,7 @@ Vue.component('ud-button', {
     <div class="ud-button">
       <button
         v-bind="$attrs"
+        :type="type"
         :disabled="disabled || loading"
         :class="{
           'is-disabled': disabled || loading,
@@ -106,6 +107,7 @@ Vue.component('ud-button', {
   `,
   inheritAttrs: false,
   props: {
+    type: { default: 'button' }, // 按鈕類型
     icon: { default: '' }, // CSS的icon
     image: { default: '' }, // 圖片的icon
     loading: Boolean, // 載入中
