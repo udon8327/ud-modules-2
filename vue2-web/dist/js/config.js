@@ -1,7 +1,8 @@
-var BASE_URL = "";
-var LINE_LOGIN_CHANNEL_ID = "";
-var LINE_OA_URL = "";
-var LINE_LIFF_ID = "";
+let BASE_URL = "";
+let LINE_LOGIN_CHANNEL_ID = "";
+let LINE_OA_URL = "";
+let LINE_LIFF_ID = "";
+
 switch (location.hostname) {
     // 正式機
     case "ud-modules-vue2.udons.space":
@@ -25,4 +26,3 @@ switch (location.hostname) {
         LINE_LIFF_ID = "1655285115-AYjbLKMr";
         break;
 }
-//# sourceMappingURL=config.js.map

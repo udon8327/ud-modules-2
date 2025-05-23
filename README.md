@@ -28,13 +28,17 @@
   * plain: 線條化 | Boolean(false)
   * round: 圓角 | Boolean(false)
   * circle: 圓形 | Boolean(false)
-  * throttle: 函式節流，幾秒內最多觸發一次 | Boolean(false)
+  * throttle: 節流模式，將幾秒內的點擊合為一次 | Boolean(false)
     ``` html
     <ud-button throttle @click="test">按鈕</ud-button> 
     ```
-  * throttleTime: 函式節流間隔時間(ms) | Number(1000)
+  * throttle: 防抖模式，幾秒間隔內最多觸發一次 | Boolean(false)
     ``` html
-    <ud-button throttle :throttle-time="2000" @click="test">按鈕</ud-button> 
+    <ud-button throttle @click="test">按鈕</ud-button> 
+    ```
+  * delay: 函式節流間隔時間(ms) | Number(1000)
+    ``` html
+    <ud-button throttle :delay="2000" @click="test">按鈕</ud-button> 
     ```
 
 ### <font color=#ebc600>ud-input：輸入框</font>
