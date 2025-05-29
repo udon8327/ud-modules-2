@@ -48,6 +48,10 @@
               <ud-button @click="sendMessage" plain>傳送訊息</ud-button>
               <ud-button @click="shareTargetPicker">好友分享</ud-button>
             </div>
+            <div class="btn-wrapper">
+              <ud-button @click="getData" plain>GET</ud-button>
+              <ud-button @click="postData">POST</ud-button>
+            </div>
           </div>
           <div class="form-area">
             <form>
@@ -133,15 +137,15 @@
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.common.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/versions/2.26.1/sdk.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue2-datepicker@3.11.1/index.min.js"></script>
     <script>
       if(!window.Vue){
         document.write(`
-          <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"><\/script>
-          <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"><\/script>
+          <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"><\/script>
+          <script src="https://cdn.jsdelivr.net/npm/axios@1.9.0/dist/axios.min.js"><\/script>
         `);
       }
     </script>

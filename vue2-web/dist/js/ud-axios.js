@@ -54,6 +54,7 @@ udAxios.interceptors.response.use(
   },
   // 狀態碼 3xx: 重新導向, 4xx: 用戶端錯誤, 5xx: 伺服器錯誤
   error => {
+    console.log('error: ', error.response.data.message);
     if(!error.config.noLoading) {
       ajaxCount--;
       if(ajaxCount === 0) vm.udLoading.close();

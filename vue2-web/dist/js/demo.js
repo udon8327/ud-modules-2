@@ -90,7 +90,7 @@ let vm = new Vue({
     }
   },
   mounted() {
-    // this.liffLogin();
+    this.liffLogin();
   },
   computed: {
   },
@@ -154,7 +154,7 @@ let vm = new Vue({
         });
     },
     getData() {
-      udAxios.get('test')
+      udAxios.get('test/400/失敗了')
         .then(res => {
           console.log('res: ', res);
         })
@@ -162,8 +162,6 @@ let vm = new Vue({
     postData() {
       udAxios.post('test', {
         name: "UDON"
-      }, {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
       })
         .then(res => {
           console.log('res: ', res);
