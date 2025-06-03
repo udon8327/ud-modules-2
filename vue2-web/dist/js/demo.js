@@ -90,7 +90,7 @@ let vm = new Vue({
     }
   },
   mounted() {
-    // this.liffLogin();
+    this.liffLogin();
   },
   computed: {
   },
