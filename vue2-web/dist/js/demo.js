@@ -99,9 +99,7 @@ let vm = new Vue({
       console.log('e: ', e);
     },
     test() {
-      console.log('test');
-      console.log(this.formData.name);
-      console.log(this.formData.name.length);
+      console.log(getRandom());
     },
     openExternal() {
       location.href = "https://liff.line.me/1655285115-w926gzYP";
