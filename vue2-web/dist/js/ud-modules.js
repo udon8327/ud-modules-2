@@ -1,7 +1,7 @@
 /*
 ==================== ud-modules 常用組件 ====================
 Form
-  ud-button：按鈕 v
+  ud-button：按鈕
   ud-input：輸入框
   ud-textarea：多行輸入框
   ud-radio：單選框
@@ -145,9 +145,17 @@ Vue.component('ud-input', {
         ref="input"
         v-model="modelValue"
         v-bind="$attrs"
-        v-on="inputListeners"
         :class="{ 'is-center': center }"
         @input="onInput"
+        @change="$emit('change', $event)"
+        @focus="$emit('focus', $event)"
+        @blur="$emit('blur', $event)"
+        @keydown="$emit('keydown', $event)"
+        @keyup="$emit('keyup', $event)"
+        @keypress="$emit('keypress', $event)"
+        @paste="$emit('paste', $event)"
+        @cut="$emit('cut', $event)"
+        @copy="$emit('copy', $event)"
       >
       <slot></slot>
     </div>
@@ -162,12 +170,6 @@ Vue.component('ud-input', {
       get(){ return this.value == null ? "" : this.value },
       set(val){ this.$emit('input', val) }
     },
-    inputListeners() {
-      return Object.assign({},
-        this.$listeners,
-        { input: event => {} }
-      )
-    }
   },
   mounted() {
   },
@@ -193,11 +195,19 @@ Vue.component('ud-textarea', {
         ref="textarea"
         v-model="modelValue"
         v-bind="$attrs"
-        v-on="inputListeners"
         :rows="rows"
+        :maxlength="limit"
         :class="{ 'is-no-resize': noResize }"
         @input="onInput"
-        :maxlength="limit"
+        @change="$emit('change', $event)"
+        @focus="$emit('focus', $event)"
+        @blur="$emit('blur', $event)"
+        @keydown="$emit('keydown', $event)"
+        @keyup="$emit('keyup', $event)"
+        @keypress="$emit('keypress', $event)"
+        @paste="$emit('paste', $event)"
+        @cut="$emit('cut', $event)"
+        @copy="$emit('copy', $event)"
       >
       </textarea>
       <div class="textarea-limit" v-if="showLimit" :class="{ 'limit-input': value.length > 0 }">
@@ -221,12 +231,6 @@ Vue.component('ud-textarea', {
     valueLength() {
       return this.value.length;
     },
-    inputListeners() {
-      return Object.assign({},
-        this.$listeners,
-        { input: event => {} }
-      )
-    }
   },
   methods: {
     onInput() {

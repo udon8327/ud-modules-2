@@ -90,13 +90,13 @@ let vm = new Vue({
     }
   },
   mounted() {
-    this.liffLogin();
+    // this.liffLogin();
   },
   computed: {
   },
   methods: {
     onInput(e) {
-      console.log('e: ', e.key);
+      console.log('e: ', e);
     },
     test() {
       console.log('test');
