@@ -834,7 +834,7 @@ Vue.component('ud-form-item', {
             }
             break;
           case "name": // 姓名驗證
-            if(value && !/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) this.errorMessage = rule.message || "姓名格式有誤，不接受特殊符號";
+            if(value && !/^[\p{sc=Han}a-zA-Z·\s]+$/u.test(value)) this.errorMessage = rule.message || "姓名格式有誤，不接受特殊符號";
             break;
           case "phone": // 電話驗證
             let valueAfter = this.typeOf(value) === 'array' ? value.join("") : value;
@@ -856,15 +856,7 @@ Vue.component('ud-form-item', {
             if(value && !/^[0-9]+$/.test(value)) this.errorMessage = rule.message || "格式有誤，只接受數字";
             break;
           case "url": // 網址驗證
-            if(value && !new RegExp(
-              "^(https?:\\/\\/)?" + // protocol
-              "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-              "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-              "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-              "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-              "(\\#[-a-z\\d_]*)?$", // fragment locator
-              "i"
-            ).test(value)) this.errorMessage = rule.message || "網址格式有誤，例: https://www.google.com";
+            if(value && !/^https?:\/\/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}([/?#][^\s]*)?$/i.test(value)) this.errorMessage = rule.message || "網址格式有誤，例: https://www.google.com";
             break;
           case "ip": // IP地址驗證
             if(value && !/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(value)) this.errorMessage = rule.message || "IP地址格式有誤，例: 115.28.47.26";
@@ -1787,13 +1779,13 @@ const isVerify = (val, type) => {
   switch (type) {
     // 姓名驗證
     case "name":
-      return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(val);
+      return /^[\p{sc=Han}a-zA-Z·\s]+$/u.test(val);
     // 電話驗證
     case "phone":
       return /^09[0-9]{8}$/.test(val);
     // 電子郵件驗證
     case "email":
-      return /^[a-zA-Z0-9](\.?[a-zA-Z0-9_\-+%])*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/.test(val);
+      return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
     // 統一編號驗證
     case "uniform":
       return /^[0-9]{8}$/.test(val);
@@ -1808,15 +1800,7 @@ const isVerify = (val, type) => {
       return /^\d+$/.test(val);
     // 網址驗證
     case "url":
-      return new RegExp(
-        "^(https?:\\/\\/)?" + // protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?$", // fragment locator
-        "i"
-      ).test(val);
+      return /^https?:\/\/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}([/?#][^\s]*)?$/i.test(val);
     // IP地址驗證
     case "ip":
       return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(val);
