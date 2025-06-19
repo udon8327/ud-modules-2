@@ -1035,7 +1035,7 @@ Vue.component('ud-collapse', {
   }
 })
 
-// ud-image：等比例自適應容器
+// ud-image：等比例自適應圖片
 Vue.component('ud-image', {
   name: "UdImage",
   template: `
