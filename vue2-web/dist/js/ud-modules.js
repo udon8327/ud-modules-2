@@ -1322,7 +1322,7 @@ Vue.component('ud-countdown', {
       }else if(this.type === "minute"){
         let min = Math.floor(this.countTime / 60);
         let sec = this.countTime - (min * 60);
-        return `${min}:${padStart(sec)}`;
+        return `${min}:${this.padStart(sec)}`;
       }
     }
   },
@@ -1331,19 +1331,25 @@ Vue.component('ud-countdown', {
   },
   methods: {
     countdown(){
+      if(this.countInterval) clearInterval(this.countInterval);
       this.countInterval = setInterval(() => {
         this.countTime -= 1;
-        if(this.countTime <= 0){
+        if (this.countTime <= 0) {
           this.$emit("timeup");
           clearInterval(this.countInterval);
+          this.countInterval = null;
         }
       }, 1000);
     },
     reset(){
-      clearInterval(this.countInterval);
+      if(this.countInterval) clearInterval(this.countInterval);
       this.countTime = this.time;
       this.countdown();
-    }
+    },
+    padStart(val, length = 2, fillChar = '0') {
+      if (val == null) return '';
+      return val.toString().padStart(length, fillChar.toString());
+    },
   }
 })
 
