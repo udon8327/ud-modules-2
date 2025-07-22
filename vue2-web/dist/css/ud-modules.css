@@ -41,7 +41,7 @@ html, #app {
     position: relative; }
     .ud-button button .button-wrapper span {
       font-size: 16px; }
-    .ud-button button .button-wrapper .button-icon {
+    .ud-button button .button-wrapper .ud-button-icon {
       position: absolute;
       left: -32px;
       top: 50%;
@@ -57,12 +57,12 @@ html, #app {
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center; }
-      .ud-button button .button-wrapper .button-icon i {
+      .ud-button button .button-wrapper .ud-button-icon i {
         font-size: 24px; }
-      .ud-button button .button-wrapper .button-icon img {
+      .ud-button button .button-wrapper .ud-button-icon img {
         width: 24px;
         height: 24px; }
-      .ud-button button .button-wrapper .button-icon .icon-loading {
+      .ud-button button .button-wrapper .ud-button-icon .ud-icon-loading {
         border: 2px solid rgba(255, 255, 255, 0.2);
         border-top: 2px solid #fff;
         border-radius: 50%;

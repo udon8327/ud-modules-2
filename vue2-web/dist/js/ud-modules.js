@@ -93,10 +93,10 @@ Vue.component('ud-button', {
           'is-circle': circle
         }"
       >
-        <div class="button-wrapper">
+        <div class="ud-button-wrapper">
           <span><slot>按鈕</slot></span>
-          <div class="button-icon">
-            <div class="icon-loading" v-if="loading"></div>
+          <div class="ud-button-icon">
+            <div class="ud-icon-loading" v-if="loading"></div>
             <i :class="icon" v-if="icon && !loading"></i>
             <img :src="image" alt="" v-if="image && !loading">
             <slot name="icon" v-if="!loading"></slot>
