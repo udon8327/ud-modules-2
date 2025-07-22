@@ -389,12 +389,19 @@ html,#app
       text-align: left
       display: flex
       align-items: center
+      &.label-align-left
+        justify-content: flex-start
+      &.label-align-center
+        justify-content: center
+      &.label-align-right
+        justify-content: flex-end
       img
         width: 26px
         margin-right: 2px
       label
         font-size: 17px
         position: relative
+        margin-right: 5px
         span
           color: $red
           font-size: 20px

@@ -463,12 +463,25 @@ html, #app {
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center; }
+      .ud-form-item.is-flex .ud-form-item-left.label-align-left {
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start; }
+      .ud-form-item.is-flex .ud-form-item-left.label-align-center {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center; }
+      .ud-form-item.is-flex .ud-form-item-left.label-align-right {
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end; }
       .ud-form-item.is-flex .ud-form-item-left img {
         width: 26px;
         margin-right: 2px; }
       .ud-form-item.is-flex .ud-form-item-left label {
         font-size: 17px;
-        position: relative; }
+        position: relative;
+        margin-right: 5px; }
         .ud-form-item.is-flex .ud-form-item-left label span {
           color: #dc3545;
           font-size: 20px;

@@ -767,7 +767,9 @@ Vue.component('ud-form-item', {
   name: "UdFormItem",
   template: `
     <div class="ud-form-item" :class="{'is-error': errorMessage, 'is-flex': flex}">
-      <div class="ud-form-item-left" :v-if="label" :style="{ 'flex-basis': labelWidth, 'text-align': labelAlign }">  
+      <div class="ud-form-item-left" :v-if="label" :style="{ 'flex-basis': labelWidth }" 
+        :class="{ 'label-align-left': labelAlign === 'left', 'label-align-center': labelAlign === 'center', 'label-align-right': labelAlign === 'right' }"
+      >
         <img :src="icon" v-if="icon">
         <label v-if="label"><span v-if="required">*</span>{{ label }}</label>
       </div>
