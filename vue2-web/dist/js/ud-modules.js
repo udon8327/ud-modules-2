@@ -802,10 +802,11 @@ Vue.component('ud-form-item', {
     },
     labelWidth: { // 標籤寬度
       type: String,
-      default: "30%"
+      default: "30%",
     },
     labelAlign: { // 標籤對齊
       type: String,
+      default: 'left',
     },
   },
   mounted() {
