@@ -495,9 +495,9 @@ html, #app {
       left: 5px;
       white-space: nowrap; }
 
-.ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-input input, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-input textarea, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-input select, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-textarea input, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-textarea textarea, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-textarea select, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-select input, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-select textarea, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-select select {
+.ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > div input, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > div textarea, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > div select {
   border: 1px solid #cecece; }
-  .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-input input:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-input textarea:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-input select:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-textarea input:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-textarea textarea:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-textarea select:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-select input:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-select textarea:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right .ud-select select:focus {
+  .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > div input:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > div textarea:focus, .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > div select:focus {
     border: 1px solid #cecece; }
 
 .ud-form.is-no-error-msg .ud-form-item.is-error .ud-form-item-right > p.error-message {

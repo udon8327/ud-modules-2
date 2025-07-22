@@ -4,6 +4,7 @@
 let vm = new Vue({
   el: "#app",
   data: {
+    isNameShow: true,
     text: "Line1\nLine2",
     isModalShow: false,
     isCollapse: false,
@@ -14,12 +15,11 @@ let vm = new Vue({
       info: "",
     },
     formData: {
-      test: [],
       name: "",
       phone: "",
       email: "",
       age: "",
-      birthday: "",
+      note: "",
       radio: "",
       checkbox: [],
       select: "",
@@ -28,14 +28,13 @@ let vm = new Vue({
       date: ["", "", ""],
       isActive: false,
       isAgree: false,
-      note: "",
+      birth: "",
     },
     rules: {
       name: [{type: "required"}, {type: "name" }],
       phone: [{type: "required"}, {type: "phone" }],
       email: [{type: "required"}, {type: "email" }],
       age: [{type: "required"}, {type: "number" }],
-      birthday: [{type: "required"}, {type: "date" }],
       radio: [{type: "required"}],
       checkbox: [{type: "required"}],
       select: [{type: "required"}],
@@ -43,11 +42,12 @@ let vm = new Vue({
       twzip: [{type: "required"}],
       date: [{type: "required"}],
       isAgree: [{type: "required", message: "請先同意相關使用條款"},],
+      birth: [{type: "required"}, {type: "date" }],
     },
     options: [
-      {label: "甲", value: "a", disabled: true},
+      {label: "甲", value: "a"},
       {label: "乙", value: "b"},
-      {label: "丙", value: "c"},
+      {label: "丙", value: "c", disabled: true},
     ],
     storeOptions: [
       {label: "台北市", value: "taipei", children: [
@@ -95,6 +95,9 @@ let vm = new Vue({
   computed: {
   },
   methods: {
+    toggleName() {
+      this.isNameShow = !this.isNameShow;
+    },
     onInput(e) {
       console.log('e: ', e);
     },
@@ -186,7 +189,7 @@ let vm = new Vue({
       this.udAlert({msg: "驗證成功!!"});
     },
     clearVerify() {
-
+      this.$refs.form.clearValidate();
     },
     toUrl(url) {
       location.href = url;

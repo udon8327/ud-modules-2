@@ -32,9 +32,6 @@
       </ud-modal>
       <div class="container">
         <div class="wrapper">
-          <div class="test-area">
-            <ud-button @click="test">TEST</ud-button>
-          </div>
           <div class="liff-area">
             <div class="liff-wrapper">
               <ud-image :src="profile.pictureUrl" alt=""></ud-image>
@@ -44,21 +41,23 @@
                 <p>{{ profile.info }}</p>
               </div>
             </div>
-            <div class="btn-wrapper">
+          </div>
+          <div class="button-area">
+            <div class="button-wrapper">
               <ud-button @click="sendMessage" plain>傳送訊息</ud-button>
               <ud-button @click="shareTargetPicker">好友分享</ud-button>
             </div>
-            <div class="btn-wrapper">
+            <div class="button-wrapper">
               <ud-button @click="getData" plain>GET</ud-button>
               <ud-button @click="postData">POST</ud-button>
             </div>
+            <div class="button-wrapper">
+              <ud-button @click="toggleName">toggleName</ud-button>
+            </div>
           </div>
           <div class="form-area">
-            <form>
-              <ud-button>submit</ud-button>
-            </form>
             <ud-form :rules="rules" :model="formData" ref="form">
-              <ud-form-item label="姓名" prop="name" flex>
+              <ud-form-item label="姓名" prop="name" flex v-if="isNameShow" label-align="center">
                 <ud-input ref="test" v-model.trim="formData.name" placeholder="請輸入您的姓名" @keydown="onInput" maxlength="10"></ud-input>
               </ud-form-item>
               <ud-form-item label="電話" prop="phone" flex>
@@ -69,9 +68,6 @@
               </ud-form-item>
               <ud-form-item label="年齡" prop="age" flex>
                 <ud-input v-model.trim="formData.age" placeholder="請輸入您的年齡" inputmode="numeric"></ud-input>
-              </ud-form-item>
-              <ud-form-item label="生日" prop="birthday" flex>
-                <date-picker v-model="formData.birth" value-type="format" format="YYYY-MM-DD" :lang="lang" placeholder="請選擇您的生日"></date-picker>
               </ud-form-item>
               <ud-form-item label="備註" prop="note" flex>
                 <ud-textarea placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="100" @keydown="onInput"></ud-textarea>
@@ -92,6 +88,9 @@
                   <ud-select v-model="formData.selectGroup[2]" :options="storeOptions" :group="formData.selectGroup" :index="2" placeholder="時段"></ud-select>
                 </div>
               </ud-form-item>
+              <ud-form-item label="地址" prop="twzip" flex>
+                <ud-select-twzip ref="zip" v-model="formData.twzip" flex></ud-select-twzip>
+              </ud-form-item>
               <ud-form-item label="預約日期" prop="date" flex>
                 <ud-select-date v-model="formData.date" flex third roc>
                   <p>年</p>
@@ -99,17 +98,16 @@
                   <p slot="third">日</p>
                 </ud-select-date>
               </ud-form-item>
-              <ud-form-item label="地址" prop="twzip" flex>
-                <ud-select-twzip ref="zip" v-model="formData.twzip" flex></ud-select-twzip>
-              </ud-form-item>
               <ud-form-item label="是否啟用" prop="isActive" flex>
                 <ud-switch v-model="formData.isActive"></ud-switch>
               </ud-form-item>
               <ud-form-item label="" prop="isAgree">
-                <ud-checkbox v-model="formData.isAgree" options="我同意使用者條款" solid></ud-checkbox>
                 <ud-checkbox v-model="formData.isAgree">
                   <p>我同意<a href="https://www.google.com.tw/">使用者條款</a></p>
                 </ud-checkbox>
+              </ud-form-item>
+              <ud-form-item label="生日" prop="birth" flex>
+                <date-picker v-model="formData.birth" value-type="format" format="YYYY-MM-DD" :lang="lang" placeholder="請選擇您的生日"></date-picker>
               </ud-form-item>
               <div class="btn-wrapper">
                 <ud-button @click="clearVerify" plain>清除驗證</ud-button>

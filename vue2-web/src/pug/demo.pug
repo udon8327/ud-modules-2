@@ -15,12 +15,6 @@ block modal
     ud-button(@click="isModalShow = false" plain) 關閉
 
 block content
-  .test-area
-    //- .btn-wrapper
-    //-   ud-button(@click="clearVerify" plain) 清除驗證
-    //-   ud-button(@click="submitVerify") 送出表單
-    ud-button(@click="test") TEST
-
   .liff-area
     .liff-wrapper
       ud-image(:src="profile.pictureUrl", alt="")
@@ -28,18 +22,20 @@ block content
         h6 {{ profile.displayName }}
         p {{ profile.userId }}
         p {{ profile.info }}
-    .btn-wrapper
+
+  .button-area
+    .button-wrapper
       ud-button(@click="sendMessage" plain) 傳送訊息
       ud-button(@click="shareTargetPicker") 好友分享
-    .btn-wrapper
+    .button-wrapper
       ud-button(@click="getData" plain) GET
       ud-button(@click="postData") POST
+    .button-wrapper
+      ud-button(@click="toggleName") toggleName
 
   .form-area
-    form
-      ud-button submit
     ud-form(:rules="rules" :model="formData" ref="form")
-      ud-form-item(label="姓名" prop="name" flex)
+      ud-form-item(label="姓名" prop="name" flex v-if="isNameShow" label-align="center")
         ud-input(ref="test" v-model.trim="formData.name" placeholder="請輸入您的姓名" @keydown="onInput" maxlength="10")
       ud-form-item(label="電話" prop="phone" flex)
         ud-input(v-model.trim="formData.phone" placeholder="請輸入您的手機號碼" inputmode="tel" maxlength="10")
@@ -47,8 +43,6 @@ block content
         ud-input(v-model.trim="formData.email" placeholder="請輸入您的Email" inputmode="email")
       ud-form-item(label="年齡" prop="age" flex)
         ud-input(v-model.trim="formData.age" placeholder="請輸入您的年齡" inputmode="numeric")
-      ud-form-item(label="生日" prop="birthday" flex)
-        date-picker(v-model="formData.birth" value-type="format" format="YYYY-MM-DD" :lang="lang" placeholder="請選擇您的生日")
       ud-form-item(label="備註" prop="note" flex)
         ud-textarea(placeholder="請輸入您的備註" v-model="formData.note" show-limit :limit="100" @keydown="onInput")
       ud-form-item(label="單選" prop="radio" flex)
@@ -62,19 +56,21 @@ block content
           ud-select(v-model="formData.selectGroup[0]" :options="storeOptions" :group="formData.selectGroup" :index="0" placeholder="縣市")
           ud-select(v-model="formData.selectGroup[1]" :options="storeOptions" :group="formData.selectGroup" :index="1" placeholder="櫃點")
           ud-select(v-model="formData.selectGroup[2]" :options="storeOptions" :group="formData.selectGroup" :index="2" placeholder="時段")
+      ud-form-item(label="地址" prop="twzip" flex)
+        ud-select-twzip(ref="zip" v-model="formData.twzip" flex)
       ud-form-item(label="預約日期" prop="date" flex)
         ud-select-date(v-model="formData.date" flex third roc)
           p 年
           p(slot="second") 月
           p(slot="third") 日
-      ud-form-item(label="地址" prop="twzip" flex)
-        ud-select-twzip(ref="zip" v-model="formData.twzip" flex)
       ud-form-item(label="是否啟用" prop="isActive" flex)
         ud-switch(v-model="formData.isActive")
       ud-form-item(label="" prop="isAgree")
-        ud-checkbox(v-model="formData.isAgree" options="我同意使用者條款" solid)
         ud-checkbox(v-model="formData.isAgree")
           p 我同意#[a(href="https://www.google.com.tw/") 使用者條款]
+      ud-form-item(label="生日" prop="birth" flex)
+        date-picker(v-model="formData.birth" value-type="format" format="YYYY-MM-DD" :lang="lang" placeholder="請選擇您的生日")
+
       .btn-wrapper
         ud-button(@click="clearVerify" plain) 清除驗證
         ud-button(@click="submitVerify") 送出表單

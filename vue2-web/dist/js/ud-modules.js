@@ -767,7 +767,7 @@ Vue.component('ud-form-item', {
   name: "UdFormItem",
   template: `
     <div class="ud-form-item" :class="{'is-error': errorMessage, 'is-flex': flex}">
-      <div class="ud-form-item-left" :v-if="label" style="{ 'flex-basis': labelWidth, 'text-align': labelAlign }">  
+      <div class="ud-form-item-left" :v-if="label" :style="{ 'flex-basis': labelWidth, 'text-align': labelAlign }">  
         <img :src="icon" v-if="icon">
         <label v-if="label"><span v-if="required">*</span>{{ label }}</label>
       </div>
@@ -810,19 +810,19 @@ Vue.component('ud-form-item', {
   },
   mounted() {
     this.$on('validate', () => {
-      if(!this.prop) return;
+      if (!this.prop) return;
       this.validate(false);
     })
   },
   methods: {
     validate(submit) {
-      if(this.form.submitLock) return;
+      if (this.form.submitLock) return;
       const rules = this.form.rules[this.prop]; // 獲取校驗規則
       const value = this.form.model[this.prop]; // 獲取數據
       
-      if(!rules) return;
+      if (!rules) return;
+      this.errorMessage = "";
       for(let rule of rules){
-        this.errorMessage = "";
         switch (rule.type) {
           case "required": // 必填驗證
             if(Array.isArray(value) && value.length != 0){
@@ -878,13 +878,16 @@ Vue.component('ud-form-item', {
             console.error("預期外的驗證類型: " + rule.type);
             break;
         }
-        if(this.errorMessage) break;
+        if (this.errorMessage) break;
       }
 
-      if(!submit) return;
+      if (!submit) return;
       return new Promise((resolve, reject) => {
         this.errorMessage ? reject() : resolve();
-      })
+      });
+    },
+    clearValidate() {
+      this.errorMessage = '';
     },
     typeOf(val) {
       return val === undefined ? 'undefined' : val === null ? 'null' : val.constructor.name.toLowerCase();
@@ -940,17 +943,24 @@ Vue.component('ud-form', {
           failedCb();
         })
     },
+    clearValidate() {
+      this.$children.forEach(item => {
+        if (typeof item.clearValidate === 'function') {
+          item.clearValidate();
+        }
+      });
+    },
     scrollTo(el = "top", speed = 5, offset = 0, callback = () => {}) {
       let scrollTop = document.scrollingElement.scrollTop;
       let top = 0;
       if(typeof el === 'number') {
         top = el + offset;
-      }else {
+      } else {
         if(el === 'top') {
           top = 0 + offset;
-        }else if(el === 'bottom') {
+        } else if(el === 'bottom') {
           top = document.body.scrollHeight - document.body.clientHeight + offset;
-        }else {
+        } else {
           top = document.querySelector(el) && document.querySelector(el).offsetTop + offset;
         }
       }
