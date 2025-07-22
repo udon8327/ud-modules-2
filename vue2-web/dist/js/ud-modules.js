@@ -874,6 +874,9 @@ Vue.component('ud-form-item', {
               if(value && value !== this.form.model[rule.equalTo]) this.errorMessage = rule.message || "驗證碼錯誤";
             }
             break;
+          case "schema": // 自定義驗證條件(將rules寫成computed回傳動態驗證函式)
+            if (!rule.schema) this.errorMessage = rule.message || "驗證條件不符合";
+            break;
           case "regex": // 自訂正則驗證
             if(!new RegExp(rule.regex).test(value)) this.errorMessage = rule.message || "格式有誤，請重新輸入";
             break;
@@ -940,8 +943,13 @@ Vue.component('ud-form', {
       Promise.all(tasks)
         .then(() => successCb())
         .catch(() => {
-          if(!this.noErrorScroll) {
-            this.$nextTick(() => this.scrollTo(".is-error", 5, -10));
+          if (!this.noErrorScroll) {
+            this.$nextTick(() => {
+              const el = document.querySelector(".is-error");
+              if (el) {
+                this.scrollTo(el, 5, -10);
+              }
+            });
           }
           failedCb();
         })
@@ -956,16 +964,22 @@ Vue.component('ud-form', {
     scrollTo(el = "top", speed = 5, offset = 0, callback = () => {}) {
       let scrollTop = document.scrollingElement.scrollTop;
       let top = 0;
-      if(typeof el === 'number') {
+
+      if (typeof el === 'number') {
         top = el + offset;
-      } else {
-        if(el === 'top') {
+      } else if (typeof el === 'string') {
+        if (el === 'top') {
           top = 0 + offset;
-        } else if(el === 'bottom') {
+        } else if (el === 'bottom') {
           top = document.body.scrollHeight - document.body.clientHeight + offset;
         } else {
-          top = document.querySelector(el) && document.querySelector(el).offsetTop + offset;
+          const found = document.querySelector(el);
+          if (found) {
+            top = found.offsetTop + offset;
+          }
         }
+      } else if (el instanceof HTMLElement) {
+        top = el.offsetTop + offset;
       }
       const scroll = () => {
         scrollTop = scrollTop + (top - scrollTop) / speed;

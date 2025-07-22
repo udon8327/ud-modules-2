@@ -95,9 +95,6 @@ let vm = new Vue({
   computed: {
   },
   methods: {
-    toggleName() {
-      this.isNameShow = !this.isNameShow;
-    },
     onInput(e) {
       console.log('e: ', e);
     },
