@@ -109,14 +109,14 @@
               <ud-form-item label="生日" prop="birth" flex>
                 <date-picker v-model="formData.birth" value-type="format" format="YYYY-MM-DD" :lang="lang" placeholder="請選擇您的生日"></date-picker>
               </ud-form-item>
-              <div class="btn-wrapper">
+              <div class="button-wrapper">
                 <ud-button @click="clearVerify" plain>清除驗證</ud-button>
                 <ud-button @click="submitVerify">送出表單</ud-button>
               </div>
             </ud-form>
           </div>
           <div class="module-area">
-            <div class="btn-wrapper">
+            <div class="button-wrapper">
               <ud-button @click="alert()">Alert</ud-button>
               <ud-button @click="isModalShow = true">Model</ud-button>
             </div>
