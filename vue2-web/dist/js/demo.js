@@ -4,8 +4,6 @@
 let vm = new Vue({
   el: "#app",
   data: {
-    isNameShow: true,
-    text: "Line1\nLine2",
     isModalShow: false,
     isCollapse: false,
     profile: {
@@ -89,10 +87,10 @@ let vm = new Vue({
       monthBeforeYear: false,
     }
   },
+  computed: {
+  },
   mounted() {
     this.liffLogin();
-  },
-  computed: {
   },
   methods: {
     onInput(e) {
